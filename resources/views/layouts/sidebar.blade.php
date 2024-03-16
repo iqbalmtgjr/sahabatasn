@@ -735,12 +735,22 @@
                                 <!--end::Heading-->
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
-                                    <span class="menu-link active">
+                                    <a class="menu-link {{ request()->is('home') ? 'active' : '' }}"
+                                        href="{{ url('home') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-home-2 fs-2"></i>
                                         </span>
                                         <span class="menu-title">Dashboards</span>
-                                    </span>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
+                                        href="{{ url('kelola-user') }}">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-people fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Kelola User</span>
+                                    </a>
                                 </div>
                                 <!--end:Menu item-->
                             </div>
