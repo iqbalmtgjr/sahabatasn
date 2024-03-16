@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class ProfilController extends Controller
@@ -36,7 +37,7 @@ class ProfilController extends Controller
         ]);
 
         if ($validator->fails()) {
-            toastr()->error('Ada Kesalahan Saat Penginputan!', 'Gagal');
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
             return redirect()
                 ->back()
                 ->withErrors($validator)
@@ -46,6 +47,10 @@ class ProfilController extends Controller
         $extension = $request->avatar->extension();
         $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
+        $request->file('avatar')->move(public_path('gambar/'), $nama_file);
+
+        // dd($nama_file);
+
         $data = User::find(auth()->user()->id);
         $data->update([
             'name' => $request->name,
@@ -53,8 +58,37 @@ class ProfilController extends Controller
             'avatar' => $nama_file,
         ]);
 
-        toastr()->success('Data berhasil diubah!', 'Selamat');
+        toastr()->success('Data berhasil diubah.', 'Selamat');
         return back();
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password_lama' => ['required', 'min:8'],
+            'password_baru' => ['required', 'min:8'],
+            'konfirmasi_password' => ['required', 'min:8', 'same:password_baru']
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
+            return redirect('password')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $currentPasswordStatus = Hash::check($request->password_lama, auth()->user()->password);
+        if ($currentPasswordStatus) {
+            User::findOrFail(auth()->user()->id)->update([
+                'password' => Hash::make($request->password_baru),
+            ]);
+
+            toastr()->success('Password berhasil diubah.', 'Selamat');
+            return back();
+        } else {
+            toastr()->error('Password Tidak Sama Dengan Password Lama.', 'Gagal');
+            return back();
+        }
     }
 
     /**

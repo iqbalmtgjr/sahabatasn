@@ -20,7 +20,15 @@
         <div class="cursor-pointer symbol symbol-circle symbol-35px symbol-md-45px"
             data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-end">
-            <img src="assets/media/avatars/300-2.jpg" alt="user" />
+            @if (Auth::user()->avatar == null)
+                <img src="assets/media/svg/avatars/blank.svg" alt="user" />
+            @else
+                @if (Auth::user()->google_id != null)
+                    <img src="{{ Auth::user()->avatar }}" alt="user" />
+                @else
+                    <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
+                @endif
+            @endif
         </div>
         <!--begin::User account menu-->
         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px"
@@ -30,7 +38,15 @@
                 <div class="menu-content d-flex align-items-center px-3">
                     <!--begin::Avatar-->
                     <div class="symbol symbol-50px me-5">
-                        <img alt="Logo" src="assets/media/avatars/300-2.jpg" />
+                        @if (Auth::user()->avatar == null)
+                            <img src="assets/media/svg/avatars/blank.svg" alt="user" />
+                        @else
+                            @if (Auth::user()->google_id != null)
+                                <img src="{{ Auth::user()->avatar }}" alt="user" />
+                            @else
+                                <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
+                            @endif
+                        @endif
                     </div>
                     <!--end::Avatar-->
                     <!--begin::Username-->

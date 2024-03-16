@@ -11,4 +11,5 @@
         <!--end::Content-->
     </div>
     <!--end::Content wrapper-->
-    @include('layouts.footer')
+</div>
+@include('layouts.footer')

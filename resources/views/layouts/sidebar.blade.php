@@ -64,9 +64,9 @@
                         id="kt_app_sidebar_header">
                         <!--begin::Logo-->
                         <a href="{{ url('home') }}" class="app-sidebar-logo">
-                            <img alt="Logo" src="assets/media/gambar/sa-side.png"
+                            <img alt="Logo" src="{{ asset('') }}assets/media/gambar/sa-side.png"
                                 class="h-25px d-none d-sm-inline app-sidebar-logo-default theme-light-show" />
-                            <img alt="Logo" src="assets/media/logos/demo38-dark.svg"
+                            <img alt="Logo" src="{{ asset('') }}assets/media/gambar/sa-side-dark.png"
                                 class="h-20px h-lg-25px theme-dark-show" />
                         </a>
                         <!--end::Logo-->
@@ -98,8 +98,8 @@
                                 <!--end::Heading-->
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('home') ? 'active' : '' }}"
-                                        href="{{ url('home') }}">
+                                    <a class="menu-link {{ request()->is('dashboard') ? 'active' : '' }}"
+                                        href="{{ url('dashboard') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-home-2 fs-2"></i>
                                         </span>

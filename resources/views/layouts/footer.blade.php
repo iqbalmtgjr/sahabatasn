@@ -70,6 +70,9 @@
 <script src="{{ asset('') }}assets/js/custom/apps/chat/chat.js"></script>
 <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script>
 <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script>
+
+@stack('footer')
+
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>
