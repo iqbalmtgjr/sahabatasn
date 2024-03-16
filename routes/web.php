@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,3 +14,8 @@ Route::get('/master', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// profile
+Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
+Route::get('/password', [ProfilController::class, 'password'])->name('password');
