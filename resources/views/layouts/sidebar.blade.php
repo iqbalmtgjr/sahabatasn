@@ -98,8 +98,8 @@
                                 <!--end::Heading-->
                                 <!--begin:Menu item-->
                                 <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('home') ? 'active' : '' }}"
-                                        href="{{ url('home') }}">
+                                    <a class="menu-link {{ request()->is('dashboard') ? 'active' : '' }}"
+                                        href="{{ url('dashboard') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-home-2 fs-2"></i>
                                         </span>
