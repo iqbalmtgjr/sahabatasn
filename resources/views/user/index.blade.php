@@ -42,6 +42,7 @@
                     </div>
                     <!--begin::Card title-->
                     <!--begin::Card toolbar-->
+                    {{-- copas sementara --}}
                     <div class="card-toolbar">
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
@@ -68,7 +69,17 @@
                         @include('user.modal')
                         <!--end::Modal - Add task-->
                     </div>
+                    <!--end::Toolbar-->
                     <!--end::Card toolbar-->
+                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-docs-table-toolbar="selected">
+                        <div class="fw-bold me-5">
+                            <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
+                        </div>
+
+                        <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Coming Soon">
+                            Selection Action
+                        </button>
+                    </div>
 
                 </div>
                 <!--end::Card header-->
@@ -115,7 +126,11 @@
     <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/table.js"></script>
     {{-- <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/export-users.js"></script> --}}
     <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/add.js"></script>
+    <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
+    <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
+    <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script>
     <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-campaign.js"></script>
+    <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script>
 
     <script>
         "use strict";
@@ -305,14 +320,46 @@
                 });
             }
 
-            // Init toggle toolbar
+            /// Toggle toolbars
+            var toggleToolbars = function() {
+                // Define variables
+                const container = document.querySelector('#kt_datatable_example_1');
+                const toolbarBase = document.querySelector('[data-kt-docs-table-toolbar="base"]');
+                const toolbarSelected = document.querySelector('[data-kt-docs-table-toolbar="selected"]');
+                const selectedCount = document.querySelector('[data-kt-docs-table-select="selected_count"]');
+
+                // Select refreshed checkbox DOM elements
+                const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
+
+                // Detect checkboxes state & count
+                let checkedState = false;
+                let count = 0;
+
+                // Count checked boxes
+                allCheckboxes.forEach(c => {
+                    if (c.checked) {
+                        checkedState = true;
+                        count++;
+                    }
+                });
+
+                // Toggle toolbars
+                if (checkedState) {
+                    selectedCount.innerHTML = count;
+                    toolbarBase.classList.add('d-none');
+                    toolbarSelected.classList.remove('d-none');
+                } else {
+                    toolbarBase.classList.remove('d-none');
+                    toolbarSelected.classList.add('d-none');
+                }
+            }
 
             // Public methods
             return {
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    handleDeleteRows();
+                    initToggleToolbar();
                 }
             }
         }();

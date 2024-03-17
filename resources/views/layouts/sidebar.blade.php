@@ -39,7 +39,7 @@
                             <i class="ki-outline ki-abstract-14 fs-2"></i>
                         </div>
                         <!--begin::Logo image-->
-                        <a href="{{ url('home') }}">
+                        <a href="{{ url('/dashboard') }}">
                             <img alt="Logo" src="assets/media/gambar/logosahabatasn.png" class="h-30px" />
                         </a>
                         <!--end::Logo image-->
@@ -63,7 +63,7 @@
                     <div class="app-sidebar-header d-flex flex-stack d-none d-lg-flex pt-8 pb-2"
                         id="kt_app_sidebar_header">
                         <!--begin::Logo-->
-                        <a href="{{ url('home') }}" class="app-sidebar-logo">
+                        <a href="{{ url('dashboard') }}" class="app-sidebar-logo">
                             <img alt="Logo" src="{{ asset('') }}assets/media/gambar/sa-side.png"
                                 class="h-25px d-none d-sm-inline app-sidebar-logo-default theme-light-show" />
                             <img alt="Logo" src="{{ asset('') }}assets/media/gambar/sa-side-dark.png"
