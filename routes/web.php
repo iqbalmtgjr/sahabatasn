@@ -33,8 +33,8 @@ Route::post('/password/update', [ProfilController::class, 'updatePassword'])->na
 Route::get('/kelola-user', [UserController::class, 'index'])->name('kelola-user');
 Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getdatauser');
 Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
-Route::post('/user/update', [UserController::class, 'update'])->name('update-user');
-Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('hapus-user');
+Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
+Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
 
 //faq
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
