@@ -1,7 +1,7 @@
 @extends('layouts.apps')
 
 @section('content')
-    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ url('home') }}"
+    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{ url('dashboard') }}"
         method="POST" action="{{ route('login') }}">
         @csrf
         <!--begin::Heading-->

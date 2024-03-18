@@ -1,4 +1,4 @@
-<div class="modal fade" id="edit" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kt_modal_edit_user" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -177,8 +177,8 @@
                     <!--begin::Actions-->
                     <div class="text-center pt-10">
                         <button type="reset" class="btn btn-light me-3"
-                            data-kt-users-modal-action="cancel">Reset</button>
-                        <button type="submit" class="btn btn-primary">
+                            data-kt-users-modal-action="cancel">Batal</button>
+                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">Simpan</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -197,20 +197,60 @@
 {{-- @push('footer') --}}
 <script>
     function getdata(id) {
-        console.log(id)
+        // console.log(id)
         var url = $('#url_getdata').val() + '/' + id
-        console.log(url);
+        // console.log(url);
 
         $.ajax({
             url: url,
             cache: false,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
                 $('#id').val(response.id);
-                $('#avatar').val(response.avatar);
                 $('#name').val(response.name);
                 $('#email').val(response.email);
+
+                $.ajax({
+                    url: 'http://localhost:8000/gambar/' + response.avatar + '',
+                    type: 'HEAD',
+                    error: function() {
+                        console.log('woi tak ada data')
+                        const file = "" + response.avatar + "";
+                        if (response.avatar !== null) {
+                            if (response.google_id !== null) {
+                                $('.image-input-wrapper').css('background-image', 'url(' +
+                                    file +
+                                    ')');
+                                $('#avatar').val(response.avatar);
+                            } else {
+                                $('.image-input-wrapper').css('background-image', 'url(' +
+                                    file +
+                                    ')');
+                                $('#avatar').val(response.avatar);
+                            }
+                        }
+                    },
+                    success: function() {
+                        console.log('woi ada data')
+                        const file = "gambar/" + response.avatar + "";
+                        if (response.avatar !== null) {
+                            if (response.google_id !== null) {
+                                $('.image-input-wrapper').css('background-image', 'url(' +
+                                    file +
+                                    ')');
+                                $('#avatar').val(response.avatar);
+                            } else {
+                                $('.image-input-wrapper').css('background-image', 'url(' +
+                                    file +
+                                    ')');
+                                $('#avatar').val(response.avatar);
+                            }
+                        }
+                    }
+                });
+
+
 
                 $('input[name="role"]').each(function() {
                     if ($(this).val() === response.role) {

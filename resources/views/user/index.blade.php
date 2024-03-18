@@ -96,6 +96,7 @@
                                             value="1" />
                                     </div>
                                 </th>
+                                <th>Avatar</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
@@ -125,13 +126,11 @@
 @push('footer')
     <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/table.js"></script>
-    {{-- <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/export-users.js"></script> --}}
     <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/add.js"></script>
+    <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/edit.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script> --}}
-    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-campaign.js"></script> --}}
-    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script> --}}
+
 
     <script>
         "use strict";
@@ -162,6 +161,9 @@
                     },
                     columns: [{
                             data: 'id'
+                        },
+                        {
+                            data: 'avatar'
                         },
                         {
                             data: 'name'
@@ -212,7 +214,7 @@
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
                                 <a href="#" onclick="getdata(${row['id']})" id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
+                                data-bs-target="#kt_modal_edit_user">
                                     Edit
                                 </a>
                             </div>
@@ -365,7 +367,7 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    initToggleToolbar();
+                    // initToggleToolbar();
                 }
             }
         }();

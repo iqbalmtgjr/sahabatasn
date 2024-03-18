@@ -36,9 +36,15 @@
                                     style="background-image: url('assets/media/svg/avatars/blank.svg')"></div>
                             @else
                                 @if (Auth::user()->google_id != null)
-                                    <div class="image-input-wrapper w-125px h-125px"
-                                        style="background-image: url('{{ auth()->user()->avatar }}')">
-                                    </div>
+                                    @if (file_exists('gambar/' . auth()->user()->avatar))
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                            style="background-image: url('{{ asset('') . 'gambar/' . auth()->user()->avatar }}')">
+                                        </div>
+                                    @else
+                                        <div class="image-input-wrapper w-125px h-125px"
+                                            style="background-image: url('{{ auth()->user()->avatar }}')">
+                                        </div>
+                                    @endif
                                 @else
                                     <div class="image-input-wrapper w-125px h-125px"
                                         style="background-image: url('{{ asset('') . 'gambar/' . auth()->user()->avatar }}')">

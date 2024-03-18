@@ -33,8 +33,13 @@
                                 @if (Auth::user()->avatar == null)
                                     <img src="assets/media/svg/avatars/blank.svg" alt="user" />
                                 @else
-                                    @if (Auth::user()->google_id != null)
-                                        <img src="{{ Auth::user()->avatar }}" alt="user" />
+                                    @if (Auth::user()->google_id !== null)
+                                        @if (file_exists('gambar/' . auth()->user()->avatar))
+                                            <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}"
+                                                alt="user" />
+                                        @else
+                                            <img src="{{ Auth::user()->avatar }}" alt="user" />
+                                        @endif
                                     @else
                                         <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
                                     @endif

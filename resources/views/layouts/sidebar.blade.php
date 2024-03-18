@@ -114,41 +114,48 @@
                                         </span>
                                         <span class="menu-title">Kelola User</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-dollar fs-2"></i>
                                         </span>
                                         <span class="menu-title">Pembayaran</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-folder fs-2"></i>
                                         </span>
                                         <span class="menu-title">Bank Soal</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-package fs-2"></i>
                                         </span>
                                         <span class="menu-title">Paket Soal</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-30 fs-2"></i>
                                         </span>
                                         <span class="menu-title">Kategori Paket</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-medal-star fs-2"></i>
                                         </span>
                                         <span class="menu-title">Hasil Tryout</span>
                                     </a>
+                                </div>
+                                <div class="menu-item">
                                     <a class="menu-link {{ request()->is('pusatlangganan') ? 'active' : '' }}"
                                         href="{{ url('pusatlangganan') }}">
                                         <span class="menu-icon">
@@ -156,26 +163,13 @@
                                         </span>
                                         <span class="menu-title">Pusat Langganan</span>
                                     </a>
-                                    <a class="menu-link"
-                                        href="#">
+                                </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-bookmark fs-2"></i>
                                         </span>
                                         <span class="menu-title">Paket Saya</span>
-                                    </a>
-                                    <a class="menu-link {{ request()->is('faq') ? 'active' : '' }}"
-                                        href="{{ url('faq') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-question fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">FAQ</span>
-                                    </a>
-                                    <a class="menu-link {{ request()->is('sk') ? 'active' : '' }}"
-                                        href="{{ url('sk') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-setting fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Syarat dan Ketentuan</span>
                                     </a>
                                 </div>
                                 <!--end:Menu item-->

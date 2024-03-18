@@ -24,7 +24,11 @@
                 <img src="assets/media/svg/avatars/blank.svg" alt="user" />
             @else
                 @if (Auth::user()->google_id != null)
-                    <img src="{{ Auth::user()->avatar }}" alt="user" />
+                    @if (file_exists('gambar/' . auth()->user()->avatar))
+                        <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
+                    @else
+                        <img src="{{ Auth::user()->avatar }}" alt="user" />
+                    @endif
                 @else
                     <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
                 @endif
@@ -38,11 +42,16 @@
                 <div class="menu-content d-flex align-items-center px-3">
                     <!--begin::Avatar-->
                     <div class="symbol symbol-50px me-5">
+
                         @if (Auth::user()->avatar == null)
                             <img src="assets/media/svg/avatars/blank.svg" alt="user" />
                         @else
                             @if (Auth::user()->google_id != null)
-                                <img src="{{ Auth::user()->avatar }}" alt="user" />
+                                @if (file_exists('gambar/' . auth()->user()->avatar))
+                                    <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
+                                @else
+                                    <img src="{{ Auth::user()->avatar }}" alt="user" />
+                                @endif
                             @else
                                 <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
                             @endif
@@ -118,6 +127,12 @@
                 <!--end::Menu-->
             </div>
             <!--end::Menu item-->
+            <div class="menu-item px-5">
+                <a href="{{ url('faq') }}" class="menu-link px-5">FAQ</a>
+            </div>
+            <div class="menu-item px-5">
+                <a href="{{ url('sk') }}" class="menu-link px-5">Syarat & Ketentuan</a>
+            </div>
             <!--begin::Menu item-->
             <div class="menu-item px-5">
                 <a href="{{ route('logout') }}" class="menu-link px-5"
