@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="d-flex flex-column flex-column-fluid">
+						<div class="d-flex flex-column flex-column-fluid">
 							<!--begin::Toolbar-->
 							<div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
 								<!--begin::Toolbar container-->
