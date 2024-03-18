@@ -41,7 +41,7 @@ class GoogleController extends Controller
                 ]);
 
 
-                Mail::to($user->email)->send(new NotifDaftar($user, $make_password));
+                // Mail::to($user->email)->send(new NotifDaftar($user, $make_password));
                 Auth::login($user);
 
                 toastr()->success('Selamat Datang di Sahabat ASN.', 'Sukses');

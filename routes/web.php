@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PusatlanggananController;
+use App\Http\Controllers\SkController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -32,3 +35,12 @@ Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getd
 Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
 Route::post('/user/update', [UserController::class, 'update'])->name('update-user');
 Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('hapus-user');
+
+//faq
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
+//pusat langganan
+Route::get('/pusatlangganan', [PusatlanggananController::class,'index'])->name('pusatlangganan');
+
+//s&k
+Route::get('/sk',[SkController::class,'index'])->name('sk');
