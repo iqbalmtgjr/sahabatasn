@@ -114,6 +114,7 @@
         <!--end::Content container-->
     </div>
     <!--end::Content-->
+    @include('user.modaledit')
 @endsection
 
 @push('header')
@@ -128,9 +129,9 @@
     <script src="{{ asset('') }}assets/js/custom/apps/user-management/users/list/add.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-campaign.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script>
+    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script> --}}
+    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-campaign.js"></script> --}}
+    {{-- <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script> --}}
 
     <script>
         "use strict";
@@ -148,7 +149,7 @@
                     processing: true,
                     serverSide: true,
                     order: [
-                        [1, 'desc']
+                        [0, 'desc']
                     ],
                     stateSave: true,
                     select: {
@@ -210,7 +211,8 @@
                         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
-                                <a href="` + row['id'] + `" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+                                <a href="#" onclick="getdata(${row['id']})" id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
+                                data-bs-target="#edit">
                                     Edit
                                 </a>
                             </div>
@@ -218,7 +220,7 @@
 
                             <!--begin::Menu item-->
                             <div class="menu-item px-3">
-                                <a href="` + row['id'] + `" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                     Delete
                                 </a>
                             </div>
@@ -252,7 +254,7 @@
                 });
             }
 
-            // Delete customer
+            // Delete user
             var handleDeleteRows = () => {
                 // Select all delete buttons
                 const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
@@ -266,16 +268,18 @@
                         const parent = e.target.closest('tr');
 
                         // Get customer name
-                        const customerName = parent.querySelectorAll('td')[1].innerText;
+                        const namaUser = parent.querySelectorAll('td')[1].innerText;
+                        let data = $(this).data()
+                        let Id = data.id;
 
                         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Are you sure you want to delete " + customerName + "?",
+                            text: "Kamu yakin ingin menghapus " + namaUser + "?",
                             icon: "warning",
                             showCancelButton: true,
                             buttonsStyling: false,
-                            confirmButtonText: "Yes, delete!",
-                            cancelButtonText: "No, cancel",
+                            confirmButtonText: "Ya, hapus!",
+                            cancelButtonText: "Tidak, batal",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-danger",
                                 cancelButton: "btn fw-bold btn-active-light-primary"
@@ -284,32 +288,34 @@
                             if (result.value) {
                                 // Simulate delete request -- for demo purpose only
                                 Swal.fire({
-                                    text: "Deleting " + customerName,
+                                    text: "Menghapus " + namaUser,
                                     icon: "info",
                                     buttonsStyling: false,
                                     showConfirmButton: false,
                                     timer: 2000
                                 }).then(function() {
                                     Swal.fire({
-                                        text: "You have deleted " +
-                                            customerName + "!.",
+                                        text: "Data " +
+                                            namaUser +
+                                            " sudah dihapus!.",
                                         icon: "success",
                                         buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
+                                        confirmButtonText: "Ok, saya mengerti!",
                                         customClass: {
                                             confirmButton: "btn fw-bold btn-primary",
                                         }
                                     }).then(function() {
-                                        // delete row data from server and re-draw datatable
+                                        window.location =
+                                            `{{ url('/user/hapus/') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: customerName + " was not deleted.",
+                                    text: namaUser + " batal dihapus.",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "Ok, saya mengerti!",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }

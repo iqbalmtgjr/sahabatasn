@@ -1,4 +1,4 @@
-<div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="edit" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -6,7 +6,7 @@
             <!--begin::Modal header-->
             <div class="modal-header" id="kt_modal_add_user_header">
                 <!--begin::Modal title-->
-                <h2 class="fw-bold">Tambah User</h2>
+                <h2 class="fw-bold">Edit User</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
                 <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
@@ -18,7 +18,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ route('user-input') }}"
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ route('user-update') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
@@ -26,6 +26,9 @@
                         data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
                         data-kt-scroll-dependencies="#kt_modal_add_user_header"
                         data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
+
+                        <input type="hidden" id="id" name="id" value="">
+                        <input type="hidden" id="url_getdata" name="url_getdata" value="{{ url('/user/getdata') }}">
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
@@ -53,7 +56,7 @@
                                 <!--begin::Label-->
                                 <label
                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Tambah avatar">
+                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Ubah avatar">
                                     <i class="ki-outline ki-pencil fs-7"></i>
                                     <!--begin::Inputs-->
                                     <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
@@ -89,7 +92,7 @@
                             <label class="required fw-semibold fs-6 mb-2">Nama Lengkap</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="name"
+                            <input type="text" name="name" id="name"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
                                 placeholder="Nama Lengkap" value="" />
                             @error('name')
@@ -106,7 +109,7 @@
                             <label class="required fw-semibold fs-6 mb-2">Email</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="email" name="email"
+                            <input type="email" name="email" id="email"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('email') is-invalid @enderror"
                                 placeholder="example@domain.com" value="" />
                             @error('email')
@@ -128,8 +131,8 @@
                                 <!--begin::Radio-->
                                 <div class="form-check form-check-custom form-check-solid">
                                     <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="role" type="radio" value="admin"
-                                        id="kt_modal_update_role_option_0" checked='checked' />
+                                    <input class="form-check-input me-3" id="role" name="role" type="radio"
+                                        value="admin" id="kt_modal_update_role_option_0" checked='checked' />
                                     <!--end::Input-->
                                     <!--begin::Label-->
                                     <label class="form-check-label" for="kt_modal_update_role_option_0">
@@ -147,8 +150,8 @@
                                 <!--begin::Radio-->
                                 <div class="form-check form-check-custom form-check-solid">
                                     <!--begin::Input-->
-                                    <input class="form-check-input me-3" name="role" type="radio" value="user"
-                                        id="kt_modal_update_role_option_1" />
+                                    <input class="form-check-input me-3" id="role" name="role" type="radio"
+                                        value="user" id="kt_modal_update_role_option_1" />
                                     <!--end::Input-->
                                     <!--begin::Label-->
                                     <label class="form-check-label" for="kt_modal_update_role_option_1">
@@ -191,3 +194,31 @@
     </div>
     <!--end::Modal dialog-->
 </div>
+{{-- @push('footer') --}}
+<script>
+    function getdata(id) {
+        console.log(id)
+        var url = $('#url_getdata').val() + '/' + id
+        console.log(url);
+
+        $.ajax({
+            url: url,
+            cache: false,
+            success: function(response) {
+                console.log(response);
+
+                $('#id').val(response.id);
+                $('#avatar').val(response.avatar);
+                $('#name').val(response.name);
+                $('#email').val(response.email);
+
+                $('input[name="role"]').each(function() {
+                    if ($(this).val() === response.role) {
+                        $(this).prop('checked', true);
+                    }
+                });
+            }
+        });
+    }
+</script>
+{{-- @endpush --}}

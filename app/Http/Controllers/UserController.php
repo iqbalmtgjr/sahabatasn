@@ -65,34 +65,60 @@ class UserController extends Controller
 
 
         Mail::to($user->email)->send(new NotifDaftar($user, $make_password));
-        Auth::login($user);
 
         toastr()->success('Berhasil menambah data user.', 'Sukses');
         return redirect()->back();
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = User::find($request->id);
+
+        if ($request->file('avatar')) {
+            // Hapus Foto Lama
+            $path = public_path('gambar/' . $data->avatar);
+            if (file_exists($path)) {
+                @unlink($path);
+            }
+
+            $extension = $request->avatar->extension();
+            $nama_file = round(microtime(true) * 1000) . '.' . $extension;
+
+            $request->file('avatar')->move(public_path('gambar/'), $nama_file);
+
+            $data->update([
+                'role' => $request->role,
+                'name' => $request->name,
+                'email' => $request->email,
+                'avatar' => $nama_file,
+            ]);
+        } else {
+            $data->update([
+                'role' => $request->role,
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        }
+
+        toastr()->success('Berhasil edit data user.', 'Sukses');
+        return redirect()->back();
     }
 
     /**
@@ -100,6 +126,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::findOrFail($id)->delete();
+        return redirect()->back();
+    }
+
+    public function getdata($id)
+    {
+        $data = User::find($id);
+        return $data;
     }
 }
