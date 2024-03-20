@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PusatlanggananController;
 use App\Http\Controllers\SkController;
+use App\Http\Controllers\PaketController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -44,3 +45,6 @@ Route::get('/pusatlangganan', [PusatlanggananController::class, 'index'])->name(
 
 //s&k
 Route::get('/sk', [SkController::class, 'index'])->name('sk');
+
+//kelola_paket
+Route::get('/kelola-paket', [PaketController::class, 'index'])->name('kelola-paket');

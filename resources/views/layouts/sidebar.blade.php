@@ -132,7 +132,8 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link {{ request()->is('kelola-paket') ? 'active' : '' }}"
+                                        href="{{ url('kelola-paket') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-package fs-2"></i>
                                         </span>
@@ -140,7 +141,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                <a class="menu-link" href="#">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-30 fs-2"></i>
                                         </span>
