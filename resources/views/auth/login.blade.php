@@ -73,8 +73,7 @@
         <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
             <div></div>
             <!--begin::Link-->
-            <a href="#" class="link-primary">Forgot
-                Password ?</a>
+            {{-- <a href="#" class="link-primary">Lupa Password ?</a> --}}
             <!--end::Link-->
         </div>
         <!--end::Wrapper-->
@@ -82,10 +81,10 @@
         <div class="d-grid mb-10">
             <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
                 <!--begin::Indicator label-->
-                <span class="indicator-label">Sign In</span>
+                <span class="indicator-label">Masuk</span>
                 <!--end::Indicator label-->
                 <!--begin::Indicator progress-->
-                <span class="indicator-progress">Please wait...
+                <span class="indicator-progress">Menunggu...
                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                 <!--end::Indicator progress-->
             </button>

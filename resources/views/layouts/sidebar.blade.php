@@ -124,7 +124,8 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link {{ request()->is('kelola-bank-soal') ? 'active' : '' }}"
+                                        href="{{ url('kelola-bank-soal') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-folder fs-2"></i>
                                         </span>
@@ -142,6 +143,8 @@
                                 </div>
                                 <div class="menu-item">
                                 <a class="menu-link" href="#">
+                                    <a class="menu-link {{ request()->is('kelola-kategori') ? 'active' : '' }}"
+                                        href="{{ url('/kelola-kategori') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-30 fs-2"></i>
                                         </span>

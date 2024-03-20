@@ -2,7 +2,7 @@
 
 var KTUsersAddUser = function () {
     const modal = document.getElementById("kt_modal_edit_user");
-    const form = modal.querySelector("#kt_modal_add_user_form");
+    const form = modal.querySelector("#kt_modal_edit_user_form");
     const modalInstance = new bootstrap.Modal(modal);
 
     return {

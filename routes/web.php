@@ -2,12 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SkController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\FaqController;
+use App\Http\Controllers\BanksoalController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PusatlanggananController;
-use App\Http\Controllers\SkController;
 use App\Http\Controllers\PaketController;
 
 Route::get('/', function () {
@@ -36,6 +38,20 @@ Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getd
 Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
 Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
 Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
+
+//kelola_kategori_paket
+Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');
+Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
+Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
+Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
+Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
+
+//kelola_bank_soal
+Route::get('/kelola-bank-soal', [BanksoalController::class, 'index']);
+Route::get('/kelola-bank-soal/getdata/{id}', [BanksoalController::class, 'getdata']);
+Route::post('/kelola-bank-soal/input', [BanksoalController::class, 'store']);
+Route::post('/kelola-bank-soal/update', [BanksoalController::class, 'update']);
+Route::get('/kelola-bank-soal/hapus/{id}', [BanksoalController::class, 'destroy']);
 
 //faq
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
