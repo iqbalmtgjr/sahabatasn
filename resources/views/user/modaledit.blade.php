@@ -18,7 +18,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ route('user-update') }}"
+                <form id="kt_modal_edit_user_form" class="form" method="POST" action="{{ route('user-update') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->

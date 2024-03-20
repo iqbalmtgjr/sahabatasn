@@ -35,7 +35,7 @@ var KTUsersAddUser = function () {
                     }
                 });
 
-                // const submitBtn = modal.querySelector('[data-kt-users-modal-action="submit"]');
+                const submitBtn = modal.querySelector('[data-kt-users-modal-action="submit"]');
                 // submitBtn.addEventListener("click", (event) => {
                 //     event.preventDefault();
                 //     formValidator && formValidator.validate().then((status) => {
@@ -105,7 +105,7 @@ var KTUsersAddUser = function () {
                     });
                 });
 
-                modal.querySelector('[data-kt-users-modal-action="close"]').addEventListener("click", (event) => {
+                modal.querySelector('[data-kt-users-modal-action="tutup"]').addEventListener("click", (event) => {
                     event.preventDefault();
                     Swal.fire({
                         text: "Kamu yakin ingin membatalkan ini?",
