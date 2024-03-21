@@ -142,7 +142,6 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                <a class="menu-link" href="#">
                                     <a class="menu-link {{ request()->is('kelola-kategori') ? 'active' : '' }}"
                                         href="{{ url('/kelola-kategori') }}">
                                         <span class="menu-icon">

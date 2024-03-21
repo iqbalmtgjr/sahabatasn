@@ -9,7 +9,7 @@
                 <h2 class="fw-bold">Edit User</h2>
                 <!--end::Modal title-->
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-users-modal-action="close">
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal">
                     <i class="ki-outline ki-cross fs-1"></i>
                 </div>
                 <!--end::Close-->
@@ -178,7 +178,7 @@
                     <div class="text-center pt-10">
                         <button type="reset" class="btn btn-light me-3"
                             data-kt-users-modal-action="cancel">Batal</button>
-                        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
                             <span class="indicator-label">Simpan</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
