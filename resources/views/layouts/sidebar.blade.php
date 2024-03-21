@@ -138,17 +138,16 @@
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-package fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Paket Soal</span>
+                                        <span class="menu-title">Kelola Paket Soal</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                <a class="menu-link" href="#">
                                     <a class="menu-link {{ request()->is('kelola-kategori') ? 'active' : '' }}"
                                         href="{{ url('/kelola-kategori') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-abstract-30 fs-2"></i>
                                         </span>
-                                        <span class="menu-title">Kategori Paket</span>
+                                        <span class="menu-title">Kelola Kategori Paket</span>
                                     </a>
                                 </div>
                                 <div class="menu-item">

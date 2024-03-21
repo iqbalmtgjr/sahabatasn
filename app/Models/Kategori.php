@@ -16,4 +16,9 @@ class Kategori extends Model
     // {
     //     return $this->belongsTo(User::class);
     // }
+
+    public function paket()
+    {
+        return $this->hasOne(Paket::class);
+    }
 }
