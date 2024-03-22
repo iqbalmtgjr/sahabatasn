@@ -14,6 +14,6 @@ class Kategori extends Model
 
     public function banksoal()
     {
-        return $this->hasOne(Banksoal::class, 'bank_soal_id');
+        return $this->hasOne(Banksoal::class);
     }
 }
