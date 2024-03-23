@@ -18,8 +18,8 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST"
-                    action="{{ url('/kelola-bank-soal/input') }}" enctype="multipart/form-data">
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/bank-soal/input') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -45,7 +45,8 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
-                                    <select data-control="select2" class="form-select form-select-solid"
+                                    <select data-control="select2"
+                                        class="form-select form-select-solid @error('kategori') is-invalid @enderror"
                                         data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori"
                                         id="">
                                         <option value=""></option>
@@ -64,7 +65,8 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipe</label>
-                                    <select data-control="select2" class="form-select form-select-solid"
+                                    <select data-control="select2"
+                                        class="form-select form-select-solid @error('tipe') is-invalid @enderror"
                                         data-hide-search="true" data-placeholder="-- Pilih Tipe --" name="tipe"
                                         id="">
                                         <option value=""></option>
@@ -160,7 +162,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban A</label>
-                                            <select data-control="select2" class="form-select form-select-solid"
+                                            <select data-control="select2"
+                                                class="form-select form-select-solid @error('jawaban_a') is-invalid @enderror"
                                                 data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
                                                 name="jawaban_a">
                                                 <option value=""></option>
@@ -193,7 +196,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban B</label>
-                                            <select data-control="select2" class="form-select form-select-solid"
+                                            <select data-control="select2"
+                                                class="form-select form-select-solid @error('jawaban_b') is-invalid @enderror"
                                                 data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
                                                 name="jawaban_b">
                                                 <option value=""></option>
@@ -226,7 +230,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban C</label>
-                                            <select data-control="select2" class="form-select form-select-solid"
+                                            <select data-control="select2"
+                                                class="form-select form-select-solid @error('jawaban_c') is-invalid @enderror"
                                                 data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
                                                 name="jawaban_c">
                                                 <option value=""></option>
@@ -259,7 +264,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban D</label>
-                                            <select data-control="select2" class="form-select form-select-solid"
+                                            <select data-control="select2"
+                                                class="form-select form-select-solid @error('jawaban_d') is-invalid @enderror"
                                                 data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
                                                 name="jawaban_d">
                                                 <option value=""></option>
@@ -291,7 +297,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban E</label>
-                                            <select data-control="select2" class="form-select form-select-solid"
+                                            <select data-control="select2"
+                                                class="form-select form-select-solid @error('jawaban_e') is-invalid @enderror"
                                                 data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
                                                 name="jawaban_e">
                                                 <option value=""></option>
@@ -313,7 +320,8 @@
                         <div class="row">
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Pembahasan</label>
-                                <textarea class="form-control form-control-solid mb-3 mb-lg-0" name="pembahasan" cols="30" rows="10">{{ old('pembahasan') }}</textarea>
+                                <textarea class="form-control form-control-solid mb-3 mb-lg-0  @error('pembahasan') is-invalid @enderror"
+                                    name="pembahasan" cols="30" rows="10">{{ old('pembahasan') }}</textarea>
                                 @error('pembahasan')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

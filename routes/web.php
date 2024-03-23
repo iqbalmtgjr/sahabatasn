@@ -47,11 +47,11 @@ Route::post('/kategori/update', [KategoriController::class, 'update'])->name('ka
 Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
 
 //kelola_bank_soal
-Route::get('/kelola-bank-soal', [BanksoalController::class, 'index']);
-Route::get('/kelola-bank-soal/getdata/{id}', [BanksoalController::class, 'getdata']);
-Route::post('/kelola-bank-soal/input', [BanksoalController::class, 'store']);
-Route::post('/kelola-bank-soal/update', [BanksoalController::class, 'update']);
-Route::get('/kelola-bank-soal/hapus/{id}', [BanksoalController::class, 'destroy']);
+Route::get('/bank-soal', [BanksoalController::class, 'index']);
+Route::get('/banksoal/getdata/{id}', [BanksoalController::class, 'getdata']);
+Route::post('/bank-soal/input', [BanksoalController::class, 'store']);
+Route::post('/banksoal/update', [BanksoalController::class, 'update']);
+Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
 
 //faq
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
