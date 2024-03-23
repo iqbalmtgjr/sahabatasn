@@ -14,9 +14,18 @@ return new class extends Migration
         Schema::create('jawaban', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bank_soal_id');
-            $table->string('teks');
-            $table->string('gambar');
-            $table->integer('nilai');
+            // $table->string('gambar')->nullable();
+            $table->string('pilihan_a');
+            $table->string('pilihan_b');
+            $table->string('pilihan_c');
+            $table->string('pilihan_d');
+            $table->string('pilihan_e');
+            $table->smallInteger('jawaban_a');
+            $table->smallInteger('jawaban_b');
+            $table->smallInteger('jawaban_c');
+            $table->smallInteger('jawaban_d');
+            $table->smallInteger('jawaban_e');
+            $table->longText('pembahasan');
             $table->timestamps();
         });
     }

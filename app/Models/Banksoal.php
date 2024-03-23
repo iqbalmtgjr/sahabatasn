@@ -19,6 +19,6 @@ class Banksoal extends Model
 
     public function kategori()
     {
-        return $this->hasOne(Kategori::class, 'id');
+        return $this->belongsTo(Kategori::class);
     }
 }
