@@ -18,7 +18,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ route('user-input') }}"
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ route('paket-input') }}"
                     enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
@@ -89,32 +89,43 @@
                             <label class="required fw-semibold fs-6 mb-2">Judul</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="name"
+                            <input type="text" name="judul"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="Nama Lengkap" value="" />
-                            @error('name')
+                                placeholder="harga" value="" />
+                            @error('judul')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                             <!--end::Input-->
                         </div>
-
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Harga</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" name="harga"
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
+                                placeholder="Nama Lengkap" value="" />
+                            @error('harga')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <!--end::Input-->
+                        </div>
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Kategori</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <Select name="id_kategori">
+                            <Select name="kategori_id">
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($kategori as $kt)
                                     <option value="{{$kt->id}}">{{$kt->kategori}}</option>
                                 @endforeach
                             </Select>
-                            <input type="text" name="name"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="Nama Lengkap" value="" />
-                            @error('name')
+                            @error('kategori')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

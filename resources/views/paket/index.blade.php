@@ -95,6 +95,7 @@
 							</div>
 							<!--end::Content-->
 	</div>
+    @include('paket.modal.edit')
 @endsection
 
 @push('header')

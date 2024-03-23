@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kategori_id');
             $table->string('soal');
-            $table->string('gambar');
+            $table->string('gambar')->nullable();
             $table->string('tipe');
             $table->timestamps();
         });

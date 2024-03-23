@@ -2,16 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banksoal;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class BanksoalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('bank_soal.index');
+        $kategori = Kategori::all();
+        $data = Banksoal::all();
+        if ($request->ajax()) {
+            return DataTables::of($data)
+                ->addColumn('kategori', function ($row) {
+                    return $row->kategori->kategori;
+                })
+                ->make(true);
+        }
+
+        return view('bank_soal.index', compact('kategori'));
     }
 
     /**

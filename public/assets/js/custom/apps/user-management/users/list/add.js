@@ -105,7 +105,7 @@ var KTUsersAddUser = function () {
                     });
                 });
 
-                modal.querySelector('[data-kt-users-modal-action="tutup"]').addEventListener("click", (event) => {
+                modal.querySelector('[data-kt-users-modal-action="close"]').addEventListener("click", (event) => {
                     event.preventDefault();
                     Swal.fire({
                         text: "Kamu yakin ingin membatalkan ini?",
