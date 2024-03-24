@@ -32,26 +32,33 @@ Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil
 Route::get('/password', [ProfilController::class, 'password'])->name('password');
 Route::post('/password/update', [ProfilController::class, 'updatePassword'])->name('update.password');
 
-//Kelola_user
-Route::get('/kelola-user', [UserController::class, 'index'])->name('kelola-user');
-Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getdatauser');
-Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
-Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
-Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
+Route::middleware(['checkRole:admin'])->group(function () {
+    //Kelola_user
+    Route::get('/kelola-user', [UserController::class, 'index'])->name('kelola-user');
+    Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getdatauser');
+    Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
+    Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
+    Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
 
-//kelola_kategori_paket
-Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');
-Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
-Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
-Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
-Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
+    //kelola_kategori_paket
+    Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');
+    Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
+    Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
+    Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
+    Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
 
-//kelola_bank_soal
-Route::get('/bank-soal', [BanksoalController::class, 'index']);
-Route::get('/banksoal/getdata/{id}', [BanksoalController::class, 'getdata']);
-Route::post('/bank-soal/input', [BanksoalController::class, 'store']);
-Route::post('/banksoal/update', [BanksoalController::class, 'update']);
-Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
+    //kelola_bank_soal
+    Route::get('/bank-soal', [BanksoalController::class, 'index']);
+    Route::get('/banksoal/getdata/{id}', [BanksoalController::class, 'getdata']);
+    Route::post('/bank-soal/input', [BanksoalController::class, 'store']);
+    Route::post('/banksoal/update', [BanksoalController::class, 'update']);
+    Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
+});
+
+Route::middleware(['checkRole:user'])->group(function () {
+    //
+});
+
 
 //faq
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');

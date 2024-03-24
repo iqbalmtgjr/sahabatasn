@@ -106,6 +106,7 @@
                                         <span class="menu-title">Dashboards</span>
                                     </a>
                                 </div>
+                                <hr>
                                 <div class="menu-item">
                                     <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
                                         href="{{ url('kelola-user') }}">

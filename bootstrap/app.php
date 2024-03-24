@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\checkRole;
 use App\Http\Middleware\isLogin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -13,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->web(append: [isLogin::class]);
+        $middleware->alias(['checkRole' => checkRole::class]);
+        // $middleware->append(checkRole::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
