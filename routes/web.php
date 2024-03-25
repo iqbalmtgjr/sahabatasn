@@ -33,7 +33,7 @@ Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil
 Route::get('/password', [ProfilController::class, 'password'])->name('password');
 Route::post('/password/update', [ProfilController::class, 'updatePassword'])->name('update.password');
 
-Route::middleware(['checkRole:admin'])->group(function () {
+Route::middleware(['checkRole:admin,user'])->group(function () {
     //Kelola_user
     Route::get('/kelola-user', [UserController::class, 'index'])->name('kelola-user');
     Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getdatauser');
