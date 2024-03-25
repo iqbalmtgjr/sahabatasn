@@ -20,22 +20,22 @@ class PaketController extends Controller
         $paket = Paket::all();
         if ($request->ajax()) {
             return DataTables::of($paket)
-            ->addColumn('gambar', function ($row) {
-                if ($row->gambar == null) {
-                    return '<p class="text-danger">Belum Ada Avatar</p>';
-                } else {
-                    if (file_exists('gambar/' . $row->gambar)) {
-                        return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->gambar . '" alt="avatar">';
+                ->addColumn('gambar', function ($row) {
+                    if ($row->gambar == null) {
+                        return '<p class="text-danger">Belum Ada Avatar</p>';
                     } else {
-                        return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->gambar . '" alt="avatar">';
+                        if (file_exists('gambar/' . $row->gambar)) {
+                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->gambar . '" alt="avatar">';
+                        } else {
+                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->gambar . '" alt="avatar">';
+                        }
                     }
-                }
-            })
-            ->rawColumns(['gambar'])    
-            ->make(true);
+                })
+                ->rawColumns(['gambar'])
+                ->make(true);
         }
-                
-        return view('paket.index', compact('paket','kategori'));
+
+        return view('paket.index', compact('paket', 'kategori'));
     }
 
     /**
@@ -52,7 +52,7 @@ class PaketController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        
+
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -96,14 +96,37 @@ class PaketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        
-
         $data = Paket::find($request->id);
-        $data->update($request->all());
 
-        toastr()->success('Berhasil edit kategori.', 'Sukses');
+        if ($request->file('gambar')) {
+            // Hapus Foto Lama
+            $path = public_path('gambar/' . $data->gambar);
+            if (file_exists($path)) {
+                @unlink($path);
+            }
+
+            $extension = $request->gambar->extension();
+            $nama_file = round(microtime(true) * 1000) . '.' . $extension;
+
+            $request->file('gambar')->move(public_path('gambar/'), $nama_file);
+
+            $data->update([
+                'gambar' => $nama_file,
+                'judul' => $request->judul,
+                'harga' => $request->harga,
+                'kategori_id' => $request->kategori_id,
+            ]);
+        } else {
+            $data->update([
+                'judul' => $request->judul,
+                'harga' => $request->harga,
+                'kategori_id' => $request->kategori_id,
+            ]);
+        }
+
+        toastr()->success('Berhasil edit data paket.', 'Sukses');
         return redirect()->back();
     }
 

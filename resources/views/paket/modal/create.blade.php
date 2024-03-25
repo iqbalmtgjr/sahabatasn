@@ -115,22 +115,20 @@
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">Kategori</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <Select name="kategori_id">
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($kategori as $kt)
-                                    <option value="{{$kt->id}}">{{$kt->kategori}}</option>
+                            <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
+                            <select data-control="select2" class="form-select form-select-solid"
+                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori_id">
+                                <option value=""></option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
+                                        {{ $item->kategori }}</option>
                                 @endforeach
-                            </Select>
+                            </select>
                             @error('kategori')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <!--end::Input-->
                         </div>
                     </div>
                     <!--end::Scroll-->

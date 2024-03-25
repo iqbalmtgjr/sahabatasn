@@ -18,7 +18,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/kategori/update') }}">
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/paket/update') }}">
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -90,7 +90,7 @@
                             <input type="text" name="judul" id="judul"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('kategori') is-invalid @enderror"
                                 placeholder="Nama Kategori" value="" />
-                            @error('kategori')
+                            @error('judul')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -102,10 +102,10 @@
                             <label class="required fw-semibold fs-6 mb-2">Harga Paket</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="judul" id="harga"
+                            <input type="text" name="harga" id="harga"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('kategori') is-invalid @enderror"
-                                placeholder="Nama Kategori" value="" />
-                            @error('kategori')
+                                placeholder="harga" value="" />
+                            @error('harga')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -113,13 +113,14 @@
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="required fw-semibold fs-6 mb-2">Kategori Paket</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="kategori_paket" id="kategori_paket" class="form-control-solid mb-3 mb-lg-0">
-                                @foreach ($kategori as $kt)
-                                    <option value="{{$kt->id}}">{{$kt->kategori}}</option>
+                            <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
+                            <select class="form-select form-select-solid"
+                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori_id"
+                                id="kategori_id">
+                                <option value=""></option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
+                                        {{ $item->kategori }}</option>
                                 @endforeach
                             </select>
                             @error('kategori')
@@ -127,7 +128,6 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <!--end::Input-->
                         </div>
                         <!--end::Input group-->
                     </div>

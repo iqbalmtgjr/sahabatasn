@@ -246,7 +246,7 @@
 
                         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Yakin ingin menghapus kategori " + customerName + "?",
+                            text: "Yakin ingin menghapus paket " + customerName + "?",
                             icon: "warning",
                             showCancelButton: true,
                             buttonsStyling: false,
@@ -267,7 +267,7 @@
                                     timer: 2000
                                 }).then(function() {
                                     Swal.fire({
-                                        text: "Data kategori " +
+                                        text: "Data paket " +
                                             customerName + " terhapus !.",
                                         icon: "success",
                                         buttonsStyling: false,
@@ -277,13 +277,13 @@
                                         }
                                     }).then(function() {
                                         window.location =
-                                            `{{ url('/kategori/hapus/') }}/${Id}`;
+                                            `{{ url('/paket/hapus/') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "Kategori " + customerName +
+                                    text: "Paket " + customerName +
                                         " tidak jadi dihapus.",
                                     icon: "error",
                                     buttonsStyling: false,
