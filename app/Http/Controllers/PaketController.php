@@ -20,6 +20,9 @@ class PaketController extends Controller
         $paket = Paket::all();
         if ($request->ajax()) {
             return DataTables::of($paket)
+                ->addColumn('harga', function ($row) {
+                    return 'Rp. ' . number_format($row->harga, 0, ',', '.');
+                })
                 ->addColumn('gambar', function ($row) {
                     if ($row->gambar == null) {
                         return '<p class="text-danger">Belum Ada Avatar</p>';
@@ -31,7 +34,7 @@ class PaketController extends Controller
                         }
                     }
                 })
-                ->rawColumns(['gambar'])
+                ->rawColumns(['harga', 'gambar'])
                 ->make(true);
         }
 

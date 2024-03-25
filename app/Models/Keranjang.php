@@ -5,15 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Paket extends Model
+class Keranjang extends Model
 {
     use HasFactory;
-    protected $table = 'paket';
+    protected $table = 'keranjang';
     protected $guarded = ['id'];
-    protected $fillable = ['kategori_id', 'judul', 'gambar', 'harga'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class);
     }
 }

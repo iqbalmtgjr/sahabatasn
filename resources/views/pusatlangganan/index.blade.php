@@ -152,7 +152,7 @@
 																	<div class="fs-6 fw-bold mt-5 d-flex flex-stack">
 																		<!--begin::Label-->
 																		<span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
-																		<span class="fs-6 fw-semibold text-gray-400"><span>Rp.</span></span>{{$item->harga}}</span>
+																		@rupiah($item->harga)</span>
 																		<!--end::Label-->
 																		<!--begin::Action-->
 																		<a href="#" class="btn btn-sm btn-primary">Beli</a>

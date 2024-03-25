@@ -91,7 +91,7 @@
                             <!--begin::Input-->
                             <input type="text" name="judul"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="harga" value="" />
+                                placeholder="Judul" value="" />
                             @error('judul')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -104,9 +104,9 @@
                             <label class="required fw-semibold fs-6 mb-2">Harga</label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" name="harga"
+                            <input type="number" name="harga"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="Nama Lengkap" value="" />
+                                placeholder="Harga" value="" />
                             @error('harga')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
