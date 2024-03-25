@@ -12,8 +12,19 @@ class Kategori extends Model
     protected $table = 'kategori';
     protected $guarded = ['id'];
 
-    public function banksoal()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    public function paket()
+    {
+        return $this->hasOne(Paket::class);
+    }
+    
+        public function banksoal()
     {
         return $this->hasOne(Banksoal::class);
     }
+
 }

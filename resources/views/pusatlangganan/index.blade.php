@@ -42,14 +42,15 @@
 											<div class="mb-17">
 												<!--begin::Row-->
 												<div class="row g-10">
+													@foreach ($data as $item)
 													<!--begin::Col-->
 													<div class="col-md-4">
 														<!--begin::Hot sales post-->
 														<div class="card-xl-stretch me-md-6">
 															<!--begin::Overlay-->
-															<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="assets/media/stock/600x400/img-23.jpg">
+															<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ asset('') . 'gambar/' . $item->gambar}}">
 																<!--begin::Image-->
-																<div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url('assets/media/stock/600x400/img-23.jpg')"></div>
+																<div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px" style="background-image:url('{{ asset('') . 'gambar/' . $item->gambar}}')"></div>
 																<!--end::Image-->
 																<!--begin::Action-->
 																<div class="overlay-layer card-rounded bg-dark bg-opacity-25">
@@ -59,29 +60,33 @@
 															</a>
 															<!--end::Overlay-->
 															<!--begin::Body-->
-															<div class="mt-5">
-																<!--begin::Title-->
-																<a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">PAKET SOAL SKD</a>
-																<!--end::Title-->
-																<!--begin::Text-->
-																<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Gratis Tryout</div>
-																<!--end::Text-->
-																<!--begin::Text-->
-																<div class="fs-6 fw-bold mt-5 d-flex flex-stack">
-																	<!--begin::Label-->
-																	<span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
-																	<span class="fs-6 fw-semibold text-gray-400"></span>Rp. 150.000</span>
-																	<!--end::Label-->
-																	<!--begin::Action-->
-																	<a href="#" class="btn btn-sm btn-primary">Beli</a>
-																	<!--end::Action-->
+															
+																<div class="mt-5">
+																	<!--begin::Title-->
+																	<a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">{{$item->judul}}</a>
+																	<!--end::Title-->
+																	<!--begin::Text-->
+																	<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Gratis Tryout</div>
+																	<!--end::Text-->
+																	<!--begin::Text-->
+																	<div class="fs-6 fw-bold mt-5 d-flex flex-stack">
+																		<!--begin::Label-->
+																		<span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
+																		@rupiah($item->harga)</span>
+																		<!--end::Label-->
+																		<!--begin::Action-->
+																		<a href="#" class="btn btn-sm btn-primary">Beli</a>
+																		<!--end::Action-->
+																	</div>
+																	<!--end::Text-->
 																</div>
-																<!--end::Text-->
-															</div>
+															
+															
 															<!--end::Body-->
 														</div>
 														<!--end::Hot sales post-->
 													</div>
+													@endforeach
 													<!--end::Col-->
 												</div>
 												<!--end::Row-->

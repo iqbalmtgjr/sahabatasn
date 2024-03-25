@@ -11,6 +11,7 @@ use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PusatlanggananController;
 use App\Http\Controllers\PaketController;
+use App\Models\Paket;
 
 Route::get('/', function () {
     return redirect('login');
@@ -71,3 +72,7 @@ Route::get('/sk', [SkController::class, 'index'])->name('sk');
 
 //kelola_paket
 Route::get('/kelola-paket', [PaketController::class, 'index'])->name('kelola-paket');
+Route::post('/paket/input', [PaketController::class, 'store'])->name('paket-input');
+Route::get('/paket/getdata/{id}', [PaketController::class, 'getdata'])->name('getdatapaket');
+Route::post('/paket/update', [PaketController::class, 'update'])->name('paket-update');
+Route::get('/paket/hapus/{id}', [PaketController::class, 'destroy'])->name('paket-delete');
