@@ -18,7 +18,7 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/paket/update') }}">
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/paket/update') }}" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -172,7 +172,7 @@
                         console.log('woi tak ada data')
                         const file = "" + response.gambar + "";
                         if (response.gambar !== null) {
-                            if (response.google_id !== null) {
+                            if (response.gambar !== null) {
                                 $('.image-input-wrapper').css('background-image', 'url(' +
                                     file +
                                     ')');
@@ -189,7 +189,7 @@
                         console.log('woi ada data')
                         const file = "gambar/" + response.gambar + "";
                         if (response.gambar !== null) {
-                            if (response.google_id !== null) {
+                            if (response.gambar !== null) {
                                 $('.image-input-wrapper').css('background-image', 'url(' +
                                     file +
                                     ')');
