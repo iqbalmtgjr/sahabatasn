@@ -9,4 +9,5 @@ class Paket extends Model
 {
     use HasFactory;
     protected $table = 'paket';
+    protected $guarded = ['id'];
 }
