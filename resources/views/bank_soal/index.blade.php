@@ -131,7 +131,7 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/kelola-bank-soal') }}",
+                        url: "{{ url('bank-soal') }}",
                     },
                     columns: [{
                             data: 'id'
@@ -243,7 +243,7 @@
 
                         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Yakin ingin menghapus kategori " + customerName + "?",
+                            text: "Yakin ingin menghapus soal " + customerName + "?",
                             icon: "warning",
                             showCancelButton: true,
                             buttonsStyling: false,
@@ -264,7 +264,7 @@
                                     timer: 2000
                                 }).then(function() {
                                     Swal.fire({
-                                        text: "Data kategori " +
+                                        text: "Data soal " +
                                             customerName + " terhapus !.",
                                         icon: "success",
                                         buttonsStyling: false,
@@ -274,13 +274,13 @@
                                         }
                                     }).then(function() {
                                         window.location =
-                                            `{{ url('/kategori/hapus/') }}/${Id}`;
+                                            `{{ url('/banksoal/hapus') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "Kategori " + customerName +
+                                    text: "Soal " + customerName +
                                         " tidak jadi dihapus.",
                                     icon: "error",
                                     buttonsStyling: false,
@@ -296,97 +296,97 @@
             }
 
             // Reset Filter
-            var handleResetForm = () => {
-                // Select reset button
-                const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
+            // var handleResetForm = () => {
+            //     // Select reset button
+            //     const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
 
-                // Reset datatable
-                resetButton.addEventListener('click', function() {
-                    // Reset payment type
-                    filterPayment[0].checked = true;
+            //     // Reset datatable
+            //     resetButton.addEventListener('click', function() {
+            //         // Reset payment type
+            //         filterPayment[0].checked = true;
 
-                    // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search('').draw();
-                });
-            }
+            //         // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+            //         dt.search('').draw();
+            //     });
+            // }
 
             // Init toggle toolbar
-            var initToggleToolbar = function() {
-                // Toggle selected action toolbar
-                // Select all checkboxes
-                const container = document.querySelector('#kt_datatable_example_1');
-                const checkboxes = container.querySelectorAll('[type="checkbox"]');
+            // var initToggleToolbar = function() {
+            //     // Toggle selected action toolbar
+            //     // Select all checkboxes
+            //     const container = document.querySelector('#kt_datatable_example_1');
+            //     const checkboxes = container.querySelectorAll('[type="checkbox"]');
 
-                // Select elements
-                const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
+            //     // Select elements
+            //     const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
 
-                // Toggle delete selected toolbar
-                checkboxes.forEach(c => {
-                    // Checkbox on click event
-                    c.addEventListener('click', function() {
-                        setTimeout(function() {
-                            toggleToolbars();
-                        }, 50);
-                    });
-                });
+            //     // Toggle delete selected toolbar
+            //     checkboxes.forEach(c => {
+            //         // Checkbox on click event
+            //         c.addEventListener('click', function() {
+            //             setTimeout(function() {
+            //                 toggleToolbars();
+            //             }, 50);
+            //         });
+            //     });
 
-                // Deleted selected rows
-                deleteSelected.addEventListener('click', function() {
-                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "Are you sure you want to delete selected customers?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        showLoaderOnConfirm: true,
-                        confirmButtonText: "Yes, delete!",
-                        cancelButtonText: "No, cancel",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-danger",
-                            cancelButton: "btn fw-bold btn-active-light-primary"
-                        },
-                    }).then(function(result) {
-                        if (result.value) {
-                            // Simulate delete request -- for demo purpose only
-                            Swal.fire({
-                                text: "Deleting selected customers",
-                                icon: "info",
-                                buttonsStyling: false,
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(function() {
-                                Swal.fire({
-                                    text: "You have deleted all selected customers!.",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                }).then(function() {
-                                    // delete row data from server and re-draw datatable
-                                    dt.draw();
-                                });
+            //     // Deleted selected rows
+            //     deleteSelected.addEventListener('click', function() {
+            //         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            //         Swal.fire({
+            //             text: "Are you sure you want to delete selected customers?",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             buttonsStyling: false,
+            //             showLoaderOnConfirm: true,
+            //             confirmButtonText: "Yes, delete!",
+            //             cancelButtonText: "No, cancel",
+            //             customClass: {
+            //                 confirmButton: "btn fw-bold btn-danger",
+            //                 cancelButton: "btn fw-bold btn-active-light-primary"
+            //             },
+            //         }).then(function(result) {
+            //             if (result.value) {
+            //                 // Simulate delete request -- for demo purpose only
+            //                 Swal.fire({
+            //                     text: "Deleting selected customers",
+            //                     icon: "info",
+            //                     buttonsStyling: false,
+            //                     showConfirmButton: false,
+            //                     timer: 2000
+            //                 }).then(function() {
+            //                     Swal.fire({
+            //                         text: "You have deleted all selected customers!.",
+            //                         icon: "success",
+            //                         buttonsStyling: false,
+            //                         confirmButtonText: "Ok, got it!",
+            //                         customClass: {
+            //                             confirmButton: "btn fw-bold btn-primary",
+            //                         }
+            //                     }).then(function() {
+            //                         // delete row data from server and re-draw datatable
+            //                         dt.draw();
+            //                     });
 
-                                // Remove header checked box
-                                const headerCheckbox = container.querySelectorAll(
-                                    '[type="checkbox"]')[0];
-                                headerCheckbox.checked = false;
-                            });
-                        } else if (result.dismiss === 'cancel') {
-                            Swal.fire({
-                                text: "Selected customers was not deleted.",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                }
-                            });
-                        }
-                    });
-                });
-            }
+            //                     // Remove header checked box
+            //                     const headerCheckbox = container.querySelectorAll(
+            //                         '[type="checkbox"]')[0];
+            //                     headerCheckbox.checked = false;
+            //                 });
+            //             } else if (result.dismiss === 'cancel') {
+            //                 Swal.fire({
+            //                     text: "Selected customers was not deleted.",
+            //                     icon: "error",
+            //                     buttonsStyling: false,
+            //                     confirmButtonText: "Ok, got it!",
+            //                     customClass: {
+            //                         confirmButton: "btn fw-bold btn-primary",
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     });
+            // }
 
             // Toggle toolbars
             var toggleToolbars = function() {
@@ -427,9 +427,9 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    initToggleToolbar();
+                    // initToggleToolbar();
                     handleDeleteRows();
-                    handleResetForm();
+                    // handleResetForm();
                 }
             }
         }();

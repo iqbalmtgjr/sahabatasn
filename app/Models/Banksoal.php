@@ -14,7 +14,7 @@ class Banksoal extends Model
 
     public function jawaban()
     {
-        return $this->hasOne(Jawaban::class);
+        return $this->hasOne(Jawaban::class, 'bank_soal_id');
     }
 
     public function kategori()
