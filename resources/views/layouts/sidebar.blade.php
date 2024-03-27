@@ -40,7 +40,7 @@
                         </div>
                         <!--begin::Logo image-->
                         <a href="{{ url('/dashboard') }}">
-                            <img alt="Logo" src="assets/media/gambar/logosahabatasn.png" class="h-30px" />
+                            <img alt="Logo" src="{{ asset('/') }}assets/media/gambar/logosahabatasn.png" class="h-30px" />
                         </a>
                         <!--end::Logo image-->
                     </div>
@@ -117,7 +117,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a class="menu-link" href="#">
+                                    <a class="menu-link {{ request()->is('pembayaran') ? 'active' : '' }}" href="{{ url('/pembayaran') }}">
                                         <span class="menu-icon">
                                             <i class="ki-outline ki-dollar fs-2"></i>
                                         </span>

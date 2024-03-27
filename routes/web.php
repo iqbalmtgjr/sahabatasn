@@ -1,17 +1,19 @@
 <?php
 
+use App\Models\Paket;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaketController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PusatlanggananController;
-use App\Http\Controllers\PaketController;
-use App\Models\Paket;
 
 Route::get('/', function () {
     return redirect('login');
@@ -76,3 +78,16 @@ Route::post('/paket/input', [PaketController::class, 'store'])->name('paket-inpu
 Route::get('/paket/getdata/{id}', [PaketController::class, 'getdata'])->name('getdatapaket');
 Route::post('/paket/update', [PaketController::class, 'update'])->name('paket-update');
 Route::get('/paket/hapus/{id}', [PaketController::class, 'destroy'])->name('paket-delete');
+
+//keranjang
+Route::get('/keranjang/{id}', [KeranjangController::class, 'index'])->name('keranjang');
+Route::get('/keranjang/getdata/{id}', [KeranjangController::class, 'getdata'])->name('getdatakeranjang');
+Route::get('/keranjang/hapus/{id}', [KeranjangController::class, 'destroy'])->name('keranjang-delete');
+
+//pembayaran
+Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
+Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
+Route::post('/pembayaran/input', [PembayaranController::class, 'store'])->name('pembayaran-input');
+Route::post('/pembayaran/update', [PembayaranController::class, 'update'])->name('pembayaran-edit');
+Route::post('/pembayaran/valid', [PembayaranController::class, 'validasi'])->name('pembayaran-valid');
+Route::get('/pembayaran/getdata/{id}', [PembayaranController::class, 'getdata'])->name('getdatapembayaran');

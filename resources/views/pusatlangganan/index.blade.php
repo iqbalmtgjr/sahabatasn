@@ -75,13 +75,11 @@
 																		@rupiah($item->harga)</span>
 																		<!--end::Label-->
 																		<!--begin::Action-->
-																		<a href="#" class="btn btn-sm btn-primary">Beli</a>
+																		<a href="{{ url('keranjang/'.$item->id.'') }}" class="btn btn-sm btn-primary">Beli</a>
 																		<!--end::Action-->
 																	</div>
 																	<!--end::Text-->
-																</div>
-															
-															
+																</div>															
 															<!--end::Body-->
 														</div>
 														<!--end::Hot sales post-->
