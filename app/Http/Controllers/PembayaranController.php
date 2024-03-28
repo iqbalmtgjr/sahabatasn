@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
+use App\Models\Paketsaya;
 use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -12,11 +13,14 @@ class PembayaranController extends Controller
 {
     public function index(Request $request)
     {
-        $data = Pembayaran::where('user_id', auth()->user()->id)->get();
+        $data = Pembayaran::all();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('nama_paket', function ($row) {
                     return $row->paket->judul;
+                })
+                ->addColumn('atas_nama', function ($row) {
+                    return $row->user->name;
                 })
                 ->addColumn('harga', function ($row) {
                     return 'Rp. ' . number_format($row->paket->harga, 0, ',', '.');
@@ -157,6 +161,14 @@ class PembayaranController extends Controller
         $pembayaran->update([
             'status' => $request->status,
         ]);
+
+        if ($pembayaran->status == 1) {
+            Paketsaya::updateOrCreate([
+                'user_id' => $pembayaran->user_id,
+                'paket_id' => $pembayaran->paket_id,
+                'status' => 1,
+            ]);
+        }
 
         toastr()->success('Status berhasil diubah.', 'Sukses');
         return redirect()->back();

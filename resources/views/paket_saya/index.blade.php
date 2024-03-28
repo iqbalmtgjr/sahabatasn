@@ -10,7 +10,7 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Pembayaran
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Paket Saya
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -55,9 +55,6 @@
                                     </div>
                                 </th>
                                 <th>Nama Paket</th>
-                                <th>Atas Nama</th>
-                                <th>Harga Paket</th>
-                                <th>Total yang dibayar</th>
                                 <th>Status</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
@@ -70,7 +67,7 @@
             </div>
         </div>
     </div>
-    @include('pembayaran.modalvalidasi')
+    {{-- @include('pembayaran.modalvalidasi') --}}
 @endsection
 
 @push('header')
@@ -106,22 +103,13 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/pembayaran') }}",
+                        url: "{{ url('/paketsaya') }}",
                     },
                     columns: [{
                             data: 'id'
                         },
                         {
                             data: 'nama_paket'
-                        },
-                        {
-                            data: 'atas_nama'
-                        },
-                        {
-                            data: 'harga'
-                        },
-                        {
-                            data: 'harga_bayar'
                         },
                         {
                             data: 'status'
@@ -152,16 +140,9 @@
                                 return `
                             <!--begin::Menu-->
                                 <!--begin::Menu item-->
-                                    <a target="_blank" href="http://localhost:8000/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
-                                        Lihat Bukti Bayar
-                                    </a>
-                                <!--end::Menu item-->
-                            <!--end::Menu-->
-                            <!--begin::Menu-->
-                                <!--begin::Menu item-->
                                     <a href="#" onclick="getdata(${row['id']})" class="btn btn-sm btn-primary" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
                                 data-bs-target="#edit">
-                                        Validasi
+                                        Kerjakan Soal
                                     </a>
                                 <!--end::Menu item-->
                             <!--end::Menu-->
@@ -178,7 +159,7 @@
                 dt.on('draw', function() {
                     // initToggleToolbar();
                     // toggleToolbars();
-                    handleDeleteRows();
+                    // handleDeleteRows();
                     KTMenu.createInstances();
                 });
             }
@@ -188,78 +169,6 @@
                 const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
                 filterSearch.addEventListener('keyup', function(e) {
                     dt.search(e.target.value).draw();
-                });
-            }
-
-            // Delete customer
-            var handleDeleteRows = () => {
-                // Select all delete buttons
-                const deleteButtons = document.querySelectorAll('[data-kt-docs-table-filter="delete_row"]');
-
-                deleteButtons.forEach(d => {
-                    // Delete button on click
-                    d.addEventListener('click', function(e) {
-                        e.preventDefault();
-
-                        // Select parent row
-                        const parent = e.target.closest('tr');
-
-                        // Get customer name
-                        const customerName = parent.querySelectorAll('td')[1].innerText;
-                        let data = $(this).data()
-                        let Id = data.id;
-
-                        // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                        Swal.fire({
-                            text: "Yakin ingin menghapus " + customerName + "?",
-                            icon: "warning",
-                            showCancelButton: true,
-                            buttonsStyling: false,
-                            confirmButtonText: "Ya, hapus!",
-                            cancelButtonText: "Tidak, batal",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-danger",
-                                cancelButton: "btn fw-bold btn-active-light-primary"
-                            }
-                        }).then(function(result) {
-                            if (result.value) {
-                                // Simulate delete request -- for demo purpose only
-                                Swal.fire({
-                                    text: "Menghapus " + customerName,
-                                    icon: "info",
-                                    buttonsStyling: false,
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                }).then(function() {
-                                    Swal.fire({
-                                        text: "Data kategori " +
-                                            customerName + " terhapus !.",
-                                        icon: "success",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "Ok, mengerti!",
-                                        customClass: {
-                                            confirmButton: "btn fw-bold btn-primary",
-                                        }
-                                    }).then(function() {
-                                        window.location =
-                                            `{{ url('/keranjang/hapus/') }}/${Id}`;
-                                        dt.draw();
-                                    });
-                                });
-                            } else if (result.dismiss === 'cancel') {
-                                Swal.fire({
-                                    text: "Kategori " + customerName +
-                                        " tidak jadi dihapus.",
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, mengerti!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                });
-                            }
-                        });
-                    })
                 });
             }
 
@@ -288,7 +197,6 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    handleDeleteRows();
                 }
             }
         }();

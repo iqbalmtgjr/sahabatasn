@@ -12,6 +12,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PusatlanggananController;
 
@@ -91,3 +92,6 @@ Route::post('/pembayaran/input', [PembayaranController::class, 'store'])->name('
 Route::post('/pembayaran/update', [PembayaranController::class, 'update'])->name('pembayaran-edit');
 Route::post('/pembayaran/valid', [PembayaranController::class, 'validasi'])->name('pembayaran-valid');
 Route::get('/pembayaran/getdata/{id}', [PembayaranController::class, 'getdata'])->name('getdatapembayaran');
+
+//paket_saya
+Route::get('/paketsaya', [PaketsayaController::class, 'index'])->name('paket-saya');
