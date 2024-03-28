@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kategori extends Model
+class Pembayaran extends Model
 {
     use HasFactory;
 
-    protected $table = 'kategori';
+    protected $table = 'pembayaran';
     protected $guarded = ['id'];
 
     public function paket()
     {
-        return $this->hasOne(Paket::class);
+        return $this->belongsTo(Paket::class);
     }
 
-    public function banksoal()
+    public function user()
     {
-        return $this->hasOne(Banksoal::class);
+        return $this->belongsTo(User::class);
     }
 }
