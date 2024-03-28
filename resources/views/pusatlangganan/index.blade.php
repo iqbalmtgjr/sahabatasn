@@ -31,7 +31,7 @@
 	</div>
 	<!--end::Toolbar-->
 	<!--begin::Content-->
-		<div class="row g-10">
+		{{-- <div class="row g-10">
 													<!--begin::Col-->
 			<div class="col-xl-4">
 														<div class="d-flex h-100 align-items-center">
@@ -110,8 +110,8 @@
 														</div>
 			</div>
 													<!--end::Col-->
-		</div>
-	{{-- <div id="kt_app_content" class="app-content flex-column-fluid">
+		</div> --}}
+	<div id="kt_app_content" class="app-content flex-column-fluid">
 								<!--begin::Content container-->
 								<div id="kt_app_content_container" class="app-container container-fluid">
 									<!--begin::Post card-->
@@ -146,7 +146,7 @@
 																	<a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">{{$item->judul}}</a>
 																	<!--end::Title-->
 																	<!--begin::Text-->
-																	<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Gratis Tryout</div>
+																	{{-- <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Gratis Tryout</div> --}}
 																	<!--end::Text-->
 																	<!--begin::Text-->
 																	<div class="fs-6 fw-bold mt-5 d-flex flex-stack">
@@ -178,7 +178,7 @@
 									<!--end::Post card-->
 								</div>
 								<!--end::Content container-->
-	</div> --}}
+	</div>
 	<!--end::Content-->
 </div>
 <!--end::Content wrapper-->
