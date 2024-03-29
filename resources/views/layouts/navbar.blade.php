@@ -4,6 +4,7 @@
         {{-- nothing --}}
     </div>
     <!--begin::Notifications-->
+    @if (auth()->user()->role == 'user')
     <div class="app-navbar-item ms-1 ms-md-3">
         <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
             <a href="{{ url('/invoice') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Invoice">
@@ -21,11 +22,11 @@
             @else
             <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Keranjang Kosong">
                 <i class="ki-outline ki-handcart fs-1"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">0</span>
             </a>
             @endif
         </div>
     </div>
+    @endif
     <!--end::Notifications-->
     <!--begin::User menu-->
     <div class="app-navbar-item ms-1 ms-md-3" id="kt_header_user_menu_toggle">

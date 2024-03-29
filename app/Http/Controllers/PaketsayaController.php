@@ -19,6 +19,9 @@ class PaketsayaController extends Controller
                 ->addColumn('nama_paket', function ($row) {
                     return $row->paket->judul;
                 })
+                ->addColumn('kategori', function ($row) {
+                    return $row->paket->kategori->kategori;
+                })
                 ->addColumn('status', function ($row) {
                     if ($row->status === 0) {
                         return '<div class="badge badge-light-danger">Expired</div>';

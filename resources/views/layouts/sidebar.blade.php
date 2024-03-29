@@ -106,7 +106,7 @@
                                         <span class="menu-title">Dashboards</span>
                                     </a>
                                 </div>
-                                <hr>
+                                @if (auth()->user()->role == 'admin')
                                 <div class="menu-item">
                                     <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
                                         href="{{ url('kelola-user') }}">
@@ -151,14 +151,7 @@
                                         <span class="menu-title">Kelola Kategori Paket</span>
                                     </a>
                                 </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="#">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-medal-star fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Hasil Tryout</span>
-                                    </a>
-                                </div>
+                                @else                                
                                 <div class="menu-item">
                                     <a class="menu-link {{ request()->is('pusatlangganan') ? 'active' : '' }}"
                                         href="{{ url('pusatlangganan') }}">
@@ -176,6 +169,15 @@
                                         <span class="menu-title">Paket Saya</span>
                                     </a>
                                 </div>
+                                <div class="menu-item">
+                                    <a class="menu-link" href="#">
+                                        <span class="menu-icon">
+                                            <i class="ki-outline ki-medal-star fs-2"></i>
+                                        </span>
+                                        <span class="menu-title">Hasil Tryout</span>
+                                    </a>
+                                </div>
+                                @endif
                                 <!--end:Menu item-->
                             </div>
                             <!--end::Sidebar menu-->

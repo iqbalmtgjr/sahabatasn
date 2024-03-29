@@ -55,6 +55,7 @@
                                     </div>
                                 </th>
                                 <th>Nama Paket</th>
+                                <th>Kategori</th>
                                 <th>Status</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
@@ -110,6 +111,9 @@
                         },
                         {
                             data: 'nama_paket'
+                        },
+                        {
+                            data: 'kategori'
                         },
                         {
                             data: 'status'
