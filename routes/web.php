@@ -84,6 +84,7 @@ Route::middleware(['checkRole:user'])->group(function () {
 
     //paket_saya
     Route::get('/paketsaya', [PaketsayaController::class, 'index'])->name('paket-saya');
+    Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
 
     //pembayaran
     Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
