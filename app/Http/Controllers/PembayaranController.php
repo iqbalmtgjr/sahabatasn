@@ -85,7 +85,7 @@ class PembayaranController extends Controller
                 ->withInput();
         }
 
-        $pembayaran = Pembayaran::where('paket_id', $request->paket_id)->first();
+        $pembayaran = Pembayaran::where('paket_id', $request->paket_id)->where('user_id', auth()->user()->id)->first();
 
         //hapus data keranjang
         Keranjang::where('user_id', auth()->user()->id)

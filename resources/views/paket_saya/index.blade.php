@@ -55,6 +55,9 @@
                                     </div>
                                 </th>
                                 <th>Nama Paket</th>
+                                <th>Kategori</th>
+                                <th>Tipe</th>
+                                <th>Jumlah Soal</th>
                                 <th>Status</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
@@ -112,6 +115,15 @@
                             data: 'nama_paket'
                         },
                         {
+                            data: 'kategori'
+                        },
+                        {
+                            data: 'tipe'
+                        },
+                        {
+                            data: 'jmlh_soal'
+                        },
+                        {
                             data: 'status'
                         },
                         {
@@ -140,8 +152,7 @@
                                 return `
                             <!--begin::Menu-->
                                 <!--begin::Menu item-->
-                                    <a href="#" onclick="getdata(${row['id']})" class="btn btn-sm btn-primary" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
+                                    <a href="{{ url('/kerjakan') }}" class="btn btn-sm btn-primary">
                                         Kerjakan Soal
                                     </a>
                                 <!--end::Menu item-->

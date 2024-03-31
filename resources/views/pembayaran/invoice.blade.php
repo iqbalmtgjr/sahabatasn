@@ -145,23 +145,19 @@
                             orderable: false,
                             className: 'text-end',
                             render: function(data, type, row) {
+                                if(row.status == '<div class="badge badge-light-primary">Sudah divalidasi</div>'){
+                                    return ``;
+                                }else{
                                 return `
-                            <!--begin::Menu-->
-                                <!--begin::Menu item-->
                                     <a target="_blank" href="http://localhost:8000/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
                                         Lihat Bukti Bayar
                                     </a>
-                                <!--end::Menu item-->
-                            <!--end::Menu-->
-                            <!--begin::Menu-->
-                                <!--begin::Menu item-->
                                     <a href="#" onclick="getdata(${row['id']})" class="btn btn-sm btn-primary" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
+                                    data-bs-target="#edit">
                                         Ubah Bukti Bayar
                                     </a>
-                                <!--end::Menu item-->
-                            <!--end::Menu-->
-                        `;
+                                `;
+                            }
                             },
                         },
                     ],

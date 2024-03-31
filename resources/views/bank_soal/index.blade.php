@@ -96,14 +96,14 @@
 @endsection
 
 @push('header')
-    <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
         type="text/css" />
 @endpush
 
 @push('footer')
-    <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="assets/js/widgets.bundle.js"></script>
+    <script src="assets/js/custom/widgets.js"></script>
 
     <script>
         "use strict";
