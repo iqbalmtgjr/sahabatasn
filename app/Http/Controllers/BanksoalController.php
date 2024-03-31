@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banksoal;
 use App\Models\Jawaban;
+use App\Models\Banksoal;
 use App\Models\Kategori;
+use App\Models\Subkategori;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class BanksoalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $kategori = Kategori::all();
+        $sub_kategori = Subkategori::all();
         $data = Banksoal::all();
         if ($request->ajax()) {
             return DataTables::of($data)
@@ -30,7 +28,7 @@ class BanksoalController extends Controller
                 ->make(true);
         }
 
-        return view('bank_soal.index', compact('kategori'));
+        return view('bank_soal.index', compact('sub_kategori'));
     }
 
     /**

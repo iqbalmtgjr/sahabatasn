@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('pilihan_b');
             $table->string('pilihan_c');
             $table->string('pilihan_d');
-            $table->string('pilihan_e');
+            $table->string('pilihan_e')->nullable();
             $table->smallInteger('jawaban_a');
             $table->smallInteger('jawaban_b');
             $table->smallInteger('jawaban_c');
             $table->smallInteger('jawaban_d');
-            $table->smallInteger('jawaban_e');
+            $table->smallInteger('jawaban_e')->nullable();
             $table->longText('pembahasan');
             $table->timestamps();
         });

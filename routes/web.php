@@ -54,6 +54,7 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
     Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
     Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
+    Route::post('/kategori/sub', [KategoriController::class, 'sub'])->name('kategori-sub');
     Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
 
     //kelola_bank_soal

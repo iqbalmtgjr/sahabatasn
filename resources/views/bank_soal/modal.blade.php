@@ -47,15 +47,15 @@
                                     <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
                                     <select data-control="select2"
                                         class="form-select form-select-solid @error('kategori') is-invalid @enderror"
-                                        data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori"
+                                        data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="sub_kategori"
                                         id="">
                                         <option value=""></option>
-                                        @foreach ($kategori as $item)
-                                            <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
-                                                {{ $item->kategori }}</option>
+                                        @foreach ($sub_kategori as $item)
+                                            <option value="{{ $item->id }}" @selected(old('sub_kategori') == $item->id)>
+                                                {{ $item->sub_kategori }}</option>
                                         @endforeach
                                     </select>
-                                    @error('kategori')
+                                    @error('sub_kategori')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
