@@ -62,6 +62,7 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::get('/banksoal/getdata/{id}', [BanksoalController::class, 'getdata']);
     Route::post('/bank-soal/input', [BanksoalController::class, 'store']);
     Route::post('/banksoal/update', [BanksoalController::class, 'update']);
+    Route::get('/banksoal/edit/{id}', [BanksoalController::class, 'edit']);
     Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
 
     //kelola_paket
