@@ -29,7 +29,7 @@
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
-                <div class="card-body py-4">
+                <div class="card-body py-10">
                     <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/banksoal/update') }}"
                         enctype="multipart/form-data">
                         @csrf
@@ -331,7 +331,7 @@
                         <!--end::Scroll-->
                         <!--begin::Actions-->
                         <div class="text-center pt-10">
-                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batal</button>
+                            <a href="{{ url('bank-soal') }}" class="btn btn-light me-3">Kembali</a>
                             <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                                 <span class="indicator-label">Simpan</span>
                             </button>
