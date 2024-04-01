@@ -349,7 +349,7 @@
                 $('#jawaban_c').val(response.jawaban.jawaban_c);
                 $('#jawaban_d').val(response.jawaban.jawaban_d);
                 $('#jawaban_e').val(response.jawaban.jawaban_e);
-                $('#pembahasan').val(response.jawaban.pembahasan);
+                $('#pembahasan').val(response.soal);
             }
         });
     }
