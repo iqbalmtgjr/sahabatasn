@@ -5,27 +5,46 @@
     </div>
     <!--begin::Notifications-->
     @if (auth()->user()->role == 'user')
-    <div class="app-navbar-item ms-1 ms-md-3">
-        <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
-            <a href="{{ url('/invoice') }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Invoice">
-                <i class="ki-outline ki-purchase fs-1"></i>
-            </a>
+        <div class="app-navbar-item ms-1 ms-md-3">
+            <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"
+                data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
+                data-kt-menu-placement="bottom-end">
+                <a href="{{ url('/invoice') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-original-title="Invoice">
+                    <i class="ki-outline ki-purchase fs-1"></i>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="app-navbar-item ms-1 ms-md-3">
-        <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative" id="kt_drawer_chat_toggle">
-        @if (auth()->user()->keranjang)
-            <a href="{{ url('keranjang').'/'.auth()->user()->keranjang->id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Keranjang">
-                <i class="ki-outline ki-handcart fs-1"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">{{ auth()->user()->keranjang->count() }}</span>
-            </a>
-            @else
-            <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Keranjang Kosong">
-                <i class="ki-outline ki-handcart fs-1"></i>
-            </a>
-            @endif
+        <div class="app-navbar-item ms-1 ms-md-3">
+            <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
+                id="kt_drawer_chat_toggle">
+                @if (auth()->user()->keranjang)
+                    <a href="{{ url('keranjang') . '/' . auth()->user()->keranjang->id }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" data-bs-original-title="Keranjang">
+                        <i class="ki-outline ki-handcart fs-1"></i>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">{{ auth()->user()->keranjang->count() }}</span>
+                    </a>
+                @else
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                        data-bs-original-title="Keranjang Kosong">
+                        <i class="ki-outline ki-handcart fs-1"></i>
+                    </a>
+                @endif
+            </div>
         </div>
-    </div>
+    @else
+        <div class="app-navbar-item ms-1 ms-md-3">
+            <div class="btn btn-icon btn-custom btn-color-gray-600 btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px position-relative"
+                id="kt_drawer_chat_toggle">
+                <a href="{{ url('/pembayaran') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    data-bs-original-title="Ada {{ app\Models\Pembayaran::where('status', 0)->get()->count() }} Pembayaran Belum Valid">
+                    <i class="ki-outline ki-notification-on fs-1"></i>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">{{ app\Models\Pembayaran::where('status', 0)->get()->count() }}</span>
+                </a>
+            </div>
+        </div>
     @endif
     <!--end::Notifications-->
     <!--begin::User menu-->

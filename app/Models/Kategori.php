@@ -21,9 +21,4 @@ class Kategori extends Model
     {
         return $this->hasOne(Paket::class);
     }
-
-    public function banksoal()
-    {
-        return $this->hasOne(Banksoal::class);
-    }
 }

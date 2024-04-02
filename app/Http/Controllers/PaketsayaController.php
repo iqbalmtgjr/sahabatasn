@@ -15,6 +15,7 @@ class PaketsayaController extends Controller
     public function index(Request $request)
     {
         $data = Paketsaya::where('user_id', auth()->user()->id)->get();
+        // dd($data);
         // dd($this->jmlh_cpns_byr(1, 'Berbayar'));
         if ($request->ajax()) {
             return DataTables::of($data)
@@ -25,10 +26,10 @@ class PaketsayaController extends Controller
                     return $row->paket->kategori->kategori;
                 })
                 ->addColumn('tipe', function ($row) {
-                    return $row->paket->kategori->banksoal->tipe;
+                    return $row->paket->kategori->subkategori->banksoal->tipe;
                 })
                 ->addColumn('jmlh_soal', function ($row) {
-                    return $this->jmlh_cpns_byr($row->paket->kategori_id, $row->paket->kategori->banksoal->tipe)->count();
+                    return $this->banksoal($row->paket->kategori->subkategori->id, $row->paket->kategori->subkategori->banksoal->tipe)->count();
                 })
                 ->addColumn('status', function ($row) {
                     if ($row->status === 0) {
@@ -44,11 +45,10 @@ class PaketsayaController extends Controller
         return view('paket_saya.index');
     }
 
-    private function jmlh_cpns_byr($kategori_id, $tipe)
+    private function banksoal($subkategori_id, $tipe)
     {
-        return Banksoal::where('kategori_id', $kategori_id)->where('tipe', $tipe)->get();
+        return Banksoal::where('subkategori_id', $subkategori_id)->where('tipe', $tipe)->get();
     }
-
 
     /**
      * Show the form for creating a new resource.

@@ -1,10 +1,23 @@
 @extends('layouts.master')
 
 @section('content')
+    <!--begin::Alert-->
+    <div class="alert alert-warning d-flex align-items-center p-5 m-5">
+        <i class="ki-duotone ki-shield-tick fs-2hx text-warning me-4"><span class="path1"></span><span
+                class="path2"></span></i>
+        <div class="d-flex flex-column">
+            <h4 class="mb-1 text-dark">Catatan</h4>
+            <span class="text-dark">Jika sudah divalidasi, silahkan menuju menu <strong>Paket Saya</strong> disisi kiri
+                halaman. Terima Kasih.
+                :D</span>
+        </div>
+    </div>
+    <!--end::Alert-->
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
+
             <!--begin::Toolbar wrapper-->
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <!--begin::Page title-->
@@ -145,10 +158,12 @@
                             orderable: false,
                             className: 'text-end',
                             render: function(data, type, row) {
-                                if(row.status == '<div class="badge badge-light-primary">Sudah divalidasi</div>'){
+                                if (row.status ==
+                                    '<div class="badge badge-light-primary">Sudah divalidasi</div>'
+                                ) {
                                     return ``;
-                                }else{
-                                return `
+                                } else {
+                                    return `
                                     <a target="_blank" href="http://localhost:8000/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
                                         Lihat Bukti Bayar
                                     </a>
@@ -157,7 +172,7 @@
                                         Ubah Bukti Bayar
                                     </a>
                                 `;
-                            }
+                                }
                             },
                         },
                     ],
@@ -273,7 +288,7 @@
             // Init toggle toolbar
 
             // Toggle toolbars
-          
+
 
             // Public methods
             return {
