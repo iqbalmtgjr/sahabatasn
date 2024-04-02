@@ -79,6 +79,7 @@
                                 </th>
                                 <th>Soal</th>
                                 <th>Kategori</th>
+                                <th>Sub Kategori</th>
                                 <th>Tipe</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
@@ -96,15 +97,24 @@
 @endsection
 
 @push('header')
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
-        type="text/css" />
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 @endpush
 
 @push('footer')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script>
+        $('.pembahasan').summernote({
+            placeholder: 'Masukkan pembahasan',
+            tabsize: 2,
+            height: 200
+        });
+    </script>
     <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="assets/js/widgets.bundle.js"></script>
     <script src="assets/js/custom/widgets.js"></script>
-
     <script>
         "use strict";
 
@@ -143,6 +153,9 @@
                             data: 'kategori'
                         },
                         {
+                            data: 'sub_kategori'
+                        },
+                        {
                             data: 'tipe'
                         },
                         {
@@ -179,6 +192,11 @@
                             </a>
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+                                <div class="menu-item px-3">
+                                    <a href="http://localhost:8000/banksoal/edit/${data['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row" >
+                                        Edit Halaman
+                                    </a>
+                                </div>
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"

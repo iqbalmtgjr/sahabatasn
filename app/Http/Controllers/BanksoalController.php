@@ -2,27 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banksoal;
 use App\Models\Jawaban;
+use App\Models\Banksoal;
 use App\Models\Kategori;
+use App\Models\Subkategori;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 class BanksoalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
-        $kategori = Kategori::all();
+        $sub_kategori = Subkategori::all();
         $data = Banksoal::all();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('kategori', function ($row) {
-                    if ($row->kategori) {
-                        return $row->kategori->kategori;
+                    if ($row->subkategori->kategori) {
+                        return $row->subkategori->kategori->kategori;
+                    } else {
+                        return '';
+                    }
+                })
+                ->addColumn('sub_kategori', function ($row) {
+                    if ($row->subkategori) {
+                        return $row->subkategori->sub_kategori;
                     } else {
                         return '';
                     }
@@ -30,7 +36,7 @@ class BanksoalController extends Controller
                 ->make(true);
         }
 
-        return view('bank_soal.index', compact('kategori'));
+        return view('bank_soal.index', compact('sub_kategori'));
     }
 
     /**
@@ -38,9 +44,10 @@ class BanksoalController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'soal' => 'required',
-            'kategori' => 'required',
+            'sub_kategori' => 'required',
             'tipe' => 'required',
             'pilihan_a' => 'required',
             'pilihan_b' => 'required',
@@ -51,7 +58,6 @@ class BanksoalController extends Controller
             'jawaban_b' => 'required',
             'jawaban_c' => 'required',
             'jawaban_d' => 'required',
-            'jawaban_e' => 'required',
             'pembahasan' => 'required',
         ]);
 
@@ -70,21 +76,36 @@ class BanksoalController extends Controller
             $request->file('gambar')->move(public_path('gambar_soal/'), $nama_file);
 
             $soal = Banksoal::create([
-                'kategori_id' => $request->kategori,
+                'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
             ]);
         } else {
             $soal = Banksoal::create([
-                'kategori_id' => $request->kategori,
+                'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'tipe' => $request->tipe,
             ]);
         }
 
+        $dom = new DOMDocument();
+        $dom->loadHTML($request->pembahasan, 9);
 
-        $jawaban = Jawaban::create([
+        $image = $dom->getElementsByTagName('img');
+
+        foreach ($image as $key => $img) {
+            $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+            $image_name = "/gambar/" . time() . $key . '.png';
+
+            file_put_contents(public_path() . $image_name, $data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src', $image_name);
+        }
+        $pembahas = $dom->saveHTML();
+
+        Jawaban::create([
             'bank_soal_id' => $soal->id,
             'pilihan_a' => $request->pilihan_a,
             'pilihan_b' => $request->pilihan_b,
@@ -96,7 +117,7 @@ class BanksoalController extends Controller
             'jawaban_c' => $request->jawaban_c,
             'jawaban_d' => $request->jawaban_d,
             'jawaban_e' => $request->jawaban_e,
-            'pembahasan' => $request->pembahasan,
+            'pembahasan' => $pembahas,
         ]);
 
         toastr()->success('Berhasil menambah soal.', 'Sukses');
@@ -108,10 +129,9 @@ class BanksoalController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'soal' => 'required',
-            'kategori' => 'required',
+            'sub_kategori' => 'required',
             'tipe' => 'required',
             'pilihan_a' => 'required',
             'pilihan_b' => 'required',
@@ -142,7 +162,7 @@ class BanksoalController extends Controller
 
             $soal = Banksoal::find($request->id);
             $soal->update([
-                'kategori_id' => $request->kategori,
+                'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
@@ -150,11 +170,30 @@ class BanksoalController extends Controller
         } else {
             $soal = Banksoal::find($request->id);
             $soal->update([
-                'kategori_id' => $request->kategori,
+                'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'tipe' => $request->tipe,
             ]);
         }
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($request->pembahasan, 9);
+
+        $image = $dom->getElementsByTagName('img');
+
+        foreach ($image as $key => $img) {
+
+            if (strpos($img->getAttribute('src'), 'data:image/') === 0) {
+                $data = base64_decode(explode(',', explode(';', $img->getAttribute('src'))[1])[1]);
+                $image_name = "/gambar/" . time() . $key . '.png';
+
+                file_put_contents(public_path() . $image_name, $data);
+
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $image_name);
+            }
+        }
+        $pembahas = $dom->saveHTML();
 
         $jawaban = Jawaban::where('bank_soal_id', $request->id)->first();
         $jawaban->update([
@@ -168,7 +207,7 @@ class BanksoalController extends Controller
             'jawaban_c' => $request->jawaban_c,
             'jawaban_d' => $request->jawaban_d,
             'jawaban_e' => $request->jawaban_e,
-            'pembahasan' => $request->pembahasan,
+            'pembahasan' => $pembahas,
         ]);
 
         toastr()->success('Berhasil edit soal.', 'Sukses');
@@ -186,10 +225,17 @@ class BanksoalController extends Controller
         return redirect()->back();
     }
 
+    public function edit($id)
+    {
+        $data = Banksoal::find($id);
+        $sub_kategori = Subkategori::all();
+        return view('bank_soal.edit', compact('data', 'sub_kategori'));
+    }
+
     public function getdata($id)
     {
         $data = Banksoal::find($id);
-        $data->kategori;
+        $data->subkategori;
         $data->jawaban;
         return $data;
     }

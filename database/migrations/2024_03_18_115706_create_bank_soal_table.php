@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bank_soal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id');
+            $table->foreignId('subkategori_id');
             $table->string('soal');
             $table->string('gambar')->nullable();
             $table->string('tipe');

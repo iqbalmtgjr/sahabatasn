@@ -46,16 +46,16 @@
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
                                     <select data-control="select2"
-                                        class="form-select form-select-solid @error('kategori') is-invalid @enderror"
-                                        data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori"
-                                        id="">
+                                        class="form-select form-select-solid @error('sub_kategori') is-invalid @enderror"
+                                        data-hide-search="true" data-placeholder="-- Pilih Kategori --"
+                                        name="sub_kategori" id="">
                                         <option value=""></option>
-                                        @foreach ($kategori as $item)
-                                            <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
-                                                {{ $item->kategori }}</option>
+                                        @foreach ($sub_kategori as $item)
+                                            <option value="{{ $item->id }}" @selected(old('sub_kategori') == $item->id)>
+                                                {{ $item->sub_kategori }}</option>
                                         @endforeach
                                     </select>
-                                    @error('kategori')
+                                    @error('sub_kategori')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -162,14 +162,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban A</label>
-                                            <select data-control="select2"
-                                                class="form-select form-select-solid @error('jawaban_a') is-invalid @enderror"
-                                                data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
-                                                name="jawaban_a">
-                                                <option value=""></option>
-                                                <option value="1" @selected(old('jawaban_a') == '1')>Benar</option>
-                                                <option value="0" @selected(old('jawaban_a') == '0')>Salah</option>
-                                            </select>
+                                            <input name="jawaban_a" type="number"
+                                                class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_a') is-invalid @enderror"
+                                                placeholder="Masukkan bobot nilai." value="">
                                             @error('jawaban_a')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -196,14 +191,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban B</label>
-                                            <select data-control="select2"
-                                                class="form-select form-select-solid @error('jawaban_b') is-invalid @enderror"
-                                                data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
-                                                name="jawaban_b">
-                                                <option value=""></option>
-                                                <option value="1" @selected(old('jawaban_b') == '1')>Benar</option>
-                                                <option value="0" @selected(old('jawaban_b') == '0')>Salah</option>
-                                            </select>
+                                            <input name="jawaban_b" type="number"
+                                                class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_b') is-invalid @enderror"
+                                                placeholder="Masukkan bobot nilai." value="">
                                             @error('jawaban_b')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -230,14 +220,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban C</label>
-                                            <select data-control="select2"
-                                                class="form-select form-select-solid @error('jawaban_c') is-invalid @enderror"
-                                                data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
-                                                name="jawaban_c">
-                                                <option value=""></option>
-                                                <option value="1" @selected(old('jawaban_c') == '1')>Benar</option>
-                                                <option value="0" @selected(old('jawaban_c') == '0')>Salah</option>
-                                            </select>
+                                            <input name="jawaban_c" type="number"
+                                                class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_c') is-invalid @enderror"
+                                                placeholder="Masukkan bobot nilai." value="">
                                             @error('jawaban_c')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -264,14 +249,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban D</label>
-                                            <select data-control="select2"
-                                                class="form-select form-select-solid @error('jawaban_d') is-invalid @enderror"
-                                                data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
-                                                name="jawaban_d">
-                                                <option value=""></option>
-                                                <option value="1" @selected(old('jawaban_d') == '1')>Benar</option>
-                                                <option value="0" @selected(old('jawaban_d') == '0')>Salah</option>
-                                            </select>
+                                            <input name="jawaban_d" type="number"
+                                                class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_d') is-invalid @enderror"
+                                                placeholder="Masukkan bobot nilai." value="">
                                             @error('jawaban_d')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -297,14 +277,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban E</label>
-                                            <select data-control="select2"
-                                                class="form-select form-select-solid @error('jawaban_e') is-invalid @enderror"
-                                                data-hide-search="true" data-placeholder="-- Pilih Jawaban --"
-                                                name="jawaban_e">
-                                                <option value=""></option>
-                                                <option value="1" @selected(old('jawaban_e') == '1')>Benar</option>
-                                                <option value="0" @selected(old('jawaban_e') == '0')>Salah</option>
-                                            </select>
+                                            <input name="jawaban_e" type="number"
+                                                class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_e') is-invalid @enderror"
+                                                placeholder="Masukkan bobot nilai." value="">
                                             @error('jawaban_e')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -320,7 +295,7 @@
                         <div class="row">
                             <div class="fv-row mb-7">
                                 <label class="required fw-semibold fs-6 mb-2">Pembahasan</label>
-                                <textarea class="form-control form-control-solid mb-3 mb-lg-0  @error('pembahasan') is-invalid @enderror"
+                                <textarea class="pembahasan form-control form-control-solid mb-3 mb-lg-0  @error('pembahasan') is-invalid @enderror"
                                     name="pembahasan" cols="30" rows="10">{{ old('pembahasan') }}</textarea>
                                 @error('pembahasan')
                                     <span class="invalid-feedback" role="alert">

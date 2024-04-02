@@ -12,6 +12,11 @@ class Kategori extends Model
     protected $table = 'kategori';
     protected $guarded = ['id'];
 
+    public function subkategori()
+    {
+        return $this->hasOne(Subkategori::class);
+    }
+
     public function paket()
     {
         return $this->hasOne(Paket::class);
