@@ -15,13 +15,17 @@ class KategoriController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->id);
+        $sub = $request->has('id') ? Subkategori::where('kategori_id', $request->id)->get() : collect();
+        // return view('kategori.modalsub', compact('sub'));
         $data = Kategori::all();
+        $sub = Subkategori::where('kategori_id', $request->id)->get();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->make(true);
         }
 
-        return view('kategori.index');
+        return view('kategori.index', compact('sub'));
     }
 
     /**
@@ -92,7 +96,7 @@ class KategoriController extends Controller
         ]);
         // $data->update($request->all());
 
-        toastr()->success('Berhasil tambah sub kategori.', 'Sukses');
+        // toastr()->success('Berhasil tambah sub kategori.', 'Sukses');
         return redirect()->back();
     }
 
@@ -109,5 +113,19 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         return $data;
+    }
+
+    public function getdatasub($id)
+    {
+        $sub = Subkategori::where('kategori_id', $id)->get();
+        return response()->json(['sub_kategori' => $sub]);
+    }
+
+    public function destroySubKategori($id)
+    {
+        $subkategori = Subkategori::findOrFail($id);
+        $subkategori->delete();
+
+        return redirect()->back();
     }
 }

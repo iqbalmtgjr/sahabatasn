@@ -52,10 +52,12 @@ Route::middleware(['checkRole:admin'])->group(function () {
     //kelola_kategori_paket
     Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');
     Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
+    Route::get('/kategori/getdatasub/{id}', [KategoriController::class, 'getdatasub'])->name('getdatasubkategori');
     Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
     Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
     Route::post('/kategori/sub', [KategoriController::class, 'sub'])->name('kategori-sub');
     Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
+    Route::get('/kategori/hapusSubKategori/{id}', [KategoriController::class, 'destroySubKategori'])->name('subkategori-delete');
 
     //kelola_bank_soal
     Route::get('/bank-soal', [BanksoalController::class, 'index']);
