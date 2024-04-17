@@ -19,7 +19,6 @@ class KategoriController extends Controller
         $sub = $request->has('id') ? Subkategori::where('kategori_id', $request->id)->get() : collect();
         // return view('kategori.modalsub', compact('sub'));
         $data = Kategori::all();
-        $sub = Subkategori::where('kategori_id', $request->id)->get();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->make(true);
@@ -104,8 +103,16 @@ class KategoriController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+
     {
-        Kategori::findOrFail($id)->delete();
+        $kategori = Kategori::findOrFail($id);
+        if ($kategori->paket()->count() > 0) {
+            toastr()->error('Kategori tidak bisa dihapus karena memiliki paket terkait.', 'Gagal');
+            return redirect()->back();
+        }
+
+        $kategori->delete();
+        toastr()->success('Kategori berhasil dihapus.', 'Sukses');
         return redirect()->back();
     }
 

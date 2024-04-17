@@ -10,7 +10,8 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Keranjang Saya
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Keranjang
+                        Saya
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -23,8 +24,36 @@
     <!--end::Toolbar-->
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
+
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
+            <div class="alert alert-info d-flex align-items-center p-5">
+
+                <i class="ki-duotone ki-information-3 fs-2hx text-info me-4">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                    <span class="path3"></span>
+                </i>
+                <!--end::Icon-->
+
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column">
+                    <!--begin::Title-->
+                    <h4 class="mb-1 text-dark">Info Nomor Rekening</h4><br>
+                    <p class="text-dark">
+                        <strong>Atas Nama : Mutya</strong> <br>
+                        <strong>Nomor Rekening : 1234567890</strong> <br>
+                        <strong>Nama Bank : BNI</strong> <br>
+                    </p>
+                    <!--end::Title-->
+
+                    <!--begin::Content-->
+                    {{-- <span>The alert component can be used to highlight certain parts of your page for higher content
+                visibility.</span> --}}
+                    <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->

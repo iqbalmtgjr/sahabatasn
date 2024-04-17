@@ -7,9 +7,9 @@
                 <div class="col-xxl-12 mb-md-5 mb-xl-10">
                     <div class="row g-5 g-xl-10">
                         <!--begin::Alert-->
-                        <div class="alert alert-primary d-flex align-items-center p-5">
+                        <div class="alert alert-success d-flex align-items-center p-5">
                             <!--begin::Icon-->
-                            <i class="ki-duotone ki-emoji-happy fs-2hx text-primary me-4"><span class="path1"></span><span
+                            <i class="ki-duotone ki-emoji-happy fs-2hx text-success me-4"><span class="path1"></span><span
                                     class="path2"></span><span class="path3"></span><span class="path4"></span></i>
                             <!--end::Icon-->
 

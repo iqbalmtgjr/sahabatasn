@@ -14,6 +14,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PusatlanggananController;
 
 Route::get('/', function () {
@@ -39,6 +40,8 @@ Route::post('/password/update', [ProfilController::class, 'updatePassword'])->na
 
 //pembayaran bisa semua role
 Route::get('/pembayaran/getdata/{id}', [PembayaranController::class, 'getdata'])->name('getdatapembayaran');
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
+
 
 //hanya admin
 Route::middleware(['checkRole:admin'])->group(function () {
@@ -48,6 +51,12 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::post('/user/input', [UserController::class, 'store'])->name('user-input');
     Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
     Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
+
+    //Kelola_pengumuman
+    Route::get('/pengumuman/getdata/{id}', [PengumumanController::class, 'getdata'])->name('getdatapengumuman');
+    Route::post('/pengumuman/input', [PengumumanController::class, 'store'])->name('pengumuman-input');
+    Route::post('/pengumuman/update', [PengumumanController::class, 'update'])->name('pengumuman-update');
+    Route::get('/pengumuman/hapus/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman-delete');
 
     //kelola_kategori_paket
     Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');

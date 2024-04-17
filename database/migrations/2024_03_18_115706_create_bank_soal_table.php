@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bank_soal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subkategori_id');
+            $table->foreignId('subkategori_id')->constrained('sub_kategori');
             $table->string('soal');
             $table->string('gambar')->nullable();
             $table->string('tipe');

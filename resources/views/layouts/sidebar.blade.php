@@ -107,6 +107,19 @@
                                         <span class="menu-title">Dashboards</span>
                                     </a>
                                 </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->is('pengumuman') ? 'active' : '' }}"
+                                        href="{{ url('pengumuman') }}">
+                                        <span class="menu-icon">
+                                            <i class="ki-duotone ki-information fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </span>
+                                        <span class="menu-title">Pengumuman</span>
+                                    </a>
+                                </div>
                                 @if (auth()->user()->role == 'admin')
                                     <div class="menu-item">
                                         <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
