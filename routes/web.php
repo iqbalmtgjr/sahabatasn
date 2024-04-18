@@ -98,6 +98,9 @@ Route::middleware(['checkRole:user'])->group(function () {
 
     //pusat langganan
     Route::get('/pusatlangganan', [PusatlanggananController::class, 'index'])->name('pusatlangganan');
+    Route::get('/detailcpns', [PusatlanggananController::class, 'detail'])->name('detailcpns');
+    Route::get('/detailskd', [PusatlanggananController::class, 'detailskd'])->name('detailskd');
+    Route::get('/detailskb', [PusatlanggananController::class, 'detailskb'])->name('detailskb');
 
     //s&k
     Route::get('/sk', [SkController::class, 'index'])->name('sk');

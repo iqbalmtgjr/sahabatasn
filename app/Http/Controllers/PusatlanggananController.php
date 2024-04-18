@@ -12,4 +12,19 @@ class PusatlanggananController extends Controller
         $data = Paket::all();
         return view('pusatlangganan.index', compact('data'));
     }
+
+    public function detail()
+    {
+        return view('pusatlangganan.detailcpns');
+    }
+
+    public function detailskd()
+    {
+        return view('pusatlangganan.detailskd');
+    }
+
+    public function detailskb()
+    {
+        return view('pusatlangganan.detailskb');
+    }
 }

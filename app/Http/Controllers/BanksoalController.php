@@ -53,7 +53,6 @@ class BanksoalController extends Controller
             'pilihan_b' => 'required',
             'pilihan_c' => 'required',
             'pilihan_d' => 'required',
-            'pilihan_e' => 'required',
             'jawaban_a' => 'required',
             'jawaban_b' => 'required',
             'jawaban_c' => 'required',
