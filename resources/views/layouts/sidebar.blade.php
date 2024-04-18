@@ -158,6 +158,15 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('tryout-gratis') ? 'active' : '' }}"
+                                            href="{{ url('tryout-gratis') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-folder fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Soal Try Out Gratis</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
                                         <a class="menu-link {{ request()->is('pembayaran') ? 'active' : '' }}"
                                             href="{{ url('/pembayaran') }}">
                                             <span class="menu-icon">

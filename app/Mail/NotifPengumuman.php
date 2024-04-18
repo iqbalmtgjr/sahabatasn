@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NotifPengumuman extends Mailable
 {
@@ -17,8 +18,9 @@ class NotifPengumuman extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $item, public $pengumuman)
+    public function __construct(public User $user, public $pengumuman)
     {
+        //
     }
 
     /**
@@ -28,7 +30,7 @@ class NotifPengumuman extends Mailable
     {
         return new Envelope(
             from: new Address('info@sahabatasn.com', 'Sahabat ASN'),
-            subject: 'Notif Pengumuman',
+            subject: 'Pengumuman Sahabat ASN',
         );
     }
 
@@ -38,7 +40,7 @@ class NotifPengumuman extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.pengumuman',
+            markdown: 'emails.pengumuman',
         );
     }
 

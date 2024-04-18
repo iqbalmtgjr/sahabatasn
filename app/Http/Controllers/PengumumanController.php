@@ -45,9 +45,9 @@ class PengumumanController extends Controller
         }
 
         $user = User::all();
-        foreach ($user as $item) {
-            $pengumuman = Pengumuman::create($request->all());
-            Mail::to($item->email)->send(new NotifPengumuman($item, $pengumuman));
+        $pengumuman = Pengumuman::create($request->all());
+        foreach ($user as $user) {
+            Mail::to($user->email)->send(new NotifPengumuman($user, $pengumuman));
         }
 
         toastr()->success('Berhasil menambah pengumuman.', 'Sukses');

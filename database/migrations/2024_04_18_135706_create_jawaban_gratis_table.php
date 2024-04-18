@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jawaban', function (Blueprint $table) {
+        Schema::create('jawaban_gratis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('bank_soal_id')->constrained('bank_soal');
+            $table->foreignId('togratis_id')->constrained('togratis');
             $table->string('pilihan_a');
             $table->string('pilihan_b');
             $table->string('pilihan_c');
@@ -24,7 +24,6 @@ return new class extends Migration
             $table->smallInteger('jawaban_c');
             $table->smallInteger('jawaban_d');
             $table->smallInteger('jawaban_e')->nullable();
-            $table->longText('pembahasan');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jawaban');
+        Schema::dropIfExists('jawaban_gratis');
     }
 };

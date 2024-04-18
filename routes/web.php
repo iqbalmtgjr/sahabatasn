@@ -11,6 +11,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TogratisController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
@@ -75,6 +76,13 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::post('/banksoal/update', [BanksoalController::class, 'update']);
     Route::get('/banksoal/edit/{id}', [BanksoalController::class, 'edit']);
     Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
+
+    //kelola_tryout_gratis
+    Route::get('/tryout-gratis', [TogratisController::class, 'index']);
+    Route::get('/tryout-gratis/getdata/{id}', [TogratisController::class, 'getdata']);
+    Route::post('/tryout-gratis/input', [TogratisController::class, 'store']);
+    Route::post('/tryout-gratis/update', [TogratisController::class, 'update']);
+    Route::get('/tryout-gratis/hapus/{id}', [TogratisController::class, 'destroy']);
 
     //kelola_paket
     Route::get('/kelola-paket', [PaketController::class, 'index'])->name('kelola-paket');

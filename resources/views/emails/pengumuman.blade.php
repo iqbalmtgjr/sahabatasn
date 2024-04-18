@@ -1,16 +1,16 @@
 <x-mail::message>
-    # Pengumuman Member Sahabat ASN
+    # Pengumuman untuk Member Sahabat ASN
 
-    Hai {{ $user->name }}
-    Kami ingin menginformasikan kepada Anda tentang beberapa hal penting berikut:
+    Hai {{ $user->name }},
+    Berikut ini adalah beberapa informasi penting yang ingin kami sampaikan kepada Anda:
 
     Judul: {{ $pengumuman->judul }}
-    Tanggal: {{ $pengumuman->tanggal->format('d M Y') }}
-    Isi:
+    Tanggal: {{ \Carbon\Carbon::parse($pengumuman->tanggal)->format('d M Y') }}
+    Pesan:
     {{ $pengumuman->isi }}
 
-    Mohon untuk membaca dan memperhatikan informasi di atas dengan seksama.
+    Kami mohon agar Anda dapat membaca dan memperhatikan informasi tersebut dengan seksama.
 
-    Terima Kasih,
-    Sahabat ASN
+    Terima kasih atas perhatiannya,
+    Tim {{ config('app.name') }}
 </x-mail::message>
