@@ -15,13 +15,16 @@ class KategoriController extends Controller
      */
     public function index(Request $request)
     {
+        // dd($request->id);
+        $sub = $request->has('id') ? Subkategori::where('kategori_id', $request->id)->get() : collect();
+        // return view('kategori.modalsub', compact('sub'));
         $data = Kategori::all();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->make(true);
         }
 
-        return view('kategori.index');
+        return view('kategori.index', compact('sub'));
     }
 
     /**
@@ -92,7 +95,7 @@ class KategoriController extends Controller
         ]);
         // $data->update($request->all());
 
-        toastr()->success('Berhasil tambah sub kategori.', 'Sukses');
+        // toastr()->success('Berhasil tambah sub kategori.', 'Sukses');
         return redirect()->back();
     }
 
@@ -100,8 +103,16 @@ class KategoriController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
+
     {
-        Kategori::findOrFail($id)->delete();
+        $kategori = Kategori::findOrFail($id);
+        if ($kategori->paket()->count() > 0) {
+            toastr()->error('Kategori tidak bisa dihapus karena memiliki paket terkait.', 'Gagal');
+            return redirect()->back();
+        }
+
+        $kategori->delete();
+        toastr()->success('Kategori berhasil dihapus.', 'Sukses');
         return redirect()->back();
     }
 
@@ -109,5 +120,19 @@ class KategoriController extends Controller
     {
         $data = Kategori::find($id);
         return $data;
+    }
+
+    public function getdatasub($id)
+    {
+        $sub = Subkategori::where('kategori_id', $id)->get();
+        return response()->json(['sub_kategori' => $sub]);
+    }
+
+    public function destroySubKategori($id)
+    {
+        $subkategori = Subkategori::findOrFail($id);
+        $subkategori->delete();
+
+        return redirect()->back();
     }
 }

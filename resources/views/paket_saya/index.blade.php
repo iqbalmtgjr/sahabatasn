@@ -201,7 +201,7 @@
             // Init toggle toolbar
 
             // Toggle toolbars
-          
+
 
             // Public methods
             return {

@@ -209,7 +209,7 @@
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
-                                        Delete
+                                        Hapus
                                     </a>
                                 </div>
                                 <!--end::Menu item-->

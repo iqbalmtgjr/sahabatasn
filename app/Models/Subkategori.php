@@ -16,4 +16,9 @@ class Subkategori extends Model
     {
         return $this->belongsTo(Kategori::class);
     }
+
+    public function banksoal()
+    {
+        return $this->hasOne(Banksoal::class);
+    }
 }

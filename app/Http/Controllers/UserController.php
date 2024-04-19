@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB; // Added for database operations
 
 class UserController extends Controller
 {
@@ -148,6 +149,7 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        DB::table('keranjang')->where('user_id', $id)->delete();
         User::findOrFail($id)->delete();
         return redirect()->back();
     }

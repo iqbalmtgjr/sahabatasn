@@ -58,8 +58,8 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Name-->
                                     <div class="d-flex align-items-center mb-2">
-                                        <a href="#"
-                                            class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ Auth::user()->name }}</a>
+                                        <p class="text-gray-900 fs-2 fw-bold me-1">
+                                            {{ Auth::user()->name }}</p>
                                     </div>
                                     <!--end::Name-->
                                     <!--begin::Info-->
@@ -79,47 +79,51 @@
                                 <!--end::User-->
                             </div>
                             <!--end::Title-->
-                            <!--begin::Stats-->
-                            <div class="d-flex flex-wrap flex-stack">
-                                <!--begin::Wrapper-->
-                                <div class="d-flex flex-column flex-grow-1 pe-8">
-                                    <!--begin::Stats-->
-                                    <div class="d-flex flex-wrap">
-                                        <!--begin::Stat-->
-                                        <div
-                                            class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="2">0
+                            @if (auth()->user()->role == 'user')
+                                <!--begin::Stats-->
+                                <div class="d-flex flex-wrap flex-stack">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-column flex-grow-1 pe-8">
+                                        <!--begin::Stats-->
+                                        <div class="d-flex flex-wrap">
+                                            <!--begin::Stat-->
+                                            <div
+                                                class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                <!--begin::Number-->
+                                                <div class="d-flex align-items-center">
+                                                    <div class="fs-2 fw-bold" data-kt-countup="true"
+                                                        data-kt-countup-value="2">0
+                                                    </div>
                                                 </div>
+                                                <!--end::Number-->
+                                                <!--begin::Label-->
+                                                <div class="fw-semibold fs-6 text-gray-400">Paket Berbayar</div>
+                                                <!--end::Label-->
                                             </div>
-                                            <!--end::Number-->
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 text-gray-400">Paket Berbayar</div>
-                                            <!--end::Label-->
-                                        </div>
-                                        <!--end::Stat-->
-                                        <!--begin::Stat-->
-                                        <div
-                                            class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                            <!--begin::Number-->
-                                            <div class="d-flex align-items-center">
-                                                {{-- <i class="ki-outline ki-arrow-down fs-3 text-danger me-2"></i> --}}
-                                                <div class="fs-2 fw-bold" data-kt-countup="true" data-kt-countup-value="3">
-                                                    0</div>
+                                            <!--end::Stat-->
+                                            <!--begin::Stat-->
+                                            <div
+                                                class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                                <!--begin::Number-->
+                                                <div class="d-flex align-items-center">
+                                                    {{-- <i class="ki-outline ki-arrow-down fs-3 text-danger me-2"></i> --}}
+                                                    <div class="fs-2 fw-bold" data-kt-countup="true"
+                                                        data-kt-countup-value="3">
+                                                        0</div>
+                                                </div>
+                                                <!--end::Number-->
+                                                <!--begin::Label-->
+                                                <div class="fw-semibold fs-6 text-gray-400">Paket Gratis</div>
+                                                <!--end::Label-->
                                             </div>
-                                            <!--end::Number-->
-                                            <!--begin::Label-->
-                                            <div class="fw-semibold fs-6 text-gray-400">Paket Gratis</div>
-                                            <!--end::Label-->
+                                            <!--end::Stat-->
                                         </div>
-                                        <!--end::Stat-->
+                                        <!--end::Stats-->
                                     </div>
-                                    <!--end::Stats-->
+                                    <!--end::Wrapper-->
                                 </div>
-                                <!--end::Wrapper-->
-                            </div>
-                            <!--end::Stats-->
+                                <!--end::Stats-->
+                            @endif
                         </div>
                         <!--end::Info-->
                     </div>

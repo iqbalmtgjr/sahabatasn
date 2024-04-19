@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('paket_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('paket_id')->constrained('paket');
             $table->string('nominal');
             $table->string('gambar');
             $table->integer('status');

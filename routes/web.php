@@ -11,9 +11,11 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\TogratisController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PusatlanggananController;
 
 Route::get('/', function () {
@@ -39,6 +41,8 @@ Route::post('/password/update', [ProfilController::class, 'updatePassword'])->na
 
 //pembayaran bisa semua role
 Route::get('/pembayaran/getdata/{id}', [PembayaranController::class, 'getdata'])->name('getdatapembayaran');
+Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
+
 
 //hanya admin
 Route::middleware(['checkRole:admin'])->group(function () {
@@ -49,13 +53,21 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::post('/user/update', [UserController::class, 'update'])->name('user-update');
     Route::get('/user/hapus/{id}', [UserController::class, 'destroy'])->name('user-delete');
 
+    //Kelola_pengumuman
+    Route::get('/pengumuman/getdata/{id}', [PengumumanController::class, 'getdata'])->name('getdatapengumuman');
+    Route::post('/pengumuman/input', [PengumumanController::class, 'store'])->name('pengumuman-input');
+    Route::post('/pengumuman/update', [PengumumanController::class, 'update'])->name('pengumuman-update');
+    Route::get('/pengumuman/hapus/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman-delete');
+
     //kelola_kategori_paket
     Route::get('/kelola-kategori', [KategoriController::class, 'index'])->name('kelola-kategori');
     Route::get('/kategori/getdata/{id}', [KategoriController::class, 'getdata'])->name('getdatakategori');
+    Route::get('/kategori/getdatasub/{id}', [KategoriController::class, 'getdatasub'])->name('getdatasubkategori');
     Route::post('/kategori/input', [KategoriController::class, 'store'])->name('kategori-input');
     Route::post('/kategori/update', [KategoriController::class, 'update'])->name('kategori-update');
     Route::post('/kategori/sub', [KategoriController::class, 'sub'])->name('kategori-sub');
     Route::get('/kategori/hapus/{id}', [KategoriController::class, 'destroy'])->name('kategori-delete');
+    Route::get('/kategori/hapusSubKategori/{id}', [KategoriController::class, 'destroySubKategori'])->name('subkategori-delete');
 
     //kelola_bank_soal
     Route::get('/bank-soal', [BanksoalController::class, 'index']);
@@ -64,6 +76,13 @@ Route::middleware(['checkRole:admin'])->group(function () {
     Route::post('/banksoal/update', [BanksoalController::class, 'update']);
     Route::get('/banksoal/edit/{id}', [BanksoalController::class, 'edit']);
     Route::get('/banksoal/hapus/{id}', [BanksoalController::class, 'destroy']);
+
+    //kelola_tryout_gratis
+    Route::get('/tryout-gratis', [TogratisController::class, 'index']);
+    Route::get('/tryout-gratis/getdata/{id}', [TogratisController::class, 'getdata']);
+    Route::post('/tryout-gratis/input', [TogratisController::class, 'store']);
+    Route::post('/tryout-gratis/update', [TogratisController::class, 'update']);
+    Route::get('/tryout-gratis/hapus/{id}', [TogratisController::class, 'destroy']);
 
     //kelola_paket
     Route::get('/kelola-paket', [PaketController::class, 'index'])->name('kelola-paket');

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket', function (Blueprint $table) {
+        Schema::create('pengumuman', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id')->constrained('kategori');
             $table->string('judul');
-            $table->string('harga');
-            $table->string('gambar');
+            $table->text('isi');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket');
+        Schema::dropIfExists('pengumuman');
     }
 };

@@ -10,8 +10,8 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Keranjang
-                        Saya
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Tryout
+                        Gratis
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -24,36 +24,8 @@
     <!--end::Toolbar-->
     <!--begin::Content-->
     <div id="kt_app_content" class="app-content flex-column-fluid">
-
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
-            <div class="alert alert-info d-flex align-items-center p-5">
-
-                <i class="ki-duotone ki-information-3 fs-2hx text-info me-4">
-                    <span class="path1"></span>
-                    <span class="path2"></span>
-                    <span class="path3"></span>
-                </i>
-                <!--end::Icon-->
-
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-column">
-                    <!--begin::Title-->
-                    <h4 class="mb-1 text-dark">Info Nomor Rekening</h4><br>
-                    <p class="text-dark">
-                        <strong>Atas Nama : Mutya</strong> <br>
-                        <strong>Nomor Rekening : 1234567890</strong> <br>
-                        <strong>Nama Bank : BNI</strong> <br>
-                    </p>
-                    <!--end::Title-->
-
-                    <!--begin::Content-->
-                    {{-- <span>The alert component can be used to highlight certain parts of your page for higher content
-                visibility.</span> --}}
-                    <!--end::Content-->
-                </div>
-                <!--end::Wrapper-->
-            </div>
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->
@@ -65,17 +37,17 @@
                             <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span
                                     class="path2"></span></i>
                             <input type="text" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Paket" />
+                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Soal" />
                         </div>
                         <!--end::Search-->
 
                         <!--begin::Toolbar-->
                         <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
                             <!--begin::Add customer-->
-                            <a href="{{ url('pusatlangganan') }}" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
                                 <i class="ki-duotone ki-plus fs-2"></i>
-                                Tambah Paket Lainnya
-                            </a>
+                                Tambah Soal
+                            </button>
                             <!--end::Add customer-->
                         </div>
                         <!--end::Toolbar-->
@@ -106,8 +78,9 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th>Nama Paket</th>
-                                <th>Harga</th>
+                                <th>Soal</th>
+                                <th>Kategori</th>
+                                <th>Sub Kategori</th>
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
                         </thead>
@@ -119,19 +92,18 @@
             </div>
         </div>
     </div>
-    @include('keranjang.modaledit')
+    @include('tryout_gratis.modal')
+    @include('tryout_gratis.modaledit')
 @endsection
 
 @push('header')
-    <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
-        type="text/css" />
+    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 @endpush
 
 @push('footer')
-    <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-
+    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="assets/js/widgets.bundle.js"></script>
+    <script src="assets/js/custom/widgets.js"></script>
     <script>
         "use strict";
 
@@ -158,16 +130,19 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/keranjang/"$paket->id"') }}",
+                        url: "{{ url('tryout-gratis') }}",
                     },
                     columns: [{
                             data: 'id'
                         },
                         {
-                            data: 'nama_paket'
+                            data: 'soal'
                         },
                         {
-                            data: 'harga'
+                            data: 'kategori'
+                        },
+                        {
+                            data: 'sub_kategori'
                         },
                         {
                             data: null
@@ -190,19 +165,36 @@
                             className: 'text-end',
                             render: function(data, type, row) {
                                 return `
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
+                                Aksi
+                                <span class="svg-icon fs-5 m-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                                            <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="currentColor" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
+                                        </g>
+                                    </svg>
+                                </span>
+                            </a>
                             <!--begin::Menu-->
+                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
-                                    <a href="#" onclick="getdata(${row['id']})" class="btn btn-sm btn-primary" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
+                                <div class="menu-item px-3">
+                                    <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
                                 data-bs-target="#edit">
-                                        Bayar
+                                        Edit
                                     </a>
+                                </div>
                                 <!--end::Menu item-->
 
                                 <!--begin::Menu item-->
-                                    <a href="#" data-id="${row['id']}" class="btn btn-sm btn-danger" data-kt-docs-table-filter="delete_row">
+                                <div class="menu-item px-3">
+                                    <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Hapus
                                     </a>
+                                </div>
                                 <!--end::Menu item-->
+                            </div>
                             <!--end::Menu-->
                         `;
                             },
@@ -250,7 +242,7 @@
 
                         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Yakin ingin menghapus " + customerName + "?",
+                            text: "Yakin ingin menghapus soal " + customerName + "?",
                             icon: "warning",
                             showCancelButton: true,
                             buttonsStyling: false,
@@ -271,7 +263,7 @@
                                     timer: 2000
                                 }).then(function() {
                                     Swal.fire({
-                                        text: "Data kategori " +
+                                        text: "Data soal " +
                                             customerName + " terhapus !.",
                                         icon: "success",
                                         buttonsStyling: false,
@@ -281,13 +273,13 @@
                                         }
                                     }).then(function() {
                                         window.location =
-                                            `{{ url('/keranjang/hapus/') }}/${Id}`;
+                                            `{{ url('/tryout-gratis/hapus') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "Kategori " + customerName +
+                                    text: "Soal " + customerName +
                                         " tidak jadi dihapus.",
                                     icon: "error",
                                     buttonsStyling: false,
@@ -303,97 +295,97 @@
             }
 
             // Reset Filter
-            var handleResetForm = () => {
-                // Select reset button
-                const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
+            // var handleResetForm = () => {
+            //     // Select reset button
+            //     const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
 
-                // Reset datatable
-                resetButton.addEventListener('click', function() {
-                    // Reset payment type
-                    filterPayment[0].checked = true;
+            //     // Reset datatable
+            //     resetButton.addEventListener('click', function() {
+            //         // Reset payment type
+            //         filterPayment[0].checked = true;
 
-                    // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search('').draw();
-                });
-            }
+            //         // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+            //         dt.search('').draw();
+            //     });
+            // }
 
             // Init toggle toolbar
-            var initToggleToolbar = function() {
-                // Toggle selected action toolbar
-                // Select all checkboxes
-                const container = document.querySelector('#kt_datatable_example_1');
-                const checkboxes = container.querySelectorAll('[type="checkbox"]');
+            // var initToggleToolbar = function() {
+            //     // Toggle selected action toolbar
+            //     // Select all checkboxes
+            //     const container = document.querySelector('#kt_datatable_example_1');
+            //     const checkboxes = container.querySelectorAll('[type="checkbox"]');
 
-                // Select elements
-                const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
+            //     // Select elements
+            //     const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
 
-                // Toggle delete selected toolbar
-                checkboxes.forEach(c => {
-                    // Checkbox on click event
-                    c.addEventListener('click', function() {
-                        setTimeout(function() {
-                            toggleToolbars();
-                        }, 50);
-                    });
-                });
+            //     // Toggle delete selected toolbar
+            //     checkboxes.forEach(c => {
+            //         // Checkbox on click event
+            //         c.addEventListener('click', function() {
+            //             setTimeout(function() {
+            //                 toggleToolbars();
+            //             }, 50);
+            //         });
+            //     });
 
-                // Deleted selected rows
-                deleteSelected.addEventListener('click', function() {
-                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "Are you sure you want to delete selected customers?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        showLoaderOnConfirm: true,
-                        confirmButtonText: "Yes, delete!",
-                        cancelButtonText: "No, cancel",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-danger",
-                            cancelButton: "btn fw-bold btn-active-light-primary"
-                        },
-                    }).then(function(result) {
-                        if (result.value) {
-                            // Simulate delete request -- for demo purpose only
-                            Swal.fire({
-                                text: "Deleting selected customers",
-                                icon: "info",
-                                buttonsStyling: false,
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(function() {
-                                Swal.fire({
-                                    text: "You have deleted all selected customers!.",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                }).then(function() {
-                                    // delete row data from server and re-draw datatable
-                                    dt.draw();
-                                });
+            //     // Deleted selected rows
+            //     deleteSelected.addEventListener('click', function() {
+            //         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            //         Swal.fire({
+            //             text: "Are you sure you want to delete selected customers?",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             buttonsStyling: false,
+            //             showLoaderOnConfirm: true,
+            //             confirmButtonText: "Yes, delete!",
+            //             cancelButtonText: "No, cancel",
+            //             customClass: {
+            //                 confirmButton: "btn fw-bold btn-danger",
+            //                 cancelButton: "btn fw-bold btn-active-light-primary"
+            //             },
+            //         }).then(function(result) {
+            //             if (result.value) {
+            //                 // Simulate delete request -- for demo purpose only
+            //                 Swal.fire({
+            //                     text: "Deleting selected customers",
+            //                     icon: "info",
+            //                     buttonsStyling: false,
+            //                     showConfirmButton: false,
+            //                     timer: 2000
+            //                 }).then(function() {
+            //                     Swal.fire({
+            //                         text: "You have deleted all selected customers!.",
+            //                         icon: "success",
+            //                         buttonsStyling: false,
+            //                         confirmButtonText: "Ok, got it!",
+            //                         customClass: {
+            //                             confirmButton: "btn fw-bold btn-primary",
+            //                         }
+            //                     }).then(function() {
+            //                         // delete row data from server and re-draw datatable
+            //                         dt.draw();
+            //                     });
 
-                                // Remove header checked box
-                                const headerCheckbox = container.querySelectorAll(
-                                    '[type="checkbox"]')[0];
-                                headerCheckbox.checked = false;
-                            });
-                        } else if (result.dismiss === 'cancel') {
-                            Swal.fire({
-                                text: "Selected customers was not deleted.",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                }
-                            });
-                        }
-                    });
-                });
-            }
+            //                     // Remove header checked box
+            //                     const headerCheckbox = container.querySelectorAll(
+            //                         '[type="checkbox"]')[0];
+            //                     headerCheckbox.checked = false;
+            //                 });
+            //             } else if (result.dismiss === 'cancel') {
+            //                 Swal.fire({
+            //                     text: "Selected customers was not deleted.",
+            //                     icon: "error",
+            //                     buttonsStyling: false,
+            //                     confirmButtonText: "Ok, got it!",
+            //                     customClass: {
+            //                         confirmButton: "btn fw-bold btn-primary",
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     });
+            // }
 
             // Toggle toolbars
             var toggleToolbars = function() {
@@ -434,9 +426,9 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    initToggleToolbar();
+                    // initToggleToolbar();
                     handleDeleteRows();
-                    handleResetForm();
+                    // handleResetForm();
                 }
             }
         }();

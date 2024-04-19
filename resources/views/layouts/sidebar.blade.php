@@ -40,7 +40,8 @@
                         </div>
                         <!--begin::Logo image-->
                         <a href="{{ url('/dashboard') }}">
-                            <img alt="Logo" src="{{ asset('/') }}assets/media/gambar/logosahabatasn.png" class="h-30px" />
+                            <img alt="Logo" src="{{ asset('/') }}assets/media/gambar/logosahabatasn.png"
+                                class="h-30px" />
                         </a>
                         <!--end::Logo image-->
                     </div>
@@ -106,77 +107,101 @@
                                         <span class="menu-title">Dashboards</span>
                                     </a>
                                 </div>
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->is('pengumuman') ? 'active' : '' }}"
+                                        href="{{ url('pengumuman') }}">
+                                        <span class="menu-icon">
+                                            <i class="ki-duotone ki-information fs-2">
+                                                <span class="path1"></span>
+                                                <span class="path2"></span>
+                                                <span class="path3"></span>
+                                            </i>
+                                        </span>
+                                        <span class="menu-title">Pengumuman</span>
+                                    </a>
+                                </div>
                                 @if (auth()->user()->role == 'admin')
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
-                                        href="{{ url('kelola-user') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-people fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Kelola User</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('pembayaran') ? 'active' : '' }}" href="{{ url('/pembayaran') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-dollar fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Pembayaran</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('bank-soal') ? 'active' : '' }}"
-                                        href="{{ url('bank-soal') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-folder fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Bank Soal</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('kelola-paket') ? 'active' : '' }}"
-                                        href="{{ url('kelola-paket') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-package fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Kelola Paket Soal</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('kelola-kategori') ? 'active' : '' }}"
-                                        href="{{ url('/kelola-kategori') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-abstract-30 fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Kelola Kategori Paket</span>
-                                    </a>
-                                </div>
-                                @else                                
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('pusatlangganan') ? 'active' : '' }}"
-                                        href="{{ url('pusatlangganan') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-handcart fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Pusat Langganan</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link {{ request()->is('paketsaya') ? 'active' : '' }}" href="{{ url('paketsaya') }}">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-bookmark fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Paket Saya</span>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a class="menu-link" href="#">
-                                        <span class="menu-icon">
-                                            <i class="ki-outline ki-medal-star fs-2"></i>
-                                        </span>
-                                        <span class="menu-title">Hasil Tryout</span>
-                                    </a>
-                                </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('kelola-user') ? 'active' : '' }}"
+                                            href="{{ url('kelola-user') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-people fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Kelola User</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('kelola-kategori') ? 'active' : '' }}"
+                                            href="{{ url('/kelola-kategori') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-abstract-30 fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Kelola Kategori Paket</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('kelola-paket') ? 'active' : '' }}"
+                                            href="{{ url('kelola-paket') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-package fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Kelola Paket Soal</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('bank-soal') ? 'active' : '' }}"
+                                            href="{{ url('bank-soal') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-folder fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Bank Soal</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('tryout-gratis') ? 'active' : '' }}"
+                                            href="{{ url('tryout-gratis') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-folder fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Soal Try Out Gratis</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('pembayaran') ? 'active' : '' }}"
+                                            href="{{ url('/pembayaran') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-dollar fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Pembayaran</span>
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('pusatlangganan') ? 'active' : '' }}"
+                                            href="{{ url('pusatlangganan') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-handcart fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Pusat Langganan</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('paketsaya') ? 'active' : '' }}"
+                                            href="{{ url('paketsaya') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-bookmark fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Paket Saya</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-medal-star fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Hasil Tryout</span>
+                                        </a>
+                                    </div>
                                 @endif
                                 <!--end:Menu item-->
                             </div>

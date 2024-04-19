@@ -174,7 +174,7 @@
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
+                                    <a href="#" onclick="getdatasub(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
                                 data-bs-target="#sub">
                                         Tambah Sub
                                     </a>
@@ -191,7 +191,7 @@
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
-                                        Delete
+                                        Hapus
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
