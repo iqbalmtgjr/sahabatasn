@@ -120,6 +120,9 @@ Route::middleware(['checkRole:user'])->group(function () {
     Route::get('/detailcpns', [PusatlanggananController::class, 'detail'])->name('detailcpns');
     Route::get('/detailskd', [PusatlanggananController::class, 'detailskd'])->name('detailskd');
     Route::get('/detailskb', [PusatlanggananController::class, 'detailskb'])->name('detailskb');
+    Route::get('/detailpppk', [PusatlanggananController::class, 'detailpppk'])->name('detailpppk');
+    Route::get('/detailpppkteknis', [PusatlanggananController::class, 'detailpppkteknis'])->name('detailpppkteknis');
+    Route::get('/detailpppkumum', [PusatlanggananController::class, 'detailpppkumum'])->name('detailpppkumum');
 
     //s&k
     Route::get('/sk', [SkController::class, 'index'])->name('sk');

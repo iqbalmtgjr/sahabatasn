@@ -63,14 +63,14 @@
 					<!--begin::Hot sales post-->
 					<div class="card-xl-stretch me-md-6">
 						<!--begin::Overlay-->
-						<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="assets/media/stock/600x600/img-88.png">
+						<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ url('detailcpns') }}">
 							<!--begin::Image-->
 							<div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url('assets/media/stock/600x600/img-88.png')"></div>
 							<!--end::Image-->
 							<!--begin::Action-->
-							<div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+							{{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
 								<i class="ki-outline ki-eye fs-2x text-white"></i>
-							</div>
+							</div> --}}
 							<!--end::Action-->
 						</a>
 						<!--end::Overlay-->
@@ -80,7 +80,7 @@
 							<a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">PAKET CPNS</a>
 							<!--end::Title-->
 							<!--begin::Text-->
-							<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Paket CPNS terdiri dari paket soal SKD dan SKB</div>
+							<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">SKD dan SKB</div>
 							<!--end::Text-->
 							<!--begin::Text-->
 							<div class="fs- fw-bold mt-5 d-flex flex-stack">
@@ -104,14 +104,14 @@
 					<!--begin::Hot sales post-->
 					<div class="card-xl-stretch mx-md-3">
 						<!--begin::Overlay-->
-						<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="assets/media/stock/600x600/img-87.jpg">
+						<a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ url('detailpppk') }}">
 							<!--begin::Image-->
 							<div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url('assets/media/stock/600x600/img-87.jpg')"></div>
 							<!--end::Image-->
 							<!--begin::Action-->
-							<div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+							{{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
 								<i class="ki-outline ki-eye fs-2x text-white"></i>
-							</div>
+							</div> --}}
 							<!--end::Action-->
 						</a>
 						<!--end::Overlay-->
@@ -121,7 +121,7 @@
 							<a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">PAKET PPPK</a>
 							<!--end::Title-->
 							<!--begin::Text-->
-							<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Paket PPPK terdiri dari paket Kompetensi Teknis dan Manajerial, Sosiokultural, & Wawancara</div>
+							<div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Kompetensi Teknis | Manajerial, Sosiokultural, & Wawancara</div>
 							<!--end::Text-->
 							<!--begin::Text-->
 							<div class="fs-6 fw-bold mt-5 d-flex flex-stack">
@@ -130,7 +130,7 @@
 								<span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
 								<!--end::Label-->
 								<!--begin::Action-->
-								<a href="#" class="btn btn-sm btn-primary">Lihat</a>
+								<a href="{{ url('detailpppk') }}" class="btn btn-sm btn-primary">Lihat</a>
 								<!--end::Action-->
 							</div>
 							<!--end::Text-->

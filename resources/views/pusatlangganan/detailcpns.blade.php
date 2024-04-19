@@ -58,27 +58,27 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <!--begin::Pricing card-->
             <div class="row g-5 g-xl-8">
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
                     <a href="{{ url('detailskd') }}" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-cheque text-gray-100 fs-2x ms-n1"></i>
                             <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">PAKET SKD</div>
-                            {{-- <div class="fw-semibold text-gray-100">New Customers</div> --}}
+                            <div class="fw-semibold text-gray-100">Soal TIU. TWK, TKP</div>
                         </div>
                         <!--end::Body-->
                     </a>
                     <!--end::Statistics Widget 5-->
                 </div>
-                <div class="col-xl-3">
+                <div class="col-xl-4">
                     <!--begin::Statistics Widget 5-->
                     <a href="{{ url('detailskb') }}" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
                         <div class="card-body">
                             <i class="ki-outline ki-chart-pie-simple text-white fs-2x ms-n1"></i>
                             <div class="text-white fw-bold fs-2 mb-2 mt-5">PAKET SKB</div>
-                            {{-- <div class="fw-semibold text-white">Milestone Reached</div> --}}
+                            <div class="fw-semibold text-white">Dosen, Dokter, Advokat</div>
                         </div>
                         <!--end::Body-->
                     </a>

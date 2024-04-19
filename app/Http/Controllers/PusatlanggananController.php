@@ -27,4 +27,19 @@ class PusatlanggananController extends Controller
     {
         return view('pusatlangganan.detailskb');
     }
+
+    public function detailpppk()
+    {
+        return view('pusatlangganan.detailpppk');
+    }
+
+    public function detailpppkteknis()
+    {
+        return view('pusatlangganan.detailpppkteknis');
+    }
+
+    public function detailpppkumum()
+    {
+        return view('pusatlangganan.detailpppkumum');
+    }
 }

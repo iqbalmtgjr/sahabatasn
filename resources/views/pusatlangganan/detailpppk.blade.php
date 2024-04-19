@@ -56,50 +56,36 @@
 	
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
+            <!--begin::Pricing card-->
             <div class="row g-5 g-xl-8">
                 <div class="col-xl-4">
-                    <!--begin::Statistics Widget 2-->
-                    <div class="card card-xl-stretch mb-xl-8">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{ url('detailpppkteknis') }}" class="card bg-dark hoverable card-xl-stretch mb-xl-8">
                         <!--begin::Body-->
-                        <div class="card-body d-flex align-items-center pt-3 pb-0">
-                            <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2">
-                                <a href="#" class="fw-bold text-dark fs-2 mb-2 text-hover-primary">Rp. 130.000</a>
-                                <span class="fw-semibold text-muted fs-5">SKB Guru</span>
-                            </div>
-                            <img src="assets/media/svg/avatars/guru.png" alt="" class="align-self-end h-100px">
+                        <div class="card-body">
+                            <i class="ki-outline ki-cheque text-gray-100 fs-2x ms-n1"></i>
+                            <div class="text-gray-100 fw-bold fs-2 mb-2 mt-5">KOMPETENSI TEKNIS</div>
+                            <div class="fw-semibold text-gray-100">Guru, Dokter, Asisten, dll</div>
                         </div>
-						<div class="pt-5">
-							{{-- <p class="text-center fs-6 pb-5">
-							<span class="badge badge-light-danger fs-8">Notes:</span>&nbsp; Current sprint requires stakeholders
-							<br>to approve newly amended policies</p> --}}
-							<a href="#" class="btn btn-primary w-100 py-3">Beli</a>
-						</div>
                         <!--end::Body-->
-                    </div>
-                    <!--end::Statistics Widget 2-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
                 </div>
-				<div class="col-xl-4">
-                    <!--begin::Statistics Widget 2-->
-                    <div class="card card-xl-stretch mb-xl-8">
+                <div class="col-xl-4">
+                    <!--begin::Statistics Widget 5-->
+                    <a href="{{ url('detailpppkumum') }}" class="card bg-info hoverable card-xl-stretch mb-5 mb-xl-8">
                         <!--begin::Body-->
-                        <div class="card-body d-flex align-items-center pt-3 pb-0">
-                            <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2">
-                                <a href="#" class="fw-bold text-dark fs-2 mb-2 text-hover-primary">Rp. 130.000</a>
-                                <span class="fw-semibold text-muted fs-5">SKB Guru</span>
-                            </div>
-                            <img src="assets/media/svg/avatars/dokter.png" alt="" class="align-self-end h-100px">
+                        <div class="card-body">
+                            <i class="ki-outline ki-chart-pie-simple text-white fs-2x ms-n1"></i>
+                            <div class="text-white fw-bold fs-2 mb-2 mt-2">KOMPETENSI UMUM</div>
+                            <div class="fw-semibold text-white">Manajerial, Sosiokultural, dan Wawancara</div>
                         </div>
-						<div class="pt-5">
-							{{-- <p class="text-center fs-6 pb-5">
-							<span class="badge badge-light-danger fs-8">Notes:</span>&nbsp; Current sprint requires stakeholders
-							<br>to approve newly amended policies</p> --}}
-							<a href="#" class="btn btn-primary w-100 py-3">Beli</a>
-						</div>
                         <!--end::Body-->
-                    </div>
-                    <!--end::Statistics Widget 2-->
+                    </a>
+                    <!--end::Statistics Widget 5-->
                 </div>
             </div>
+            <!--end::Pricing card-->
         </div>
         <!--end::Content container-->
 	<!--end::Content-->
