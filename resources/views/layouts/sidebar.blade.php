@@ -177,7 +177,7 @@
                                     </div>
                                 @else
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('pusatlangganan') ? 'active' : '' }}"
+                                        <a class="menu-link {{ request()->is('pusatlangganan*') ? 'active' : '' }}"
                                             href="{{ url('pusatlangganan') }}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-handcart fs-2"></i>

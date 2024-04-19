@@ -117,6 +117,12 @@ Route::middleware(['checkRole:user'])->group(function () {
 
     //pusat langganan
     Route::get('/pusatlangganan', [PusatlanggananController::class, 'index'])->name('pusatlangganan');
+    Route::get('/pusatlangganan/detailcpns', [PusatlanggananController::class, 'detail'])->name('detailcpns');
+    Route::get('/pusatlangganan/detailskd', [PusatlanggananController::class, 'detailskd'])->name('detailskd');
+    Route::get('/pusatlangganan/detailskb', [PusatlanggananController::class, 'detailskb'])->name('detailskb');
+    Route::get('/pusatlangganan/detailpppk', [PusatlanggananController::class, 'detailpppk'])->name('detailpppk');
+    Route::get('/pusatlangganan/detailpppkteknis', [PusatlanggananController::class, 'detailpppkteknis'])->name('detailpppkteknis');
+    Route::get('/pusatlangganan/detailpppkumum', [PusatlanggananController::class, 'detailpppkumum'])->name('detailpppkumum');
 
     //s&k
     Route::get('/sk', [SkController::class, 'index'])->name('sk');

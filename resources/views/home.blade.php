@@ -3,34 +3,46 @@
 @section('content')
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-fluid">
-            <!--begin::Alert-->
-            <div class="alert alert-success d-flex align-items-center p-5">
-                <!--begin::Icon-->
-                <i class="ki-duotone ki-emoji-happy fs-2hx text-success me-4"><span class="path1"></span><span
-                        class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-                <!--end::Icon-->
-
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-column">
-                    <!--begin::Title-->
-                    <h4 class="mb-1 text-dark">Selamat datang kembali, <strong
-                            class="text-primary">{{ Auth::user()->name }}</strong>! Ayo kita
-                        bersama-sama
-                        belajar dan persiapkan diri untuk sukses di ujian CPNS atau PPPK. Selamat belajar di Sahabat ASN!
-                    </h4>
-                    <!--end::Title-->
-
-                    <!--begin::Content-->
-                    {{-- <span>The alert component can be used to highlight certain parts of your page for higher content
-                            visibility.</span> --}}
-                    <!--end::Content-->
+            <div class="card border-transparent" data-bs-theme="light" style="background-color: #1C325E;">
+                <!--begin::Body-->
+                <div class="card-body d-flex ps-xl-15">
+                    <!--begin::Wrapper-->
+                    <div class="m-0">
+                        <!--begin::Title-->
+                        <div class="position-relative fs-2x z-index-2 fw-bold text-white mb-7">
+                            <span class="me-2">Selamat Datang Kembali
+                                <span class="position-relative d-inline-block text-danger">
+                                    <a href="{{ url('profil') }}"
+                                        class="text-danger opacity-75-hover">{{ auth()->user()->name }}</a>
+                                    <!--begin::Separator-->
+                                    <span
+                                        class="position-absolute opacity-50 bottom-0 start-0 border-4 border-danger border-bottom w-100"></span>
+                                    <!--end::Separator-->
+                                </span></span>,
+                            <br>Ayo manfaatkan waktu belajar kita dengan maksimal agar sukses dalam ujian CPNS dan PPPK!
+                        </div>
+                        <!--end::Title-->
+                        <!--begin::Action-->
+                        <div class="mb-3">
+                            <a href="{{ url('pusatlangganan') }}" class="btn btn-danger fw-semibold me-2">Lihat Paket</a>
+                            <a href="{{ url('paketsaya') }}"
+                                class="btn btn-color-white bg-white bg-opacity-15 bg-hover-opacity-25 fw-semibold">Paket
+                                Saya</a>
+                        </div>
+                        <!--begin::Action-->
+                    </div>
+                    <!--begin::Wrapper-->
+                    <!--begin::Illustration-->
+                    <img src="{{ url('assets/media/illustrations/sigma-1/17-dark.png') }}"
+                        class="position-absolute me-3 bottom-0 end-0 h-200px" alt="">
+                    <!--end::Illustration-->
                 </div>
-                <!--end::Wrapper-->
+                <!--end::Body-->
             </div>
-            <!--end::Alert-->
-            <div class="card">
+
+            <div class="card py-4 px-4 mt-4">
                 <div class="card-body py-4">
-                    <h1>Informasi Tekini</h1>
+                    <h2>Informasi Terbaru</h2>
                     <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
@@ -41,10 +53,7 @@
                                             value="1" />
                                     </div>
                                 </th>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Judul</th>
-                                <th>Isi</th>
+                                <th>Pengumuman</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
@@ -82,7 +91,7 @@
                     processing: true,
                     serverSide: true,
                     order: [
-                        [0, 'desc'] // Mengubah urutan berdasarkan kolom pertama (id) secara descending
+                        [0, 'desc']
                     ],
                     stateSave: true,
                     select: {
@@ -94,21 +103,8 @@
                         url: "{{ url('/pengumuman') }}",
                     },
                     columns: [{
-                            data: 'id', // Menambahkan kolom id
-                            visible: false // Menyembunyikan kolom id dari tampilan tabel
-                        },
-                        {
-                            data: null,
-                            render: function(data, type, row, meta) {
-                                return meta.row + meta.settings._iDisplayStart +
-                                    1; // Mengubah penghitungan nomor baris agar dinamis sesuai halaman
-                            }
-                        },
-                        {
-                            data: 'tanggal'
-                        },
-                        {
-                            data: 'judul'
+                            data: 'id',
+                            visible: false
                         },
                         {
                             data: 'isi'
