@@ -49,7 +49,7 @@
                     </a>
                 @else
                     <a href="{{ url('/pembayaran') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        data-bs-original-title="Ada 0 Pembayaran Belum Valid">
+                        data-bs-original-title="Belum ada pembayaran yang masuk">
                         <i class="ki-outline ki-notification-on fs-1"></i>
                     </a>
                 @endif
