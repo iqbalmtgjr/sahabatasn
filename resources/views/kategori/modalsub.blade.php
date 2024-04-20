@@ -162,7 +162,8 @@
                 getdatasub($('#kategori_id').val());
             },
             error: function(error) {
-                toastr.error('Gagal menghapus sub kategori', 'Error');
+                toastr.error('Gagal menghapus sub kategori, ada sub kategori yang sedang digunakan',
+                    'Error');
             }
         });
     }
