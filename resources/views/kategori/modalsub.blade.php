@@ -103,7 +103,6 @@
             success: function(response) {
                 // Cek jika response memiliki sub_kategori dan panjang array lebih dari 0
                 if (response.sub_kategori && response.sub_kategori.length > 0) {
-                    // Jika ada, tampilkan data sub kategori
                     tampilkanDataSubKategori(response);
                     // Set value untuk kategori_id berdasarkan id sub kategori pertama
                     $('#kategori_id').val(response.sub_kategori[0].kategori_id);
@@ -114,7 +113,6 @@
                         method: 'GET',
                         cache: false,
                         success: function(response) {
-                            // Tampilkan data sub kategori meskipun kosong
                             tampilkanDataSubKategori({
                                 sub_kategori: []
                             });
@@ -135,8 +133,7 @@
         var subKategoriList = '';
         if (response.sub_kategori && response.sub_kategori.length > 0) {
             subKategoriList += '<table class="table table-striped">';
-            subKategoriList +=
-                '<thead><tr><th>No</th><th>Sub Kategori</th><th>Aksi</th></tr></thead>';
+            subKategoriList += '<thead><tr><th>No</th><th>Sub Kategori</th><th>Aksi</th></tr></thead>';
             subKategoriList += '<tbody>';
             response.sub_kategori.forEach(function(sub, index) {
                 subKategoriList += '<tr><td>' + (index + 1) + '</td><td>' + sub

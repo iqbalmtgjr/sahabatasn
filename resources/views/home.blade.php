@@ -39,7 +39,6 @@
                 </div>
                 <!--end::Body-->
             </div>
-
             <div class="card py-4 px-4 mt-4">
                 <div class="card-body py-4">
                     <h2>Informasi Terbaru</h2>

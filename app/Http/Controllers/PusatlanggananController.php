@@ -9,8 +9,7 @@ class PusatlanggananController extends Controller
 {
     public function index()
     {
-        $data = Paket::all();
-        return view('pusatlangganan.index', compact('data'));
+        return view('pusatlangganan.index');
     }
 
     public function detail()
@@ -20,12 +19,14 @@ class PusatlanggananController extends Controller
 
     public function detailskd()
     {
-        return view('pusatlangganan.detailskd');
+        $data = Paket::where('kategori_id', 1)->get();
+        return view('pusatlangganan.detailskd', compact('data'));
     }
 
     public function detailskb()
     {
-        return view('pusatlangganan.detailskb');
+        $data = Paket::where('kategori_id', 2)->get();
+        return view('pusatlangganan.detailskb', compact('data'));
     }
 
     public function detailpppk()
