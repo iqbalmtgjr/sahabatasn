@@ -89,13 +89,8 @@
                     <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" />
-                                    </div>
-                                </th>
+                                <th></th>
+                                <th class="w-10px pe-2">No</th>
                                 <th>Avatar</th>
                                 <th>Nama</th>
                                 <th>Email</th>
@@ -159,7 +154,14 @@
                         url: "{{ url('/kelola-user') }}",
                     },
                     columns: [{
-                            data: 'id'
+                            data: 'id',
+                            visible: false
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, full, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            }
                         },
                         {
                             data: 'avatar'
@@ -181,22 +183,12 @@
                         [0, "desc"]
                     ],
                     columnDefs: [{
-                            targets: 0,
-                            orderable: false,
-                            render: function(data) {
-                                return `
-                        <div class="form-check form-check-sm form-check-custom form-check-solid">
-                            <input class="form-check-input" type="checkbox" value="${data}" />
-                        </div>`;
-                            }
-                        },
-                        {
-                            targets: -1,
-                            data: null,
-                            orderable: false,
-                            className: 'text-end',
-                            render: function(data, type, row) {
-                                return `
+                        targets: -1,
+                        data: null,
+                        orderable: false,
+                        className: 'text-end',
+                        render: function(data, type, row) {
+                            return `
                         <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
                             Aksi
                             <span class="svg-icon fs-5 m-0">
@@ -229,9 +221,8 @@
                         </div>
                         <!--end::Menu-->
                     `;
-                            },
                         },
-                    ],
+                    }, ],
                     // Add data-filter attribute
                     createdRow: function(row, data, dataIndex) {
                         $(row).find('td:eq(4)').attr('data-filter', data.CreditCardType);

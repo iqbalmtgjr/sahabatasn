@@ -70,17 +70,12 @@
                     <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
                         <thead>
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                <th class="w-10px pe-2">
-                                    <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                                        <input class="form-check-input" type="checkbox" data-kt-check="true"
-                                            data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-                                            value="1" />
-                                    </div>
-                                </th>
+                                <th></th>
+                                <th class="w-10px pe-2">No</th>
                                 <th>Soal</th>
                                 <th>Kategori</th>
                                 <th>Sub Kategori</th>
-                                <th>Tipe</th>
+                                {{-- <th>Tipe</th> --}}
                                 <th class="text-end min-w-100px">Aksi</th>
                             </tr>
                         </thead>
@@ -93,11 +88,12 @@
         </div>
     </div>
     @include('bank_soal.modal')
-    @include('bank_soal.modaledit')
+    {{-- @include('bank_soal.modaledit') --}}
 @endsection
 
 @push('header')
-    <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
+        type="text/css" />
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
@@ -112,9 +108,9 @@
             height: 200
         });
     </script>
-    <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="assets/js/widgets.bundle.js"></script>
-    <script src="assets/js/custom/widgets.js"></script>
+    <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
+    <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
+    <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
     <script>
         "use strict";
 
@@ -132,7 +128,7 @@
                     processing: true,
                     serverSide: true,
                     order: [
-                        [1, 'desc']
+                        [0, 'desc'] // Mengubah indeks kolom untuk pengurutan dari 0 menjadi 1
                     ],
                     stateSave: true,
                     select: {
@@ -144,7 +140,14 @@
                         url: "{{ url('bank-soal') }}",
                     },
                     columns: [{
-                            data: 'id'
+                            data: 'id',
+                            visible: false
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, full, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            }
                         },
                         {
                             data: 'soal'
@@ -156,29 +159,16 @@
                             data: 'sub_kategori'
                         },
                         {
-                            data: 'tipe'
-                        },
-                        {
                             data: null
                         },
                     ],
                     columnDefs: [{
-                            targets: 0,
-                            orderable: false,
-                            render: function(data) {
-                                return `
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="${data}" />
-                            </div>`;
-                            }
-                        },
-                        {
-                            targets: -1,
-                            data: null,
-                            orderable: false,
-                            className: 'text-end',
-                            render: function(data, type, row) {
-                                return `
+                        targets: -1,
+                        data: null,
+                        orderable: false,
+                        className: 'text-end',
+                        render: function(data, type, row) {
+                            return `
                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
                                 Aksi
                                 <span class="svg-icon fs-5 m-0">
@@ -193,40 +183,26 @@
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <div class="menu-item px-3">
-                                    <a href="http://localhost:8000/banksoal/edit/${data['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row" >
-                                        Edit Halaman
-                                    </a>
-                                </div>
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
+                                    <a href="http://localhost:8000/bank-soal/edit/${data['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row" >
                                         Edit
                                     </a>
                                 </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
+                                
                                 <div class="menu-item px-3">
                                     <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Hapus
                                     </a>
                                 </div>
-                                <!--end::Menu item-->
                             </div>
                             <!--end::Menu-->
                         `;
-                            },
                         },
-                    ],
-                    // Add data-filter attribute
+                    }, ],
                 });
 
                 table = dt.$;
 
-                // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
                 dt.on('draw', function() {
-                    // initToggleToolbar();
                     toggleToolbars();
                     handleDeleteRows();
                     KTMenu.createInstances();
@@ -457,4 +433,12 @@
             KTDatatablesServerSide.init();
         });
     </script>
+
+    {{-- Cadangan EDIT MODAL --}}
+    {{-- <div class="menu-item px-3">
+        <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row"
+            data-bs-toggle="modal" data-bs-target="#edit">
+            Edit
+        </a>
+    </div> --}}
 @endpush

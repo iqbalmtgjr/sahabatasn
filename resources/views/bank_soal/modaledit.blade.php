@@ -64,7 +64,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-7">
+                                {{-- <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipe</label>
                                     <select class="form-select form-select-solid  @error('tipe') is-invalid @enderror"
                                         data-hide-search="true" data-placeholder="-- Pilih Tipe --" name="tipe"
@@ -78,7 +78,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <!--end::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Label-->
@@ -338,7 +338,7 @@
                 $('#id').val(response.id);
                 $('#soal').val(response.soal);
                 $('#sub_kategori').val(response.subkategori.id);
-                $('#tipe').val(response.tipe);
+                // $('#tipe').val(response.tipe);
                 $('#pilihan_a').val(response.jawaban.pilihan_a);
                 $('#pilihan_b').val(response.jawaban.pilihan_b);
                 $('#pilihan_c').val(response.jawaban.pilihan_c);

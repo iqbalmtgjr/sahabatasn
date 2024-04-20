@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
 use App\Models\Paket;
+use App\Models\Kategori;
+use App\Models\Subkategori;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class PaketController extends Controller
@@ -16,7 +18,7 @@ class PaketController extends Controller
      */
     public function index(Request $request)
     {
-        $kategori = Kategori::all();
+        $subkategori = Subkategori::all();
         $paket = Paket::all();
         if ($request->ajax()) {
             return DataTables::of($paket)
@@ -38,14 +40,25 @@ class PaketController extends Controller
                 ->make(true);
         }
 
-        return view('paket.index', compact('paket', 'kategori'));
+        return view('paket.index', compact('paket', 'subkategori'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'harga' => 'required',
+            'subkategori_id' => 'required',
+            'gambar' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
@@ -57,13 +70,13 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori_id' => $request->kategori_id,
+                'subkategori_id' => $request->subkategori_id,
             ]);
         } else {
             $tambah = Paket::updateOrCreate([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori_id' => $request->kategori_id,
+                'subkategori_id' => $request->subkategori_id,
             ]);
         }
 
@@ -91,13 +104,13 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori_id' => $request->kategori_id,
+                'subkategori_id' => $request->subkategori_id,
             ]);
         } else {
             $data->update([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori_id' => $request->kategori_id,
+                'subkategori_id' => $request->subkategori_id,
             ]);
         }
 
@@ -110,7 +123,15 @@ class PaketController extends Controller
      */
     public function destroy(string $id)
     {
-        Paket::findOrFail($id)->delete();
+        $paket = Paket::findOrFail($id);
+
+        $path = public_path('gambar/' . $paket->gambar);
+        if (file_exists($path)) {
+            @unlink($path);
+        }
+
+        $paket->delete();
+
         return redirect()->back();
     }
 

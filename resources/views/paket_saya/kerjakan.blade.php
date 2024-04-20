@@ -34,35 +34,42 @@
                                 <h3>Soal Nomor 1</h3>
                             </div>
                             <hr>
-                            <p style="font-size: 15px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis eveniet eum velit cupiditate sed nemo! Incidunt, voluptas magnam numquam dicta, nostrum obcaecati saepe aspernatur aut id facilis, aliquid aliquam aperiam?</p>
+                            <p style="font-size: 15px">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis
+                                eveniet eum velit cupiditate sed nemo! Incidunt, voluptas magnam numquam dicta, nostrum
+                                obcaecati saepe aspernatur aut id facilis, aliquid aliquam aperiam?</p>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  <strong style="font-size: 15px">A. alksdjlasdljasd</strong> 
-                                </label>
-                              </div>
-                            <div class="form-check my-6">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                    <strong style="font-size: 15px">B. aksdhkashdkahsdsd</strong> 
+                                    <strong style="font-size: 15px">A. alksdjlasdljasd</strong>
                                 </label>
                             </div>
                             <div class="form-check my-6">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                  <strong style="font-size: 15px">C. alksdjlasdljasd</strong> 
-                                </label>
-                              </div>
-                            <div class="form-check my-6">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                    <strong style="font-size: 15px">D. aksdhkashdkahsdsd</strong> 
+                                    <strong style="font-size: 15px">B. aksdhkashdkahsdsd</strong>
                                 </label>
                             </div>
                             <div class="form-check my-6">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    <strong style="font-size: 15px">C. alksdjlasdljasd</strong>
+                                </label>
+                            </div>
+                            <div class="form-check my-6">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                    <strong style="font-size: 15px">E. aksdhkashdkahsdsd</strong> 
+                                    <strong style="font-size: 15px">D. aksdhkashdkahsdsd</strong>
+                                </label>
+                            </div>
+                            <div class="form-check my-6">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    <strong style="font-size: 15px">E. aksdhkashdkahsdsd</strong>
                                 </label>
                             </div>
                         </div>
@@ -74,25 +81,38 @@
                             <h3>Nomor Soal</h3>
                             <hr>
                             <div class="text-center">
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">1</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">2</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">3</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">4</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">5</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">6</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">7</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">8</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">9</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">10</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">11</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">12</button>
-                                <button class="btn btn-secondary text-primary" style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">13</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">1</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">2</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">3</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">4</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">5</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">6</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">7</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">8</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">9</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">10</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">11</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">12</button>
+                                <button class="btn btn-secondary text-primary"
+                                    style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">13</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 @endsection

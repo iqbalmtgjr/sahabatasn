@@ -10,7 +10,7 @@ class Paket extends Model
     use HasFactory;
     protected $table = 'paket';
     protected $guarded = ['id'];
-    protected $fillable = ['kategori_id', 'judul', 'gambar', 'harga'];
+    protected $fillable = ['subkategori_id', 'judul', 'gambar', 'harga'];
 
     public function kategori()
     {

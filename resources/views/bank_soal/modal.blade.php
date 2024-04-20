@@ -63,7 +63,7 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-7">
+                                {{-- <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Tipe</label>
                                     <select data-control="select2"
                                         class="form-select form-select-solid @error('tipe') is-invalid @enderror"
@@ -78,7 +78,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <!--end::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Label-->
@@ -164,7 +164,7 @@
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban A</label>
                                             <input name="jawaban_a" type="number"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_a') is-invalid @enderror"
-                                                placeholder="Masukkan bobot nilai." value="">
+                                                placeholder="Masukkan bobot nilai." value="{{ old('jawaban_a') }}">
                                             @error('jawaban_a')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -193,7 +193,7 @@
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban B</label>
                                             <input name="jawaban_b" type="number"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_b') is-invalid @enderror"
-                                                placeholder="Masukkan bobot nilai." value="">
+                                                placeholder="Masukkan bobot nilai." value="{{ old('jawaban_b') }}">
                                             @error('jawaban_b')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -222,7 +222,7 @@
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban C</label>
                                             <input name="jawaban_c" type="number"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_c') is-invalid @enderror"
-                                                placeholder="Masukkan bobot nilai." value="">
+                                                placeholder="Masukkan bobot nilai." value="{{ old('jawaban_c') }}">
                                             @error('jawaban_c')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -251,7 +251,7 @@
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban D</label>
                                             <input name="jawaban_d" type="number"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_d') is-invalid @enderror"
-                                                placeholder="Masukkan bobot nilai." value="">
+                                                placeholder="Masukkan bobot nilai." value="{{ old('jawaban_d') }}">
                                             @error('jawaban_d')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -279,7 +279,7 @@
                                             <label class="required fw-semibold fs-6 mb-2">Jawaban E</label>
                                             <input name="jawaban_e" type="number"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('jawaban_e') is-invalid @enderror"
-                                                placeholder="Masukkan bobot nilai." value="">
+                                                placeholder="Masukkan bobot nilai." value="{{ old('jawaban_e') }}">
                                             @error('jawaban_e')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

@@ -2,99 +2,96 @@
 
 @section('content')
     <div class="d-flex flex-column flex-column-fluid">
-							<!--begin::Toolbar-->
-							<div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
-								<!--begin::Toolbar container-->
-								<div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
-									<!--begin::Toolbar wrapper-->
-									<div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
-										<!--begin::Page title-->
-										<div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
-											<!--begin::Title-->
-											<h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Daftar Paket</h1>
-											<!--end::Title-->
-											<!--begin::Breadcrumb-->
-											<!--end::Breadcrumb-->
-										</div>
-										<!--end::Page title-->
-										<!--begin::Actions-->
-										<!--end::Actions-->
-									</div>
-									<!--end::Toolbar wrapper-->
-								</div>
-								<!--end::Toolbar container-->
-							</div>
-							<!--end::Toolbar-->
-							<!--begin::Content-->
-							<div id="kt_app_content" class="app-content flex-column-fluid">
-								<!--begin::Content container-->
-								<div id="kt_app_content_container" class="app-container container-fluid">
-									<!--begin::Card-->
-									<div class="card">
-										<!--begin::Card header-->
-										<div class="card-header border-0 pt-6">
-											<!--begin::Card title-->
-											<div class="card-title">
-												<!--begin::Search-->
-												<div class="d-flex align-items-center position-relative my-1">
-													<i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span
-															class="path2"></span></i>
-													<input type="text" data-kt-docs-table-filter="search"
-														class="form-control form-control-solid w-250px ps-15" placeholder="Cari Kategori" />
-												</div>
-												<!--end::Search-->
-											</div>
-											<!--begin::Card title-->
-											<!--begin::Card toolbar-->
-											<div class="card-toolbar">
-												<!--begin::Toolbar-->
-												<div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-													<!--begin::Add user-->
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_paket">
-													<i class="ki-outline ki-plus fs-2"></i>Tambah Paket</button>
-													<!--end::Add user-->
-												</div>
-											</div>
-											<!--end::Card toolbar-->
-											<!--begin::Modal - Add task-->
-											@include('paket.modal.create')
-                       						 <!--end::Modal - Add task-->
-										</div>
-										<!--end::Card header-->
-										<!--begin::Card body-->
-										<div class="card-body py-4">
-											<!--begin::Table-->
-											  <!--begin::Datatable-->
-											  <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-												<thead>
-													<tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-														<th class="w-10px pe-2">
-															<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-																<input class="form-check-input" type="checkbox" data-kt-check="true"
-																	data-kt-check-target="#kt_datatable_example_1 .form-check-input"
-																	value="1" />
-															</div>
-														</th>
-														<th>Gambar</th>
-														<th>Judul</th>
-														<th>Harga</th>
-														<th class="text-end min-w-100px">Aksi</th>
-													</tr>
-												</thead>
-												<tbody class="text-gray-600 fw-semibold">
-												</tbody>
-											</table>
-											<!--end::Datatable-->
-											<!--end::Table-->
-										</div>
-										<!--end::Card body-->
-									</div>
-									<!--end::Card-->
-								</div>
-								<!--end::Content container-->
-							</div>
-							<!--end::Content-->
-	</div>
+        <!--begin::Toolbar-->
+        <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
+            <!--begin::Toolbar container-->
+            <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
+                <!--begin::Toolbar wrapper-->
+                <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
+                    <!--begin::Page title-->
+                    <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
+                        <!--begin::Title-->
+                        <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Daftar
+                            Paket</h1>
+                        <!--end::Title-->
+                        <!--begin::Breadcrumb-->
+                        <!--end::Breadcrumb-->
+                    </div>
+                    <!--end::Page title-->
+                    <!--begin::Actions-->
+                    <!--end::Actions-->
+                </div>
+                <!--end::Toolbar wrapper-->
+            </div>
+            <!--end::Toolbar container-->
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-fluid">
+                <!--begin::Card-->
+                <div class="card">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 pt-6">
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span
+                                        class="path1"></span><span class="path2"></span></i>
+                                <input type="text" data-kt-docs-table-filter="search"
+                                    class="form-control form-control-solid w-250px ps-15" placeholder="Cari Kategori" />
+                            </div>
+                            <!--end::Search-->
+                        </div>
+                        <!--begin::Card title-->
+                        <!--begin::Card toolbar-->
+                        <div class="card-toolbar">
+                            <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                <!--begin::Add user-->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_add_paket">
+                                    <i class="ki-outline ki-plus fs-2"></i>Tambah Paket</button>
+                                <!--end::Add user-->
+                            </div>
+                        </div>
+                        <!--end::Card toolbar-->
+                        <!--begin::Modal - Add task-->
+                        @include('paket.modal.create')
+                        <!--end::Modal - Add task-->
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body py-4">
+                        <!--begin::Table-->
+                        <!--begin::Datatable-->
+                        <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                            <thead>
+                                <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                    <th></th>
+                                    <th class="w-10px pe-2">No</th>
+                                    <th>Gambar</th>
+                                    <th>Judul</th>
+                                    <th>Harga</th>
+                                    <th class="text-end min-w-100px">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 fw-semibold">
+                            </tbody>
+                        </table>
+                        <!--end::Datatable-->
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+    </div>
     @include('paket.modal.edit')
 @endsection
 
@@ -137,38 +134,35 @@
                         url: "{{ url('/kelola-paket') }}",
                     },
                     columns: [{
-                            data: 'id'
+                            data: 'id',
+                            visible: false
+                        },
+                        {
+                            data: null,
+                            render: function(data, type, full, meta) {
+                                return meta.row + meta.settings._iDisplayStart + 1;
+                            }
                         },
                         {
                             data: 'gambar'
                         },
-						{
-							data: 'judul'
-						},
-						{
-							data: 'harga'
-						},
+                        {
+                            data: 'judul'
+                        },
+                        {
+                            data: 'harga'
+                        },
                         {
                             data: null
                         },
                     ],
                     columnDefs: [{
-                            targets: 0,
-                            orderable: false,
-                            render: function(data) {
-                                return `
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="${data}" />
-                            </div>`;
-                            }
-                        },
-                        {
-                            targets: -1,
-                            data: null,
-                            orderable: false,
-                            className: 'text-end',
-                            render: function(data, type, row) {
-                                return `
+                        targets: -1,
+                        data: null,
+                        orderable: false,
+                        className: 'text-end',
+                        render: function(data, type, row) {
+                            return `
                             <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
                                 Aksi
                                 <span class="svg-icon fs-5 m-0">
@@ -201,9 +195,8 @@
                             </div>
                             <!--end::Menu-->
                         `;
-                            },
                         },
-                    ],
+                    }, ],
                     // Add data-filter attribute
                 });
 

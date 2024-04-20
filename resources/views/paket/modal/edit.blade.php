@@ -18,7 +18,8 @@
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
                 <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/paket/update') }}" enctype="multipart/form-data">
+                <form id="kt_modal_add_user_form" class="form" method="POST" action="{{ url('/paket/update') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <!--begin::Scroll-->
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10" id="kt_modal_add_user_scroll"
@@ -43,7 +44,7 @@
                             </style>
                             <!--end::Image placeholder-->
                             <!--begin::Image input-->
-                            <div class="image-input image-input-outline image-input-placeholder"
+                            <div class="image-input image-input-outline image-input-placeholder @error('gambar') is-invalid @enderror"
                                 data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-125px h-125px"
@@ -88,7 +89,7 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" name="judul" id="judul"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('kategori') is-invalid @enderror"
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('judul') is-invalid @enderror"
                                 placeholder="Nama Kategori" value="" />
                             @error('judul')
                                 <span class="invalid-feedback" role="alert">
@@ -103,7 +104,7 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" name="harga" id="harga"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('kategori') is-invalid @enderror"
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('harga') is-invalid @enderror"
                                 placeholder="harga" value="" />
                             @error('harga')
                                 <span class="invalid-feedback" role="alert">
@@ -114,16 +115,16 @@
                         </div>
                         <div class="fv-row mb-7">
                             <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
-                            <select class="form-select form-select-solid"
-                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori_id"
-                                id="kategori_id">
+                            <select class="form-select form-select-solid @error('subkategori_id') is-invalid @enderror"
+                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="subkategori_id"
+                                id="subkategori_id">
                                 <option value=""></option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
-                                        {{ $item->kategori }}</option>
+                                @foreach ($subkategori as $item)
+                                    <option value="{{ $item->id }}" @selected(old('subkategori_id') == $item->id)>
+                                        {{ $item->sub_kategori }}</option>
                                 @endforeach
                             </select>
-                            @error('kategori')
+                            @error('subkategori_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -163,8 +164,8 @@
                 $('#id').val(response.id);
                 $('#judul').val(response.judul);
                 $('#harga').val(response.harga);
-                $('#kategori_id').val(response.kategori_id);
-            
+                $('#subkategori_id').val(response.subkategori_id);
+
                 $.ajax({
                     url: 'http://localhost:8000/gambar/' + response.gambar + '',
                     type: 'HEAD',

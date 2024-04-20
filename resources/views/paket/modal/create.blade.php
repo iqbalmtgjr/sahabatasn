@@ -43,7 +43,7 @@
                             </style>
                             <!--end::Image placeholder-->
                             <!--begin::Image input-->
-                            <div class="image-input image-input-outline image-input-placeholder"
+                            <div class="image-input image-input-outline image-input-placeholder @error('gambar') is-invalid @enderror"
                                 data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-125px h-125px"
@@ -81,6 +81,11 @@
                             <div class="form-text">Tipe file yang diperbolehkan : png, jpg, jpeg.
                             </div>
                             <!--end::Hint-->
+                            @error('gambar')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->
@@ -90,8 +95,8 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" name="judul"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="Judul" value="" />
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('judul') is-invalid @enderror"
+                                placeholder="Judul" value="{{ old('judul') }}" />
                             @error('judul')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -105,8 +110,8 @@
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="number" name="harga"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('name') is-invalid @enderror"
-                                placeholder="Harga" value="" />
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('harga') is-invalid @enderror"
+                                placeholder="Harga" value="{{ old('harga') }}" />
                             @error('harga')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -116,15 +121,16 @@
                         </div>
                         <div class="fv-row mb-7">
                             <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
-                            <select data-control="select2" class="form-select form-select-solid"
-                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori_id">
+                            <select data-control="select2"
+                                class="form-select form-select-solid @error('subkategori_id') is-invalid @enderror"
+                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="subkategori_id">
                                 <option value=""></option>
-                                @foreach ($kategori as $item)
-                                    <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
-                                        {{ $item->kategori }}</option>
+                                @foreach ($subkategori as $item)
+                                    <option value="{{ $item->id }}" @selected(old('subkategori_id') == $item->id)>
+                                        {{ $item->sub_kategori }}</option>
                                 @endforeach
                             </select>
-                            @error('kategori')
+                            @error('subkategori_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -134,8 +140,7 @@
                     <!--end::Scroll-->
                     <!--begin::Actions-->
                     <div class="text-center pt-10">
-                        <button type="reset" class="btn btn-light me-3"
-                            data-bs-dismiss="modal">Batal</button>
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">Simpan</span>
                             <span class="indicator-progress">Please wait...

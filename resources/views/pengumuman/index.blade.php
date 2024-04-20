@@ -146,7 +146,10 @@
                             data: 'isi'
                         },
                         {
-                            data: 'tanggal'
+                            data: 'tanggal',
+                            render: function(data, type, row) {
+                                return moment(data).format('DD MMMM YYYY');
+                            }
                         },
                         {
                             data: null

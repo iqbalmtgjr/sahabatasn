@@ -48,7 +48,7 @@ class BanksoalController extends Controller
         $validator = Validator::make($request->all(), [
             'soal' => 'required',
             'sub_kategori' => 'required',
-            'tipe' => 'required',
+            // 'tipe' => 'required',
             'pilihan_a' => 'required',
             'pilihan_b' => 'required',
             'pilihan_c' => 'required',
@@ -77,14 +77,14 @@ class BanksoalController extends Controller
             $soal = Banksoal::create([
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
-                'tipe' => $request->tipe,
+                // 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
             ]);
         } else {
             $soal = Banksoal::create([
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
-                'tipe' => $request->tipe,
+                // 'tipe' => $request->tipe,
             ]);
         }
 
@@ -131,7 +131,7 @@ class BanksoalController extends Controller
         $validator = Validator::make($request->all(), [
             'soal' => 'required',
             'sub_kategori' => 'required',
-            'tipe' => 'required',
+            // 'tipe' => 'required',
             'pilihan_a' => 'required',
             'pilihan_b' => 'required',
             'pilihan_c' => 'required',
@@ -161,7 +161,7 @@ class BanksoalController extends Controller
             $soal->update([
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
-                'tipe' => $request->tipe,
+                // 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
             ]);
         } else {
@@ -169,7 +169,7 @@ class BanksoalController extends Controller
             $soal->update([
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
-                'tipe' => $request->tipe,
+                // 'tipe' => $request->tipe,
             ]);
         }
 
@@ -208,7 +208,7 @@ class BanksoalController extends Controller
         ]);
 
         toastr()->success('Berhasil edit soal.', 'Sukses');
-        return redirect()->back();
+        return redirect('bank-soal');
     }
 
     /**

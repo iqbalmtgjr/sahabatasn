@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bank_soal', function (Blueprint $table) {
@@ -16,14 +13,11 @@ return new class extends Migration
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
             $table->string('soal');
             $table->string('gambar')->nullable();
-            $table->string('tipe');
+            $table->string('tipe')->nullable();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bank_soal');
