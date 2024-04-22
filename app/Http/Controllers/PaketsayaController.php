@@ -30,14 +30,12 @@ class PaketsayaController extends Controller
     {
         $dataa = Banksoal::where('subkategori_id', $id)->get();
 
-        $data = Banksoal::where('subkategori_id', $id)->paginate(1);
-
         $datas = Banksoal::where('subkategori_id', $id)->get();
         $nomor = (int)$no;
         $jmlh = $nomor - 1;
         $datas = $datas[$jmlh];
         // dd($datas->subkategori_id);
-        return view('paket_saya.kerjakan', compact('datas', 'data', 'dataa', 'nomor'));
+        return view('paket_saya.kerjakan', compact('datas', 'dataa', 'nomor'));
     }
 
     /**
