@@ -64,7 +64,7 @@
 
                                 {{-- On progress By Iqbal --}}
                                 <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
-                                    href="{{ url('assets/gambar/') . $item->gambar }}">
+                                    href="{{ asset('gambar') . '/' . $item->gambar }}">
                                     <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px"
                                         style="background-image:url('{{ url('assets/media/stock/600x600/img-89.png') }}')">
                                     </div>
@@ -88,7 +88,7 @@
                                         {{-- <span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
                                         <!--end::Label-->
                                         <!--begin::Action-->
-                                        <a href="#" class="btn btn-sm btn-primary">Beli</a>
+                                        <a href="{{ url('keranjang/' . $item->id) }}" class="btn btn-sm btn-primary">Beli</a>
                                         <!--end::Action-->
                                     </div>
                                     <!--end::Text-->

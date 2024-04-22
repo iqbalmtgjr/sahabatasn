@@ -75,7 +75,8 @@
                                     {{-- <p class="text-center fs-6 pb-5">
 							<span class="badge badge-light-danger fs-8">Notes:</span>&nbsp; Current sprint requires stakeholders
 							<br>to approve newly amended policies</p> --}}
-                                    <a href="#" class="btn btn-primary w-100 py-3">Beli</a>
+                                    <a href="{{ url('keranjang/' . $item->id) }}"
+                                        class="btn btn-primary w-100 py-3">Beli</a>
                                 </div>
                                 <!--end::Body-->
                             </div>

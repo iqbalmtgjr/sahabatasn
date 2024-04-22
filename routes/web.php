@@ -44,6 +44,23 @@ Route::post('/password/update', [ProfilController::class, 'updatePassword'])->na
 Route::get('/pembayaran/getdata/{id}', [PembayaranController::class, 'getdata'])->name('getdatapembayaran');
 Route::get('/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman');
 
+//faq
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+
+//pusat langganan
+Route::get('/pusatlangganan', [PusatlanggananController::class, 'index'])->name('pusatlangganan');
+Route::get('/pusatlangganan/detailcpns', [PusatlanggananController::class, 'detail'])->name('detailcpns');
+Route::get('/pusatlangganan/detailskd', [PusatlanggananController::class, 'detailskd'])->name('detailskd');
+Route::get('/pusatlangganan/detailskb', [PusatlanggananController::class, 'detailskb'])->name('detailskb');
+Route::get('/pusatlangganan/detailpppk', [PusatlanggananController::class, 'detailpppk'])->name('detailpppk');
+Route::get('/pusatlangganan/detailpppkteknis', [PusatlanggananController::class, 'detailpppkteknis'])->name('detailpppkteknis');
+Route::get('/pusatlangganan/detailpppkumum', [PusatlanggananController::class, 'detailpppkumum'])->name('detailpppkumum');
+
+//s&k
+Route::get('/sk', [SkController::class, 'index'])->name('sk');
+
+//ourteam
+Route::get('/tentang-kami', [AboutController::class, 'index'])->name('tentang');
 
 //hanya admin
 Route::middleware(['checkRole:admin'])->group(function () {
@@ -112,22 +129,4 @@ Route::middleware(['checkRole:user'])->group(function () {
     Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
     Route::post('/pembayaran/input', [PembayaranController::class, 'store'])->name('pembayaran-input');
     Route::post('/pembayaran/update', [PembayaranController::class, 'update'])->name('pembayaran-edit');
-
-    //faq
-    Route::get('/faq', [FaqController::class, 'index'])->name('faq');
-
-    //pusat langganan
-    Route::get('/pusatlangganan', [PusatlanggananController::class, 'index'])->name('pusatlangganan');
-    Route::get('/pusatlangganan/detailcpns', [PusatlanggananController::class, 'detail'])->name('detailcpns');
-    Route::get('/pusatlangganan/detailskd', [PusatlanggananController::class, 'detailskd'])->name('detailskd');
-    Route::get('/pusatlangganan/detailskb', [PusatlanggananController::class, 'detailskb'])->name('detailskb');
-    Route::get('/pusatlangganan/detailpppk', [PusatlanggananController::class, 'detailpppk'])->name('detailpppk');
-    Route::get('/pusatlangganan/detailpppkteknis', [PusatlanggananController::class, 'detailpppkteknis'])->name('detailpppkteknis');
-    Route::get('/pusatlangganan/detailpppkumum', [PusatlanggananController::class, 'detailpppkumum'])->name('detailpppkumum');
-
-    //s&k
-    Route::get('/sk', [SkController::class, 'index'])->name('sk');
-
-    //ourteam
-    Route::get('/about', [AboutController::class, 'index'])->name('about');
 });
