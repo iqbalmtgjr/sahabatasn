@@ -177,6 +177,9 @@
             <div class="menu-item px-5">
                 <a href="{{ url('sk') }}" class="menu-link px-5">Syarat & Ketentuan</a>
             </div>
+            <div class="menu-item px-5">
+                <a href="{{ url('about') }}" class="menu-link px-5">About Us</a>
+            </div>
             <!--begin::Menu item-->
             <div class="menu-item px-5">
                 <a href="{{ route('logout') }}" class="menu-link px-5"

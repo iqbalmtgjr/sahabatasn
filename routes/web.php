@@ -17,6 +17,7 @@ use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PusatlanggananController;
+use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
     return redirect('login');
@@ -126,4 +127,7 @@ Route::middleware(['checkRole:user'])->group(function () {
 
     //s&k
     Route::get('/sk', [SkController::class, 'index'])->name('sk');
+
+    //ourteam
+    Route::get('/about', [AboutController::class, 'index'])->name('about');
 });
