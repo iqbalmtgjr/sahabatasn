@@ -71,7 +71,7 @@
                                     <!--end::Label-->
                                     <!--begin::Action-->
                                     <a href="{{ url('pusatlangganan/detailcpns') }}"
-                                        class="btn btn-sm btn-primary">Lihat</a>
+                                        class="btn btn-sm btn-primary col-12">Lihat</a>
                                     <!--end::Action-->
                                 </div>
                                 <!--end::Text-->
@@ -117,7 +117,7 @@
                                     <!--end::Label-->
                                     <!--begin::Action-->
                                     <a href="{{ url('pusatlangganan/detailpppk') }}"
-                                        class="btn btn-sm btn-primary">Lihat</a>
+                                        class="btn btn-sm btn-primary col-12">Lihat</a>
                                     <!--end::Action-->
                                 </div>
                                 <!--end::Text-->

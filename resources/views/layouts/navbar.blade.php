@@ -178,11 +178,11 @@
                 <a href="{{ url('sk') }}" class="menu-link px-5">Syarat & Ketentuan</a>
             </div>
             <div class="menu-item px-5">
-                <a href="{{ url('about') }}" class="menu-link px-5">About Us</a>
+                <a href="{{ url('tentang-kami') }}" class="menu-link px-5">Tentang Kami</a>
             </div>
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-                <a href="{{ route('logout') }}" class="menu-link px-5"
+                <a href="{{ route('logout') }}" class="menu-link px-5 text-danger"
                     onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">Keluar</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

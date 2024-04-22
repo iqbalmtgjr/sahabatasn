@@ -17,32 +17,32 @@ class PaketsayaController extends Controller
         $data = Paketsaya::where('user_id', auth()->user()->id)->get();
         // dd($data);
         // dd($this->jmlh_cpns_byr(1, 'Berbayar'));
-        if ($request->ajax()) {
-            return DataTables::of($data)
-                ->addColumn('nama_paket', function ($row) {
-                    return $row->paket->judul;
-                })
-                ->addColumn('kategori', function ($row) {
-                    return $row->paket->kategori->kategori;
-                })
-                ->addColumn('tipe', function ($row) {
-                    return $row->paket->kategori->subkategori->banksoal->tipe;
-                })
-                ->addColumn('jmlh_soal', function ($row) {
-                    return $this->banksoal($row->paket->kategori->subkategori->id, $row->paket->kategori->subkategori->banksoal->tipe)->count();
-                })
-                ->addColumn('status', function ($row) {
-                    if ($row->status === 0) {
-                        return '<div class="badge badge-light-danger">Expired</div>';
-                    } else {
-                        return '<div class="badge badge-light-primary">Aktif</div>';
-                    }
-                })
-                ->rawColumns(['status'])
-                ->make(true);
-        }
+        // if ($request->ajax()) {
+        //     return DataTables::of($data)
+        //         ->addColumn('nama_paket', function ($row) {
+        //             return $row->paket->judul;
+        //         })
+        //         ->addColumn('kategori', function ($row) {
+        //             return $row->paket->kategori->kategori;
+        //         })
+        //         ->addColumn('tipe', function ($row) {
+        //             return $row->paket->kategori->subkategori->banksoal->tipe;
+        //         })
+        //         ->addColumn('jmlh_soal', function ($row) {
+        //             return $this->banksoal($row->paket->kategori->subkategori->id, $row->paket->kategori->subkategori->banksoal->tipe)->count();
+        //         })
+        //         ->addColumn('status', function ($row) {
+        //             if ($row->status === 0) {
+        //                 return '<div class="badge badge-light-danger">Expired</div>';
+        //             } else {
+        //                 return '<div class="badge badge-light-primary">Aktif</div>';
+        //             }
+        //         })
+        //         ->rawColumns(['status'])
+        //         ->make(true);
+        // }
 
-        return view('paket_saya.index');
+        return view('paket_saya.index', compact('data'));
     }
 
     private function banksoal($subkategori_id, $tipe)
