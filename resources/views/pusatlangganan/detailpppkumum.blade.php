@@ -30,8 +30,8 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted"><a href="{{ url('pusatlangganan/detailcpns') }}"
-                                    class="text-muted text-hover-primary">Detail CPNS</a></li>
+                            <li class="breadcrumb-item text-muted"><a href="{{ url('pusatlangganan/detailpppk') }}"
+                                    class="text-muted text-hover-primary">Detail PPPK</a></li>
                             <!--end::Item-->
                             <!--begin::Item-->
                             <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                             </li>
                             <!--end::Item-->
                             <!--begin::Item-->
-                            <li class="breadcrumb-item text-muted">Detail PPPK Umum</li>
+                            <li class="breadcrumb-item text-muted">Kompetensi Umum</li>
                             <!--end::Item-->
                         </ul>
                         <!--end::Breadcrumb-->
@@ -56,99 +56,32 @@
         <!--begin::Content container-->
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container-fluid">
-                <div class="row g-10">
-                    <!--begin::Col-->
-                    <div class="col-md-4">
-                        <!--begin::Hot sales post-->
-                        <div class="card-xl-stretch mx-md-3">
-                            <!--begin::Overlay-->
-                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
-                                href="assets/media/stock/600x600/img-14.jpg">
-                                <!--begin::Image-->
-                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px"
-                                    style="background-image:url('assets/media/stock/600x600/img-14.jpg')"></div>
-                                <!--end::Image-->
-                                <!--begin::Action-->
-                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                    <i class="ki-outline ki-eye fs-2x text-white"></i>
+                <div class="row g-5 g-xl-8">
+                    @foreach ($data as $item)
+                        <div class="col-xl-4">
+                            <!--begin::Statistics Widget 2-->
+                            <div class="card card-xl-stretch mb-xl-8">
+                                <!--begin::Body-->
+                                <div class="card-body d-flex align-items-center pt-3 pb-0">
+                                    <div class="d-flex flex-column flex-grow-1 py-2 py-lg-13 me-2">
+                                        <p class="fw-bold text-dark fs-2 mb-2 text-hover-primary">@rupiah($item->harga)</p>
+                                        <span class="fw-semibold text-muted fs-5">{{ $item->judul }}</span>
+                                    </div>
+                                    <img src="assets/media/svg/avatars/guru.png" alt=""
+                                        class="align-self-end h-100px">
                                 </div>
-                                <!--end::Action-->
-                            </a>
-                            <!--end::Overlay-->
-                            <!--begin::Body-->
-                            <div class="mt-5">
-                                <!--begin::Title-->
-                                <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">25
-                                    Products Mega Bundle with 50% off discount amazing</a>
-                                <!--end::Title-->
-                                <!--begin::Text-->
-                                <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">We’ve been focused on making a
-                                    the
-                                    from also not been eye</div>
-                                <!--end::Text-->
-                                <!--begin::Text-->
-                                <div class="fs-6 fw-bold mt-5 d-flex flex-stack">
-                                    <!--begin::Label-->
-                                    <span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
-                                        <span class="fs-6 fw-semibold text-gray-400">$</span>27</span>
-                                    <!--end::Label-->
-                                    <!--begin::Action-->
-                                    <a href="#" class="btn btn-sm btn-primary">Purchase</a>
-                                    <!--end::Action-->
+                                <div class="pt-5">
+                                    {{-- <p class="text-center fs-6 pb-5">
+							<span class="badge badge-light-danger fs-8">Notes:</span>&nbsp; Current sprint requires stakeholders
+							<br>to approve newly amended policies</p> --}}
+                                    <a href="{{ url('keranjang/' . $item->id) }}"
+                                        class="btn btn-primary w-100 py-3">Beli</a>
                                 </div>
-                                <!--end::Text-->
+                                <!--end::Body-->
                             </div>
-                            <!--end::Body-->
+                            <!--end::Statistics Widget 2-->
                         </div>
-                        <!--end::Hot sales post-->
-                    </div>
-                    <!--end::Col-->
-                    <!--begin::Col-->
-                    <div class="col-md-4">
-                        <!--begin::Hot sales post-->
-                        <div class="card-xl-stretch ms-md-6">
-                            <!--begin::Overlay-->
-                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
-                                href="assets/media/stock/600x400/img-71.jpg">
-                                <!--begin::Image-->
-                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px"
-                                    style="background-image:url('assets/media/stock/600x400/img-71.jpg')"></div>
-                                <!--end::Image-->
-                                <!--begin::Action-->
-                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                    <i class="ki-outline ki-eye fs-2x text-white"></i>
-                                </div>
-                                <!--end::Action-->
-                            </a>
-                            <!--end::Overlay-->
-                            <!--begin::Body-->
-                            <div class="mt-5">
-                                <!--begin::Title-->
-                                <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">25
-                                    Products Mega Bundle with 50% off discount amazing</a>
-                                <!--end::Title-->
-                                <!--begin::Text-->
-                                <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">We’ve been focused on making a
-                                    the
-                                    from also not been eye</div>
-                                <!--end::Text-->
-                                <!--begin::Text-->
-                                <div class="fs-6 fw-bold mt-5 d-flex flex-stack">
-                                    <!--begin::Label-->
-                                    <span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
-                                        <span class="fs-6 fw-semibold text-gray-400">$</span>25</span>
-                                    <!--end::Label-->
-                                    <!--begin::Action-->
-                                    <a href="#" class="btn btn-sm btn-primary">Purchase</a>
-                                    <!--end::Action-->
-                                </div>
-                                <!--end::Text-->
-                            </div>
-                            <!--end::Body-->
-                        </div>
-                        <!--end::Hot sales post-->
-                    </div>
-                    <!--end::Col-->
+                    @endforeach
                 </div>
             </div>
             <!--end::Content container-->

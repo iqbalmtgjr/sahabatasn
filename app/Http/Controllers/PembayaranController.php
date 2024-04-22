@@ -73,8 +73,8 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'bukti_bayar' => 'required',
-            'nominal' => 'required',
+            'bukti_bayar' => 'required|image|mimes:png,jpg,jpeg',
+            'nominal' => 'required|max:11',
         ]);
 
         if ($validator->fails()) {
@@ -117,7 +117,8 @@ class PembayaranController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nominal' => 'required',
+            'bukti_bayar' => 'image|mimes:png,jpg,jpeg',
+            'nominal' => 'required|max:11',
         ]);
 
         if ($validator->fails()) {
