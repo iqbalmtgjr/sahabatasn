@@ -177,20 +177,20 @@
                                     </div>
                                 @else
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
-                                            <span class="menu-icon">
-                                                <i class="ki-outline ki-medal-star fs-2"></i>
-                                            </span>
-                                            <span class="menu-title">Try Out Gratis</span>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
                                         <a class="menu-link {{ request()->is('pusatlangganan*') ? 'active' : '' }}"
                                             href="{{ url('pusatlangganan') }}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-handcart fs-2"></i>
                                             </span>
                                             <span class="menu-title">Pusat Langganan</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-medal-star fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Try Out Gratis</span>
                                         </a>
                                     </div>
                                     <div class="menu-item">

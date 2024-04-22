@@ -88,7 +88,9 @@
                                         {{-- <span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
                                         <!--end::Label-->
                                         <!--begin::Action-->
-                                        <a href="{{ url('keranjang/' . $item->id) }}" class="btn btn-sm btn-primary">Beli</a>
+                                        <a href="{{ url('keranjang/' . $item->id) }}"
+                                            class="btn btn-sm btn-primary col-12"><i
+                                                class="ki-outline ki-handcart fs-1"></i>Beli</a>
                                         <!--end::Action-->
                                     </div>
                                     <!--end::Text-->

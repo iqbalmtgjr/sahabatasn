@@ -52,16 +52,13 @@
                                     <div class="d-flex align-items-center flex-grow-1">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
-                                            <i class="ki-outline ki-notification text-primary fs-1"></i>
-                                            {{-- <img src="assets/media/avatars/300-7.jpg" alt=""> --}}
+                                            <i style="font-size: 70px" class="ki-outline ki-notification text-success"></i>
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Info-->
                                         <div class="d-flex flex-column">
-                                            <a href="#"
-                                                class="text-gray-900 text-hover-primary fs-6 fw-bold">{{ $item->judul }}</a>
-                                            <span
-                                                class="text-gray">{{ \Carbon\Carbon::parse($item->tanggal)->format('d F Y') }}</span>
+                                            <p class="text-gray-900 fs-1 fw-bold">{{ $item->judul }}</p>
+                                            <p class="text-gray fs-2">{{ $item->isi }}</p>
                                         </div>
                                         <!--end::Info-->
                                     </div>
@@ -71,11 +68,9 @@
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Post-->
-                                <div class="mb-7">
-                                    <!--begin::Text-->
+                                {{-- <div class="mb-7">
                                     <div class="text mb-5">{{ $item->isi }}</div>
-                                    <!--end::Text-->
-                                </div>
+                                </div> --}}
                                 <!--end::Post-->
                                 <!--begin::Separator-->
                                 {{-- <div class="separator mb-4"></div> --}}

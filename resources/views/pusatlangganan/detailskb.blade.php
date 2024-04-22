@@ -68,15 +68,15 @@
                                             class="fw-bold text-dark fs-2 mb-2 text-hover-primary">@rupiah($item->harga)</a>
                                         <span class="fw-semibold text-muted fs-5">{{ $item->judul }}</span>
                                     </div>
-                                    <img src="{{ url('assets/media/svg/avatars/guru.png') }}" alt=""
+                                    <img src="{{ asset('gambar/' . $item->gambar) }}" alt=""
                                         class="align-self-end h-100px">
                                 </div>
                                 <div class="pt-5">
                                     {{-- <p class="text-center fs-6 pb-5">
 							<span class="badge badge-light-danger fs-8">Notes:</span>&nbsp; Current sprint requires stakeholders
 							<br>to approve newly amended policies</p> --}}
-                                    <a href="{{ url('keranjang/' . $item->id) }}"
-                                        class="btn btn-primary w-100 py-3">Beli</a>
+                                    <a href="{{ url('keranjang/' . $item->id) }}" class="btn btn-primary w-100 py-3"><i
+                                            class="ki-outline ki-handcart fs-1"></i>Beli</a>
                                 </div>
                                 <!--end::Body-->
                             </div>
