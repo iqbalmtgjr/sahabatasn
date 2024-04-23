@@ -39,7 +39,7 @@
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
             <!--begin::Card-->
-            <div class="card">
+            {{-- <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Wrapper-->
@@ -79,6 +79,25 @@
                     </table>
                     <!--end::Datatable-->
                 </div>
+            </div> --}}
+            <div class="col-xl-4" data-kt-billing-element="address">
+                <!--begin::Address-->
+                <div class="card h-xl-100 flex-row flex-stack flex-wrap p-6">
+                    <!--begin::Details-->
+                    <div class="d-flex flex-column py-2">
+                        <div class="d-flex align-items-center fs-5 fw-bold mb-5">
+                            <span class="badge badge-light-success fs-5 me-1"> Pembayaran Berhasil<i
+                                class="ki-outline ki-check fs-2x text-success"></i></span>
+                        </div>
+                        <div class="fs-5 mb-2">
+                            <span class="text-gray-800 fw-bold me-1">Paket SKD</span>
+                            <span class="text-gray-600 fw-semibold">Rp. 130000</span>
+                        </div>
+                        <div class="fs-6 text-gray-600 fw-semibold">Total yang dibayar: Rp. 130000</div>
+                    </div>
+                    <!--end::Details-->
+                </div>
+                <!--end::Address-->
             </div>
         </div>
     </div>

@@ -58,6 +58,11 @@ class PaketsayaController extends Controller
         return view('paket_saya.kerjakan');
     }
 
+    public function togratis()
+    {
+        return view('paket_saya.togratis');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

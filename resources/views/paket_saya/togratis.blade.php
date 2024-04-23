@@ -10,7 +10,7 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Paket Saya
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Try Out Gratis
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -28,17 +28,15 @@
             <!--begin::Card-->
             <div class="row g-5 g-xl-8">
                 <!--begin::Col-->
-                @if ($data->count() > 0)
-                    @foreach ($data as $data)
+                    {{-- @foreach ($data as $data) --}}
                         <div class="col-xl-4">
                             <!--begin::Mixed Widget 4-->
                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                 <!--begin::Beader-->
                                 <div class="card-header border-0 py-5">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1">{{ $data->paket->judul }}</span>
-                                        <span class="text-muted fw-semibold fs-7">Berlaku hingga
-                                            {{ \Carbon\Carbon::parse($data->created_at)->addYear()->format('d F Y') }}</span>
+                                        <span class="card-label fw-bold fs-3 mb-1">Judul</span>
+                                        <span class="text-muted fw-semibold fs-7">Berlaku hingga ..</span>
                                     </h3>
                                 </div>
                                 <!--end::Header-->
@@ -53,15 +51,7 @@
                             </div>
                             <!--end::Mixed Widget 4-->
                         </div>
-                    @endforeach
-                @else
-                    <div class="alert alert-warning" role="alert">
-                        <h4 class="alert-heading" style="color: black">Belum Ada Paket</h4>
-                        <p style="color: black">Yuk beli paket dulu dan kerjakan soal Tryout Anda.</p>
-                        <a href="{{ url('pusatlangganan') }}" class="btn btn-primary btn-md">Lihat Paket</a>
-                    </div>
-                @endif
-
+                    {{-- @endforeach --}}
                 <!--end::Col-->
             </div>
         </div>
@@ -69,12 +59,12 @@
     {{-- @include('pembayaran.modalvalidasi') --}}
 @endsection
 
-@push('header')
+{{-- @push('header')
     <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
         type="text/css" />
-@endpush
+@endpush --}}
 
-@push('footer')
+{{-- @push('footer')
     <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
@@ -213,4 +203,4 @@
             KTDatatablesServerSide.init();
         });
     </script>
-@endpush
+@endpush --}}

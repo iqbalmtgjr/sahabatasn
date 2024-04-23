@@ -186,7 +186,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link" href="#">
+                                        <a class="menu-link" href="{{url('togratis')}}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-medal-star fs-2"></i>
                                             </span>

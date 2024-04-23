@@ -55,7 +55,7 @@
                 <!--end::Wrapper-->
             </div>
             <!--begin::Card-->
-            <div class="card">
+            {{-- <div class="card">
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Wrapper-->
@@ -116,6 +116,52 @@
                     </table>
                     <!--end::Datatable-->
                 </div>
+            </div> --}}
+
+            <div class="col-sm-4 col-xxl-3">
+                <!--begin::Card widget 14-->
+                <div class="card card-flush hl-100">
+                    <!--begin::Body-->
+                    <div class="card-body text-center pb-5">
+                        <!--begin::Overlay-->
+                        <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="assets/media/stock/600x600/img-39.jpg">
+                            <!--begin::Image-->
+                            <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded mb-7" style="height: 266px;background-image:url('assets/media/stock/600x600/img-39.jpg"></div>
+                            <!--end::Image-->
+                            <!--begin::Action-->
+                            <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                <i class="ki-outline ki-eye fs-3x text-white"></i>
+                            </div>
+                            <!--end::Action-->
+                        </a>
+                        <!--end::Overlay-->
+                        <!--begin::Info-->
+                        <div class="d-flex align-items-end flex-stack mb-1">
+                            <!--begin::Title-->
+                            <div class="text-start">
+                                <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-4 d-block">Paket SKD</span>
+                                <span class="mt-1 fw-bold fs-6">Rp. 130000</span>
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Total-->
+                            {{-- <span class="text-gray-600 text-end fw-bold fs-6">Rp. 130000</span> --}}
+                            <!--end::Total-->
+                        </div>
+                        <!--end::Info-->
+                    </div>
+                    <!--end::Body-->
+                    <!--begin::Footer-->
+                    <div class="card-footer flex-stack pt-0">
+                        <!--begin::Link-->
+                        <a class="btn btn-sm btn-primary" href="#">Bayar</a>
+                        <!--end::Link-->
+                        <!--begin::Link-->
+                        <a class="btn btn-sm btn-danger" href="#">Hapus</a>
+                        <!--end::Link-->
+                    </div>
+                    <!--end::Footer-->
+                </div>
+                <!--end::Card widget 14-->
             </div>
         </div>
     </div>

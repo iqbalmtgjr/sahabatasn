@@ -36,9 +36,9 @@
             <!--begin::Content container-->
             <div id="kt_app_content_container" class="app-container container-fluid">
                 <!--begin::Row-->
-                <div class="row g-10">
+                <div class="row g-12">
                     <!--begin::Col-->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <!--begin::Hot sales post-->
                         <div class="card-xl-stretch me-md-6">
                             <!--begin::Overlay-->
@@ -82,7 +82,7 @@
                     </div>
                     <!--end::Col-->
                     <!--begin::Col-->
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <!--begin::Hot sales post-->
                         <div class="card-xl-stretch mx-md-3">
                             <!--begin::Overlay-->

@@ -124,6 +124,8 @@ Route::middleware(['checkRole:user'])->group(function () {
     //paket_saya
     Route::get('/paketsaya', [PaketsayaController::class, 'index'])->name('paket-saya');
     Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
+    Route::get('/togratis', [PaketsayaController::class, 'togratis'])->name('togratis');
+
 
     //pembayaran
     Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
