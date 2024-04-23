@@ -45,8 +45,13 @@
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column">
                                     <div class="pt-1">
+<<<<<<< HEAD
                                         <a href="{{ url('kerjakan') }}" class="btn btn-primary w-100 py-3"><i
                                             class="ki-outline ki-pencil fs-2"></i>Kerjakan</a>
+=======
+                                        <a href="{{ url('kerjakan/' . $data->paket->subkategori_id . '/1') }}"
+                                            class="btn btn-primary w-100 py-3">Kerjakan</a>
+>>>>>>> 46606bf87a5000d51e7f4643545841232b4b2b55
                                     </div>
                                 </div>
                                 <!--end::Body-->
@@ -75,142 +80,4 @@
 @endpush
 
 @push('footer')
-    <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
-    <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-
-    <script>
-        "use strict";
-
-        // Class definition
-        var KTDatatablesServerSide = function() {
-            // Shared variables
-            var table;
-            var dt;
-            var filterPayment;
-
-            // Private functions
-            var initDatatable = function() {
-                dt = $("#kt_datatable_example_1").DataTable({
-                    searchDelay: 500,
-                    processing: true,
-                    serverSide: true,
-                    stateSave: true,
-                    select: {
-                        style: 'multi',
-                        selector: 'td:first-child input[type="checkbox"]',
-                        className: 'row-selected'
-                    },
-                    ajax: {
-                        url: "{{ url('/paketsaya') }}",
-                    },
-                    columns: [{
-                            data: 'id'
-                        },
-                        {
-                            data: 'nama_paket'
-                        },
-                        {
-                            data: 'kategori'
-                        },
-                        {
-                            data: 'tipe'
-                        },
-                        {
-                            data: 'jmlh_soal'
-                        },
-                        {
-                            data: 'status'
-                        },
-                        {
-                            data: null
-                        },
-                    ],
-                    order: [
-                        [0, 'desc']
-                    ],
-                    columnDefs: [{
-                            targets: 0,
-                            orderable: false,
-                            render: function(data) {
-                                return `
-                            <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="${data}" />
-                            </div>`;
-                            }
-                        },
-                        {
-                            targets: -1,
-                            data: null,
-                            orderable: false,
-                            className: 'text-end',
-                            render: function(data, type, row) {
-                                return `
-                            <!--begin::Menu-->
-                                <!--begin::Menu item-->
-                                    <a href="{{ url('/kerjakan') }}" class="btn btn-sm btn-primary">
-                                        Kerjakan Soal
-                                    </a>
-                                <!--end::Menu item-->
-                            <!--end::Menu-->
-                        `;
-                            },
-                        },
-                    ],
-                    // Add data-filter attribute
-                });
-
-                table = dt.$;
-
-                // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
-                dt.on('draw', function() {
-                    // initToggleToolbar();
-                    // toggleToolbars();
-                    // handleDeleteRows();
-                    KTMenu.createInstances();
-                });
-            }
-
-            // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-            var handleSearchDatatable = function() {
-                const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
-                filterSearch.addEventListener('keyup', function(e) {
-                    dt.search(e.target.value).draw();
-                });
-            }
-
-            // Reset Filter
-            var handleResetForm = () => {
-                // Select reset button
-                const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
-
-                // Reset datatable
-                resetButton.addEventListener('click', function() {
-                    // Reset payment type
-                    filterPayment[0].checked = true;
-
-                    // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                    dt.search('').draw();
-                });
-            }
-
-            // Init toggle toolbar
-
-            // Toggle toolbars
-
-
-            // Public methods
-            return {
-                init: function() {
-                    initDatatable();
-                    handleSearchDatatable();
-                }
-            }
-        }();
-
-        // On document ready
-        KTUtil.onDOMContentLoaded(function() {
-            KTDatatablesServerSide.init();
-        });
-    </script>
 @endpush

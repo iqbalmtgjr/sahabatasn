@@ -53,7 +53,8 @@
                                 <!--begin::Label-->
                                 <label
                                     class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Tambah Bukti Bayar">
+                                    data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                    title="Tambah Bukti Bayar">
                                     <i class="ki-outline ki-pencil fs-7"></i>
                                     <!--begin::Inputs-->
                                     <input type="file" name="bukti_bayar" accept=".png, .jpg, .jpeg" />
@@ -91,7 +92,11 @@
                             <input type="number" name="nominal" id="nominal"
                                 class="form-control form-control-solid mb-3 mb-lg-0 @error('nominal') is-invalid @enderror"
                                 placeholder="Nominal Harga" value="" />
-                                <p class="form-text"><span class="text-danger">*</span>Sesuaikan nominal dengan nominal di bukti bayar anda</p>
+                            <p class="form-text"><span class="text-danger">*</span>Sesuaikan nominal dengan nominal di
+                                bukti bayar anda</p>
+                            <p class="form-text"><span class="text-danger">*</span>Penulisan hanya angka, tanpa tanda
+                                titik (.),
+                                ataupun tanda koma (,)</p>
                             @error('nominal')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -104,8 +109,7 @@
                     <input type="hidden" name="id" id="id">
                     <!--begin::Actions-->
                     <div class="text-center pt-10">
-                        <button type="reset" class="btn btn-light me-3"
-                            data-bs-dismiss="modal">Batal</button>
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">
                             <span class="indicator-label">Kirim</span>
                             <span class="indicator-progress">Please wait...

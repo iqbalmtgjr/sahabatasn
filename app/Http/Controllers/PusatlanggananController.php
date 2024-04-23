@@ -36,11 +36,13 @@ class PusatlanggananController extends Controller
 
     public function detailpppkteknis()
     {
-        return view('pusatlangganan.detailpppkteknis');
+        $data = Paket::where('kategori_id', 4)->get();
+        return view('pusatlangganan.detailpppkteknis', compact('data'));
     }
 
     public function detailpppkumum()
     {
-        return view('pusatlangganan.detailpppkumum');
+        $data = Paket::where('kategori_id', 5)->get();
+        return view('pusatlangganan.detailpppkumum', compact('data'));
     }
 }

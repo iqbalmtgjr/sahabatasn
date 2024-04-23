@@ -41,9 +41,9 @@
                     <!--begin::Title-->
                     <h4 class="mb-1 text-dark">Info Nomor Rekening</h4><br>
                     <p class="text-dark">
-                        <strong>Atas Nama : Mutya</strong> <br>
-                        <strong>Nomor Rekening : 1234567890</strong> <br>
                         <strong>Nama Bank : BNI</strong> <br>
+                        <strong>Nomor Rekening : 1234567890</strong> <br>
+                        <strong>Atas Nama : Ahmad Supendi</strong> <br>
                     </p>
                     <!--end::Title-->
 
