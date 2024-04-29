@@ -67,7 +67,7 @@ class PembayaranController extends Controller
                 ->make(true);
         }
 
-        return view('pembayaran.invoice');
+        return view('pembayaran.invoice', compact('data'));
     }
 
     public function store(Request $request)

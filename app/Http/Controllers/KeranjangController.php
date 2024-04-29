@@ -20,19 +20,19 @@ class KeranjangController extends Controller
         }
 
         $data = Keranjang::where('user_id', auth()->user()->id)->get();
-        if ($request->ajax()) {
-            return DataTables::of($data)
-                ->addColumn('nama_paket', function ($row) {
-                    return $row->paket->judul;
-                })
-                ->addColumn('harga', function ($row) {
-                    return 'Rp. ' . number_format($row->paket->harga, 0, ',', '.');
-                })
-                ->rawColumns(['status'])
-                ->make(true);
-        }
+        // if ($request->ajax()) {
+        //     return DataTables::of($data)
+        //         ->addColumn('nama_paket', function ($row) {
+        //             return $row->paket->judul;
+        //         })
+        //         ->addColumn('harga', function ($row) {
+        //             return 'Rp. ' . number_format($row->paket->harga, 0, ',', '.');
+        //         })
+        //         ->rawColumns(['status'])
+        //         ->make(true);
+        // }
 
-        return view('keranjang.index', compact('paket'));
+        return view('keranjang.index', compact('paket', 'data'));
     }
 
     public function destroy(string $id)

@@ -45,13 +45,8 @@
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column">
                                     <div class="pt-1">
-<<<<<<< HEAD
-                                        <a href="{{ url('kerjakan') }}" class="btn btn-primary w-100 py-3"><i
-                                            class="ki-outline ki-pencil fs-2"></i>Kerjakan</a>
-=======
                                         <a href="{{ url('kerjakan/' . $data->paket->subkategori_id . '/1') }}"
                                             class="btn btn-primary w-100 py-3">Kerjakan</a>
->>>>>>> 46606bf87a5000d51e7f4643545841232b4b2b55
                                     </div>
                                 </div>
                                 <!--end::Body-->

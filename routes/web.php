@@ -123,13 +123,10 @@ Route::middleware(['checkRole:user'])->group(function () {
 
     //paket_saya
     Route::get('/paketsaya', [PaketsayaController::class, 'index'])->name('paket-saya');
-<<<<<<< HEAD
-    Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
+    // Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
+    Route::get('/kerjakan/{id}/{no}', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
     Route::get('/togratis', [PaketsayaController::class, 'togratis'])->name('togratis');
 
-=======
-    Route::get('/kerjakan/{id}/{no}', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
->>>>>>> 46606bf87a5000d51e7f4643545841232b4b2b55
 
     //pembayaran
     Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');

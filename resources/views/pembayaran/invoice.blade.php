@@ -8,8 +8,7 @@
         <div class="d-flex flex-column">
             <h4 class="mb-1 text-dark">Catatan</h4>
             <span class="text-dark">Jika sudah divalidasi, silahkan menuju menu <strong>Paket Saya</strong> disisi kiri
-                halaman. Terima Kasih.
-                :D</span>
+                halaman. <br> Terima Kasih</span>
         </div>
     </div>
     <!--end::Alert-->
@@ -80,25 +79,38 @@
                     <!--end::Datatable-->
                 </div>
             </div> --}}
-            <div class="col-xl-4" data-kt-billing-element="address">
-                <!--begin::Address-->
-                <div class="card h-xl-100 flex-row flex-stack flex-wrap p-6">
-                    <!--begin::Details-->
-                    <div class="d-flex flex-column py-2">
-                        <div class="d-flex align-items-center fs-5 fw-bold mb-5">
-                            <span class="badge badge-light-success fs-5 me-1"> Pembayaran Berhasil<i
-                                class="ki-outline ki-check fs-2x text-success"></i></span>
+            <div class="row">
+                @foreach ($data as $item)
+                    <div class="col-xl-4" data-kt-billing-element="address">
+                        <!--begin::Address-->
+                        <div class="card h-xl-100 flex-row flex-stack flex-wrap p-6">
+                            <!--begin::Details-->
+                            <div class="d-flex flex-column py-2">
+                                <div class="d-flex align-items-center fs-5 fw-bold mb-5">
+                                    @if ($item->status == 0)
+                                        <span class="badge badge-light-warning fs-5 me-1"> Pengecekan Pembayaran<i
+                                                class="ki-duotone ki-arrows-loop fs-2x text-warning"><span
+                                                    class="path1"></span><span class="path2"></span>
+                                            </i></span>
+                                    @else
+                                        <span class="badge badge-light-success fs-5 me-1"> Pembayaran Berhasil<i
+                                                class="ki-outline ki-check fs-2x text-success"></i></span>
+                                    @endif
+                                </div>
+                                <div class="fs-5 mb-2">
+                                    <span class="text-gray-800 fw-bold me-1">{{ $item->paket->judul }}</span>
+                                    {{-- <span class="text-gray-600 fw-semibold">@rupiah($item->nominal)</span> --}}
+                                </div>
+                                <div class="fs-6 text-gray-600 fw-semibold">Total yang dibayar: @rupiah($item->nominal)</div>
+                            </div>
+                            <!--end::Details-->
                         </div>
-                        <div class="fs-5 mb-2">
-                            <span class="text-gray-800 fw-bold me-1">Paket SKD</span>
-                            <span class="text-gray-600 fw-semibold">Rp. 130000</span>
-                        </div>
-                        <div class="fs-6 text-gray-600 fw-semibold">Total yang dibayar: Rp. 130000</div>
+                        <!--end::Address-->
                     </div>
-                    <!--end::Details-->
-                </div>
-                <!--end::Address-->
+                @endforeach
+
             </div>
+
         </div>
     </div>
     @include('pembayaran.modaledit')
