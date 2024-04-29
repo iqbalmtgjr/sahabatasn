@@ -50,7 +50,6 @@
 <script src="{{ asset('') }}assets/js/scripts.bundle.js"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
-
 @stack('footer')
 <!--end::Custom Javascript-->
 <!--end::Javascript-->

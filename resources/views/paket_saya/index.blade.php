@@ -45,7 +45,7 @@
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column">
                                     <div class="pt-1">
-                                        <a href="{{ url('kerjakan/' . $data->paket->subkategori_id . '/1') }}"
+                                        <a href="{{ url('kerjakan/' . $data->paket->subkategori_id) }}"
                                             class="btn btn-primary w-100 py-3">Kerjakan</a>
                                     </div>
                                 </div>

@@ -8,6 +8,7 @@
     <div class="d-flex flex-column flex-column-fluid">
         <!--begin::Content-->
         @yield('content')
+        {{ isset($slot) ? $slot : null }}
         <!--end::Content-->
     </div>
     <!--end::Content wrapper-->

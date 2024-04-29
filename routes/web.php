@@ -18,6 +18,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PusatlanggananController;
 use App\Http\Controllers\AboutController;
+use App\Livewire\Kerjakan;
 
 Route::get('/', function () {
     return redirect('login');
@@ -124,7 +125,8 @@ Route::middleware(['checkRole:user'])->group(function () {
     //paket_saya
     Route::get('/paketsaya', [PaketsayaController::class, 'index'])->name('paket-saya');
     // Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
-    Route::get('/kerjakan/{id}/{no}', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
+    // Route::get('/kerjakan/{id}/{no}', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
+    Route::get('/kerjakan/{id}', Kerjakan::class)->name('kerjakan');
     Route::get('/togratis', [PaketsayaController::class, 'togratis'])->name('togratis');
 
 
