@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('banksoal_id');
             $table->foreignId('subkategori_id');
-            $table->string('jawaban');
+            $table->foreignId('jawaban_id');
+            $table->string('jawab');
             $table->timestamps();
         });
     }

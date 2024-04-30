@@ -1,5 +1,5 @@
 <div>
-    {{-- @dd($jawaban->jawaban) --}}
+    {{-- @dd($warna) --}}
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
@@ -20,12 +20,12 @@
         </div>
         <!--end::Toolbar container-->
     </div>
+
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="row">
                 <div class="col-md-9">
-                    {{-- {{ dd($datas[$currentStep]) }} --}}
-                    @if ($currentStep === 1)
+                    {{-- @if ($currentStep === 1)
                         <!-- Step 1 -->
                         <div class="card mb-4" wire:key="1">
                             <div class="card-body py-4">
@@ -37,49 +37,66 @@
                                 <!-- Soal -->
                                 <label for="jawaban" style="font-size: 15px">{{ $datas[0]->soal }}</label>
                                 <!-- Jawaban -->
-                                <div class="form-check" style="margin-top: 10px">
-                                    <input wire:click="simpan('A')" class="form-check-input" type="radio"
-                                        wire:model="jawaban_1" id="flexRadioDefault1" value="A">
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                <div class="form-check form-check-custom form-check-solid mt-5">
+                                    <input
+                                        wire:click="simpan('{{ $datas[0]->jawaban->pilihan_a }}',{{ $datas[0]->jawaban->id }})"
+                                        name="jawaban_1" class="form-check-input" type="radio" value="A"
+                                        id="flexRadioChecked1"
+                                        {{ $datas[0]->jawaban->pilihan_a == $jawaban->jawab ? 'checked' : '' }} />
+                                    <label class="form-check-label" for="flexRadioChecked1">
                                         <strong style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_a }}</strong>
                                     </label>
                                 </div>
-                                <div class="form-check" style="margin-top: 10px">
-                                    <input wire:click="simpan('B')" class="form-check-input" type="radio"
-                                        wire:model="jawaban_1" id="flexRadioDefault2" value="B">
-                                    <label class="form-check-label" for="flexRadioDefault2">
+                                <div class="form-check form-check-custom form-check-solid mt-3">
+                                    <input
+                                        wire:click="simpan('{{ $datas[0]->jawaban->pilihan_b }}',{{ $datas[0]->jawaban->id }})"
+                                        name="jawaban_1" class="form-check-input" type="radio" value="B"
+                                        id="flexRadioChecked2"
+                                        {{ $datas[0]->jawaban->pilihan_b == $jawaban->jawab ? 'checked' : '' }} />
+                                    <label class="form-check-label" for="flexRadioChecked2">
                                         <strong style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_b }}</strong>
                                     </label>
                                 </div>
-                                <div class="form-check" style="margin-top: 10px">
-                                    <input wire:click="simpan('C')" class="form-check-input" type="radio"
-                                        wire:model="jawaban_1" id="flexRadioDefault3" value="C">
-                                    <label class="form-check-label" for="flexRadioDefault3">
+                                <div class="form-check form-check-custom form-check-solid mt-3">
+                                    <input
+                                        wire:click="simpan('{{ $datas[0]->jawaban->pilihan_c }}',{{ $datas[0]->jawaban->id }})"
+                                        name="jawaban_1" class="form-check-input" type="radio" value="C"
+                                        id="flexRadioChecked3"
+                                        {{ $datas[0]->jawaban->pilihan_c == $jawaban->jawab ? 'checked' : '' }} />
+                                    <label class="form-check-label" for="flexRadioChecked3">
                                         <strong style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_c }}</strong>
                                     </label>
                                 </div>
-                                <div class="form-check" style="margin-top: 10px">
-                                    <input wire:click="simpan('D')" class="form-check-input" type="radio"
-                                        wire:model="jawaban_1" id="flexRadioDefault4" value="D">
-                                    <label class="form-check-label" for="flexRadioDefault4">
+                                <div class="form-check form-check-custom form-check-solid mt-3">
+                                    <input
+                                        wire:click="simpan('{{ $datas[0]->jawaban->pilihan_d }}',{{ $datas[0]->jawaban->id }})"
+                                        name="jawaban_1" class="form-check-input" type="radio" value="D"
+                                        id="flexRadioChecked4"
+                                        {{ $datas[0]->jawaban->pilihan_d == $jawaban->jawab ? 'checked' : '' }} />
+                                    <label class="form-check-label" for="flexRadioChecked4">
                                         <strong style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_d }}</strong>
                                     </label>
                                 </div>
                                 @if ($datas[0]->jawaban->pilihan_e != null)
-                                    <div class="form-check" style="margin-top: 10px">
-                                        <input wire:click="simpan('E')" class="form-check-input" type="radio"
-                                            wire:model="jawaban_1" id="flexRadioDefault5" value="E">
-                                        <label class="form-check-label" for="flexRadioDefault5">
-                                            <strong style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_e }}</strong>
+                                    <div class="form-check form-check-custom form-check-solid mt-3">
+                                        <input
+                                            wire:click="simpan('{{ $datas[0]->jawaban->pilihan_e }}',{{ $datas[0]->jawaban->id }})"
+                                            name="jawaban_1" class="form-check-input" type="radio" value="E"
+                                            id="flexRadioChecked5"
+                                            {{ $datas[0]->jawaban->pilihan_e == $jawaban->jawab ? 'checked' : '' }} />
+                                        <label class="form-check-label" for="flexRadioChecked5">
+                                            <strong
+                                                style="font-size: 15px">{{ $datas[0]->jawaban->pilihan_e }}</strong>
                                         </label>
                                     </div>
                                 @endif
+
                             </div>
                         </div>
-                    @endif
-                    @for ($i = 1; $i <= $totalSteps; $i++)
+                    @endif --}}
+                    @for ($i = 0; $i <= $totalSteps; $i++)
                         @if ($currentStep === $i + 1)
-                            <div class="card mb-4" wire:key="{{ $i }}">
+                            <div class="card mb-4" wire:ignore_self wire:key="{{ $i }}">
                                 <div class="card-body py-4">
                                     <div class="d-flex justify-content-between">
                                         <h3>Soal Nomor {{ $i + 1 }}</h3>
@@ -89,47 +106,59 @@
                                     <!-- Soal -->
                                     <p style="font-size: 15px">{{ $datas[$i]->soal }}</p>
                                     <!-- Jawaban -->
-                                    <div class="form-check" style="margin-top: 10px">
-                                        <input wire:click="simpan('A')" class="form-check-input" type="radio"
-                                            wire:model="jawaban_{{ $i + 1 }}" id="flexRadioDefault1"
-                                            value="A">
+                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
+                                        <input
+                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_a }}',{{ $datas[$i]->jawaban->id }})"
+                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
+                                            id="flexRadioDefault1" value="A"
+                                            {{ $datas[$i]->jawaban->pilihan_a == $jawaban->jawab ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             <strong
                                                 style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_a }}</strong>
                                         </label>
                                     </div>
-                                    <div class="form-check" style="margin-top: 10px">
-                                        <input wire:click="simpan('B')" class="form-check-input" type="radio"
-                                            wire:model="jawaban_{{ $i + 1 }}" id="flexRadioDefault2"
-                                            value="B">
+                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
+                                        <input
+                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_b }}',{{ $datas[$i]->jawaban->id }})"
+                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
+                                            id="flexRadioDefault2" value="B"
+                                            {{ $datas[$i]->jawaban->pilihan_b == $jawaban->jawab ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             <strong
                                                 style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_b }}</strong>
                                         </label>
                                     </div>
-                                    <div class="form-check" style="margin-top: 10px">
-                                        <input wire:click="simpan('C')" class="form-check-input" type="radio"
-                                            wire:model="jawaban_{{ $i + 1 }}" id="flexRadioDefault3"
-                                            value="C">
+                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
+                                        <input
+                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_c }}',{{ $datas[$i]->jawaban->id }})"
+                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
+                                            id="flexRadioDefault3" value="C"
+                                            {{ $datas[$i]->jawaban->pilihan_c == $jawaban->jawab ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault3">
                                             <strong
                                                 style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_c }}</strong>
                                         </label>
                                     </div>
-                                    <div class="form-check" style="margin-top: 10px">
-                                        <input wire:click="simpan('D')" class="form-check-input" type="radio"
-                                            wire:model="jawaban_{{ $i + 1 }}" id="flexRadioDefault4"
-                                            value="D">
+                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
+                                        <input
+                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_d }}',{{ $datas[$i]->jawaban->id }})"
+                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
+                                            id="flexRadioDefault4" value="D"
+                                            {{ $datas[$i]->jawaban->pilihan_d == $jawaban->jawab ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault4">
                                             <strong
                                                 style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_d }}</strong>
                                         </label>
                                     </div>
                                     @if ($datas[$i]->jawaban->pilihan_e != null)
-                                        <div class="form-check" style="margin-top: 10px">
-                                            <input wire:click="simpan('E')" class="form-check-input" type="radio"
-                                                wire:model="jawaban_{{ $i + 1 }}" id="flexRadioDefault5"
-                                                value="E">
+                                        <div class="form-check form-check-custom form-check-solid"
+                                            style="margin-top: 10px">
+                                            <input
+                                                wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_e }}',{{ $datas[$i]->jawaban->id }})"
+                                                class="form-check-input" type="radio"
+                                                name="jawaban_{{ $i + 1 }}" id="flexRadioDefault5"
+                                                value="E"
+                                                {{ $datas[$i]->jawaban->pilihan_e == $jawaban->jawab ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexRadioDefault5">
                                                 <strong
                                                     style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_e }}</strong>
@@ -160,21 +189,29 @@
                             <h3>Nomor Soal</h3>
                             <hr>
                             <div class="text-center">
+                                @php
+                                    $tangkap = [];
+                                    foreach ($jawabann as $key => $value) {
+                                        $tangkap[] = $value->subkategori_id;
+                                        // dd($tangkap);
+                                    }
+                                @endphp
                                 @foreach ($datas as $item)
                                     @php
                                         $key = $loop->iteration;
-                                        $selectedClass =
-                                            $jawabann->banksoal_id == $item->id ? 'btn-primary' : 'btn-secondary';
                                     @endphp
+                                    {{-- @foreach ($jawabann as $itemm) --}}
                                     <button wire:click="goToStep({{ $key }}, {{ $item->subkategori_id }})"
-                                        class="btn {{ $selectedClass }}"
+                                        class="btn {{ $tangkap[0] == $item->subkategori_id ? 'btn-primary' : 'btn-secondary' }}"
                                         style="margin: 2px; padding: 5px 15px; font-size: 10px; width:42px; height:34px">{{ $key }}</button>
+                                    {{-- @endforeach --}}
                                 @endforeach
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-</div>
+</div

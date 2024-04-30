@@ -10,31 +10,39 @@ use Illuminate\Support\Facades\Request;
 
 class Kerjakan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawaban_1, $jawaban_2, $jawaban_3, $jawaban_4, $jawaban_5;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan;
     public $currentStep = 1;
     public $totalSteps;
     public $subkategoriId;
-    public $selectedAnswers = [];
+    public $selectedAnswers;
+    public $warna = "btn-secondary";
 
-    // #[On('pageChanged')]
+    #[On('pageChanged')]
     public function mount($id)
     {
-        $this->subkategoriId = $id;
         $this->datas = Banksoal::where('subkategori_id', $id)->get();
+        $this->jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
+            ->where('banksoal_id', $this->getSoal()->id)
+            ->where('subkategori_id', $this->getSoal()->subkategori_id)
+            ->first();
+        $this->jawabann = Simpanjawaban::where('user_id', auth()->user()->id)
+            ->where('banksoal_id', $this->getSoal()->id)
+            ->where('subkategori_id', $this->getSoal()->subkategori_id)
+            ->get();
         $this->totalSteps = $this->datas->count();
         $this->currentStep;
-        $this->jawaban = Simpanjawaban::where('subkategori_id', $id)->first()->jawaban;
-        $this->jawabann = Simpanjawaban::where('subkategori_id', $id)->first();
     }
 
     public function render()
     {
-        return view('livewire.kerjakan');
+        return view('livewire.kerjakan2');
     }
 
     public function nextStep()
     {
         $this->currentStep++;
+        // dd($this->currentStep++);
+        // $this->dispatch('pageChanged', $this->getSoal()->subkategori_id);
     }
 
     public function previousStep()
@@ -42,10 +50,15 @@ class Kerjakan extends Component
         $this->currentStep--;
     }
 
-    public function goToStep($step, $subkategori_id)
+    // public function goToStep($step, $subkategori_id)
+    public function goToStep($step)
     {
+        // dd($step);
         $this->selectedAnswers[$step] = request()->input('jawaban');
         $this->currentStep = $step;
+
+        // Perbarui status jawabanTersimpan
+        $this->jawabanTersimpan[$step] = true;
         // $this->dispatch('pageChanged', $subkategori_id);
     }
 
@@ -54,9 +67,9 @@ class Kerjakan extends Component
         return $this->datas[$this->currentStep - 1];
     }
 
-    public function simpan($value)
+    public function simpan($value, $jawaban_id)
     {
-        // dd($this->pilihan_1);
+        // dd($value, $jawaban_id);
         $datay = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('banksoal_id', $this->getSoal()->id)
             ->where('subkategori_id', $this->getSoal()->subkategori_id)
@@ -67,18 +80,39 @@ class Kerjakan extends Component
                 'user_id' => auth()->user()->id,
                 'banksoal_id' => $this->getSoal()->id,
                 'subkategori_id' => $this->getSoal()->subkategori_id,
-                'jawaban' => $value,
+                'jawaban_id' => $jawaban_id,
+                'jawab' => $value,
             ]);
-            // $this->dispatch('pageChanged', $this->getSoal()->subkategori_id);
         } else {
             $simpan = Simpanjawaban::create([
                 'user_id' => auth()->user()->id,
                 'banksoal_id' => $this->getSoal()->id,
                 'subkategori_id' => $this->getSoal()->subkategori_id,
-                'jawaban' => $value,
+                'jawaban_id' => $jawaban_id,
+                'jawab' => $value,
             ]);
-            // $this->dispatch('pageChanged', $this->getSoal()->subkategori_id);
         }
+
+        $this->changeColor($value, $jawaban_id);
+
+        // $this->dispatch('pageChanged', $this->getSoal()->subkategori_id);
+    }
+
+    public function changeColor($value, $jawaban_id)
+    {
+        // dd($value, $jawaban_id);
+        $query = Simpanjawaban::where('user_id', auth()->user()->id)
+            ->where('banksoal_id', $this->getSoal()->id)
+            ->where('subkategori_id', $this->getSoal()->subkategori_id)
+            ->first();
+        // dd($query);
+
+        if ($query->jawab === $value) {
+            $this->warna = "btn-primary";
+        } else {
+            $this->warna = "btn-secondary";
+        }
+        $this->dispatch('pageChanged', $query->subkategori_id);
     }
 
     // public $data, $nomor, $kelas, $datas, $jawabans = [];

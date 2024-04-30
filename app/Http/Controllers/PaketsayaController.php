@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banksoal;
 use App\Models\Paketsaya;
 use Illuminate\Http\Request;
+use App\Models\Simpanjawaban;
 use Yajra\DataTables\Facades\DataTables;
 
 class PaketsayaController extends Controller
@@ -48,7 +49,19 @@ class PaketsayaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        for ($i = 1; $i < $request->step_total + 1; $i++) {
+            $jawaban = 'jawaban_' . $i;
+            Simpanjawaban::create([
+                'user_id' => auth()->user()->id,
+                'banksoal_id' => $request->banksoal_id,
+                'subkategori_id' => $request->subkategori_id,
+                'jawaban_id' => $request->jawaban_id,
+                'jawab' => $request->$jawaban,
+            ]);
+        }
+
+        toastr()->success('Jawaban berhasil disimpan', 'Berhasil');
+        return redirect()->back();
     }
 
     /**

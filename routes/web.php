@@ -127,6 +127,8 @@ Route::middleware(['checkRole:user'])->group(function () {
     // Route::get('/kerjakan', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
     // Route::get('/kerjakan/{id}/{no}', [PaketsayaController::class, 'kerjakan'])->name('kerjakan');
     Route::get('/kerjakan/{id}', Kerjakan::class)->name('kerjakan');
+    Route::post('/kerjakan/post', [PaketsayaController::class, 'store'])->name('kerjakan-post');
+
     Route::get('/togratis', [PaketsayaController::class, 'togratis'])->name('togratis');
 
 
