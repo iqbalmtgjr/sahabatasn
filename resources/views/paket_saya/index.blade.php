@@ -34,20 +34,23 @@
                             <!--begin::Mixed Widget 4-->
                             <div class="card card-xl-stretch mb-5 mb-xl-8">
                                 <!--begin::Beader-->
-                                <div class="card-header border-0 py-5">
+                                <div class="card-header border-0 py-3">
                                     <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1">{{ $data->paket->judul }}</span>
-                                        <span class="text-muted fw-semibold fs-7">Berlaku hingga
-                                            {{ \Carbon\Carbon::parse($data->created_at)->addYear()->format('d F Y') }}</span>
+                                        <span class="card-label fw-bold fs-3 mb-4">{{ $data->paket->judul }}</span>
+                                        <p class="fw-semibold fs-7 mb-1 text-muted">Waktu Pengerjaan :
+                                            <span class="text-danger">{{ $data->paket->waktu }} Menit</span>
+                                        </p>
+                                        <p class="text-muted fw-semibold fs-7">Berlaku hingga :
+                                            <span class="text-danger">
+                                                {{ \Carbon\Carbon::parse($data->created_at)->addYear()->format('d F Y') }}</span>
+                                        </p>
                                     </h3>
                                 </div>
                                 <!--end::Header-->
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column">
-                                    <div class="pt-1">
-                                        <a href="{{ url('kerjakan/' . $data->paket->subkategori_id) }}"
-                                            class="btn btn-primary w-100 py-3">Kerjakan</a>
-                                    </div>
+                                    <a href="{{ url('kerjakan/' . $data->paket->subkategori_id . '/' . $data->paket_id) }}"
+                                        class="btn btn-primary w-100 py-3">Kerjakan</a>
                                 </div>
                                 <!--end::Body-->
                             </div>

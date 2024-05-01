@@ -7,6 +7,7 @@ use App\Models\Paketsaya;
 use Illuminate\Http\Request;
 use App\Models\Simpanjawaban;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class PaketsayaController extends Controller
 {
@@ -51,6 +52,18 @@ class PaketsayaController extends Controller
     {
         for ($i = 1; $i < $request->step_total + 1; $i++) {
             $jawaban = 'jawaban_' . $i;
+            $validator = Validator::make($request->all(), [
+                $jawaban => 'required',
+                $jawaban => 'required',
+                $jawaban => 'required',
+            ]);
+
+            if ($validator->fails()) {
+                toastr()->error('Ada Pertanyaan Yang Belum Dijawab.', 'Gagal');
+                return redirect()
+                    ->back();
+            }
+
             Simpanjawaban::create([
                 'user_id' => auth()->user()->id,
                 'banksoal_id' => $request->banksoal_id,

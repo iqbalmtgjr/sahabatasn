@@ -74,7 +74,7 @@ class PembayaranController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'bukti_bayar' => 'required|image|mimes:png,jpg,jpeg',
-            'nominal' => 'required|max:11',
+            'nominal' => 'required|integer',
         ]);
 
         if ($validator->fails()) {

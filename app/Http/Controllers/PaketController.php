@@ -62,6 +62,7 @@ class PaketController extends Controller
             'judul' => 'required',
             'harga' => 'required',
             'subkategori_id' => 'required',
+            'waktu' => 'required',
             'gambar' => 'required',
         ]);
 
@@ -85,6 +86,7 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
+                'waktu' => $request->waktu,
                 'kategori_id' => $kategori_id,
                 'subkategori_id' => $request->subkategori_id,
             ]);
@@ -92,6 +94,7 @@ class PaketController extends Controller
             Paket::updateOrCreate([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
+                'waktu' => $request->waktu,
                 'kategori_id' => $kategori_id,
                 'subkategori_id' => $request->subkategori_id,
             ]);
@@ -122,6 +125,7 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
+                'waktu' => $request->waktu,
                 'kategori_id' => $kategori_id,
                 'subkategori_id' => $request->subkategori_id,
             ]);
@@ -129,6 +133,7 @@ class PaketController extends Controller
             $data->update([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
+                'waktu' => $request->waktu,
                 'kategori_id' => $kategori_id,
                 'subkategori_id' => $request->subkategori_id,
             ]);

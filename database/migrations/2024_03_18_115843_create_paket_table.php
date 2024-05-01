@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
             $table->string('judul');
             $table->string('harga');
+            $table->integer('waktu');
             $table->string('gambar');
             $table->timestamps();
         });

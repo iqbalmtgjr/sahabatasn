@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class isLogin
@@ -15,7 +16,11 @@ class isLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dd('isLogin dijalankan');
-        return $next($request);
+        if (Auth::check()) {
+            return $next($request);
+        }
+
+        toastr()->error('Halaman tidak bisa diakses!', 'Gagal');
+        return redirect('/');
     }
 }

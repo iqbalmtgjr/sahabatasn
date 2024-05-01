@@ -105,6 +105,18 @@
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Waktu</label>
+                            <input type="number" name="waktu"
+                                class="form-control form-control-solid mb-3 mb-lg-0 @error('waktu') is-invalid @enderror"
+                                placeholder="Contoh: 20" value="{{ old('waktu') }}" />
+                            <p class="text-info">Dalam Menit</p>
+                            @error('waktu')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Harga</label>
                             <!--end::Label-->

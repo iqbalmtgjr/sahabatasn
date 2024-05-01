@@ -14,8 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->alias(['checkRole' => checkRole::class]);
-        // $middleware->append(checkRole::class);
+        $middleware->alias([
+            'checkRole' => checkRole::class,
+            'isLogin' => isLogin::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

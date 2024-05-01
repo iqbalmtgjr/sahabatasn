@@ -76,6 +76,7 @@
                                     <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Sub Kategori</th>
+                                    <th>Waktu</th>
                                     <th>Harga</th>
                                     <th class="text-end min-w-100px">Aksi</th>
                                 </tr>
@@ -156,6 +157,12 @@
                         },
                         {
                             data: 'subkategori_id',
+                        },
+                        {
+                            data: 'waktu',
+                            render: function(data) {
+                                return `${data} menit`;
+                            }
                         },
                         {
                             data: 'harga'

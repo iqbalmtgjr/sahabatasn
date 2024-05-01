@@ -38,6 +38,8 @@ class KeranjangController extends Controller
     public function destroy(string $id)
     {
         Keranjang::findOrFail($id)->delete();
+
+        toastr()->success('Item Keranjang Berhasil Dihapus.', 'Sukses');
         return redirect()->back();
     }
 
