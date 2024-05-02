@@ -90,7 +90,7 @@ Route::group(['middleware' => ['isLogin']], function () {
         Route::get('/kategori/hapusSubKategori/{id}', [KategoriController::class, 'destroySubKategori'])->name('subkategori-delete');
 
         //kelola_bank_soal
-        Route::get('/bank-soal', [BanksoalController::class, 'index']);
+        Route::get('/bank-soal', [BanksoalController::class, 'index'])->name('bank-soal');
         Route::get('/banksoal/getdata/{id}', [BanksoalController::class, 'getdata']);
         Route::post('/bank-soal/input', [BanksoalController::class, 'store']);
         Route::post('/banksoal/update', [BanksoalController::class, 'update']);

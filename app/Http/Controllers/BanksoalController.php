@@ -16,22 +16,28 @@ class BanksoalController extends Controller
     public function index(Request $request)
     {
         $sub_kategori = Subkategori::all();
-        $data = Banksoal::all();
+        // $query = Banksoal::query();
+
+        // if ($request->has('subkategori')) {
+        //     $query->where('subkategori_id', $request->subkategori);
+        // }
+
+        // $data = $query->get();
+
         if ($request->ajax()) {
+            $query = Banksoal::query();
+
+            if ($request->has('subkategori')) {
+                $query->where('subkategori_id', $request->subkategori);
+            }
+
+            $data = $query->get();
             return DataTables::of($data)
                 ->addColumn('kategori', function ($row) {
-                    if ($row->subkategori->kategori) {
-                        return $row->subkategori->kategori->kategori;
-                    } else {
-                        return '';
-                    }
+                    return optional($row->subkategori->kategori)->kategori;
                 })
                 ->addColumn('sub_kategori', function ($row) {
-                    if ($row->subkategori) {
-                        return $row->subkategori->sub_kategori;
-                    } else {
-                        return '';
-                    }
+                    return optional($row->subkategori)->sub_kategori;
                 })
                 ->make(true);
         }
