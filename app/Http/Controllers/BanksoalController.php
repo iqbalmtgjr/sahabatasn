@@ -15,23 +15,12 @@ class BanksoalController extends Controller
 {
     public function index(Request $request)
     {
+        $kategori = Kategori::all();
         $sub_kategori = Subkategori::all();
-        // $query = Banksoal::query();
 
-        // if ($request->has('subkategori')) {
-        //     $query->where('subkategori_id', $request->subkategori);
-        // }
-
-        // $data = $query->get();
-
+        $data = Banksoal::all();
+        // dd($data);
         if ($request->ajax()) {
-            $query = Banksoal::query();
-
-            if ($request->has('subkategori')) {
-                $query->where('subkategori_id', $request->subkategori);
-            }
-
-            $data = $query->get();
             return DataTables::of($data)
                 ->addColumn('kategori', function ($row) {
                     return optional($row->subkategori->kategori)->kategori;
@@ -42,7 +31,7 @@ class BanksoalController extends Controller
                 ->make(true);
         }
 
-        return view('bank_soal.index', compact('sub_kategori'));
+        return view('bank_soal.index', compact('kategori', 'sub_kategori'));
     }
 
     /**
@@ -73,7 +62,7 @@ class BanksoalController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
+        $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -81,6 +70,7 @@ class BanksoalController extends Controller
             $request->file('gambar')->move(public_path('gambar_soal/'), $nama_file);
 
             $soal = Banksoal::create([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 // 'tipe' => $request->tipe,
@@ -88,6 +78,7 @@ class BanksoalController extends Controller
             ]);
         } else {
             $soal = Banksoal::create([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 // 'tipe' => $request->tipe,
@@ -157,6 +148,7 @@ class BanksoalController extends Controller
                 ->withInput();
         }
 
+        $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -165,6 +157,7 @@ class BanksoalController extends Controller
 
             $soal = Banksoal::find($request->id);
             $soal->update([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 // 'tipe' => $request->tipe,
@@ -173,6 +166,7 @@ class BanksoalController extends Controller
         } else {
             $soal = Banksoal::find($request->id);
             $soal->update([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 // 'tipe' => $request->tipe,

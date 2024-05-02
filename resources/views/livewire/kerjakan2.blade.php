@@ -257,52 +257,50 @@
                 let menit = {{ $paketSaya->waktu }};
                 let countdown = menit * 60;
                 const countdownElement = document.getElementById('countdown');
-
-                // Kunci unik untuk menyimpan countdown di localStorage
                 const countdownKey = 'countdown_' + paketId;
 
                 // Ambil countdown dari localStorage berdasarkan paketId
                 const storedCountdown = localStorage.getItem(countdownKey);
-                if (storedCountdown) {
+                if (storedCountdown && parseInt(storedCountdown) > 0) {
                     countdown = parseInt(storedCountdown);
+                } else {
+                    countdown = menit * 60;
+                    localStorage.setItem(countdownKey, countdown);
                 }
 
                 const interval = setInterval(() => {
-                    let hours = Math.floor(countdown / 3600);
-                    let minutes = Math.floor((countdown % 3600) / 60);
-                    let seconds = countdown % 60;
+                    if (countdown > 0) {
+                        let hours = Math.floor(countdown / 3600);
+                        let minutes = Math.floor((countdown % 3600) / 60);
+                        let seconds = countdown % 60;
 
-                    // Format countdown string hh:mm:ss
-                    countdownElement.textContent =
-                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                        countdownElement.textContent =
+                            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-                    // Kurangi countdown setiap detik
-                    countdown--;
-
-                    // Simpan countdown yang diperbarui ke localStorage
-                    localStorage.setItem(countdownKey, countdown);
-
-                    // Jika countdown telah selesai, hentikan interval
-                    if (countdown <= 0) {
+                        countdown--;
+                        localStorage.setItem(countdownKey, countdown);
+                    } else {
                         clearInterval(interval);
-                        // Anda dapat menambahkan logika tambahan di sini jika countdown selesai
-                        // Misalnya, mengirimkan form, menampilkan pesan, dll.
+                        countdown = 0;
+                        countdownElement.textContent = '00:00:00';
+                        localStorage.removeItem(countdownKey);
+                        toastr.error('Waktu habis, silahkan klik tombol Selesai', 'Waktu habis');
                     }
+
+                    localStorage.setItem(countdownKey, countdown);
                 }, 1000);
 
                 // Simpan intervalId jika Anda perlu menghentikan interval dari luar fungsi ini
-                window.intervalId = interval;
+                window.addEventListener('beforeunload', () => {
+                    if (window.intervalId) {
+                        clearInterval(window.intervalId);
+                    }
+                });
             }
 
-            // Pastikan untuk memulai countdown saat dokumen siap
             document.addEventListener('DOMContentLoaded', startCountdown);
 
-            // Jangan lupa untuk membersihkan interval saat meninggalkan halaman
-            window.onbeforeunload = function() {
-                if (window.intervalId) {
-                    clearInterval(window.intervalId);
-                }
-            };
+            ////////////* Batas *//////////////
 
             // Fungsi untuk stepper item sebelah kanan ketika klik berubah pertanyaan
             document.querySelectorAll('.stepper-item').forEach((item, index) => {

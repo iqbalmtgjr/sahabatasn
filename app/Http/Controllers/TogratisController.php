@@ -65,6 +65,7 @@ class TogratisController extends Controller
                 ->withInput();
         }
 
+        $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -72,12 +73,14 @@ class TogratisController extends Controller
             $request->file('gambar')->move(public_path('gambar_soal/'), $nama_file);
 
             $soal = Togratis::create([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'gambar' => $nama_file,
             ]);
         } else {
             $soal = Togratis::create([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
             ]);
@@ -127,6 +130,7 @@ class TogratisController extends Controller
                 ->withInput();
         }
 
+        $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -135,6 +139,7 @@ class TogratisController extends Controller
 
             $soal = Togratis::find($request->id);
             $soal->update([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
                 'gambar' => $nama_file,
@@ -142,6 +147,7 @@ class TogratisController extends Controller
         } else {
             $soal = Togratis::find($request->id);
             $soal->update([
+                'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
                 'soal' => $request->soal,
             ]);
