@@ -12,17 +12,16 @@ use Illuminate\Support\Facades\Request;
 
 class Kerjakan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paket, $totalSteps;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId;
     public $currentStep = 1;
 
     #[On('pageChanged')]
     public function mount($id, $paket_id)
     {
-        // dd($paket_id);
         $this->datas = Banksoal::where('subkategori_id', $id)->get();
-        $this->paket = Paketsaya::where('user_id', auth()->user()->id)
+        $this->paketSaya = Paketsaya::where('user_id', auth()->user()->id)
             ->where('paket_id', $paket_id)->first()->paket;
-        // dd($this->paket->waktu);
+        $this->paketId = $paket_id;
         $this->jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('subkategori_id', $this->getSoal()->subkategori_id)
             ->first();
@@ -65,7 +64,7 @@ class Kerjakan extends Component
     }
     public function getPaket()
     {
-        return $this->paket;
+        return $this->paketSaya;
     }
 
     public function simpan($value, $jawaban_id)

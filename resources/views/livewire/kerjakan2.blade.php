@@ -1,4 +1,5 @@
 <div>
+    {{-- @dd($paketId); --}}
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
         <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
@@ -252,12 +253,16 @@
         <script>
             // Fungsi untuk memulai countdown
             function startCountdown() {
-                let menit = {{ $paket->waktu }};
+                let paketId = {{ $paketId }}
+                let menit = {{ $paketSaya->waktu }};
                 let countdown = menit * 60;
-
                 const countdownElement = document.getElementById('countdown');
 
-                const storedCountdown = localStorage.getItem('countdown');
+                // Kunci unik untuk menyimpan countdown di localStorage
+                const countdownKey = 'countdown_' + paketId;
+
+                // Ambil countdown dari localStorage berdasarkan paketId
+                const storedCountdown = localStorage.getItem(countdownKey);
                 if (storedCountdown) {
                     countdown = parseInt(storedCountdown);
                 }
@@ -267,38 +272,39 @@
                     let minutes = Math.floor((countdown % 3600) / 60);
                     let seconds = countdown % 60;
 
-                    // Tampilkan waktu countdown dalam format yang sesuai
-                    if (hours > 0) {
-                        countdownElement.innerHTML =
-                            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    } else {
-                        countdownElement.innerHTML =
-                            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    }
+                    // Format countdown string hh:mm:ss
+                    countdownElement.textContent =
+                        `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
+                    // Kurangi countdown setiap detik
+                    countdown--;
+
+                    // Simpan countdown yang diperbarui ke localStorage
+                    localStorage.setItem(countdownKey, countdown);
+
+                    // Jika countdown telah selesai, hentikan interval
                     if (countdown <= 0) {
                         clearInterval(interval);
-                        countdownFinished();
-                    } else {
-                        countdown--;
-                        localStorage.setItem('countdown', countdown);
+                        // Anda dapat menambahkan logika tambahan di sini jika countdown selesai
+                        // Misalnya, mengirimkan form, menampilkan pesan, dll.
                     }
-                }, 1000); // Update setiap 1 detik
+                }, 1000);
+
+                // Simpan intervalId jika Anda perlu menghentikan interval dari luar fungsi ini
+                window.intervalId = interval;
             }
 
-            if (performance.navigation.type == 0) {
-                startCountdown();
-            }
+            // Pastikan untuk memulai countdown saat dokumen siap
+            document.addEventListener('DOMContentLoaded', startCountdown);
 
-            function countdownFinished() {
-                toastr.error('Waktu sudah habis, silahkan klik tombol selesai', 'Waktu Habis!');
-                console.log('Countdown Selesai!');
-            }
+            // Jangan lupa untuk membersihkan interval saat meninggalkan halaman
+            window.onbeforeunload = function() {
+                if (window.intervalId) {
+                    clearInterval(window.intervalId);
+                }
+            };
 
-            document.addEventListener('DOMContentLoaded', function() {
-                startCountdown();
-            });
-
+            // Fungsi untuk stepper item sebelah kanan ketika klik berubah pertanyaan
             document.querySelectorAll('.stepper-item').forEach((item, index) => {
                 item.addEventListener('click', () => {
                     document.querySelectorAll('.stepper-item').forEach((el) => {
