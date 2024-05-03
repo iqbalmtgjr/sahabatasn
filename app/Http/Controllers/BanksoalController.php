@@ -216,9 +216,9 @@ class BanksoalController extends Controller
      */
     public function destroy(string $id)
     {
-        Banksoal::find($id)->delete();
         $jawaban = Jawaban::where('bank_soal_id', $id)->first();
         $jawaban->delete();
+        Banksoal::find($id)->delete();
         return redirect()->back();
     }
 
