@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\Paket;
+use App\Livewire\Kerjakan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
@@ -16,9 +18,8 @@ use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaketsayaController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\HasiltryoutController;
 use App\Http\Controllers\PusatlanggananController;
-use App\Http\Controllers\AboutController;
-use App\Livewire\Kerjakan;
 
 Route::get('/', function () {
     return redirect('login');
@@ -137,5 +138,8 @@ Route::group(['middleware' => ['isLogin']], function () {
         Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
         Route::post('/pembayaran/input', [PembayaranController::class, 'store'])->name('pembayaran-input');
         Route::post('/pembayaran/update', [PembayaranController::class, 'update'])->name('pembayaran-edit');
+
+        //hasil
+        Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
     });
 });

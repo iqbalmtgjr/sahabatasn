@@ -15,9 +15,7 @@ class KategoriController extends Controller
      */
     public function index(Request $request)
     {
-        // dd($request->id);
         $sub = $request->has('id') ? Subkategori::where('kategori_id', $request->id)->get() : collect();
-        // return view('kategori.modalsub', compact('sub'));
         $data = Kategori::all();
         if ($request->ajax()) {
             return DataTables::of($data)

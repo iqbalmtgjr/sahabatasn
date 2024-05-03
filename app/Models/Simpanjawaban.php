@@ -26,4 +26,9 @@ class Simpanjawaban extends Model
     {
         return $this->belongsTo(Jawaban::class);
     }
+
+    public function paketsaya()
+    {
+        return $this->belongsTo(Paketsaya::class);
+    }
 }

@@ -20,12 +20,15 @@ class PaketsayaController extends Controller
         $data = Paketsaya::where('user_id', auth()->user()->id)
             ->where('status', '!=', 3)
             ->get();
-        return view('paket_saya.index', compact('data'));
+
+        $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id)->count();
+        // dd($jmlh_soal);
+        return view('paket_saya.index', compact('data', 'jmlh_soal'));
     }
 
-    private function banksoal($subkategori_id, $tipe)
+    private function banksoal($kategori_id)
     {
-        return Banksoal::where('subkategori_id', $subkategori_id)->where('tipe', $tipe)->get();
+        return Banksoal::where('kategori_id', $kategori_id)->get();
     }
 
     /**

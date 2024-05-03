@@ -21,4 +21,9 @@ class Paketsaya extends Model
     {
         return $this->belongsTo(Paket::class);
     }
+
+    public function simpanjawaban()
+    {
+        return $this->hasOne(Simpanjawaban::class);
+    }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('paket_id')->constrained('paket');
             $table->smallInteger('status');
+            $table->smallInteger('submit')->nullable();
             $table->timestamps();
         });
     }

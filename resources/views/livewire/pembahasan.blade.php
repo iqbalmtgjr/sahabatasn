@@ -1,24 +1,15 @@
 <div>
-    {{-- @dd($paketId); --}}
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
-        <!--begin::Toolbar container-->
         <div id="kt_app_toolbar_container" class="app-container container-fluid d-flex align-items-stretch">
-            <!--begin::Toolbar wrapper-->
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
-                <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
-                    <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">
                         Soal-soal
                         {{ $datas[0]->kategori_id == 1 || $datas[0]->kategori_id == 2 || $datas[0]->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
                     </h1>
-                    <!--end::Title-->
                 </div>
-                <!--end::Page title-->
             </div>
-            <!--end::Toolbar wrapper-->
         </div>
-        <!--end::Toolbar container-->
     </div>
 
     <div id="kt_app_content" class="app-content flex-column-fluid">
@@ -26,7 +17,6 @@
             <div class="stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid gap-10"
                 id="kt_create_account_stepper">
                 <div class="card d-flex flex-row-fluid flex-center">
-                    <!--begin::Form-->
                     <form class="card-body w-100 px-9" id="kt_create_account_form">
                         {{-- @csrf --}}
 
@@ -47,15 +37,11 @@
                         @for ($i = 0; $i < $totalSteps; $i++)
                             <div class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
-                                <!--begin::Wrapper-->
                                 <div class="w-100">
-                                    <!--begin::Heading-->
                                     <div class="pb-5 pb-lg-5">
-                                        <!--begin::Title-->
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
                                             #{{ $i + 1 }}. {{ $datas[$i]->soal }}
                                         </h2>
-                                        <!--end::Title-->
                                     </div>
                                     <!-- Jawaban -->
                                     {{-- <input type="hidden" name="banksoal_id" value="{{ $datas[$i]->id }}">
@@ -126,9 +112,6 @@
                                             </label>
                                         </div>
                                     @endif
-                                    <!--end::Heading-->
-                                    <!--begin::Input group-->
-                                    <!--end::Input group-->
                                 </div>
 
                                 {{-- <button wire:click="delete({{ $jawabann[0]->id }})" type="button"
@@ -224,20 +207,6 @@
                                 </div>
                             @endfor
                             <!--begin::Step 5-->
-                            {{-- <div class="stepper-item mark-completed col-2 mb-5" data-kt-stepper-element="nav">
-                                <!--begin::Wrapper-->
-                                <div class="stepper-wrapper">
-                                    <!--begin::Icon-->
-                                    <div class="stepper-icon w-40px h-40px">
-                                        <i class="ki-outline ki-check fs-2 stepper-check"></i>
-                                        <span class="stepper-number">5</span>
-                                    </div>
-                                    <!--end::Icon-->
-                                </div>
-                                <!--end::Wrapper-->
-                            </div> --}}
-                            <!--end::Step 5-->
-                            {{-- </div> --}}
                         </div>
 
                         <!--end::Nav-->
@@ -254,57 +223,6 @@
 
     @push('footer')
         <script>
-            // Fungsi untuk memulai countdown
-            function startCountdown() {
-                let paketId = {{ $paketId }}
-                let menit = {{ $paketSaya->paket->waktu }};
-                let countdown = menit * 60;
-                const countdownElement = document.getElementById('countdown');
-                const countdownKey = 'countdown_' + paketId;
-
-                // Ambil countdown dari localStorage berdasarkan paketId
-                const storedCountdown = localStorage.getItem(countdownKey);
-                if (storedCountdown && parseInt(storedCountdown) > 0) {
-                    countdown = parseInt(storedCountdown);
-                } else {
-                    countdown = menit * 60;
-                    localStorage.setItem(countdownKey, countdown);
-                }
-
-                const interval = setInterval(() => {
-                    if (countdown > 0) {
-                        let hours = Math.floor(countdown / 3600);
-                        let minutes = Math.floor((countdown % 3600) / 60);
-                        let seconds = countdown % 60;
-
-                        countdownElement.textContent =
-                            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                        countdown--;
-                        localStorage.setItem(countdownKey, countdown);
-                    } else {
-                        clearInterval(interval);
-                        countdown = 0;
-                        countdownElement.textContent = '00:00:00';
-                        localStorage.removeItem(countdownKey);
-                        toastr.error('Waktu habis, silahkan klik tombol Selesai', 'Waktu habis');
-                    }
-
-                    localStorage.setItem(countdownKey, countdown);
-                }, 1000);
-
-                // Simpan intervalId jika Anda perlu menghentikan interval dari luar fungsi ini
-                window.addEventListener('beforeunload', () => {
-                    if (window.intervalId) {
-                        clearInterval(window.intervalId);
-                    }
-                });
-            }
-
-            document.addEventListener('DOMContentLoaded', startCountdown);
-
-            ////////////* Batas *//////////////
-
             // Fungsi untuk stepper item sebelah kanan ketika klik berubah pertanyaan
             document.querySelectorAll('.stepper-item').forEach((item, index) => {
                 item.addEventListener('click', () => {
@@ -324,28 +242,6 @@
                     });
                 });
             });
-
-            document.querySelectorAll('.form-check-input').forEach((input) => {
-                input.addEventListener('click', () => {
-                    const stepIndex = parseInt(input.name.split('_')[1]) - 1;
-                    document.querySelectorAll('.stepper-item').forEach((item, idx) => {
-                        if (idx === stepIndex) {
-                            const bgColor = window.getComputedStyle(item.querySelector('.stepper-icon'))
-                                .backgroundColor;
-                            const textColor = getTextColor(bgColor);
-                            item.querySelector('.stepper-icon').style.backgroundColor = 'green';
-                            // item.querySelector('.stepper-label').style.color = textColor;
-                        }
-                    });
-                });
-            });
         </script>
-        <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-account.js"></script>
-        <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
-        <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-        <script src="{{ asset('') }}assets/js/custom/apps/chat/chat.js"></script>
-        <script src="{{ asset('') }}assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-        <script src="{{ asset('') }}assets/js/custom/utilities/modals/create-campaign.js"></script>
-        <script src="{{ asset('') }}assets/js/custom/utilities/modals/users-search.js"></script>
     @endpush
 </div>
