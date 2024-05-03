@@ -19,13 +19,17 @@ class PusatlanggananController extends Controller
 
     public function detailskd()
     {
-        $data = Paket::where('kategori_id', 1)->get();
+        $data = Paket::where('kategori_id', 1)
+            ->where('harga', '>', 0)
+            ->get();
         return view('pusatlangganan.detailskd', compact('data'));
     }
 
     public function detailskb()
     {
-        $data = Paket::where('kategori_id', 2)->get();
+        $data = Paket::where('kategori_id', 2)
+            ->where('harga', '>', 0)
+            ->get();
         return view('pusatlangganan.detailskb', compact('data'));
     }
 
@@ -36,7 +40,9 @@ class PusatlanggananController extends Controller
 
     public function detailpppkteknis()
     {
-        $data = Paket::where('kategori_id', 4)->get();
+        $data = Paket::where('kategori_id', 4)
+            ->where('harga', '>', 0)
+            ->get();
         return view('pusatlangganan.detailpppkteknis', compact('data'));
     }
 

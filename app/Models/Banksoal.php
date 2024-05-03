@@ -17,6 +17,11 @@ class Banksoal extends Model
         return $this->hasOne(Jawaban::class, 'bank_soal_id');
     }
 
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
+
     public function subkategori()
     {
         return $this->belongsTo(Subkategori::class);

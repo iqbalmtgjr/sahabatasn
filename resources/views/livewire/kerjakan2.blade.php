@@ -10,7 +10,7 @@
                     <!--begin::Title-->
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">
                         Soal-soal
-                        {{-- {{ $data->subkategori->sub_kategori }} --}}
+                        {{ $datas[0]->kategori_id == 1 || $datas[0]->kategori_id == 2 || $datas[0]->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -30,13 +30,15 @@
                     <form class="card-body w-100 px-9" id="kt_create_account_form">
                         {{-- @csrf --}}
 
-                        <div class="d-flex justify-content-between" wire:ignore>
-                            <h3 class="text-primary">{{ $datas[0]->subkategori->sub_kategori }}</h3>
-                            <div class="row">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="text-primary">Soal
+                                {{ $datas[$currentStep - 1]->kategori->kategori }}
+                                {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
+                            <div class="row text-end ">
                                 <div class="col-3 text-end">
                                     <i class="text-primary ki-outline ki-time fs-2"></i>
                                 </div>
-                                <div class="col-9 text-start">
+                                <div class="col-9 text-start" wire:ignore>
                                     <h3 id="countdown" class="d-flex"></h3>
                                 </div>
                             </div>
@@ -128,6 +130,7 @@
                                     <!--begin::Input group-->
                                     <!--end::Input group-->
                                 </div>
+
                                 {{-- <button wire:click="delete({{ $jawabann[0]->id }})" type="button"
                                     class="btn btn-lg btn-light-primary me-3">
                                     Reset
@@ -254,7 +257,7 @@
             // Fungsi untuk memulai countdown
             function startCountdown() {
                 let paketId = {{ $paketId }}
-                let menit = {{ $paketSaya->waktu }};
+                let menit = {{ $paketSaya->paket->waktu }};
                 let countdown = menit * 60;
                 const countdownElement = document.getElementById('countdown');
                 const countdownKey = 'countdown_' + paketId;

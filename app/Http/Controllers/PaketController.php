@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Paket;
+use App\Models\Paketsaya;
 use App\Models\Subkategori;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -36,7 +37,11 @@ class PaketController extends Controller
                     }
                 })
                 ->addColumn('harga', function ($row) {
-                    return 'Rp. ' . number_format($row->harga, 0, ',', '.');
+                    if ($row->harga == 0) {
+                        return 'Gratis';
+                    } else {
+                        return 'Rp. ' . number_format($row->harga, 0, ',', '.');
+                    }
                 })
                 ->addColumn('gambar', function ($row) {
                     if ($row->gambar == null) {
@@ -74,6 +79,8 @@ class PaketController extends Controller
                 ->withInput();
         }
 
+
+
         $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
 
         if ($request->file('gambar')) {
@@ -82,7 +89,7 @@ class PaketController extends Controller
 
             $request->file('gambar')->move(public_path('gambar/'), $nama_file);
 
-            Paket::updateOrCreate([
+            $paket = Paket::updateOrCreate([
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
@@ -91,12 +98,21 @@ class PaketController extends Controller
                 'subkategori_id' => $request->subkategori_id,
             ]);
         } else {
-            Paket::updateOrCreate([
+            $paket = Paket::updateOrCreate([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
                 'waktu' => $request->waktu,
                 'kategori_id' => $kategori_id,
                 'subkategori_id' => $request->subkategori_id,
+            ]);
+        }
+
+        // status == 3 -> "Tipe Gratis"
+        if ($request->harga == 0) {
+            Paketsaya::updateOrCreate([
+                'user_id' => auth()->user()->id,
+                'paket_id' => $paket->id,
+                'status' => 3,
             ]);
         }
 

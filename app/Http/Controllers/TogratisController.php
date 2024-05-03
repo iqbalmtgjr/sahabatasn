@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DOMDocument;
+use App\Models\Kategori;
 use App\Models\Togratis;
 use App\Models\Subkategori;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class TogratisController extends Controller
 {
     public function index(Request $request)
     {
+        $kategori = Kategori::all();
         $sub_kategori = Subkategori::all();
         $data = Togratis::all();
         if ($request->ajax()) {
@@ -35,7 +37,7 @@ class TogratisController extends Controller
                 ->make(true);
         }
 
-        return view('tryout_gratis.index', compact('sub_kategori'));
+        return view('tryout_gratis.index', compact('kategori', 'sub_kategori'));
     }
 
     /**

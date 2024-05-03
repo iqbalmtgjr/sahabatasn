@@ -10,7 +10,8 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Try Out Gratis
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Try Out
+                        Gratis
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -28,30 +29,34 @@
             <!--begin::Card-->
             <div class="row g-5 g-xl-8">
                 <!--begin::Col-->
-                    {{-- @foreach ($data as $data) --}}
-                        <div class="col-xl-4">
-                            <!--begin::Mixed Widget 4-->
-                            <div class="card card-xl-stretch mb-5 mb-xl-8">
-                                <!--begin::Beader-->
-                                <div class="card-header border-0 py-5">
-                                    <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-1">Judul</span>
-                                        <span class="text-muted fw-semibold fs-7">Berlaku hingga ..</span>
-                                    </h3>
-                                </div>
-                                <!--end::Header-->
-                                <!--begin::Body-->
-                                <div class="card-body d-flex flex-column">
-                                    <div class="pt-1">
-                                        <a href="{{ url('kerjakan') }}" class="btn btn-primary w-100 py-3"><i
-                                            class="ki-outline ki-pencil fs-2"></i>Kerjakan</a>
-                                    </div>
-                                </div>
-                                <!--end::Body-->
+                @foreach ($data as $data)
+                    <div class="col-xl-4">
+                        <!--begin::Mixed Widget 4-->
+                        <div class="card card-xl-stretch mb-5 mb-xl-8">
+                            <!--begin::Beader-->
+                            <div class="card-header border-0 py-3">
+                                <h3 class="card-title align-items-start flex-column">
+                                    <span class="card-label fw-bold fs-3 mb-4">{{ $data->paket->judul }}</span>
+                                    <p class="fw-semibold fs-7 mb-1 text-muted">Waktu Pengerjaan :
+                                        <span class="text-danger">{{ $data->paket->waktu }} Menit</span>
+                                    </p>
+                                    <p class="text-muted fw-semibold fs-7">Berlaku hingga :
+                                        <span class="text-danger">
+                                            {{ \Carbon\Carbon::parse($data->created_at)->addYear()->format('d F Y') }}</span>
+                                    </p>
+                                </h3>
                             </div>
-                            <!--end::Mixed Widget 4-->
+                            <!--end::Header-->
+                            <!--begin::Body-->
+                            <div class="card-body d-flex flex-column">
+                                <a href="{{ url('kerjakan/' . $data->paket->kategori_id . '/' . $data->paket_id) }}"
+                                    class="btn btn-primary w-100 py-3">Kerjakan</a>
+                            </div>
+                            <!--end::Body-->
                         </div>
-                    {{-- @endforeach --}}
+                        <!--end::Mixed Widget 4-->
+                    </div>
+                @endforeach
                 <!--end::Col-->
             </div>
         </div>

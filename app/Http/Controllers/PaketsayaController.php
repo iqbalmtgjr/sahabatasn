@@ -16,7 +16,10 @@ class PaketsayaController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Paketsaya::where('user_id', auth()->user()->id)->get();
+        // status == 3 -> "Tipe Gratis"
+        $data = Paketsaya::where('user_id', auth()->user()->id)
+            ->where('status', '!=', 3)
+            ->get();
         return view('paket_saya.index', compact('data'));
     }
 
@@ -42,7 +45,10 @@ class PaketsayaController extends Controller
 
     public function togratis()
     {
-        return view('paket_saya.togratis');
+        $data = Paketsaya::where('status', 3)
+            ->get();
+        // dd($data);
+        return view('paket_saya.togratis', compact('data'));
     }
 
     /**
