@@ -7,6 +7,7 @@ use App\Models\Banksoal;
 use App\Models\Paketsaya;
 use App\Models\Simpanjawaban;
 use App\Models\Togratis;
+use App\Models\User;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Request;
 
@@ -18,9 +19,15 @@ class Kerjakan extends Component
     #[On('pageChanged')]
     public function mount($id, $paket_id)
     {
-        $this->paketSaya = Paketsaya::where('user_id', auth()->user()->id)
+        $admin = User::where('role', 'admin')->get();
+        $tangkap_id = array();
+        foreach ($admin as $key => $value) {
+            $tangkap_id[] = $value->id;
+            $tangkap_id[] = auth()->user()->id;
+        }
+        $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
             ->where('paket_id', $paket_id)->first();
-        // dd($this->getPaket()->id);
+        // dd($this->paketSaya);
 
         if ($this->paketSaya->status == 3) {
             $this->datas = Togratis::where('kategori_id', $id)->get();

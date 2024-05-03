@@ -41,10 +41,17 @@ class HasiltryoutController extends Controller
             }
 
             $hasil = array_intersect($tangkap_twk, $tangkap_jawaban);
-            $frekuensi_a = Jawaban::whereIn('pilihan_a', $hasil)->first()->jawaban_a;
-            $frekuensi_b = Jawaban::whereIn('pilihan_b', $hasil)->first()->jawaban_a;
-            dd($frekuensi_a);
-            // $jml_benar = count($frekuensi);
+            $frekuensi_a = Jawaban::where('pilihan_a', $hasil)->whereNotNull('jawaban_a')->value('jawaban_a');
+            $frekuensi_b = Jawaban::where('pilihan_b', $hasil)->whereNotNull('jawaban_b')->value('jawaban_b');
+            $frekuensi_c = Jawaban::where('pilihan_c', $hasil)->whereNotNull('jawaban_c')->value('jawaban_c');
+            $frekuensi_d = Jawaban::where('pilihan_d', $hasil)->whereNotNull('jawaban_d')->value('jawaban_d');
+
+            $frekuensi = array();
+            $frekuensi[] = $frekuensi_a;
+            $frekuensi[] = $frekuensi_b;
+            $frekuensi[] = $frekuensi_c;
+            $frekuensi[] = $frekuensi_d;
+            $jml_benar = count($frekuensi);
             // $jml_soal = count($tangkap_twk);
             // $jml_salah = $jml_soal - $jml_benar;
             // $skor = ($jml_soal - $jml_salah) * 100;
@@ -55,6 +62,8 @@ class HasiltryoutController extends Controller
             //         'skor' => $skor,
             //     ]);
         }
+        dd($jml_benar);
+
 
 
         if ($request->ajax()) {
