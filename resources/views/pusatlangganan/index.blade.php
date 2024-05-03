@@ -45,7 +45,7 @@
                             <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ url('detailcpns') }}">
                                 <!--begin::Image-->
                                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px"
-                                    style="background-image:url('assets/media/stock/600x600/img-88.png')"></div>
+                                    style="background-image:url('assets/media/stock/600x600/1.png')"></div>
                                 <!--end::Image-->
                                 <!--begin::Action-->
                                 {{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
@@ -90,7 +90,7 @@
                                 href="{{ url('pusatlangganan/detailpppk') }}">
                                 <!--begin::Image-->
                                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px"
-                                    style="background-image:url('assets/media/stock/600x600/img-87.jpg')"></div>
+                                    style="background-image:url('assets/media/stock/600x600/2.png')"></div>
                                 <!--end::Image-->
                                 <!--begin::Action-->
                                 {{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
