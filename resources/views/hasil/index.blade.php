@@ -10,8 +10,8 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Kategori
-                        Paket
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Hasil
+                        Tryout
                     </h1>
                     <!--end::Title-->
                 </div>
@@ -37,33 +37,9 @@
                             <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span
                                     class="path2"></span></i>
                             <input type="text" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Kategori" />
+                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Hasil Tryout" />
                         </div>
                         <!--end::Search-->
-
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                            <!--begin::Add customer-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
-                                <i class="ki-duotone ki-plus fs-2"></i>
-                                Tambah Kategori
-                            </button>
-                            <!--end::Add customer-->
-                        </div>
-                        <!--end::Toolbar-->
-
-                        <!--begin::Group actions-->
-                        <div class="d-flex justify-content-end align-items-center d-none"
-                            data-kt-docs-table-toolbar="selected">
-                            <div class="fw-bold me-5">
-                                <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
-                            </div>
-
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Coming Soon">
-                                Selection Action
-                            </button>
-                        </div>
-                        <!--end::Group actions-->
                     </div>
                     <!--end::Wrapper-->
 
@@ -73,8 +49,15 @@
                             <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                 <th></th>
                                 <th class="w-10px pe-2">No</th>
-                                <th>Kategori Paket</th>
-                                <th class="text-end min-w-100px">Aksi</th>
+                                <th>Paket Tryout</th>
+                                <th>Tanggal Mengerjakan</th>
+                                <th>Skor TWK</th>
+                                <th>Skor TIU</th>
+                                <th>Skor TKP</th>
+                                <th>Skor Akhir</th>
+                                <th>Pembahasan</th>
+                                <th>Lulus</th>
+                                {{-- <th class="text-end min-w-100px">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
@@ -85,9 +68,6 @@
             </div>
         </div>
     </div>
-    @include('kategori.modalsub')
-    @include('kategori.modal')
-    @include('kategori.modaledit')
 @endsection
 
 @push('header')
@@ -125,7 +105,7 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/kelola-kategori') }}",
+                        url: "{{ url('/hasil') }}",
                     },
                     columns: [{
                             data: 'id',
@@ -138,59 +118,30 @@
                             }
                         },
                         {
-                            data: 'kategori'
+                            data: 'paket_id'
                         },
                         {
-                            data: null
+                            data: 'tgl_kerja'
+                        },
+                        {
+                            data: 'twk'
+                        },
+                        {
+                            data: 'tiu'
+                        },
+                        {
+                            data: 'tkp'
+                        },
+                        {
+                            data: 'skor'
+                        },
+                        {
+                            data: 'pembahasan'
+                        },
+                        {
+                            data: 'lulus'
                         },
                     ],
-                    columnDefs: [{
-                        targets: -1,
-                        data: null,
-                        orderable: false,
-                        className: 'text-end',
-                        render: function(data, type, row) {
-                            return `
-                            <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                                Aksi
-                                <span class="svg-icon fs-5 m-0">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                            <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="currentColor" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
-                                        </g>
-                                    </svg>
-                                </span>
-                            </a>
-                            <!--begin::Menu-->
-                            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="getdatasub(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#sub">
-                                        Tambah Sub
-                                    </a>
-                                </div>
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
-                                        Edit
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
-                                        Hapus
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-                            </div>
-                            <!--end::Menu-->
-                        `;
-                        },
-                    }, ],
                     // Add data-filter attribute
                 });
 

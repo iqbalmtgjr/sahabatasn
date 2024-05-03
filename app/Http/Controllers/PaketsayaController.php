@@ -16,13 +16,19 @@ class PaketsayaController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Paketsaya::where('user_id', auth()->user()->id)->get();
-        return view('paket_saya.index', compact('data'));
+        // status == 3 -> "Tipe Gratis"
+        $data = Paketsaya::where('user_id', auth()->user()->id)
+            ->where('status', '!=', 3)
+            ->get();
+
+        $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id)->count();
+        // dd($jmlh_soal);
+        return view('paket_saya.index', compact('data', 'jmlh_soal'));
     }
 
-    private function banksoal($subkategori_id, $tipe)
+    private function banksoal($kategori_id)
     {
-        return Banksoal::where('subkategori_id', $subkategori_id)->where('tipe', $tipe)->get();
+        return Banksoal::where('kategori_id', $kategori_id)->get();
     }
 
     /**
@@ -42,7 +48,10 @@ class PaketsayaController extends Controller
 
     public function togratis()
     {
-        return view('paket_saya.togratis');
+        $data = Paketsaya::where('status', 3)
+            ->get();
+        // dd($data);
+        return view('paket_saya.togratis', compact('data'));
     }
 
     /**

@@ -37,6 +37,9 @@
                                 <div class="card-header border-0 py-3">
                                     <h3 class="card-title align-items-start flex-column">
                                         <span class="card-label fw-bold fs-3 mb-4">{{ $data->paket->judul }}</span>
+                                        <p class="fw-semibold fs-7 mb-1 text-muted">Jumlah Soal :
+                                            <span class="text-danger">{{ $jmlh_soal }}</span>
+                                        </p>
                                         <p class="fw-semibold fs-7 mb-1 text-muted">Waktu Pengerjaan :
                                             <span class="text-danger">{{ $data->paket->waktu }} Menit</span>
                                         </p>
@@ -49,7 +52,7 @@
                                 <!--end::Header-->
                                 <!--begin::Body-->
                                 <div class="card-body d-flex flex-column">
-                                    <a href="{{ url('kerjakan/' . $data->paket->subkategori_id . '/' . $data->paket_id) }}"
+                                    <a href="{{ url('kerjakan/' . $data->paket->kategori_id . '/' . $data->paket_id) }}"
                                         class="btn btn-primary w-100 py-3">Kerjakan</a>
                                 </div>
                                 <!--end::Body-->
@@ -64,7 +67,6 @@
                         <a href="{{ url('pusatlangganan') }}" class="btn btn-primary btn-md">Lihat Paket</a>
                     </div>
                 @endif
-
                 <!--end::Col-->
             </div>
         </div>

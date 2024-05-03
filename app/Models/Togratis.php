@@ -12,9 +12,14 @@ class Togratis extends Model
     protected $table = 'togratis';
     protected $guarded = ['id'];
 
-    public function jawabangratis()
+    public function jawaban()
     {
         return $this->hasOne(Jawabangratis::class, 'togratis_id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
     }
 
     public function subkategori()

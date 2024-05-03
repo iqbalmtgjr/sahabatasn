@@ -44,7 +44,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
-                                    <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
+                                    <label class="required fw-semibold fs-6 mb-2">Sub Ketegori</label>
                                     <select data-control="select2"
                                         class="form-select form-select-solid @error('sub_kategori') is-invalid @enderror"
                                         data-hide-search="true" data-placeholder="-- Pilih Kategori --"

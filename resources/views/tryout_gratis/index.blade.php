@@ -28,43 +28,55 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <!--begin::Card-->
             <div class="card">
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <!--begin::Search-->
+                        <div class="d-flex align-items-center position-relative my-1">
+                            <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
+                            <input type="text" data-kt-docs-table-filter="search"
+                                class="form-control form-control-solid w-250px ps-12" placeholder="Cari Soal" />
+                        </div>
+                        <!--end::Search-->
+                    </div>
+                    <!--end::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <div class="w-100 mw-250px">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="-- Pilih Kategori --" data-kt-kategori-filter="kategori">
+                                <option></option>
+                                <option value="all">Semua</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->kategori }}">{{ $item->kategori }}</option>
+                                @endforeach
+                            </select>
+                            <!--end::Select2-->
+                        </div>
+                        <div class="w-100 mw-250px">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="-- Pilih Sub Kategori --" data-kt-subkategori-filter="subkategori">
+                                <option></option>
+                                <option value="all">Semua</option>
+                                @foreach ($sub_kategori as $item)
+                                    <option value="{{ $item->sub_kategori }}">{{ $item->sub_kategori }}</option>
+                                @endforeach
+                            </select>
+                            <!--end::Select2-->
+                        </div>
+                        <!--begin::Add product-->
+                        <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#tambah">Tambah
+                            Soal</a>
+                        <!--end::Add product-->
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
                 <!--begin::Card body-->
                 <div class="card-body py-4">
                     <!--begin::Wrapper-->
-                    <div class="d-flex flex-stack mb-5">
-                        <!--begin::Search-->
-                        <div class="d-flex align-items-center position-relative my-1">
-                            <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span
-                                    class="path2"></span></i>
-                            <input type="text" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Soal" />
-                        </div>
-                        <!--end::Search-->
-
-                        <!--begin::Toolbar-->
-                        <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                            <!--begin::Add customer-->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
-                                <i class="ki-duotone ki-plus fs-2"></i>
-                                Tambah Soal
-                            </button>
-                            <!--end::Add customer-->
-                        </div>
-                        <!--end::Toolbar-->
-
-                        <!--begin::Group actions-->
-                        <div class="d-flex justify-content-end align-items-center d-none"
-                            data-kt-docs-table-toolbar="selected">
-                            <div class="fw-bold me-5">
-                                <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
-                            </div>
-
-                            <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Coming Soon">
-                                Selection Action
-                            </button>
-                        </div>
-                        <!--end::Group actions-->
-                    </div>
                     <!--end::Wrapper-->
 
                     <!--begin::Datatable-->
@@ -199,8 +211,10 @@
                 // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
                 dt.on('draw', function() {
                     // initToggleToolbar();
-                    toggleToolbars();
+                    // toggleToolbars();
                     handleDeleteRows();
+                    handleKategoriFilter();
+                    handleSubKategoriFilter();
                     KTMenu.createInstances();
                 });
             }
@@ -212,6 +226,28 @@
                     dt.search(e.target.value).draw();
                 });
             }
+
+            var handleKategoriFilter = () => {
+                const kategoriFilterElement = document.querySelector(
+                    '[data-kt-kategori-filter="kategori"]');
+
+                $(kategoriFilterElement).on("change", (event) => {
+                    let kategori = event.target.value;
+                    kategori === "all" && (kategori = "");
+                    dt.column(3).search(kategori).draw();
+                });
+            };
+
+            var handleSubKategoriFilter = () => {
+                const subKategoriFilterElement = document.querySelector(
+                    '[data-kt-subkategori-filter="subkategori"]');
+
+                $(subKategoriFilterElement).on("change", (event) => {
+                    let subKategori = event.target.value;
+                    subKategori === "all" && (subKategori = "");
+                    dt.column(4).search(subKategori).draw();
+                });
+            };
 
             // Delete customer
             var handleDeleteRows = () => {
@@ -417,6 +453,8 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
+                    handleKategoriFilter();
+                    handleSubKategoriFilter();
                     // initToggleToolbar();
                     handleDeleteRows();
                     // handleResetForm();

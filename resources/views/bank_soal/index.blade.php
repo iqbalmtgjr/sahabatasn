@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@push('header')
+    <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+@endpush
 @section('content')
     <!--begin::Toolbar-->
     <div id="kt_app_toolbar" class="app-toolbar pt-7 pt-lg-10">
@@ -27,85 +29,74 @@
         <div id="kt_app_content_container" class="app-container container-fluid">
             <!--begin::Card-->
             <div class="card">
-                <!--begin::Card body-->
-                <div class="card-body py-4">
-                    <!--begin::Wrapper-->
-                    <div class="d-flex flex-stack mb-5">
+                <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                    <!--begin::Card title-->
+                    <div class="card-title">
                         <!--begin::Search-->
                         <div class="d-flex align-items-center position-relative my-1">
-                            <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span class="path1"></span><span
-                                    class="path2"></span></i>
+                            <i class="ki-outline ki-magnifier fs-3 position-absolute ms-4"></i>
                             <input type="text" data-kt-docs-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-15" placeholder="Cari Soal" />
+                                class="form-control form-control-solid w-250px ps-12" placeholder="Cari Soal" />
                         </div>
                         <!--end::Search-->
-
-                        <!--begin::Toolbar-->
-                        <form action="{{ route('bank-soal') }}" method="get">
-                            <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
-                                <!--begin::Filter-->
-                                <div class="d-flex align-items-center position-relative my-1 ps-5 px-5">
-                                    <i class="ki-duotone ki-folder fs-1 position-absolute ms-6"><span
-                                            class="path1"></span><span class="path2"></span></i>
-                                    <select name="subkategori" class="form-control form-control-solid w-250px ps-15"
-                                        id="">
-                                        <option value="">-- Pilih Sub Kategori --</option>
-                                        @foreach ($sub_kategori as $item)
-                                            <option value="{{ $item->id }}">{{ $item->sub_kategori }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-light-primary me-3" data-kt-menu-trigger="click"
-                                    data-kt-menu-placement="bottom-end">
-                                    <i class="ki-duotone ki-filter fs-2"><span class="path1"></span><span
-                                            class="path2"></span></i>
-                                    Filter
-                                </button>
-                        </form>
-                        <!--end::Filter-->
-                        <!--begin::Add customer-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="ki-duotone ki-plus fs-2"></i>
-                            Tambah Soal
-                        </button>
-                        <!--end::Add customer-->
                     </div>
-                    <!--end::Toolbar-->
-
-                    <!--begin::Group actions-->
-                    <div class="d-flex justify-content-end align-items-center d-none" data-kt-docs-table-toolbar="selected">
-                        <div class="fw-bold me-5">
-                            <span class="me-2" data-kt-docs-table-select="selected_count"></span> Selected
+                    <!--end::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                        <div class="w-100 mw-250px">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="-- Pilih Kategori --" data-kt-kategori-filter="kategori">
+                                <option></option>
+                                <option value="all">Semua</option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->kategori }}">{{ $item->kategori }}</option>
+                                @endforeach
+                            </select>
+                            <!--end::Select2-->
                         </div>
-
-                        <button type="button" class="btn btn-danger" data-bs-toggle="tooltip" title="Coming Soon">
-                            Selection Action
-                        </button>
+                        <div class="w-100 mw-250px">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="-- Pilih Sub Kategori --" data-kt-subkategori-filter="subkategori">
+                                <option></option>
+                                <option value="all">Semua</option>
+                                @foreach ($sub_kategori as $item)
+                                    <option value="{{ $item->sub_kategori }}">{{ $item->sub_kategori }}</option>
+                                @endforeach
+                            </select>
+                            <!--end::Select2-->
+                        </div>
+                        <!--begin::Add product-->
+                        <a href="javascript:void(0)" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#tambah">Tambah
+                            Soal</a>
+                        <!--end::Add product-->
                     </div>
-                    <!--end::Group actions-->
+                    <!--end::Card toolbar-->
                 </div>
-                <!--end::Wrapper-->
-
-                <!--begin::Datatable-->
-                <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-                    <thead>
-                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                            <th></th>
-                            <th class="w-10px pe-2">No</th>
-                            <th>Soal</th>
-                            <th>Kategori</th>
-                            <th>Sub Kategori</th>
-                            {{-- <th>Tipe</th> --}}
-                            <th class="text-end min-w-100px">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 fw-semibold">
-                    </tbody>
-                </table>
-                <!--end::Datatable-->
+                <!--begin::Card body-->
+                <div class="card-body py-4">
+                    <!--begin::Datatable-->
+                    <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                        <thead>
+                            <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                <th></th>
+                                <th class="w-10px pe-2">No</th>
+                                <th>Soal</th>
+                                <th>Kategori</th>
+                                <th>Sub Kategori</th>
+                                {{-- <th>Tipe</th> --}}
+                                <th class="text-end min-w-100px">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 fw-semibold">
+                        </tbody>
+                    </table>
+                    <!--end::Datatable-->
+                </div>
             </div>
         </div>
-    </div>
     </div>
     @include('bank_soal.modal')
     {{-- @include('bank_soal.modaledit') --}}
@@ -131,6 +122,7 @@
     <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
+    {{-- <script src="{{ asset('') }}assets/js/custom/apps/ecommerce/catalog/products.js"></script> --}}
     <script>
         "use strict";
 
@@ -139,7 +131,6 @@
             // Shared variables
             var table;
             var dt;
-            var filterPayment;
 
             // Private functions
             var initDatatable = function() {
@@ -225,6 +216,8 @@
                 dt.on('draw', function() {
                     toggleToolbars();
                     handleDeleteRows();
+                    handleKategoriFilter();
+                    handleSubKategoriFilter();
                     KTMenu.createInstances();
                 });
             }
@@ -236,6 +229,28 @@
                     dt.search(e.target.value).draw();
                 });
             }
+
+            var handleKategoriFilter = () => {
+                const kategoriFilterElement = document.querySelector(
+                    '[data-kt-kategori-filter="kategori"]');
+
+                $(kategoriFilterElement).on("change", (event) => {
+                    let kategori = event.target.value;
+                    kategori === "all" && (kategori = "");
+                    dt.column(3).search(kategori).draw();
+                });
+            };
+
+            var handleSubKategoriFilter = () => {
+                const subKategoriFilterElement = document.querySelector(
+                    '[data-kt-subkategori-filter="subkategori"]');
+
+                $(subKategoriFilterElement).on("change", (event) => {
+                    let subKategori = event.target.value;
+                    subKategori === "all" && (subKategori = "");
+                    dt.column(4).search(subKategori).draw();
+                });
+            };
 
             // Delete customer
             var handleDeleteRows = () => {
@@ -308,6 +323,35 @@
                     })
                 });
             }
+
+            // var handleFilterDatatable = () => {
+            //     // Select filter options
+            //     filterPayment = document.querySelectorAll(
+            //         '[data-kt-docs-table-filter="payment_type"] [name="payment_type"]');
+            //     const filterButton = document.querySelector('[data-kt-docs-table-filter="filter"]');
+
+            //     // Filter datatable on submit
+            //     filterButton.addEventListener('click', function() {
+            //         // Get filter values
+            //         let paymentValue = '';
+
+            //         // Get payment value
+            //         filterPayment.forEach(r => {
+            //             if (r.checked) {
+            //                 paymentValue = r.value;
+            //             }
+
+            //             // Reset payment value if "All" is selected
+            //             if (paymentValue === 'all') {
+            //                 paymentValue = '';
+            //             }
+            //         });
+
+            //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+            //         dt.search(paymentValue).draw();
+            //     });
+            // }
+
 
             // Reset Filter
             // var handleResetForm = () => {
@@ -408,7 +452,8 @@
                 const container = document.querySelector('#kt_datatable_example_1');
                 const toolbarBase = document.querySelector('[data-kt-docs-table-toolbar="base"]');
                 const toolbarSelected = document.querySelector('[data-kt-docs-table-toolbar="selected"]');
-                const selectedCount = document.querySelector('[data-kt-docs-table-select="selected_count"]');
+                const selectedCount = document.querySelector(
+                    '[data-kt-docs-table-select="selected_count"]');
 
                 // Select refreshed checkbox DOM elements
                 const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
@@ -426,14 +471,14 @@
                 });
 
                 // Toggle toolbars
-                if (checkedState) {
-                    selectedCount.innerHTML = count;
-                    toolbarBase.classList.add('d-none');
-                    toolbarSelected.classList.remove('d-none');
-                } else {
-                    toolbarBase.classList.remove('d-none');
-                    toolbarSelected.classList.add('d-none');
-                }
+                // if (checkedState) {
+                //     selectedCount.innerHTML = count;
+                //     toolbarBase.classList.add('d-none');
+                //     toolbarSelected.classList.remove('d-none');
+                // } else {
+                //     toolbarBase.classList.remove('d-none');
+                //     toolbarSelected.classList.add('d-none');
+                // }
             }
 
             // Public methods
@@ -441,6 +486,8 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
+                    handleKategoriFilter();
+                    handleSubKategoriFilter();
                     // initToggleToolbar();
                     handleDeleteRows();
                     // handleResetForm();
