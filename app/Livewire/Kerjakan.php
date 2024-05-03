@@ -18,9 +18,9 @@ class Kerjakan extends Component
     #[On('pageChanged')]
     public function mount($id, $paket_id)
     {
-        $this->paketSaya = Paketsaya::where('user_id', auth()->user()->id)
+        // dd($id, $paket_id);
+        $this->paketSaya = Paketsaya::where('user_id', 2)
             ->where('paket_id', $paket_id)->first();
-        // dd($this->getPaket()->id);
 
         if ($this->paketSaya->status == 3) {
             $this->datas = Togratis::where('kategori_id', $id)->get();
