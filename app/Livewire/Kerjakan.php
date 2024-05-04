@@ -25,9 +25,10 @@ class Kerjakan extends Component
             $tangkap_id[] = $value->id;
             $tangkap_id[] = auth()->user()->id;
         }
+
+        // dd($tangkap_id);
         $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
             ->where('paket_id', $paket_id)->first();
-        // dd($this->paketSaya);
 
         if ($this->paketSaya->status == 3) {
             $this->datas = Togratis::where('kategori_id', $id)->get();
