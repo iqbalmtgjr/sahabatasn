@@ -63,7 +63,8 @@ class HasiltryoutController extends Controller
                     return $skor;
                 })
                 ->addColumn('pembahasan', function ($row) {
-                    return '<a href="" class="btn btn-sm btn-primary">Detail</a>';
+                    $url = url("pembahasan/" . $row->paket->kategori_id) . "/" . $row->paket_id;
+                    return "<a href=\"$url\" class=\"btn btn-sm btn-primary\">Detail</a>";
                 })
                 ->addColumn('lulus', function ($row) {
                     return '<div class="badge badge-light-success">Lulus</div>';
