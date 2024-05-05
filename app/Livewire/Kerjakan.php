@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Request;
 
 class Kerjakan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $paket_saya, $totalSteps, $paketId;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId;
     public $currentStep = 1;
 
     #[On('pageChanged')]
@@ -21,7 +21,7 @@ class Kerjakan extends Component
     {
         $admin = User::where('role', 'admin')->get();
         $tangkap_id = array();
-        foreach ($admin as $key => $value) {
+        foreach ($admin as $value) {
             $tangkap_id[] = $value->id;
             $tangkap_id[] = auth()->user()->id;
         }

@@ -51,6 +51,7 @@
 <!--end::Global Javascript Bundle-->
 <!--begin::Custom Javascript(used for this page only)-->
 @stack('footer')
+@livewireScripts
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
 </body>

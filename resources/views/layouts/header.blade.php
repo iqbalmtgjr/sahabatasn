@@ -27,5 +27,6 @@
     <link href="{{ asset('') }}assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
     @stack('header')
+    @livewireStyles
 </head>
 <!--end::Head-->

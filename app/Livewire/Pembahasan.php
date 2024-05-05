@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Request;
 
 class Pembahasan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $paket_saya, $totalSteps, $paketId;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId;
     public $currentStep = 1;
 
     #[On('pageChanged')]
@@ -21,7 +21,7 @@ class Pembahasan extends Component
     {
         $admin = User::where('role', 'admin')->get();
         $tangkap_id = array();
-        foreach ($admin as $key => $value) {
+        foreach ($admin as $value) {
             $tangkap_id[] = $value->id;
             $tangkap_id[] = auth()->user()->id;
         }
@@ -53,16 +53,16 @@ class Pembahasan extends Component
         return view('livewire.pembahasan');
     }
 
-    public function nextStep()
+    public function nextSteps()
     {
         $this->currentStep++;
         $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id);
     }
 
-    public function previousStep()
+    public function previousSteps()
     {
         $this->currentStep--;
-        dd($this->currentStep);
+        // dd($this->currentStep);
         $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id);
     }
 
@@ -74,8 +74,11 @@ class Pembahasan extends Component
 
     public function getSoal()
     {
+        // dd($this->datas[1]);
+        // dd($this->currentStep);
         return $this->datas[$this->currentStep - 1];
     }
+
     public function getPaket()
     {
         return $this->paketSaya;
