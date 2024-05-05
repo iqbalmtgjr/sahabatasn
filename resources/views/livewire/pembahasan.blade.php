@@ -67,10 +67,10 @@
                                     <div class="row">
                                         <p style="font-size: 18px">Jawaban Anda:
                                             <span
-                                                class="text-primary">{{ $datas[$i]->jawaban->simpanjawaban->jawab }}</span>
+                                                class="text-primary"><strong>{{ $datas[$i]->jawaban->simpanjawaban->jawab }}</strong></span>
                                         </p>
                                         <p style="font-size: 18px">Kunci Jawaban: <span
-                                                style="color: green">{{ $datas[$i]->jawaban->simpanjawaban->jawab }}</span>
+                                                style="color: green"><strong>{{ $datas[$i]->jawaban->simpanjawaban->jawab }}</strong></span>
                                         </p>
                                     </div>
                                     <hr>
