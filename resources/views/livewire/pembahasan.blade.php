@@ -157,20 +157,11 @@
                             @foreach ($datas as $i => $data)
                                 @php
                                     $backgroundColor = '';
-                                    if (
-                                        in_array($data->jawaban->simpanjawaban->jawab, [
-                                            $data->jawaban->pilihan_a,
-                                            $data->jawaban->pilihan_b,
-                                            $data->jawaban->pilihan_c,
-                                            $data->jawaban->pilihan_d,
-                                            $data->jawaban->pilihan_e,
-                                        ]) &&
-                                        in_array($data->jawaban->jawaban_a, [0, 5]) &&
-                                        $data->jawaban->jawaban_a == 5
-                                    ) {
-                                        $backgroundColor = 'background-color: red;';
-                                    } else {
-                                        $backgroundColor = 'background-color: green;';
+                                    foreach (range('a', 'e') as $alpha) {
+                                        $backgroundColor .= match ($data->jawaban["pilihan_$alpha"]) {
+                                            $data->jawaban->simpanjawaban->jawab => 'background-color: green;',
+                                            default => 'background-color: green;',
+                                        };
                                     }
                                 @endphp
                                 <div wire:key='{{ $i }}'
