@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class PaketsayaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         // status == 3 -> "Tipe Gratis"
@@ -21,9 +18,11 @@ class PaketsayaController extends Controller
             ->where('status', '!=', 3)
             ->get();
 
-        $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id)->count();
-        // dd($jmlh_soal);
-        return view('paket_saya.index', compact('data', 'jmlh_soal'));
+        if ($data->first() != null) {
+            $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id)->count();
+            return view('paket_saya.index', compact('data', 'jmlh_soal'));
+        }
+        return view('paket_saya.index', compact('data'));
     }
 
     private function banksoal($kategori_id)
