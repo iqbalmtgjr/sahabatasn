@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('simpan_jawaban', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('paketsaya_id');
-            $table->foreignId('banksoal_id');
-            $table->foreignId('subkategori_id');
-            $table->foreignId('jawaban_id');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('paketsaya_id')->constrained('paket_saya');
+            $table->foreignId('banksoal_id')->constrained('bank_soal');
+            $table->foreignId('subkategori_id')->constrained('sub_kategori');
+            $table->foreignId('jawaban_id')->constrained('jawaban');
+            $table->foreignId('jawabangratis_id')->nullable()->constrained('jawaban');
             $table->string('jawab');
             $table->timestamps();
         });

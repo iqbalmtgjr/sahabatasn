@@ -8,7 +8,7 @@
         <div class="d-flex flex-column">
             <h4 class="mb-1 text-dark">Catatan</h4>
             <span class="text-dark">Jika sudah divalidasi, silahkan menuju menu <strong>Paket Saya</strong> disisi kiri
-                halaman. <br> Terima Kasih</span>
+                halaman atau <a href="{{ url('paketsaya') }}">Klik Disini</a>. <br> Terima Kasih</span>
         </div>
     </div>
     <!--end::Alert-->
