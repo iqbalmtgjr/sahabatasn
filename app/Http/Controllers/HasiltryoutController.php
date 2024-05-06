@@ -63,7 +63,17 @@ class HasiltryoutController extends Controller
         //     //     ]);
         // }
         // dd($jml_benar);
+        // twk
+        $nilai_twk = $this->total_nilai(1);
 
+        // tiu
+        $nilai_tiu = $this->total_nilai(2);
+
+        // tkp
+        $nilai_tkp = $this->total_nilai(3);
+
+        // skor
+        $skor = $nilai_twk + $nilai_tiu + $nilai_tkp;
 
 
         if ($request->ajax()) {
@@ -76,26 +86,28 @@ class HasiltryoutController extends Controller
                     }
                 })
                 ->addColumn('tgl_kerja', function ($row) {
-                    if ($row->simpanjawaban->created_at) {
+                    if ($row->simpanjawaban) {
                         return \Carbon\Carbon::parse($row->simpanjawaban->created_at)->format('d F Y');
+                        // return $row->simpanjawaban;
                     } else {
                         return '';
                     }
                 })
-                ->addColumn('twk', function ($row) {
-                    return '0';
+                ->addColumn('twk', function ($row) use ($nilai_twk) {
+                    return $nilai_twk;
                 })
-                ->addColumn('tiu', function ($row) {
-                    return '0';
+                ->addColumn('tiu', function ($row) use ($nilai_tiu) {
+                    return $nilai_tiu;
                 })
-                ->addColumn('tkp', function ($row) {
-                    return '0';
+                ->addColumn('tkp', function ($row) use ($nilai_tkp) {
+                    return $nilai_tkp;
                 })
-                ->addColumn('skor', function ($row) {
-                    return '0';
+                ->addColumn('skor', function ($row) use ($skor) {
+                    return $skor;
                 })
                 ->addColumn('pembahasan', function ($row) {
-                    return '<a href="" class="btn btn-sm btn-primary">Detail</a>';
+                    $url = url("pembahasan/" . $row->paket->kategori_id) . "/" . $row->paket_id;
+                    return "<a href=\"$url\" class=\"btn btn-sm btn-primary\">Detail</a>";
                 })
                 ->addColumn('lulus', function ($row) {
                     return '<div class="badge badge-light-success">Lulus</div>';
@@ -106,51 +118,65 @@ class HasiltryoutController extends Controller
         return view('hasil.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function total_nilai($subkategori_id)
     {
-        //
-    }
+        $soal = Banksoal::where('subkategori_id', $subkategori_id)->get();
+        $tangkap = array();
+        foreach ($soal as $item) {
+            $simpan_jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
+                ->where('banksoal_id', $item->id)
+                ->where('subkategori_id', $subkategori_id)
+                ->get();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            if (!$simpan_jawaban->isEmpty()) {
+                $tangkap[] = $simpan_jawaban;
+            }
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $jawabnya = array();
+        for ($i = 0; $i < count($tangkap); $i++) {
+            $jawabnya[] = $tangkap[$i][0]->jawab;
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $pilihan_a = array();
+        $pilihan_b = array();
+        $pilihan_c = array();
+        $pilihan_d = array();
+        $jawaban_a = array();
+        $jawaban_b = array();
+        $jawaban_c = array();
+        $jawaban_d = array();
+        for ($i = 0; $i < count($tangkap); $i++) {
+            $pilihan_a[] = $tangkap[$i][0]->jawaban->pilihan_a;
+            $pilihan_b[] = $tangkap[$i][0]->jawaban->pilihan_b;
+            $pilihan_c[] = $tangkap[$i][0]->jawaban->pilihan_c;
+            $pilihan_d[] = $tangkap[$i][0]->jawaban->pilihan_d;
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+            $jawaban_a[] = $tangkap[$i][0]->jawaban->jawaban_a;
+            $jawaban_b[] = $tangkap[$i][0]->jawaban->jawaban_b;
+            $jawaban_c[] = $tangkap[$i][0]->jawaban->jawaban_c;
+            $jawaban_d[] = $tangkap[$i][0]->jawaban->jawaban_d;
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $hasils = [];
+
+        foreach ($jawabnya as $key => $value) {
+            $hsl_a = array_intersect([$jawabnya[$key]], $pilihan_a);
+            $hsl_b = array_intersect([$jawabnya[$key]], $pilihan_b);
+            $hsl_c = array_intersect([$jawabnya[$key]], $pilihan_c);
+            $hsl_d = array_intersect([$jawabnya[$key]], $pilihan_d);
+            if (!empty($hsl_a)) {
+                $hasils[] = $jawaban_a[$key];
+            } elseif (!empty($hsl_b)) {
+                $hasils[] = $jawaban_b[$key];
+            } elseif (!empty($hsl_c)) {
+                $hasils[] = $jawaban_c[$key];
+            } elseif (!empty($hsl_d)) {
+                $hasils[] = $jawaban_d[$key];
+            } else {
+                $hasils[] = 0;
+            }
+        }
+        return array_sum($hasils);
     }
 }

@@ -35,7 +35,8 @@
                         </div>
                         <hr>
                         @for ($i = 0; $i < $totalSteps; $i++)
-                            <div class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
+                            <div wire:key='{{ $datas[$i]->id }}'
+                                class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="pb-5 pb-lg-5">
@@ -179,20 +180,6 @@
                         <div class="row">
                             {{-- <div class="stepper-nav"> --}}
                             @for ($i = 0; $i < $totalSteps; $i++)
-                                <!--begin::Step 1-->
-                                {{-- <div class="stepper-item mark-completed {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
-                                    data-kt-stepper-element="nav" wire:ignore>
-                                    <div class="stepper-wrapper">
-                                        <a href="#">
-                                            <div class="stepper-icon w-40px h-40px">
-                                                <span style="font-size: 20px"
-                                                    class="stepper-check"><strong>{{ $i + 1 }}</strong> </span>
-                                                <span class="stepper-number">{{ $i + 1 }}</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <!--end::Step 1-->
                                 <div class="stepper-item {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
                                     data-kt-stepper-element="nav">
                                     <div class="stepper-wrapper">

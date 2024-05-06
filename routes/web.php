@@ -20,6 +20,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\HasiltryoutController;
 use App\Http\Controllers\PusatlanggananController;
+use App\Livewire\Pembahasan;
 
 Route::get('/', function () {
     return redirect('login');
@@ -141,5 +142,6 @@ Route::group(['middleware' => ['isLogin']], function () {
 
         //hasil
         Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
+        Route::get('/pembahasan/{id}/{paket_id}', Pembahasan::class)->name('pembahasan');
     });
 });

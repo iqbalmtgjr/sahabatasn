@@ -16,4 +16,9 @@ class Jawaban extends Model
     {
         return $this->belongsTo(Banksoal::class);
     }
+
+    public function simpanjawaban()
+    {
+        return $this->hasOne(Simpanjawaban::class);
+    }
 }

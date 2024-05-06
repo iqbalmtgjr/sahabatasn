@@ -81,7 +81,7 @@
             </div> --}}
             <div class="row">
                 @foreach ($data as $item)
-                    <div class="col-xl-4" data-kt-billing-element="address">
+                    <div class="col-xl-4 mb-3">
                         <!--begin::Address-->
                         <div class="card h-xl-100 flex-row flex-stack flex-wrap p-6">
                             <!--begin::Details-->

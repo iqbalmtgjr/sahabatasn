@@ -26,6 +26,49 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <!--begin::Content container-->
         <div id="kt_app_content_container" class="app-container container-fluid">
+            <div class="alert alert-primary p-5">
+                <!--begin::Wrapper-->
+                {{-- <div class="d-flex flex-column"> --}}
+                <div class="row d-flex flex-wrap justify-content-start">
+                    <div class="col-4">
+                        <table class="table table-borderless align-start">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start">TWK</td>
+                                    <td class="text-start">: <strong>65</strong></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-start">Total Nilai</td>
+                                    <td class="text-start">: <strong>550</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-borderless align-middle">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start">TIU</td>
+                                    <td class="text-start">: <strong>80</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-4">
+                        <table class="table table-borderless align-middle">
+                            <tbody>
+                                <tr>
+                                    <td class="text-start">TKP</td>
+                                    <td class="text-start">: <strong>166</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </table>
+                {{-- </div> --}}
+                <!--end::Wrapper-->
+            </div>
             <!--begin::Card-->
             <div class="card">
                 <!--begin::Card body-->

@@ -4,7 +4,7 @@
             <div class="app-toolbar-wrapper d-flex flex-stack flex-wrap gap-4 w-100">
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">
-                        Soal-soal
+                        Pembahasan Soal-soal
                         {{ $datas[0]->kategori_id == 1 || $datas[0]->kategori_id == 2 || $datas[0]->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
                     </h1>
                 </div>
@@ -21,21 +21,19 @@
                         {{-- @csrf --}}
 
                         <div class="d-flex justify-content-between">
-                            <h3 class="text-primary">Soal
+                            <h3>Soal
                                 {{ $datas[$currentStep - 1]->kategori->kategori }}
                                 {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
                             <div class="row text-end ">
-                                <div class="col-3 text-end">
-                                    <i class="text-primary ki-outline ki-time fs-2"></i>
-                                </div>
-                                <div class="col-9 text-start" wire:ignore>
-                                    <h3 id="countdown" class="d-flex"></h3>
-                                </div>
+                                <h3>Lama Mengerjakan: 10 Menit</h3>
                             </div>
                         </div>
                         <hr>
                         @for ($i = 0; $i < $totalSteps; $i++)
-                            <div class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
+                            {{-- <br>
+                            {{ $datas[$i]->jawaban->simpanjawaban }} --}}
+                            <div wire:key='{{ $datas[$i]->id }}'
+                                class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="pb-5 pb-lg-5">
@@ -44,82 +42,69 @@
                                         </h2>
                                     </div>
                                     <!-- Jawaban -->
-                                    {{-- <input type="hidden" name="banksoal_id" value="{{ $datas[$i]->id }}">
-                                        <input type="hidden" name="subkategori_id"
-                                            value="{{ $datas[$i]->subkategori_id }}">
-                                        <input type="hidden" name="jawaban_id" value="{{ $datas[$i]->jawaban->id }}">
-                                        <input type="hidden" name="step_total" value="{{ $totalSteps }}"> --}}
-                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
-                                        {{-- {{ dd($jawabann) }} --}}
-                                        <input
-                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_a }}',{{ $datas[$i]->jawaban->id }})"
-                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault1"
-                                            {{ ($jawabann[$i] ?? null ? $jawabann[$i]->jawab : null) == ($datas[$i]->jawaban->pilihan_a ?? null) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            <strong
-                                                style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_a }}</strong>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
-                                        <input
-                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_b }}',{{ $datas[$i]->jawaban->id }})"
-                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault2"
-                                            value="{{ $datas[$i]->jawaban->pilihan_b != null ? $datas[$i]->jawaban->pilihan_b : old('jawaban_' . $i + 1) }}"
-                                            {{ ($jawabann[$i] ?? null ? $jawabann[$i]->jawab : null) == $datas[$i]->jawaban->pilihan_b ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            <strong
-                                                style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_b }}</strong>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
-                                        <input
-                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_c }}',{{ $datas[$i]->jawaban->id }})"
-                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault3"
-                                            value="{{ $datas[$i]->jawaban->pilihan_c != null ? $datas[$i]->jawaban->pilihan_c : old('jawaban_' . $i + 1) }}"
-                                            {{ ($jawabann[$i] ?? null ? $jawabann[$i]->jawab : null) == ($datas[$i]->jawaban->pilihan_c ?? null) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault3">
-                                            <strong
-                                                style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_c }}</strong>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
-                                        <input
-                                            wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_d }}',{{ $datas[$i]->jawaban->id }})"
-                                            class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault4"
-                                            value="{{ $datas[$i]->jawaban->pilihan_d != null ? $datas[$i]->jawaban->pilihan_d : old('jawaban_' . $i + 1) }}"
-                                            {{ ($jawabann[$i] ?? null ? $jawabann[$i]->jawab : null) == ($datas[$i]->jawaban->pilihan_d ?? null) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault4">
-                                            <strong
-                                                style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_d }}</strong>
-                                        </label>
-                                    </div>
-                                    @if ($datas[$i]->jawaban->pilihan_e != null)
-                                        <div class="form-check form-check-custom form-check-solid"
-                                            style="margin-top: 10px">
-                                            <input
-                                                wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_e }}',{{ $datas[$i]->jawaban->id }})"
-                                                class="form-check-input" type="radio"
-                                                name="jawaban_{{ $i + 1 }}" id="flexRadioDefault5"
-                                                value="{{ $datas[$i]->jawaban->pilihan_e != null ? $datas[$i]->jawaban->pilihan_e : old('jawaban_' . $i + 1) }}"
-                                                {{ ($jawabann[$i] ?? null ? $jawabann[$i]->jawab : null) == ($datas[$i]->jawaban->pilihan_e ?? null) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="flexRadioDefault5">
-                                                <strong
-                                                    style="font-size: 15px">{{ $datas[$i]->jawaban->pilihan_e }}</strong>
-                                            </label>
-                                        </div>
-                                    @endif
-                                </div>
+                                    @foreach (range('a', 'e') as $alpha)
+                                        @if (isset($datas[$i]->jawaban["pilihan_$alpha"]))
+                                            <div>
+                                                @if (isset($datas[$i]->jawaban["pilihan_$alpha"]) &&
+                                                        $datas[$i]->jawaban["pilihan_$alpha"] === $datas[$i]->jawaban->simpanjawaban->jawab)
+                                                    <strong wire:key='{{ $datas[$i]->id }}' class="text-primary"
+                                                        style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
+                                                @elseif($datas[$i]->jawaban["jawaban_$alpha"] != 0)
+                                                    <strong wire:key='{{ $datas[$i]->id }}'
+                                                        style="font-size: 15px; color:green">{{ strtoupper($alpha) }}.
+                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong><i
+                                                        class="ki-duotone ki-check fs-2"></i>
+                                                @else
+                                                    <strong style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
+                                                @endif
 
-                                {{-- <button wire:click="delete({{ $jawabann[0]->id }})" type="button"
-                                    class="btn btn-lg btn-light-primary me-3">
-                                    Reset
-                                </button> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                    <hr>
+                                    <div class="row">
+                                        <p style="font-size: 18px">Jawaban Anda:
+                                            @switch($datas[$i]->jawaban->simpanjawaban->jawab)
+                                                @case($datas[$i]->jawaban['pilihan_a'])
+                                                    <span class="text-primary"><strong>A</strong></span>
+                                                @break
+
+                                                @case($datas[$i]->jawaban['pilihan_b'])
+                                                    <span class="text-primary"><strong>B</strong></span>
+                                                @break
+
+                                                @case($datas[$i]->jawaban['pilihan_c'])
+                                                    <span class="text-primary"><strong>C</strong></span>
+                                                @break
+
+                                                @case($datas[$i]->jawaban['pilihan_d'])
+                                                    <span class="text-primary"><strong>D</strong></span>
+                                                @break
+
+                                                @case($datas[$i]->jawaban['pilihan_e'])
+                                                    <span class="text-primary"><strong>E</strong></span>
+                                                @break
+                                            @endswitch
+                                        </p>
+                                        <p style="font-size: 18px">Kunci Jawaban:
+                                            @foreach (range('a', 'e') as $alpha)
+                                                @if (isset($datas[$i]->jawaban["jawaban_$alpha"]) && $datas[$i]->jawaban["jawaban_$alpha"] != 0)
+                                                    <span
+                                                        style="{{ $datas[$i]->jawaban->simpanjawaban->jawab == $datas[$i]->jawaban["jawaban_$alpha"] ? 'color: green' : 'color: green' }}"><strong>{{ strtoupper($alpha) }}
+                                                        </strong></span>
+                                                @endif
+                                            @endforeach
+                                        </p>
+                                    </div>
+                                    <hr>
+                                    <div class="row mt-5">
+                                        <h2><strong>Pembahasan</strong></h2>
+                                        <span style="font-size: 17px">{!! $datas[$i]->jawaban->pembahasan !!}</span>
+                                    </div>
+                                </div>
                             </div>
-                            {{-- @endif --}}
                         @endfor
 
                         <!--begin::Actions-->
@@ -127,7 +112,7 @@
                             <!--begin::Wrapper-->
                             @if ($currentStep > 1 && $currentStep <= $totalSteps)
                                 <div class="mr-2">
-                                    <button wire:click="previousStep" type="button"
+                                    <button wire:click="previousSteps" type="button"
                                         class="btn btn-lg btn-light-primary me-3">
                                         <i class="ki-outline ki-arrow-left fs-4 me-1"></i>Kembali</button>
                                 </div>
@@ -148,19 +133,11 @@
                                     </button>
                                 @endif
                                 @if ($currentStep != $totalSteps)
-                                    <button wire:click="nextStep" data-kt-stepper-action="next" type="button"
+                                    <button wire:click="nextSteps" data-kt-stepper-action="next" type="button"
                                         class="btn btn-lg btn-primary">Selanjutnya
                                         <i class="ki-outline ki-arrow-right fs-4 ms-1 me-0"></i></button>
                                 @endif
                             </div>
-
-                            <!--end::Wrapper-->
-                            {{-- <button type="submit" class="btn btn-lg btn-primary me-3">
-                                <span class="indicator-label">Selesai
-                                    <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
-                                <span class="indicator-progress">Mohon Tunggu...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                            </button> --}}
                         </div>
                         <!--end::Actions-->
                         <!--end::Form-->
@@ -177,35 +154,29 @@
                         <!--begin::Nav-->
 
                         <div class="row">
-                            {{-- <div class="stepper-nav"> --}}
-                            @for ($i = 0; $i < $totalSteps; $i++)
-                                <!--begin::Step 1-->
-                                {{-- <div class="stepper-item mark-completed {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
-                                    data-kt-stepper-element="nav" wire:ignore>
-                                    <div class="stepper-wrapper">
-                                        <a href="#">
-                                            <div class="stepper-icon w-40px h-40px">
-                                                <span style="font-size: 20px"
-                                                    class="stepper-check"><strong>{{ $i + 1 }}</strong> </span>
-                                                <span class="stepper-number">{{ $i + 1 }}</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div> --}}
-                                <!--end::Step 1-->
-                                <div class="stepper-item {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
+                            @foreach ($datas as $i => $data)
+                                @php
+                                    $backgroundColor = '';
+                                    foreach (range('a', 'e') as $alpha) {
+                                        $backgroundColor .= match ($data->jawaban["pilihan_$alpha"]) {
+                                            $data->jawaban->simpanjawaban->jawab => 'background-color: green;',
+                                            default => 'background-color: green;',
+                                        };
+                                    }
+                                @endphp
+                                <div wire:key='{{ $i }}'
+                                    class="stepper-item {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
                                     data-kt-stepper-element="nav">
                                     <div class="stepper-wrapper">
                                         <a href="javascript:void(0)" wire:click="setStep({{ $i + 1 }})">
-                                            <div class="stepper-icon w-40px h-40px">
-                                                <span style="font-size: 20px; font-weight: bold; color: #ffffff"
-                                                    class="ki-outline ki-check fs-2 stepper-check">{{ $i + 1 }}</span>
-                                                <span class="stepper-number">{{ $i + 1 }}</span>
+                                            <div class="stepper-icon w-40px h-40px" style="{{ $backgroundColor }}">
+                                                <span class="stepper-number" style="color: white">
+                                                    {{ $i + 1 }}</span>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
-                            @endfor
+                            @endforeach
                             <!--begin::Step 5-->
                         </div>
 
@@ -213,10 +184,6 @@
                     </div>
                     <!--end::Wrapper-->
                 </div>
-                <!--begin::Aside-->
-                <!--begin::Content-->
-
-                <!--end::Content-->
             </div>
         </div>
     </div>
