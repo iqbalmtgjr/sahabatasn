@@ -7,7 +7,8 @@
                 class="path2"></span></i>
         <div class="d-flex flex-column">
             <h4 class="mb-1 text-dark">Catatan</h4>
-            <span class="text-dark">Jika sudah divalidasi, silahkan menuju menu <strong>Paket Saya</strong> disisi kiri
+            <span class="text-dark">Jika sudah tervalidasi dan status berubah menjadi "Pembayaran Berhasil", silahkan menuju
+                menu <strong>Paket Saya</strong> disisi kiri
                 halaman atau <a href="{{ url('paketsaya') }}">Klik Disini</a>. <br> Terima Kasih</span>
         </div>
     </div>

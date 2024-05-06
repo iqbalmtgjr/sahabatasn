@@ -41,7 +41,7 @@
                                 <div class="w-100">
                                     <div class="pb-5 pb-lg-5">
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
-                                            #{{ $i + 1 }}. {{ $datas[$i]->soal }}
+                                            {{ $i + 1 }}. {{ $datas[$i]->soal }}
                                         </h2>
                                     </div>
                                     <!-- Jawaban -->

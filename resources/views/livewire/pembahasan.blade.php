@@ -38,7 +38,7 @@
                                 <div class="w-100">
                                     <div class="pb-5 pb-lg-5">
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
-                                            #{{ $i + 1 }}. {{ $datas[$i]->soal }}
+                                            {{ $i + 1 }}. {{ $datas[$i]->soal }}
                                         </h2>
                                     </div>
                                     <!-- Jawaban -->
@@ -47,14 +47,19 @@
                                             <div>
                                                 @if (isset($datas[$i]->jawaban["pilihan_$alpha"]) &&
                                                         $datas[$i]->jawaban["pilihan_$alpha"] === $datas[$i]->jawaban->simpanjawaban->jawab)
-                                                    <strong wire:key='{{ $datas[$i]->id }}' class="text-primary"
+                                                    <strong wire:key='{{ $datas[$i]->id }}'
+                                                        class="{{ $datas[$i]->jawaban["pilihan_$alpha"] === $datas[$i]->jawaban->simpanjawaban->jawab && $datas[$i]->jawaban["jawaban_$alpha"] == 5 ? 'text-primary' : 'text-danger' }}"
                                                         style="font-size: 15px">{{ strtoupper($alpha) }}.
                                                         {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
+                                                    {{-- @elseif ($datas[$i]->jawaban["jawaban_$alpha"] == 0)
+                                                    <strong wire:key='{{ $datas[$i]->id }}'
+                                                        style="font-size: 15px; color:red">{{ strtoupper($alpha) }}.
+                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong> --}}
                                                 @elseif($datas[$i]->jawaban["jawaban_$alpha"] != 0)
                                                     <strong wire:key='{{ $datas[$i]->id }}'
                                                         style="font-size: 15px; color:green">{{ strtoupper($alpha) }}.
                                                         {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong><i
-                                                        class="ki-duotone ki-check fs-2"></i>
+                                                        class="ki-duotone ki-check fs-2" style="color:green"></i>
                                                 @else
                                                     <strong style="font-size: 15px">{{ strtoupper($alpha) }}.
                                                         {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
@@ -157,12 +162,37 @@
                             @foreach ($datas as $i => $data)
                                 @php
                                     $backgroundColor = '';
-                                    foreach (range('a', 'e') as $alpha) {
-                                        $backgroundColor .= match ($data->jawaban["pilihan_$alpha"]) {
-                                            $data->jawaban->simpanjawaban->jawab => 'background-color: green;',
-                                            default => 'background-color: green;',
-                                        };
+                                    // echo $data->jawaban["pilihan_$alpha"];
+                                    // die();
+                                    if (
+                                        in_array($data->jawaban->simpanjawaban->jawab, [
+                                            $data->jawaban['pilihan_a'],
+                                            $data->jawaban['pilihan_b'],
+                                            $data->jawaban['pilihan_c'],
+                                            $data->jawaban['pilihan_d'],
+                                            $data->jawaban['pilihan_e'],
+                                        ]) &&
+                                        in_array(5, [
+                                            $data->jawaban['jawaban_a'],
+                                            $data->jawaban['jawaban_b'],
+                                            $data->jawaban['jawaban_c'],
+                                            $data->jawaban['jawaban_d'],
+                                            $data->jawaban['jawaban_e'],
+                                        ])
+                                    ) {
+                                        $backgroundColor = 'background-color: green;';
+                                    } else {
+                                        $backgroundColor = 'background-color: red;';
                                     }
+                                    // $backgroundColor .= match ($data->jawaban["pilihan_$alpha"]) {
+                                    //     $data->jawaban->simpanjawaban->jawab => 'background-color: green;',
+                                    //     default => 'background-color: green;',
+                                    // };
+                                    // if ($ubh_warna == true) {
+                                    //     $backgroundColor = 'background-color: green;';
+                                    // } else {
+                                    //     $backgroundColor = 'background-color: red;';
+                                    // }
                                 @endphp
                                 <div wire:key='{{ $i }}'
                                     class="stepper-item {{ $currentStep == $i + 1 ? 'current' : '' }} col-2 mb-5"
