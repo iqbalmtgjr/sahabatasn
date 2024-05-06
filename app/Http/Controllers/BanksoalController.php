@@ -86,7 +86,7 @@ class BanksoalController extends Controller
         }
 
         $dom = new DOMDocument();
-        $dom->loadHTML($request->pembahasan, 9);
+        $dom->loadHTML($request->pembahasan, 225);
 
         $image = $dom->getElementsByTagName('img');
 
@@ -216,9 +216,9 @@ class BanksoalController extends Controller
      */
     public function destroy(string $id)
     {
-        Banksoal::find($id)->delete();
         $jawaban = Jawaban::where('bank_soal_id', $id)->first();
         $jawaban->delete();
+        Banksoal::find($id)->delete();
         return redirect()->back();
     }
 

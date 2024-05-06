@@ -20,49 +20,49 @@ class HasiltryoutController extends Controller
             ->where('submit', 1)
             ->get();
 
-        $soal_twk = Banksoal::where('subkategori_id', 1)->get();
-        $soal_tiu = Banksoal::where('subkategori_id', 2)->get();
-        $soal_tkp = Banksoal::where('subkategori_id', 3)->get();
+        // $soal_twk = Banksoal::where('subkategori_id', 1)->get();
+        // $soal_tiu = Banksoal::where('subkategori_id', 2)->get();
+        // $soal_tkp = Banksoal::where('subkategori_id', 3)->get();
 
-        $tangkap_twk = array();
-        foreach ($soal_twk as $item) {
-            $simpan_jawaban_twk = Simpanjawaban::where('banksoal_id', $item->id)
-                ->where('subkategori_id', 1)
-                ->first()->jawab;
-            $tangkap_twk[] = $simpan_jawaban_twk;
+        // $tangkap_twk = array();
+        // foreach ($soal_twk as $item) {
+        //     $simpan_jawaban_twk = Simpanjawaban::where('banksoal_id', $item->id)
+        //         ->where('subkategori_id', 1)
+        //         ->first()->jawab;
+        //     $tangkap_twk[] = $simpan_jawaban_twk;
 
-            $jawaban = Jawaban::where('bank_soal_id', $item->id)->get();
-            $tangkap_jawaban = array();
-            foreach ($jawaban as $key => $value) {
-                $tangkap_jawaban[] = $value->pilihan_a;
-                $tangkap_jawaban[] = $value->pilihan_b;
-                $tangkap_jawaban[] = $value->pilihan_c;
-                $tangkap_jawaban[] = $value->pilihan_d;
-            }
+        //     $jawaban = Jawaban::where('bank_soal_id', $item->id)->get();
+        //     $tangkap_jawaban = array();
+        //     foreach ($jawaban as $key => $value) {
+        //         $tangkap_jawaban[] = $value->pilihan_a;
+        //         $tangkap_jawaban[] = $value->pilihan_b;
+        //         $tangkap_jawaban[] = $value->pilihan_c;
+        //         $tangkap_jawaban[] = $value->pilihan_d;
+        //     }
 
-            $hasil = array_intersect($tangkap_twk, $tangkap_jawaban);
-            $frekuensi_a = Jawaban::where('pilihan_a', $hasil)->whereNotNull('jawaban_a')->value('jawaban_a');
-            $frekuensi_b = Jawaban::where('pilihan_b', $hasil)->whereNotNull('jawaban_b')->value('jawaban_b');
-            $frekuensi_c = Jawaban::where('pilihan_c', $hasil)->whereNotNull('jawaban_c')->value('jawaban_c');
-            $frekuensi_d = Jawaban::where('pilihan_d', $hasil)->whereNotNull('jawaban_d')->value('jawaban_d');
+        //     $hasil = array_intersect($tangkap_twk, $tangkap_jawaban);
+        //     $frekuensi_a = Jawaban::where('pilihan_a', $hasil)->whereNotNull('jawaban_a')->value('jawaban_a');
+        //     $frekuensi_b = Jawaban::where('pilihan_b', $hasil)->whereNotNull('jawaban_b')->value('jawaban_b');
+        //     $frekuensi_c = Jawaban::where('pilihan_c', $hasil)->whereNotNull('jawaban_c')->value('jawaban_c');
+        //     $frekuensi_d = Jawaban::where('pilihan_d', $hasil)->whereNotNull('jawaban_d')->value('jawaban_d');
 
-            $frekuensi = array();
-            $frekuensi[] = $frekuensi_a;
-            $frekuensi[] = $frekuensi_b;
-            $frekuensi[] = $frekuensi_c;
-            $frekuensi[] = $frekuensi_d;
-            $jml_benar = count($frekuensi);
-            // $jml_soal = count($tangkap_twk);
-            // $jml_salah = $jml_soal - $jml_benar;
-            // $skor = ($jml_soal - $jml_salah) * 100;
-            // $simpan_jawaban = Simpanjawaban::where('banksoal_id', $item->id)
-            //     ->where('subkategori_id', 1)
-            //     ->update([
-            //         'frekuensi' => $jml_benar,
-            //         'skor' => $skor,
-            //     ]);
-        }
-        dd($jml_benar);
+        //     $frekuensi = array();
+        //     $frekuensi[] = $frekuensi_a;
+        //     $frekuensi[] = $frekuensi_b;
+        //     $frekuensi[] = $frekuensi_c;
+        //     $frekuensi[] = $frekuensi_d;
+        //     $jml_benar = count($frekuensi);
+        //     // $jml_soal = count($tangkap_twk);
+        //     // $jml_salah = $jml_soal - $jml_benar;
+        //     // $skor = ($jml_soal - $jml_salah) * 100;
+        //     // $simpan_jawaban = Simpanjawaban::where('banksoal_id', $item->id)
+        //     //     ->where('subkategori_id', 1)
+        //     //     ->update([
+        //     //         'frekuensi' => $jml_benar,
+        //     //         'skor' => $skor,
+        //     //     ]);
+        // }
+        // dd($jml_benar);
 
 
 
