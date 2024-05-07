@@ -83,31 +83,64 @@ class Kerjakan extends Component
 
     public function simpan($value, $jawaban_id)
     {
-        // dd($value, $jawaban_id);
-        $datay = Simpanjawaban::where('user_id', auth()->user()->id)
-            ->where('banksoal_id', $this->getSoal()->id)
-            ->where('subkategori_id', $this->getSoal()->kategori_id)
-            ->first();
+        // dd($this->paketId->status);
+        $paket_gue = Paketsaya::where('user_id', auth()->user()->id)
+            ->where('paket_id', $this->paketId)->first();
 
-        if ($datay) {
-            $datay->update([
-                'user_id' => auth()->user()->id,
-                'paketsaya_id' => $this->getPaket()->id,
-                'banksoal_id' => $this->getSoal()->id,
-                'subkategori_id' => $this->getSoal()->subkategori_id,
-                'jawaban_id' => $jawaban_id,
-                'jawab' => $value,
-            ]);
+        if ($paket_gue->status == 3) {
+            $datay = Simpanjawaban::where('user_id', auth()->user()->id)
+                ->where('togratis_id', $this->getSoal()->id)
+                ->where('subkategori_id', $this->getSoal()->subkategori_id)
+                ->first();
+
+            if ($datay) {
+                $datay->update([
+                    'user_id' => auth()->user()->id,
+                    'paketsaya_id' => $this->getPaket()->id,
+                    'togratis_id' => $this->getSoal()->id,
+                    'subkategori_id' => $this->getSoal()->subkategori_id,
+                    'jawabangratis_id' => $jawaban_id,
+                    'jawab' => $value,
+                ]);
+            } else {
+                Simpanjawaban::create([
+                    'user_id' => auth()->user()->id,
+                    'paketsaya_id' => $this->getPaket()->id,
+                    'togratis_id' => $this->getSoal()->id,
+                    'subkategori_id' => $this->getSoal()->subkategori_id,
+                    'jawabangratis_id' => $jawaban_id,
+                    'jawab' => $value,
+                ]);
+            }
         } else {
-            Simpanjawaban::create([
-                'user_id' => auth()->user()->id,
-                'paketsaya_id' => $this->getPaket()->id,
-                'banksoal_id' => $this->getSoal()->id,
-                'subkategori_id' => $this->getSoal()->subkategori_id,
-                'jawaban_id' => $jawaban_id,
-                'jawab' => $value,
-            ]);
+            $datay = Simpanjawaban::where('user_id', auth()->user()->id)
+                ->where('banksoal_id', $this->getSoal()->id)
+                ->where('subkategori_id', $this->getSoal()->kategori_id)
+                ->first();
+
+            if ($datay) {
+                $datay->update([
+                    'user_id' => auth()->user()->id,
+                    'paketsaya_id' => $this->getPaket()->id,
+                    'banksoal_id' => $this->getSoal()->id,
+                    'subkategori_id' => $this->getSoal()->subkategori_id,
+                    'jawaban_id' => $jawaban_id,
+                    'jawab' => $value,
+                ]);
+            } else {
+                Simpanjawaban::create([
+                    'user_id' => auth()->user()->id,
+                    'paketsaya_id' => $this->getPaket()->id,
+                    'banksoal_id' => $this->getSoal()->id,
+                    'subkategori_id' => $this->getSoal()->subkategori_id,
+                    'jawaban_id' => $jawaban_id,
+                    'jawab' => $value,
+                ]);
+            }
         }
+
+
+
 
         // toastr()->success('Jawaban berhasil disimpan', 'Berhasil');
 

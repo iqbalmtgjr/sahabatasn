@@ -51,7 +51,7 @@
                                         <input type="hidden" name="jawaban_id" value="{{ $datas[$i]->jawaban->id }}">
                                         <input type="hidden" name="step_total" value="{{ $totalSteps }}"> --}}
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
-                                        {{-- {{ dd($jawabann) }} --}}
+                                        {{-- {{ dd($datas[$i]) }} --}}
                                         <input
                                             wire:click="simpan('{{ $datas[$i]->jawaban->pilihan_a }}',{{ $datas[$i]->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
@@ -143,9 +143,6 @@
                                     <button wire:click='submit' type="button" class="btn btn-lg btn-primary me-3">
                                         <span class="indicator-label">Selesai
                                             <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
-                                        <span class="indicator-progress">Mohon tunggu...
-                                            <span
-                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
                                 @endif
                                 @if ($currentStep != $totalSteps)

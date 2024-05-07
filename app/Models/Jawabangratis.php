@@ -17,4 +17,9 @@ class Jawabangratis extends Model
     {
         return $this->belongsTo(Togratis::class);
     }
+
+    public function simpanjawaban()
+    {
+        return $this->hasOne(Simpanjawaban::class, 'togratis_id');
+    }
 }

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Request;
 
 class Pembahasan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId, $status;
     public $currentStep = 1;
 
     #[On('pageChanged')]
@@ -30,7 +30,9 @@ class Pembahasan extends Component
         $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
             ->where('paket_id', $paket_id)->first();
 
-        if ($this->paketSaya->status == 3) {
+        $this->status = $this->paketSaya->status;
+
+        if ($this->status == 3) {
             $this->datas = Togratis::where('kategori_id', $id)->get();
         } else {
             $this->datas = Banksoal::where('kategori_id', $id)->get();
