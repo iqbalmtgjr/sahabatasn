@@ -31,7 +31,9 @@
                                 {{ $datas[$currentStep - 1]->kategori->kategori }}
                                 {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
                             <div class="row text-end ">
-                                <h3>Lama Mengerjakan: 10 Menit</h3>
+                                <h3>Lama Mengerjakan:
+                                    {{ $datas[$currentStep - 1]->jawaban->simpanjawaban->lama_pengerjaan }}
+                                </h3>
                             </div>
                         </div>
                         <hr>
@@ -70,27 +72,31 @@
                                     <hr>
                                     <div class="row">
                                         <p style="font-size: 18px">Jawaban Anda:
-                                            @switch($datas[$i]->jawaban->simpanjawaban->jawab)
-                                                @case($datas[$i]->jawaban['pilihan_a'])
-                                                    <span class="text-primary"><strong>A</strong></span>
-                                                @break
+                                            @if ($datas[$i]->jawaban->simpanjawaban->jawab == null)
+                                                <span class="text-danger"><strong>Tidak Dijawab</strong></span>
+                                            @else
+                                                @switch($datas[$i]->jawaban->simpanjawaban->jawab)
+                                                    @case($datas[$i]->jawaban['pilihan_a'])
+                                                        <span class="text-primary"><strong>A</strong></span>
+                                                    @break
 
-                                                @case($datas[$i]->jawaban['pilihan_b'])
-                                                    <span class="text-primary"><strong>B</strong></span>
-                                                @break
+                                                    @case($datas[$i]->jawaban['pilihan_b'])
+                                                        <span class="text-primary"><strong>B</strong></span>
+                                                    @break
 
-                                                @case($datas[$i]->jawaban['pilihan_c'])
-                                                    <span class="text-primary"><strong>C</strong></span>
-                                                @break
+                                                    @case($datas[$i]->jawaban['pilihan_c'])
+                                                        <span class="text-primary"><strong>C</strong></span>
+                                                    @break
 
-                                                @case($datas[$i]->jawaban['pilihan_d'])
-                                                    <span class="text-primary"><strong>D</strong></span>
-                                                @break
+                                                    @case($datas[$i]->jawaban['pilihan_d'])
+                                                        <span class="text-primary"><strong>D</strong></span>
+                                                    @break
 
-                                                @case($datas[$i]->jawaban['pilihan_e'])
-                                                    <span class="text-primary"><strong>E</strong></span>
-                                                @break
-                                            @endswitch
+                                                    @case($datas[$i]->jawaban['pilihan_e'])
+                                                        <span class="text-primary"><strong>E</strong></span>
+                                                    @break
+                                                @endswitch
+                                            @endif
                                         </p>
                                         <p style="font-size: 18px">Kunci Jawaban:
                                             @foreach (range('a', 'e') as $alpha)
@@ -146,29 +152,39 @@
                         <div class="row">
                             <div class="stepper-item col-2 mb-5" data-kt-stepper-element="nav">
                                 <div class="stepper-wrapper">
-                                    <div class="stepper-icon w-40px h-40px" style="background-color: green">
+                                    <div class="stepper-icon w-30px h-30px" style="background-color: green">
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center col-5 mb-5" data-kt-stepper-element="nav">
-                                <h3>= Benar</h3>
+                                <h4>= Benar</h4>
                             </div>
                         </div>
                         <div class="row">
                             <div class="stepper-item col-2 mb-5" data-kt-stepper-element="nav">
                                 <div class="stepper-wrapper">
-                                    <div class="stepper-icon w-40px h-40px" style="background-color: red">
+                                    <div class="stepper-icon w-30px h-30px" style="background-color: red">
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center col-5 mb-5" data-kt-stepper-element="nav">
-                                <h3>= Salah</h3>
+                                <h4>= Salah</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="stepper-item col-2 mb-5" data-kt-stepper-element="nav">
+                                <div class="stepper-wrapper">
+                                    <div class="stepper-icon w-30px h-30px" style="background-color: grey">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center col-5 mb-5" data-kt-stepper-element="nav">
+                                <h4>= Kosong</h4>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
                             @foreach ($datas as $index => $data)
-                                {{-- @dd($data->jawaban); --}}
                                 <div wire:key="{{ $index }}"
                                     class="stepper-item {{ $currentStep == $index + 1 ? 'current' : '' }} col-2 mb-5"
                                     data-kt-stepper-element="nav">
@@ -178,11 +194,11 @@
                                                 style="background-color: 
                                                     @if ($data->jawaban['pilihan_a'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_a'] == 5) green;
                                                     @elseif($data->jawaban['pilihan_b'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_b'] == 5)
-                                                    green; @elseif ($data->jawaban['pilihan_b'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_b'] == 5)
                                                     green; @elseif ($data->jawaban['pilihan_c'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_c'] == 5)
                                                     green; @elseif ($data->jawaban['pilihan_d'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_d'] == 5)
                                                     green; @elseif ($data->jawaban['pilihan_e'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_e'] == 5)
-                                                    green; @else red; @endif">
+                                                    green; @elseif($data->jawaban->simpanjawaban->jawab == null) grey;
+                                                    @else red; @endif">
                                                 <span class="stepper-number"
                                                     style="color: white">{{ $loop->iteration }}
                                                 </span>

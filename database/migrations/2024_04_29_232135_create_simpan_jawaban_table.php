@@ -20,7 +20,8 @@ return new class extends Migration
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
             $table->foreignId('jawaban_id')->constrained('jawaban')->nullable();
             $table->foreignId('jawabangratis_id')->nullable()->constrained('jawaban_gratis')->nullable();
-            $table->string('jawab');
+            $table->string('jawab')->nullable();
+            $table->string('lama_pengerjakan')->nullable();
             $table->timestamps();
         });
     }
