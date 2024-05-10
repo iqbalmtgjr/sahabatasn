@@ -27,6 +27,11 @@ class Simpanjawaban extends Model
         return $this->belongsTo(Jawaban::class);
     }
 
+    public function jawabangratis()
+    {
+        return $this->belongsTo(Jawabangratis::class);
+    }
+
     public function paketsaya()
     {
         return $this->belongsTo(Paketsaya::class);

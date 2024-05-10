@@ -204,7 +204,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('hasil') ? 'active' : '' }}"
+                                        <a class="menu-link {{ request()->is('hasil*') ? 'active' : '' }}"
                                             href="{{ url('hasil') }}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-chart-simple fs-2"></i>
