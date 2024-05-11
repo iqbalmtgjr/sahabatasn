@@ -2,22 +2,23 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use App\Models\Banksoal;
-use App\Models\Paketsaya;
-use App\Models\Simpanjawaban;
 use App\Models\Togratis;
-use App\Models\User;
+use App\Models\Paketsaya;
 use Livewire\Attributes\On;
+use App\Models\Simpanjawaban;
+use App\Models\Simpanjawabansubmit;
 use Illuminate\Support\Facades\Request;
 
 class Pembahasan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId, $status;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId, $status, $kodeSubmit;
     public $currentStep = 1;
 
     #[On('pageChanged')]
-    public function mount($id, $paket_id)
+    public function mount($id, $paket_id, $kode_submit = null)
     {
         $admin = User::where('role', 'admin')->get();
         $tangkap_id = array();
@@ -25,6 +26,8 @@ class Pembahasan extends Component
             $tangkap_id[] = $value->id;
             $tangkap_id[] = auth()->user()->id;
         }
+
+        $this->kodeSubmit = $kode_submit;
 
         // dd($tangkap_id);
         $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
@@ -39,12 +42,16 @@ class Pembahasan extends Component
         }
 
         $this->paketId = $paket_id;
-        $this->jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
+        $this->jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+            ->where('kode_submit', $kode_submit)
             ->where('subkategori_id', $this->getSoal()->subkategori_id)
             ->first();
-        $this->jawabann = Simpanjawaban::where('user_id', auth()->user()->id)
-            ->where('subkategori_id', $this->getSoal()->subkategori_id)
+        $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+            ->where('kode_submit', $kode_submit)
+            // ->where('subkategori_id', $this->getSoal()->subkategori_id)
             ->get();
+
+        // dd($this->jawabann);
 
         $this->totalSteps = $this->datas->count();
         $this->currentStep;
@@ -58,20 +65,20 @@ class Pembahasan extends Component
     public function nextSteps()
     {
         $this->currentStep++;
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id);
+        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function previousSteps()
     {
         $this->currentStep--;
         // dd($this->currentStep);
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id);
+        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function setStep($step)
     {
         $this->currentStep = $step;
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id);
+        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function getSoal()
@@ -84,5 +91,10 @@ class Pembahasan extends Component
     public function getPaket()
     {
         return $this->paketSaya;
+    }
+
+    public function kodeSubmitt()
+    {
+        return $this->kodeSubmit;
     }
 }

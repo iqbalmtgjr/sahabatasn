@@ -34,9 +34,6 @@
                             </div>
                         </div>
                         <hr>
-                        @php
-                            $hasil = App\Models\Hasil::where('paketsaya_id', $datas[$currentStep - 1]->id)->first();
-                        @endphp
                         @foreach ($datas as $i => $item)
                             <div wire:key='{{ $item->id }}'
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"

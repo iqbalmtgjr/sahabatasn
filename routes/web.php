@@ -142,6 +142,6 @@ Route::group(['middleware' => ['isLogin']], function () {
 
         //hasil
         Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
-        Route::get('/hasil/pembahasan/{id}/{paket_id}', Pembahasan::class)->name('pembahasan');
+        Route::get('/hasil/pembahasan/{id}/{paket_id}/{kode_submit}', Pembahasan::class)->name('pembahasan');
     });
 });

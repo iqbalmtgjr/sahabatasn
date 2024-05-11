@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('paketsaya_id')->constrained('paket_saya');
+            $table->string('kode_submit');
             $table->timestamps();
         });
     }

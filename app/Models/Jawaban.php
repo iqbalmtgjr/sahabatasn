@@ -21,4 +21,9 @@ class Jawaban extends Model
     {
         return $this->hasOne(Simpanjawaban::class);
     }
+
+    public function simpanjawabansubmit()
+    {
+        return $this->hasOne(Simpanjawabansubmit::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Paketsaya;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,9 @@ class ProfilController extends Controller
      */
     public function index()
     {
-        return view('profil.index');
+        $paket = Paketsaya::where('user_id', auth()->user()->id)->where('status', '!=', '3')->get();
+        $paketgratis = Paketsaya::where('user_id', auth()->user()->id)->where('status', '3')->get();
+        return view('profil.index', compact('paket', 'paketgratis'));
     }
 
     /**

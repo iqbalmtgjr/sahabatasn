@@ -2,14 +2,16 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use App\Models\Hasil;
 use Livewire\Component;
 use App\Models\Banksoal;
-use App\Models\Hasil;
-use App\Models\Paketsaya;
-use App\Models\Simpanjawaban;
 use App\Models\Togratis;
-use App\Models\User;
+use App\Models\Paketsaya;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
+use App\Models\Simpanjawaban;
+use App\Models\Simpanjawabansubmit;
 use Illuminate\Support\Facades\Request;
 
 class Kerjakan extends Component
@@ -96,8 +98,7 @@ class Kerjakan extends Component
         $duration = $minutes . ' menit ' . $seconds . ' detik';
 
         // dd($duration);
-        $paket_gue = Paketsaya::where('user_id', auth()->user()->id)
-            ->where('paket_id', $this->paketId)->first();
+        $paket_gue = $this->getPaket();
 
         if ($paket_gue->status == 3) {
             $datay = Simpanjawaban::where('user_id', auth()->user()->id)
@@ -165,35 +166,87 @@ class Kerjakan extends Component
 
     public function submit()
     {
+        $paket_gue = $this->getPaket();
+
         $jawab_submit = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('paketsaya_id', $this->getPaket()->id)
             ->get();
+        // dd($jawab_submit);
 
-        $jawab_belum_submit = $this->datas->whereNotIn('id', $jawab_submit->pluck('banksoal_id'));
+        if ($paket_gue->status == 3) {
+            $jawab_belum_submit = $this->datas->whereNotIn('id', $jawab_submit->pluck('togratis_id'));
+            // dd($jawab_belum_submit);
+        } else {
+            $jawab_belum_submit = $this->datas->whereNotIn('id', $jawab_submit->pluck('banksoal_id'));
+        }
+
 
         if ($jawab_submit->count() != $this->totalSteps) {
             foreach ($jawab_belum_submit as $value) {
                 //simpan jawaban yang tidak diisikan
-                Simpanjawaban::create([
-                    'user_id' => auth()->user()->id,
-                    'banksoal_id' => $value->id,
-                    'paketsaya_id' => $this->getPaket()->id,
-                    'subkategori_id' => $value->subkategori_id,
-                    'jawaban_id' => $value->jawaban->id,
-                    'jawab' => null,
-                    'lama_pengerjaan' => null,
+                if ($paket_gue->status == 3) {
+                    $simpan_submit = Simpanjawaban::create([
+                        'user_id' => auth()->user()->id,
+                        'togratis_id' => $value->id,
+                        'paketsaya_id' => $this->getPaket()->id,
+                        'subkategori_id' => $value->subkategori_id,
+                        'jawabangratis_id' => $value->jawaban->id,
+                        'jawab' => null,
+                        'lama_pengerjaan' => null,
+                    ]);
+                } else {
+                    $simpan_submit = Simpanjawaban::create([
+                        'user_id' => auth()->user()->id,
+                        'banksoal_id' => $value->id,
+                        'paketsaya_id' => $this->getPaket()->id,
+                        'subkategori_id' => $value->subkategori_id,
+                        'jawaban_id' => $value->jawaban->id,
+                        'jawab' => null,
+                        'lama_pengerjaan' => null,
+                    ]);
+                }
+            }
+        }
+
+
+
+        $kode_submit = Str::random(10) . rand(0, 99);
+        foreach ($jawab_submit as $item) {
+            if ($paket_gue->status == 3) {
+                $simpan_submit = Simpanjawabansubmit::create([
+                    'kode_submit' => $kode_submit,
+                    'user_id' => $item->user_id,
+                    'togratis_id' => $item->togratis_id,
+                    'paketsaya_id' => $item->paketsaya_id,
+                    'subkategori_id' => $item->subkategori_id,
+                    'jawabangratis_id' => $item->jawabangratis_id,
+                    'jawab' => $item->jawab,
+                    'lama_pengerjaan' => $item->lama_pengerjaan,
+                ]);
+            } else {
+                $simpan_submit = Simpanjawabansubmit::create([
+                    'kode_submit' => $kode_submit,
+                    'user_id' => $item->user_id,
+                    'banksoal_id' => $item->banksoal_id,
+                    'paketsaya_id' => $item->paketsaya_id,
+                    'subkategori_id' => $item->subkategori_id,
+                    'jawaban_id' => $item->jawaban_id,
+                    'jawab' => $item->jawab,
+                    'lama_pengerjaan' => $item->lama_pengerjaan,
                 ]);
             }
         }
-        // $this->paketSaya->update([
-        //     'submit' => 1,
-        // ]);
 
         $hasil = Hasil::create([
             'user_id' => auth()->user()->id,
+            'kode_submit' => $kode_submit,
             'paketsaya_id' => $this->getPaket()->id,
             'simpanjawaban_id' => $jawab_submit->pluck('id'),
         ]);
+
+        $delete_simpan_jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
+            ->where('paketsaya_id', $this->getPaket()->id)
+            ->delete();
 
         return redirect('hasil');
     }
