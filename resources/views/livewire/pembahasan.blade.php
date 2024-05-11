@@ -32,7 +32,7 @@
                                 {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
                             <div class="row text-end ">
                                 <h3>Lama Mengerjakan:
-                                    {{ $jawabann[$currentStep - 1]->lama_pengerjaan }}
+                                    {{ $datas[$currentStep - 1]->jawaban->simpanjawabansubmit->lama_pengerjaan }}
                                 </h3>
                             </div>
                         </div>
@@ -42,6 +42,21 @@
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
+                                    <div class="mb-5">
+                                        @if ($status == 3)
+                                            @if ($item->togratis->gambar != null)
+                                                <img style="width: 250px"
+                                                    src="{{ asset('gambar_soal') . '/' . $item->togratis->gambar }}"
+                                                    alt="gambar_soal">
+                                            @endif
+                                        @else
+                                            @if ($item->banksoal->gambar != null)
+                                                <img style="width: 250px"
+                                                    src="{{ asset('gambar_soal') . '/' . $item->banksoal->gambar }}"
+                                                    alt="gambar_soal">
+                                            @endif
+                                        @endif
+                                    </div>
                                     <div class="pb-5 pb-lg-5">
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
                                             @if ($status == 3)
@@ -96,50 +111,50 @@
                                     <hr>
                                     <div class="row">
                                         <p style="font-size: 18px">Jawaban Anda:
-                                            @if ($jawabann[$i]->jawab == null)
+                                            @if ($item->jawab == null)
                                                 <span class="text-danger"><strong>Tidak Dijawab</strong></span>
                                             @else
                                                 @if ($status == 3)
-                                                    @switch($jawabann[$i]->jawab)
-                                                        @case($jawabann[$i]->jawabangratis['pilihan_a'])
+                                                    @switch($item->jawab)
+                                                        @case($item->jawabangratis['pilihan_a'])
                                                             <span class="text-primary"><strong>A</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawabangratis['pilihan_b'])
+                                                        @case($item->jawabangratis['pilihan_b'])
                                                             <span class="text-primary"><strong>B</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawabangratis['pilihan_c'])
+                                                        @case($item->jawabangratis['pilihan_c'])
                                                             <span class="text-primary"><strong>C</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawabangratis['pilihan_d'])
+                                                        @case($item->jawabangratis['pilihan_d'])
                                                             <span class="text-primary"><strong>D</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawabangratis['pilihan_e'])
+                                                        @case($item->jawabangratis['pilihan_e'])
                                                             <span class="text-primary"><strong>E</strong></span>
                                                         @break
                                                     @endswitch
                                                 @else
-                                                    @switch($jawabann[$i]->jawab)
-                                                        @case($jawabann[$i]->jawaban['pilihan_a'])
+                                                    @switch($item->jawab)
+                                                        @case($item->jawaban['pilihan_a'])
                                                             <span class="text-primary"><strong>A</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawaban['pilihan_b'])
+                                                        @case($item->jawaban['pilihan_b'])
                                                             <span class="text-primary"><strong>B</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawaban['pilihan_c'])
+                                                        @case($item->jawaban['pilihan_c'])
                                                             <span class="text-primary"><strong>C</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawaban['pilihan_d'])
+                                                        @case($item->jawaban['pilihan_d'])
                                                             <span class="text-primary"><strong>D</strong></span>
                                                         @break
 
-                                                        @case($jawabann[$i]->jawaban['pilihan_e'])
+                                                        @case($item->jawaban['pilihan_e'])
                                                             <span class="text-primary"><strong>E</strong></span>
                                                         @break
                                                     @endswitch
@@ -149,14 +164,14 @@
                                         <p style="font-size: 18px">Kunci Jawaban:
                                             @if ($status == 3)
                                                 @foreach (range('a', 'e') as $alpha)
-                                                    @if (isset($jawabann[$i]->jawabangratis["jawaban_$alpha"]) && $jawabann[$i]->jawabangratis["jawaban_$alpha"] != 0)
+                                                    @if (isset($item->jawabangratis["jawaban_$alpha"]) && $item->jawabangratis["jawaban_$alpha"] != 0)
                                                         <span style="color: green"><strong>{{ strtoupper($alpha) }}
                                                             </strong></span>
                                                     @endif
                                                 @endforeach
                                             @else
                                                 @foreach (range('a', 'e') as $alpha)
-                                                    @if (isset($jawabann[$i]->jawaban["jawaban_$alpha"]) && $datas[$i]->jawaban["jawaban_$alpha"] != 0)
+                                                    @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
                                                         <span style="color: green"><strong>{{ strtoupper($alpha) }}
                                                             </strong></span>
                                                     @endif
@@ -290,27 +305,4 @@
             </div>
         </div>
     </div>
-
-    @push('footer')
-        {{-- <script>
-            document.querySelectorAll('.stepper-item').forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.stepper-item').forEach((el) => {
-                        el.classList.remove('current');
-                    });
-
-                    item.classList.add('current');
-
-                    document.querySelectorAll('[data-kt-stepper-element="content"]').forEach((content,
-                        contentIndex) => {
-                        if (contentIndex === index) {
-                            content.classList.add('current');
-                        } else {
-                            content.classList.remove('current');
-                        }
-                    });
-                });
-            });
-        </script> --}}
-    @endpush
 </div>

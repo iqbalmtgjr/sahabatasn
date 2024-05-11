@@ -171,45 +171,14 @@ class Kerjakan extends Component
         $jawab_submit = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('paketsaya_id', $this->getPaket()->id)
             ->get();
-        // dd($jawab_submit);
 
         if ($paket_gue->status == 3) {
             $jawab_belum_submit = $this->datas->whereNotIn('id', $jawab_submit->pluck('togratis_id'));
-            // dd($jawab_belum_submit);
         } else {
             $jawab_belum_submit = $this->datas->whereNotIn('id', $jawab_submit->pluck('banksoal_id'));
         }
 
-
-        if ($jawab_submit->count() != $this->totalSteps) {
-            foreach ($jawab_belum_submit as $value) {
-                //simpan jawaban yang tidak diisikan
-                if ($paket_gue->status == 3) {
-                    $simpan_submit = Simpanjawaban::create([
-                        'user_id' => auth()->user()->id,
-                        'togratis_id' => $value->id,
-                        'paketsaya_id' => $this->getPaket()->id,
-                        'subkategori_id' => $value->subkategori_id,
-                        'jawabangratis_id' => $value->jawaban->id,
-                        'jawab' => null,
-                        'lama_pengerjaan' => null,
-                    ]);
-                } else {
-                    $simpan_submit = Simpanjawaban::create([
-                        'user_id' => auth()->user()->id,
-                        'banksoal_id' => $value->id,
-                        'paketsaya_id' => $this->getPaket()->id,
-                        'subkategori_id' => $value->subkategori_id,
-                        'jawaban_id' => $value->jawaban->id,
-                        'jawab' => null,
-                        'lama_pengerjaan' => null,
-                    ]);
-                }
-            }
-        }
-
-
-
+        // dd($jawab_belum_submit);
         $kode_submit = Str::random(10) . rand(0, 99);
         foreach ($jawab_submit as $item) {
             if ($paket_gue->status == 3) {
@@ -234,6 +203,35 @@ class Kerjakan extends Component
                     'jawab' => $item->jawab,
                     'lama_pengerjaan' => $item->lama_pengerjaan,
                 ]);
+            }
+        }
+
+        if ($jawab_submit->count() != $this->totalSteps) {
+            foreach ($jawab_belum_submit as $value) {
+                //simpan jawaban yang tidak diisikan
+                if ($paket_gue->status == 3) {
+                    $simpan_submit = Simpanjawabansubmit::create([
+                        'kode_submit' => $kode_submit,
+                        'user_id' => auth()->user()->id,
+                        'togratis_id' => $value->id,
+                        'paketsaya_id' => $this->getPaket()->id,
+                        'subkategori_id' => $value->subkategori_id,
+                        'jawabangratis_id' => $value->jawaban->id,
+                        'jawab' => null,
+                        'lama_pengerjaan' => null,
+                    ]);
+                } else {
+                    $simpan_submit = Simpanjawabansubmit::create([
+                        'kode_submit' => $kode_submit,
+                        'user_id' => auth()->user()->id,
+                        'banksoal_id' => $value->id,
+                        'paketsaya_id' => $this->getPaket()->id,
+                        'subkategori_id' => $value->subkategori_id,
+                        'jawaban_id' => $value->jawaban->id,
+                        'jawab' => null,
+                        'lama_pengerjaan' => null,
+                    ]);
+                }
             }
         }
 

@@ -26,7 +26,7 @@
                             class="position-absolute top-0 start-100 translate-middle badge badge-circle badge-danger w-15px h-15px ms-n4 mt-3">{{ auth()->user()->keranjang->count() }}</span>
                     </a>
                 @else
-                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    <a href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="bottom"
                         data-bs-original-title="Keranjang Kosong">
                         <i class="ki-outline ki-handcart fs-1"></i>
                     </a>

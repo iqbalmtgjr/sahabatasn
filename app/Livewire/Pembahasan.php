@@ -42,14 +42,18 @@ class Pembahasan extends Component
         }
 
         $this->paketId = $paket_id;
-        $this->jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-            ->where('kode_submit', $kode_submit)
-            ->where('subkategori_id', $this->getSoal()->subkategori_id)
-            ->first();
-        $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-            ->where('kode_submit', $kode_submit)
-            // ->where('subkategori_id', $this->getSoal()->subkategori_id)
-            ->get();
+
+        if ($this->status == 3) {
+            $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+                ->where('kode_submit', $kode_submit)
+                ->orderBy('togratis_id')
+                ->get();
+        } else {
+            $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+                ->where('kode_submit', $kode_submit)
+                ->orderBy('banksoal_id')
+                ->get();
+        }
 
         // dd($this->jawabann);
 

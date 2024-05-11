@@ -17,6 +17,11 @@ class Togratis extends Model
         return $this->hasOne(Jawabangratis::class);
     }
 
+    public function simpanjawabansubmit()
+    {
+        return $this->hasOne(Simpanjawabansubmit::class);
+    }
+
     public function simpanjawaban()
     {
         return $this->hasOne(Simpanjawaban::class);
