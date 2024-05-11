@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Banksoal;
+use App\Models\Hasil;
 use App\Models\Paketsaya;
 use App\Models\Simpanjawaban;
 use App\Models\Togratis;
@@ -184,9 +185,16 @@ class Kerjakan extends Component
                 ]);
             }
         }
-        $this->paketSaya->update([
-            'submit' => 1,
+        // $this->paketSaya->update([
+        //     'submit' => 1,
+        // ]);
+
+        $hasil = Hasil::create([
+            'user_id' => auth()->user()->id,
+            'paketsaya_id' => $this->getPaket()->id,
+            'simpanjawaban_id' => $jawab_submit->pluck('id'),
         ]);
+
         return redirect('hasil');
     }
 

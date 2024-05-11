@@ -31,4 +31,9 @@ class Banksoal extends Model
     {
         return $this->belongsTo(Subkategori::class);
     }
+
+    public function hasil()
+    {
+        return $this->hasOne(Hasil::class);
+    }
 }

@@ -66,7 +66,7 @@
                                 <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
                                     href="{{ asset('gambar') . '/' . $item->gambar }}">
                                     <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px"
-                                        style="background-image:url('{{ url('assets/media/stock/600x600/img-89.png') }}')">
+                                        style="background-image:url('{{ asset('gambar') . '/' . $item->gambar }}')">
                                     </div>
                                     <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
                                         <i class="ki-outline ki-eye fs-2x text-white"></i>

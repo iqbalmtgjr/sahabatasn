@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banksoal;
+use App\Models\Hasil;
 use App\Models\Jawaban;
 use App\Models\Paketsaya;
 use Illuminate\Http\Request;
@@ -17,22 +18,10 @@ class HasiltryoutController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Paketsaya::where('user_id', auth()->user()->id)
-            ->where('submit', 1)
-            ->get();
-        // dd($data);
-
-        // twk
-        // $nilai_twk = $this->total_nilai(1);
-
-        // // tiu
-        // $nilai_tiu = $this->total_nilai(2);
-
-        // // tkp
-        // $nilai_tkp = $this->total_nilai(3);
-
-        // skor
-
+        // $data = Paketsaya::where('user_id', auth()->user()->id)
+        //     ->where('submit', 1)
+        //     ->get();
+        $data = Hasil::where('user_id', auth()->user()->id)->get();
 
         // lulus
         $grade_twk = 65;
@@ -51,39 +40,39 @@ class HasiltryoutController extends Controller
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('paket_id', function ($row) {
-                    if ($row->paket->judul) {
-                        return $row->paket->judul;
+                    if ($row->paketsaya->paket->judul) {
+                        return $row->paketsaya->paket->judul;
                     } else {
                         return '';
                     }
                 })
                 ->addColumn('tgl_kerja', function ($row) {
-                    if ($row->simpanjawaban) {
-                        return \Carbon\Carbon::parse($row->simpanjawaban->created_at)->format('d F Y');
+                    if ($row->paketsaya->simpanjawaban) {
+                        return \Carbon\Carbon::parse($row->paketsaya->simpanjawaban->created_at)->format('d F Y');
                     } else {
                         return '';
                     }
                 })
                 ->addColumn('twk', function ($row) {
-                    return $this->total_nilai($row->id, $row->status, 1);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1);
                 })
                 ->addColumn('tiu', function ($row) {
-                    return $this->total_nilai($row->id, $row->status, 2);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2);
                 })
                 ->addColumn('tkp', function ($row) {
-                    return $this->total_nilai($row->id, $row->status, 3);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3);
                 })
                 ->addColumn('skor', function ($row) {
-                    return $this->total_nilai($row->id, $row->status, 1) + $this->total_nilai($row->id, $row->status, 2) + $this->total_nilai($row->id, $row->status, 3);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3);
                 })
                 ->addColumn('pembahasan', function ($row) {
-                    $url = url("hasil/pembahasan/" . $row->paket->kategori_id) . "/" . $row->paket_id;
+                    $url = url("hasil/pembahasan/" . $row->paketsaya->paket->kategori_id) . "/" . $row->paketsaya->paket_id;
                     return "<a href=\"$url\" class=\"btn btn-sm btn-primary\">Detail</a>";
                 })
                 ->addColumn('lulus', function ($row) use ($grade_twk, $grade_tiu, $grade_tkp) {
-                    $lulus_twk = $this->total_nilai($row->id, $row->status, 1) >= $grade_twk ? 1 : 0;
-                    $lulus_tiu = $this->total_nilai($row->id, $row->status, 2) >= $grade_tiu ? 1 : 0;
-                    $lulus_tkp = $this->total_nilai($row->id, $row->status, 3) >= $grade_tkp ? 1 : 0;
+                    $lulus_twk = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1) >= $grade_twk ? 1 : 0;
+                    $lulus_tiu = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2) >= $grade_tiu ? 1 : 0;
+                    $lulus_tkp = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3) >= $grade_tkp ? 1 : 0;
                     if ($lulus_twk == 1 && $lulus_tiu == 1 && $lulus_tkp == 1) {
                         return '<div class="badge badge-light-success">Lulus</div>';
                     } else {

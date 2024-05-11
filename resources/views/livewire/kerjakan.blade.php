@@ -34,7 +34,9 @@
                             </div>
                         </div>
                         <hr>
-                        {{-- @for ($i = 0; $i < $totalSteps; $i++) --}}
+                        @php
+                            $hasil = App\Models\Hasil::where('paketsaya_id', $datas[$currentStep - 1]->id)->first();
+                        @endphp
                         @foreach ($datas as $i => $item)
                             <div wire:key='{{ $item->id }}'
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
@@ -106,8 +108,6 @@
                                 </div>
                             </div>
                         @endforeach
-
-                        {{-- @endfor --}}
 
                         <!--begin::Actions-->
                         <div class="d-flex flex-stack pt-10">

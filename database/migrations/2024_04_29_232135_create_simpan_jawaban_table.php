@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('paketsaya_id')->constrained('paket_saya');
-            $table->foreignId('banksoal_id')->constrained('bank_soal')->nullable();
-            $table->foreignId('togratis_id')->constrained('togratis')->nullable();
+            $table->foreignId('banksoal_id')->nullable();
+            $table->foreignId('togratis_id')->nullable();
+            $table->foreignId('jawaban_id')->nullable();
+            $table->foreignId('jawabangratis_id')->nullable();
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
-            $table->foreignId('jawaban_id')->constrained('jawaban')->nullable();
-            $table->foreignId('jawabangratis_id')->nullable()->constrained('jawaban_gratis')->nullable();
             $table->string('jawab')->nullable();
             $table->string('lama_pengerjakan')->nullable();
             $table->timestamps();
