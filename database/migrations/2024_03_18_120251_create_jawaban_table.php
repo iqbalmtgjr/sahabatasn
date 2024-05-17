@@ -24,7 +24,7 @@ return new class extends Migration
             $table->smallInteger('jawaban_c');
             $table->smallInteger('jawaban_d');
             $table->smallInteger('jawaban_e')->nullable();
-            $table->longText('pembahasan');
+            $table->longText('pembahasan')->max(10000);
             $table->timestamps();
         });
     }

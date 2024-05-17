@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kategori_id')->constrained('kategori');
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
-            $table->longText('soal');
+            $table->longText('soal')->max(10000);
             $table->string('gambar')->nullable();
             $table->string('tipe')->nullable();
             $table->timestamps();
