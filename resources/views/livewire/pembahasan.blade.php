@@ -203,7 +203,7 @@
                             @endif
                             <div>
                                 @if ($currentStep == $totalSteps)
-                                    <a href="{{ url('/hasil') }}" class="btn btn-lg btn-primary me-3">
+                                    <a href="{{ url('/hasil') }}" class="btn btn-lg btn-success me-3">
                                         <span class="indicator-label">Selesai
                                             <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
                                     </a>
@@ -302,6 +302,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="sesai mt-2 d-flex justify-content-end">
+                <a href="{{ url('/hasil') }}" class="btn btn-lg btn-success me-3">
+                    <span class="indicator-label">Selesai
+                        <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
+                </a>
             </div>
         </div>
     </div>
