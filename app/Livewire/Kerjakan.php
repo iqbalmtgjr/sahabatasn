@@ -129,17 +129,18 @@ class Kerjakan extends Component
             }
         } else {
             $datay = Simpanjawaban::where('user_id', auth()->user()->id)
+                ->where('paketsaya_id', $this->getPaket()->id)
                 ->where('banksoal_id', $this->getSoal()->id)
-                ->where('subkategori_id', $this->getSoal()->kategori_id)
+                // ->where('subkategori_id', $this->getSoal()->kategori_id)
                 ->first();
 
             if ($datay) {
                 $datay->update([
-                    'user_id' => auth()->user()->id,
-                    'paketsaya_id' => $this->getPaket()->id,
-                    'banksoal_id' => $this->getSoal()->id,
-                    'subkategori_id' => $this->getSoal()->subkategori_id,
-                    'jawaban_id' => $jawaban_id,
+                    // 'user_id' => auth()->user()->id,
+                    // 'paketsaya_id' => $this->getPaket()->id,
+                    // 'banksoal_id' => $this->getSoal()->id,
+                    // 'subkategori_id' => $this->getSoal()->subkategori_id,
+                    // 'jawaban_id' => $jawaban_id,
                     'jawab' => $value,
                     'lama_pengerjaan' => $duration
                 ]);

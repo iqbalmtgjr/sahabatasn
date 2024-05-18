@@ -19,15 +19,22 @@ class PaketsayaController extends Controller
             ->get();
 
         if ($data->first() != null) {
-            $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id)->count();
+            $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id, $data->first()->paket->subkategori_id)->count();
             return view('paket_saya.index', compact('data', 'jmlh_soal'));
         }
         return view('paket_saya.index', compact('data'));
     }
 
-    private function banksoal($kategori_id)
+    private function banksoal($kategori_id, $subkategori_id)
     {
-        return Banksoal::where('kategori_id', $kategori_id)->get();
+        if ($kategori_id > 3) {
+            return Banksoal::where('kategori_id', $kategori_id)
+                ->where('subkategori_id', $subkategori_id)
+                ->get();
+        } else {
+            return Banksoal::where('kategori_id', $kategori_id)
+                ->get();
+        }
     }
 
     public function kerjakan($id, $no)
