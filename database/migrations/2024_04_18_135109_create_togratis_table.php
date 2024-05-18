@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kategori_id')->constrained('kategori');
             $table->foreignId('subkategori_id')->constrained('sub_kategori');
-            $table->string('soal');
+            $table->longText('soal')->max(10000);
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

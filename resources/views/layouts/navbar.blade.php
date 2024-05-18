@@ -71,7 +71,7 @@
                     @if (file_exists('gambar/' . auth()->user()->avatar))
                         <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
                     @else
-                        <img src="{{ Auth::user()->avatar }}" alt="user" />
+                        <img loading="lazy" src="{{ Auth::user()->avatar }}" alt="user" />
                     @endif
                 @else
                     <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />

@@ -71,13 +71,4 @@
             </div>
         </div>
     </div>
-    {{-- @include('pembayaran.modalvalidasi') --}}
 @endsection
-
-@push('header')
-    <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
-        type="text/css" />
-@endpush
-
-@push('footer')
-@endpush

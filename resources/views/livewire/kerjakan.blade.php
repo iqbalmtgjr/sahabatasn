@@ -131,8 +131,7 @@
                             <!--begin::Wrapper-->
                             <div class="sesai">
                                 @if ($currentStep == $totalSteps)
-                                    <button type="button" class="btn btn-lg btn-primary me-3 selesai"
-                                        wire:click="$dispatch('trigger-selesai')">
+                                    <button type="button" class="btn btn-lg btn-success me-3 selesai">
                                         <span class="indicator-label">Selesai
                                             <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
                                     </button>
@@ -199,6 +198,12 @@
 
                 <!--end::Content-->
             </div>
+            <div class="sesai mt-2 d-flex justify-content-end">
+                <button type="button" class="btn btn-lg btn-success me-3 selesai">
+                    <span class="indicator-label">Selesai
+                        <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -209,7 +214,7 @@
             function startCountdown() {
                 let paketId = {{ $paketId }}
                 let menit = {{ $paketSaya->paket->waktu }};
-                console.log(menit);
+                // console.log(menit);
                 let countdown = menit * 60;
                 const countdownElement = document.getElementById('countdown');
                 const countdownKey = 'countdown_' + paketId;
@@ -252,6 +257,16 @@
                         clearInterval(window.intervalId);
                     }
                 });
+
+                // Cek jika user telah menekan tombol Selesai sebelumnya
+                if (localStorage.getItem('selesai_klik') === 'true') {
+                    localStorage.removeItem('selesai_klik');
+                    clearInterval(interval);
+                    countdown = 0;
+                    countdownElement.textContent = '00:00:00';
+                    localStorage.removeItem(countdownKey);
+                    startCountdown();
+                }
             }
 
             document.addEventListener('DOMContentLoaded', startCountdown);
@@ -269,12 +284,14 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya',
+                    confirmButtonText: 'Yakin',
+                    cancelButtonText: 'Batal',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false,
                 }).then((result) => {
                     if (result.value) {
+                        localStorage.setItem('selesai_klik', 'true');
                         @this.call('submit')
                     }
                 }).then(() => {
@@ -307,24 +324,24 @@
             ////////////* Batas *//////////////
 
             // Fungsi untuk stepper item sebelah kanan ketika klik berubah pertanyaan
-            document.querySelectorAll('.stepper-item').forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.stepper-item').forEach((el) => {
-                        el.classList.remove('current');
-                    });
+            // document.querySelectorAll('.stepper-item').forEach((item, index) => {
+            //     item.addEventListener('click', () => {
+            //         document.querySelectorAll('.stepper-item').forEach((el) => {
+            //             el.classList.remove('current');
+            //         });
 
-                    item.classList.add('current');
+            //         item.classList.add('current');
 
-                    document.querySelectorAll('[data-kt-stepper-element="content"]').forEach((content,
-                        contentIndex) => {
-                        if (contentIndex === index) {
-                            content.classList.add('current');
-                        } else {
-                            content.classList.remove('current');
-                        }
-                    });
-                });
-            });
+            //         document.querySelectorAll('[data-kt-stepper-element="content"]').forEach((content,
+            //             contentIndex) => {
+            //             if (contentIndex === index) {
+            //                 content.classList.add('current');
+            //             } else {
+            //                 content.classList.remove('current');
+            //             }
+            //         });
+            //     });
+            // });
         </script>
     @endpush
 </div>
