@@ -22,4 +22,9 @@ class Jawabangratis extends Model
     {
         return $this->hasOne(Simpanjawaban::class, 'togratis_id');
     }
+
+    public function simpanjawabansubmit()
+    {
+        return $this->hasOne(Simpanjawabansubmit::class);
+    }
 }

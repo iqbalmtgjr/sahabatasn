@@ -22,6 +22,11 @@ class Banksoal extends Model
         return $this->hasOne(Simpanjawaban::class);
     }
 
+    public function simpanjawabansubmit()
+    {
+        return $this->hasOne(Simpanjawabansubmit::class);
+    }
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);
@@ -30,5 +35,10 @@ class Banksoal extends Model
     public function subkategori()
     {
         return $this->belongsTo(Subkategori::class);
+    }
+
+    public function hasil()
+    {
+        return $this->hasOne(Hasil::class);
     }
 }

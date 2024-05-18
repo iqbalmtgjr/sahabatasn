@@ -32,89 +32,163 @@
                                 {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
                             <div class="row text-end ">
                                 <h3>Lama Mengerjakan:
-                                    {{ $datas[$currentStep - 1]->jawaban->simpanjawaban->lama_pengerjaan }}
+                                    {{ $datas[$currentStep - 1]->jawaban->simpanjawabansubmit->lama_pengerjaan }}
                                 </h3>
                             </div>
                         </div>
                         <hr>
-                        @for ($i = 0; $i < $totalSteps; $i++)
-                            <div wire:key='{{ $datas[$i]->id }}'
+                        @foreach ($jawabann as $i => $item)
+                            <div wire:key='{{ $item->id }}'
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
+                                    <div class="mb-5">
+                                        @if ($status == 3)
+                                            @if ($item->togratis->gambar != null)
+                                                <img style="width: 250px"
+                                                    src="{{ asset('gambar_soal') . '/' . $item->togratis->gambar }}"
+                                                    alt="gambar_soal">
+                                            @endif
+                                        @else
+                                            @if ($item->banksoal->gambar != null)
+                                                <img style="width: 250px"
+                                                    src="{{ asset('gambar_soal') . '/' . $item->banksoal->gambar }}"
+                                                    alt="gambar_soal">
+                                            @endif
+                                        @endif
+                                    </div>
                                     <div class="pb-5 pb-lg-5">
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
-                                            {{ $i + 1 }}. {{ $datas[$i]->soal }}
+                                            @if ($status == 3)
+                                                {{ $i + 1 }}. {{ $item->togratis->soal }}
+                                            @else
+                                                {{ $i + 1 }}. {{ $item->banksoal->soal }}
+                                            @endif
                                         </h2>
                                     </div>
                                     @foreach (range('a', 'e') as $alpha)
-                                        @if (isset($datas[$i]->jawaban["pilihan_$alpha"]))
-                                            <div>
-                                                @if (isset($datas[$i]->jawaban["pilihan_$alpha"]) &&
-                                                        $datas[$i]->jawaban["pilihan_$alpha"] === $datas[$i]->jawaban->simpanjawaban->jawab)
-                                                    <strong wire:key='{{ $datas[$i]->id }}'
-                                                        class="{{ $datas[$i]->jawaban["pilihan_$alpha"] === $datas[$i]->jawaban->simpanjawaban->jawab && $datas[$i]->jawaban["jawaban_$alpha"] == 5 ? 'text-primary' : 'text-danger' }}"
-                                                        style="font-size: 15px">{{ strtoupper($alpha) }}.
-                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
-                                                @elseif($datas[$i]->jawaban["jawaban_$alpha"] == 5)
-                                                    <strong wire:key='{{ $datas[$i]->id }}'
-                                                        style="font-size: 15px; color:green">{{ strtoupper($alpha) }}.
-                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong><i
-                                                        class="ki-duotone ki-check fs-2" style="color:green"></i>
-                                                @else
-                                                    <strong style="font-size: 15px">{{ strtoupper($alpha) }}.
-                                                        {{ $datas[$i]->jawaban["pilihan_$alpha"] }}</strong>
-                                                @endif
+                                        @if ($status == 3)
+                                            @if (isset($item->jawabangratis["pilihan_$alpha"]))
+                                                <div>
+                                                    @if (isset($item->jawabangratis["pilihan_$alpha"]) && $item->jawabangratis["pilihan_$alpha"] === $item->jawab)
+                                                        <strong wire:key='{{ $item->id }}'
+                                                            class="{{ $item->jawabangratis["pilihan_$alpha"] === $item->jawab && $item->jawabangratis["jawaban_$alpha"] == 5 ? 'text-primary' : 'text-danger' }}"
+                                                            style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawabangratis["pilihan_$alpha"] }}</strong>
+                                                    @elseif($item->jawabangratis["jawaban_$alpha"] == 5)
+                                                        <strong wire:key='{{ $item->id }}'
+                                                            style="font-size: 15px; color:green">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawabangratis["pilihan_$alpha"] }}</strong><i
+                                                            class="ki-duotone ki-check fs-2" style="color:green"></i>
+                                                    @else
+                                                        <strong style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawabangratis["pilihan_$alpha"] }}</strong>
+                                                    @endif
 
-                                            </div>
+                                                </div>
+                                            @endif
+                                        @else
+                                            @if (isset($item->jawaban["pilihan_$alpha"]))
+                                                <div>
+                                                    @if (isset($item->jawaban["pilihan_$alpha"]) && $item->jawaban["pilihan_$alpha"] === $item->jawab)
+                                                        <strong wire:key='{{ $item->id }}'
+                                                            class="{{ $item->jawaban["pilihan_$alpha"] === $item->jawab && $item->jawaban["jawaban_$alpha"] == 5 ? 'text-primary' : 'text-danger' }}"
+                                                            style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawaban["pilihan_$alpha"] }}</strong>
+                                                    @elseif($item->jawaban["jawaban_$alpha"] == 5)
+                                                        <strong wire:key='{{ $item->id }}'
+                                                            style="font-size: 15px; color:green">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawaban["pilihan_$alpha"] }}</strong><i
+                                                            class="ki-duotone ki-check fs-2" style="color:green"></i>
+                                                    @else
+                                                        <strong style="font-size: 15px">{{ strtoupper($alpha) }}.
+                                                            {{ $item->jawaban["pilihan_$alpha"] }}</strong>
+                                                    @endif
+                                                </div>
+                                            @endif
                                         @endif
                                     @endforeach
                                     <hr>
                                     <div class="row">
                                         <p style="font-size: 18px">Jawaban Anda:
-                                            @if ($datas[$i]->jawaban->simpanjawaban->jawab == null)
+                                            @if ($item->jawab == null)
                                                 <span class="text-danger"><strong>Tidak Dijawab</strong></span>
                                             @else
-                                                @switch($datas[$i]->jawaban->simpanjawaban->jawab)
-                                                    @case($datas[$i]->jawaban['pilihan_a'])
-                                                        <span class="text-primary"><strong>A</strong></span>
-                                                    @break
+                                                @if ($status == 3)
+                                                    @switch($item->jawab)
+                                                        @case($item->jawabangratis['pilihan_a'])
+                                                            <span class="text-primary"><strong>A</strong></span>
+                                                        @break
 
-                                                    @case($datas[$i]->jawaban['pilihan_b'])
-                                                        <span class="text-primary"><strong>B</strong></span>
-                                                    @break
+                                                        @case($item->jawabangratis['pilihan_b'])
+                                                            <span class="text-primary"><strong>B</strong></span>
+                                                        @break
 
-                                                    @case($datas[$i]->jawaban['pilihan_c'])
-                                                        <span class="text-primary"><strong>C</strong></span>
-                                                    @break
+                                                        @case($item->jawabangratis['pilihan_c'])
+                                                            <span class="text-primary"><strong>C</strong></span>
+                                                        @break
 
-                                                    @case($datas[$i]->jawaban['pilihan_d'])
-                                                        <span class="text-primary"><strong>D</strong></span>
-                                                    @break
+                                                        @case($item->jawabangratis['pilihan_d'])
+                                                            <span class="text-primary"><strong>D</strong></span>
+                                                        @break
 
-                                                    @case($datas[$i]->jawaban['pilihan_e'])
-                                                        <span class="text-primary"><strong>E</strong></span>
-                                                    @break
-                                                @endswitch
+                                                        @case($item->jawabangratis['pilihan_e'])
+                                                            <span class="text-primary"><strong>E</strong></span>
+                                                        @break
+                                                    @endswitch
+                                                @else
+                                                    @switch($item->jawab)
+                                                        @case($item->jawaban['pilihan_a'])
+                                                            <span class="text-primary"><strong>A</strong></span>
+                                                        @break
+
+                                                        @case($item->jawaban['pilihan_b'])
+                                                            <span class="text-primary"><strong>B</strong></span>
+                                                        @break
+
+                                                        @case($item->jawaban['pilihan_c'])
+                                                            <span class="text-primary"><strong>C</strong></span>
+                                                        @break
+
+                                                        @case($item->jawaban['pilihan_d'])
+                                                            <span class="text-primary"><strong>D</strong></span>
+                                                        @break
+
+                                                        @case($item->jawaban['pilihan_e'])
+                                                            <span class="text-primary"><strong>E</strong></span>
+                                                        @break
+                                                    @endswitch
+                                                @endif
                                             @endif
                                         </p>
                                         <p style="font-size: 18px">Kunci Jawaban:
-                                            @foreach (range('a', 'e') as $alpha)
-                                                @if (isset($datas[$i]->jawaban["jawaban_$alpha"]) && $datas[$i]->jawaban["jawaban_$alpha"] != 0)
-                                                    <span style="color: green"><strong>{{ strtoupper($alpha) }}
-                                                        </strong></span>
-                                                @endif
-                                            @endforeach
+                                            @if ($status == 3)
+                                                @foreach (range('a', 'e') as $alpha)
+                                                    @if (isset($item->jawabangratis["jawaban_$alpha"]) && $item->jawabangratis["jawaban_$alpha"] != 0)
+                                                        <span style="color: green"><strong>{{ strtoupper($alpha) }}
+                                                            </strong></span>
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                @foreach (range('a', 'e') as $alpha)
+                                                    @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
+                                                        <span style="color: green"><strong>{{ strtoupper($alpha) }}
+                                                            </strong></span>
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         </p>
                                     </div>
                                     <hr>
                                     <div class="row mt-5">
-                                        <h2><strong>Pembahasan</strong></h2>
-                                        <span style="font-size: 17px">{!! $datas[$i]->jawaban->pembahasan !!}</span>
+                                        @if ($status != 3)
+                                            <h2><strong>Pembahasan</strong></h2>
+                                            <span style="font-size: 17px">{!! $datas[$i]->jawaban->pembahasan !!}</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        @endfor
+                        @endforeach
 
                         <div class="d-flex flex-stack pt-10">
                             @if ($currentStep > 1 && $currentStep <= $totalSteps)
@@ -184,26 +258,44 @@
                         </div>
                         <hr>
                         <div class="row">
-                            @foreach ($datas as $index => $data)
+                            @foreach ($jawabann as $index => $data)
                                 <div wire:key="{{ $index }}"
                                     class="stepper-item {{ $currentStep == $index + 1 ? 'current' : '' }} col-2 mb-5"
                                     data-kt-stepper-element="nav">
                                     <div class="stepper-wrapper">
-                                        <a href="javascript:void(0)" wire:click="setStep({{ $index + 1 }})">
-                                            <div class="stepper-icon w-40px h-40px"
-                                                style="background-color: 
-                                                    @if ($data->jawaban['pilihan_a'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_a'] == 5) green;
-                                                    @elseif($data->jawaban['pilihan_b'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_b'] == 5)
-                                                    green; @elseif ($data->jawaban['pilihan_c'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_c'] == 5)
-                                                    green; @elseif ($data->jawaban['pilihan_d'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_d'] == 5)
-                                                    green; @elseif ($data->jawaban['pilihan_e'] == $data->jawaban->simpanjawaban->jawab && $data->jawaban['jawaban_e'] == 5)
-                                                    green; @elseif($data->jawaban->simpanjawaban->jawab == null) grey;
+                                        @if ($status == 3)
+                                            <a href="javascript:void(0)" wire:click="setStep({{ $index + 1 }})">
+                                                <div class="stepper-icon w-40px h-40px"
+                                                    style="background-color: 
+                                                    @if ($data->jawabangratis['pilihan_a'] == $data->jawab && $data->jawabangratis['jawaban_a'] == 5) green;
+                                                    @elseif($data->jawabangratis['pilihan_b'] == $data->jawab && $data->jawabangratis['jawaban_b'] == 5)
+                                                    green; @elseif ($data->jawabangratis['pilihan_c'] == $data->jawab && $data->jawabangratis['jawaban_c'] == 5)
+                                                    green; @elseif ($data->jawabangratis['pilihan_d'] == $data->jawab && $data->jawabangratis['jawaban_d'] == 5)
+                                                    green; @elseif ($data->jawabangratis['pilihan_e'] == $data->jawab && $data->jawabangratis['jawaban_e'] == 5)
+                                                    green; @elseif($data->jawab == null) grey;
                                                     @else red; @endif">
-                                                <span class="stepper-number"
-                                                    style="color: white">{{ $loop->iteration }}
-                                                </span>
-                                            </div>
-                                        </a>
+                                                    <span class="stepper-number"
+                                                        style="color: white">{{ $loop->iteration }}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        @else
+                                            <a href="javascript:void(0)" wire:click="setStep({{ $index + 1 }})">
+                                                <div class="stepper-icon w-40px h-40px"
+                                                    style="background-color: 
+                                                    @if ($data->jawaban['pilihan_a'] == $data->jawab && $data->jawaban['jawaban_a'] == 5) green;
+                                                    @elseif($data->jawaban['pilihan_b'] == $data->jawab && $data->jawaban['jawaban_b'] == 5)
+                                                    green; @elseif ($data->jawaban['pilihan_c'] == $data->jawab && $data->jawaban['jawaban_c'] == 5)
+                                                    green; @elseif ($data->jawaban['pilihan_d'] == $data->jawab && $data->jawaban['jawaban_d'] == 5)
+                                                    green; @elseif ($data->jawaban['pilihan_e'] == $data->jawab && $data->jawaban['jawaban_e'] == 5)
+                                                    green; @elseif($data->jawab == null) grey;
+                                                    @else red; @endif">
+                                                    <span class="stepper-number"
+                                                        style="color: white">{{ $loop->iteration }}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach
@@ -213,27 +305,4 @@
             </div>
         </div>
     </div>
-
-    @push('footer')
-        {{-- <script>
-            document.querySelectorAll('.stepper-item').forEach((item, index) => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.stepper-item').forEach((el) => {
-                        el.classList.remove('current');
-                    });
-
-                    item.classList.add('current');
-
-                    document.querySelectorAll('[data-kt-stepper-element="content"]').forEach((content,
-                        contentIndex) => {
-                        if (contentIndex === index) {
-                            content.classList.add('current');
-                        } else {
-                            content.classList.remove('current');
-                        }
-                    });
-                });
-            });
-        </script> --}}
-    @endpush
 </div>

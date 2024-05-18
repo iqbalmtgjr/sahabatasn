@@ -34,13 +34,20 @@
                             </div>
                         </div>
                         <hr>
-                        {{-- @for ($i = 0; $i < $totalSteps; $i++) --}}
                         @foreach ($datas as $i => $item)
                             <div wire:key='{{ $item->id }}'
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
+                                    <div class="mb-5">
+                                        @if ($item->gambar != null)
+                                            <img style="width: 250px"
+                                                src="{{ asset('gambar_soal') . '/' . $item->gambar }}"
+                                                alt="gambar_soal">
+                                        @endif
+                                    </div>
                                     <div class="pb-5 pb-lg-5">
+
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
                                             {{ $i + 1 }}. {{ $item->soal }}
                                         </h2>
@@ -106,8 +113,6 @@
                                 </div>
                             </div>
                         @endforeach
-
-                        {{-- @endfor --}}
 
                         <!--begin::Actions-->
                         <div class="d-flex flex-stack pt-10">
@@ -234,6 +239,7 @@
                         countdown = 0;
                         countdownElement.textContent = '00:00:00';
                         localStorage.removeItem(countdownKey);
+                        @this.call('submit')
                         toastr.error('Waktu habis, silahkan klik tombol Selesai', 'Waktu habis');
                     }
 

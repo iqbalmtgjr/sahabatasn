@@ -37,12 +37,13 @@
                                 <!--begin::Top-->
                                 <div class="text-center mb-15">
                                     <!--begin::Title-->
-                                    <h3 class="fs-2hx text-dark mb-5">About Us</h3>
+                                    <h3 class="fs-2hx text-dark mb-5">Tentang Kami</h3>
                                     <!--end::Title-->
                                     <!--begin::Text-->
-                                    <div class="fs-5 text-muted fw-semibold">Within the last 10 years, we have sold over
-                                        100,000 admin theme copies that have been
-                                        <br>successfully deployed by small businesses to global enterprises
+                                    <div class="fs-5 text-muted fw-semibold">Bimbingan Belajar Sahabat ASN merupakan pelopor bimbingan belajar di Kabupaten Merauke, Papua Selatan. 
+                                        Mewujudkan Mimpi Tanpa Batas menjadi slogan yang tidak lepas dari visi misi Bimbingan Belajar Sahabat ASN. Berdiri sejak awal tahun 2024, Sahabat ASN berusaha mewujudkan mimpi peserta bimbingan CPNS, PPPK, Sekolah Kedinasan, dan lainnya.
+                                        Harapannya Bimbingan Belajar ini menjadi ruang berproses dalam mencapai cita-cita peserta bimbingan belajar. Sahabat ASN, Mewujudkan Mimpi Tanpa Batas.                                       
+                                        {{-- <br>successfully deployed by small businesses to global enterprises --}}
                                     </div>
                                     <!--end::Text-->
                                 </div>
@@ -65,13 +66,16 @@
                             </div>
                             <!--end::Wrapper-->
                             <!--begin::Description-->
-                            <div class="fs-5 fw-semibold text-gray-600">
+                            {{-- <div class="fs-5 fw-semibold text-gray-600">
                                 <!--begin::Text-->
-                                <p class="mb-8">First, a disclaimer – the entire process of writing a blog post often
-                                    takes more than a couple of hours, even if you can type eighty words per minute and your
-                                    writing skills are sharp. From the seed of the idea to finally hitting “Publish,” you
-                                    might spend several days or maybe even a week “writing” a blog post, but it’s important
-                                    to spend those vital hours planning your post and even thinking about
+                                <p class="mb-8">VISI
+                                    Menjadi lembaga belajar profesional terbaik dan terbesar di Indonesia
+                                    
+                                    Misi	
+                                    1.	Membimbing sumber daya manusia lokal menjadi unggul dan dapat bersaing secara nasional.
+                                    2.	Menumbuhkan budaya belajar berbasis teknologi di mana saja dan kapan saja.
+                                    3.	Mewujudkan pendidikan bermutu di Indonesia dan mendukung persiapan seleksi secara nasional.
+                                    
                                     <a href="../../demo38/dist/pages/blog/post.html" class="link-primary pe-1">Your
                                         Post</a>(yes, thinking counts as working if you’re a blogger) before you actually
                                     write it.
@@ -102,12 +106,35 @@
                                     matter how dry it may be. Blogging is a lot easier, however, if you can muster at least
                                     a little enthusiasm for the topic at hand.</p>
                                 <!--end::Text-->
+                            </div> --}}
+                            <div class="text-center mb-15">
+                                <!--begin::Title-->
+                                <h5 class="fs-2hx text-dark mb-3">VISI</h5>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                <div class="fs-5 text-muted fw-semibold">
+                                    Menjadi lembaga belajar profesional terbaik dan terbesar di Indonesia                                       
+                                    {{-- <br>successfully deployed by small businesses to global enterprises --}}
+                                </div>
+                                <!--end::Text-->
+                            </div>
+                            <div class="text-center mb-15">
+                                <!--begin::Title-->
+                                <h5 class="fs-2hx text-dark mb-3">MISI</h5>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                <div class="fs-5 text-muted fw-semibold">
+                                    1.	Membimbing sumber daya manusia lokal menjadi unggul dan dapat bersaing secara nasional. <br>
+                                    2.	Menumbuhkan budaya belajar berbasis teknologi di mana saja dan kapan saja. <br>
+                                    3.	Mewujudkan pendidikan bermutu di Indonesia dan mendukung persiapan seleksi secara nasional.
+                                </div>
+                                <!--end::Text-->
                             </div>
                             <!--end::Description-->
                         </div>
                         <!--end::About-->
                         <!--begin::Statistics-->
-                        <div class="card bg-light mb-18">
+                        {{-- <div class="card bg-light mb-18">
                             <!--begin::Body-->
                             <div class="card-body py-15">
                                 <!--begin::Wrapper-->
@@ -211,10 +238,10 @@
                                 <!--end::Author-->
                             </div>
                             <!--end::Body-->
-                        </div>
+                        </div> --}}
                         <!--end::Statistics-->
                         <!--begin::Section-->
-                        <div class="mb-16">
+                        {{-- <div class="mb-16">
                             <!--begin::Top-->
                             <div class="text-center mb-12">
                                 <!--begin::Title-->
@@ -375,19 +402,18 @@
                                 <!--end::Col-->
                             </div>
                             <!--end::Row-->
-                        </div>
+                        </div> --}}
                         <!--end::Section-->
                         <!--begin::Team-->
                         <div class="mb-18">
                             <!--begin::Heading-->
                             <div class="text-center mb-12">
                                 <!--begin::Title-->
-                                <h3 class="fs-2hx text-dark mb-5">Our Great Team</h3>
+                                <h3 class="fs-2hx text-dark mb-5">TIM KAMI</h3>
                                 <!--end::Title-->
                                 <!--begin::Sub-title-->
-                                <div class="fs-5 text-muted fw-semibold">It’s no doubt that when a development takes longer
-                                    to complete, additional costs to
-                                    <br>integrate and test each extra feature creeps up and haunts most of us.
+                                <div class="fs-5 text-muted fw-semibold">Tim hebat kami yang membangun Sahabat ASN
+                                    {{-- <br>integrate and test each extra feature creeps up and haunts most of us. --}}
                                 </div>
                                 <!--end::Sub-title=-->
                             </div>

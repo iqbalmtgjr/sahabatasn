@@ -13,15 +13,13 @@ return new class extends Migration
     {
         Schema::create('hasil', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jawaban_id')->constrained('jawaban');
-            $table->foreignId('bank_soal_id')->constrained('bank_soal');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('paketsaya_id')->constrained('paket_saya');
+            $table->string('kode_submit');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('hasil');

@@ -92,7 +92,7 @@
                                                 <!--begin::Number-->
                                                 <div class="d-flex align-items-center">
                                                     <div class="fs-2 fw-bold" data-kt-countup="true"
-                                                        data-kt-countup-value="2">0
+                                                        data-kt-countup-value="{{ count($paket) }}">0
                                                     </div>
                                                 </div>
                                                 <!--end::Number-->
@@ -108,7 +108,7 @@
                                                 <div class="d-flex align-items-center">
                                                     {{-- <i class="ki-outline ki-arrow-down fs-3 text-danger me-2"></i> --}}
                                                     <div class="fs-2 fw-bold" data-kt-countup="true"
-                                                        data-kt-countup-value="3">
+                                                        data-kt-countup-value="{{ count($paketgratis) }}">
                                                         0</div>
                                                 </div>
                                                 <!--end::Number-->
