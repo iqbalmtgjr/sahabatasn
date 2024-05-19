@@ -111,54 +111,12 @@
         <!--end::Content-->
     </div>
 @endsection
-{{-- @push('footer')
-    <script>
-        // const button = document.getElementByClassName('hapus');
-
-        $('#kt_datatable_example_1').on('click', '.hapus', function() {
-            let data = $(this).data()
-            let Id = data.id
-            let Soal = data.soal
-
-            Swal.fire({
-                    title: 'Yakin?',
-                    text: "Mau Hapus Soal " + Soal + "?",
-                    icon: "warning",
-                    buttonsStyling: false,
-                    showCancelButton: true,
-                    confirmButtonText: "Yakin, hapus!",
-                    cancelButtonText: 'Tidak, batal',
-                    customClass: {
-                        confirmButton: "btn btn-primary",
-                        cancelButton: 'btn btn-danger'
-                    }
-                })
-                .then((result) => {
-                    console.log(result);
-                    if (result.value) {
-                        window.location = `{{ url('/subpaket/soal/hapus/') }}/${Id}`;
-                    }
-                });
-        });
-    </script>
-@endpush --}}
 @push('header')
     <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
         type="text/css" />
-
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 @endpush
 
 @push('footer')
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <script>
-        $('.pembahasan').summernote({
-            placeholder: 'Masukkan pembahasan',
-            tabsize: 2,
-            height: 200
-        });
-    </script>
     <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
