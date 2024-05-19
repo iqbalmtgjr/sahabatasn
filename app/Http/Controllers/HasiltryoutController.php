@@ -30,7 +30,6 @@ class HasiltryoutController extends Controller
 
         // $this->total_nilai(6, 3, 1);
 
-
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('paket_id', function ($row) {

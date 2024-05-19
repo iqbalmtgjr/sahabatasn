@@ -56,9 +56,9 @@
                                         <input
                                             wire:click="simpan('{{ $item->jawaban->pilihan_a }}',{{ $item->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault1"
+                                            id="flexRadioDefault{{ $i + 1 }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_a ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault{{ $i + 1 }}">
                                             <strong style="font-size: 15px">{{ $item->jawaban->pilihan_a }}</strong>
                                         </label>
                                     </div>
@@ -66,10 +66,10 @@
                                         <input
                                             wire:click="simpan('{{ $item->jawaban->pilihan_b }}',{{ $item->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault2"
+                                            id="flexRadioDefault2{{ $i + 1 }}"
                                             value="{{ $item->jawaban->pilihan_b != null ? $item->jawaban->pilihan_b : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_b ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault2">
+                                        <label class="form-check-label" for="flexRadioDefault2{{ $i + 1 }}">
                                             <strong style="font-size: 15px">{{ $item->jawaban->pilihan_b }}</strong>
                                         </label>
                                     </div>
@@ -77,10 +77,10 @@
                                         <input
                                             wire:click="simpan('{{ $item->jawaban->pilihan_c }}',{{ $item->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault3"
+                                            id="flexRadioDefault3{{ $i + 1 }}"
                                             value="{{ $item->jawaban->pilihan_c != null ? $item->jawaban->pilihan_c : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_c ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault3">
+                                        <label class="form-check-label" for="flexRadioDefault3{{ $i + 1 }}">
                                             <strong style="font-size: 15px">{{ $item->jawaban->pilihan_c }}</strong>
                                         </label>
                                     </div>
@@ -88,10 +88,10 @@
                                         <input
                                             wire:click="simpan('{{ $item->jawaban->pilihan_d }}',{{ $item->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
-                                            id="flexRadioDefault4"
+                                            id="flexRadioDefault4{{ $i + 1 }}"
                                             value="{{ $item->jawaban->pilihan_d != null ? $item->jawaban->pilihan_d : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_d ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="flexRadioDefault4">
+                                        <label class="form-check-label" for="flexRadioDefault4{{ $i + 1 }}">
                                             <strong style="font-size: 15px">{{ $item->jawaban->pilihan_d }}</strong>
                                         </label>
                                     </div>
@@ -101,10 +101,11 @@
                                             <input
                                                 wire:click="simpan('{{ $item->jawaban->pilihan_e }}',{{ $item->jawaban->id }})"
                                                 class="form-check-input" type="radio"
-                                                name="jawaban_{{ $i + 1 }}" id="flexRadioDefault5"
+                                                name="jawaban_{{ $i + 1 }}"
+                                                id="flexRadioDefault5{{ $i + 1 }}"
                                                 value="{{ $item->jawaban->pilihan_e != null ? $item->jawaban->pilihan_e : old('jawaban_' . $i + 1) }}"
                                                 {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_e ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="flexRadioDefault5">
+                                            <label class="form-check-label" for="flexRadioDefault5{{ $i + 1 }}">
                                                 <strong
                                                     style="font-size: 15px">{{ $item->jawaban->pilihan_e }}</strong>
                                             </label>
