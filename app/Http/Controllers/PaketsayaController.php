@@ -27,7 +27,7 @@ class PaketsayaController extends Controller
 
     private function banksoal($kategori_id, $subkategori_id)
     {
-        if ($kategori_id > 3) {
+        if ($kategori_id > 1) {
             return Banksoal::where('kategori_id', $kategori_id)
                 ->where('subkategori_id', $subkategori_id)
                 ->get();
