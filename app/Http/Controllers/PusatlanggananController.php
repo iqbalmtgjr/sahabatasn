@@ -40,7 +40,7 @@ class PusatlanggananController extends Controller
 
     public function detailpppkteknis()
     {
-        $data = Paket::where('kategori_id', 4)
+        $data = Paket::where('kategori_id', 3)
             ->where('harga', '>', 0)
             ->get();
         return view('pusatlangganan.detailpppkteknis', compact('data'));
@@ -48,7 +48,7 @@ class PusatlanggananController extends Controller
 
     public function detailpppkumum()
     {
-        $data = Paket::where('kategori_id', 5)->get();
+        $data = Paket::where('kategori_id', 4)->get();
         return view('pusatlangganan.detailpppkumum', compact('data'));
     }
 }

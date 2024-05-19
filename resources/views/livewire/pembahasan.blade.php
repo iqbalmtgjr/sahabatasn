@@ -183,7 +183,7 @@
                                     <div class="row mt-5">
                                         @if ($status != 3)
                                             <h2><strong>Pembahasan</strong></h2>
-                                            <span style="font-size: 17px">{!! $datas[$i]->jawaban->pembahasan !!}</span>
+                                            <span style="font-size: 17px">{!! $jawabann[$i]->jawaban->pembahasan !!}</span>
                                         @endif
                                     </div>
                                 </div>
