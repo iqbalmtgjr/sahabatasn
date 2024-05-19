@@ -31,17 +31,18 @@
                         <div class="me-7 mb-4">
                             <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                                 @if (Auth::user()->avatar == null)
-                                    <img src="assets/media/svg/avatars/blank.svg" alt="user" />
+                                    <img class="lozad" src="assets/media/svg/avatars/blank.svg" alt="user" />
                                 @else
                                     @if (Auth::user()->google_id !== null)
                                         @if (file_exists('gambar/' . auth()->user()->avatar))
-                                            <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}"
+                                            <img class="lozad" src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}"
                                                 alt="user" />
                                         @else
-                                            <img src="{{ Auth::user()->avatar }}" alt="user" />
+                                            <img class="lozad" src="{{ Auth::user()->avatar }}" alt="user" />
                                         @endif
                                     @else
-                                        <img src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}" alt="user" />
+                                        <img class="lozad" src="{{ asset('') . 'gambar/' . auth()->user()->avatar }}"
+                                            alt="user" />
                                     @endif
                                 @endif
                                 <div

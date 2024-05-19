@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Paket;
 use App\Models\Paketsaya;
 use App\Models\Subkategori;
+use App\Models\Subpaket;
 use Illuminate\Support\Str;
+use App\Models\Tampungpaket;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -13,29 +15,12 @@ use Illuminate\Support\Facades\Validator;
 
 class PaketController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $subkategori = Subkategori::all();
         $paket = Paket::all();
         if ($request->ajax()) {
             return DataTables::of($paket)
-                ->addColumn('kategori_id', function ($row) {
-                    if ($row->kategori) {
-                        return $row->kategori->kategori;
-                    } else {
-                        return '';
-                    }
-                })
-                ->addColumn('subkategori_id', function ($row) {
-                    if ($row->subkategori) {
-                        return $row->subkategori->sub_kategori;
-                    } else {
-                        return '';
-                    }
-                })
                 ->addColumn('harga', function ($row) {
                     if ($row->harga == 0) {
                         return 'Gratis';
@@ -44,13 +29,15 @@ class PaketController extends Controller
                     }
                 })
                 ->addColumn('gambar', function ($row) {
+                    $url = asset('gambar/' . $row->gambar);
+                    $url2 = asset($row->gambar);
                     if ($row->gambar == null) {
-                        return '<p class="text-danger">Belum Ada Avatar</p>';
+                        return '<p class="text-danger">Belum Ada Gambar</p>';
                     } else {
                         if (file_exists('gambar/' . $row->gambar)) {
-                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->gambar . '" alt="avatar">';
+                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $url . '" alt="gambar paket">';
                         } else {
-                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->gambar . '" alt="avatar">';
+                            return '<span class="text-danger">Kesalahan Saat Mengambil Gambar</span>';
                         }
                     }
                 })
@@ -64,11 +51,9 @@ class PaketController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'gambar' => 'required',
             'judul' => 'required',
             'harga' => 'required',
-            'subkategori_id' => 'required',
-            'waktu' => 'required',
-            'gambar' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -78,10 +63,7 @@ class PaketController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
-
-
-        $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
+        // $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
 
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
@@ -93,17 +75,11 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
             ]);
         } else {
             $paket = Paket::updateOrCreate([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
             ]);
         }
 
@@ -122,9 +98,22 @@ class PaketController extends Controller
 
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'harga' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         $data = Paket::find($request->id);
 
-        $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
+        // $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
         if ($request->file('gambar')) {
             // Hapus Foto Lama
             $path = public_path('gambar/' . $data->gambar);
@@ -141,17 +130,11 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
             ]);
         } else {
             $data->update([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
             ]);
         }
 
@@ -159,9 +142,6 @@ class PaketController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $paket = Paket::findOrFail($id);
@@ -173,6 +153,66 @@ class PaketController extends Controller
 
         $paket->delete();
 
+        return redirect()->back();
+    }
+
+    public function sub(Request $request, $id)
+    {
+        $data = Tampungpaket::where('paket_id', $id)->get();
+        $subpaket = Subpaket::all();
+        if ($request->ajax()) {
+            return DataTables::of($data)
+                ->addColumn('subpaket', function ($row) {
+                    return $row->subpaket->judul;
+                })
+                ->make(true);
+        }
+        return view('paket.sub', compact('data', 'subpaket', 'id'));
+    }
+
+    public function subpost(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'subpaket' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Sub paket belum dipilih.', 'Gagal');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $subpaket = Subpaket::whereIn('id', $request->subpaket)->get();
+        $sub = array();
+        foreach ($subpaket as $value) {
+            $cek = Tampungpaket::where('subpaket_id', $value->id)->first();
+            if (!$cek) {
+                $sub[] = array(
+                    'paket_id' => $request->id,
+                    'subpaket_id' => $value->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                );
+            }
+        }
+
+        if (count($sub) > 0) {
+            Tampungpaket::insert($sub);
+            toastr()->success('Sub paket berhasil ditambah.', 'Selamat');
+        } else {
+            toastr()->error('Sub paket sudah ada, tidak bisa ditambahkan lagi.', 'Gagal');
+        }
+
+        return redirect()->back();
+    }
+
+    public function subhapus($id)
+    {
+        Tampungpaket::find($id)->delete();
+
+        toastr()->success('Sub paket berhasil dihapus.', 'Selamat');
         return redirect()->back();
     }
 

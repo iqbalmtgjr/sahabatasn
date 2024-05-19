@@ -212,7 +212,7 @@
                 $('#email').val(response.email);
 
                 $.ajax({
-                    url: 'http://localhost:8000/gambar/' + response.avatar + '',
+                    url: '{{ url('') }}/gambar/' + response.avatar + '',
                     type: 'HEAD',
                     error: function() {
                         console.log('woi tak ada data')
@@ -233,7 +233,7 @@
                     },
                     success: function() {
                         console.log('woi ada data')
-                        const file = "gambar/" + response.avatar + "";
+                        const file = "{{ asset('') }}/gambar/" + response.avatar + "";
                         if (response.avatar !== null) {
                             if (response.google_id !== null) {
                                 $('.image-input-wrapper').css('background-image', 'url(' +

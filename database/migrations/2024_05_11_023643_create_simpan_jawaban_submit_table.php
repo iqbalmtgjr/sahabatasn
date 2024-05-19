@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('simpan_jawaban_submit', function (Blueprint $table) {
             $table->id();
             $table->string('kode_submit');
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('paketsaya_id')->constrained('paket_saya');
-            $table->foreignId('banksoal_id')->nullable()->constrained('bank_soal');
-            $table->foreignId('togratis_id')->nullable()->constrained('togratis');
-            $table->foreignId('jawaban_id')->nullable()->constrained('jawaban');
-            $table->foreignId('jawabangratis_id')->nullable()->constrained('jawaban_gratis');
-            $table->foreignId('subkategori_id')->constrained('sub_kategori');
+            $table->foreignId('user_id');
+            $table->foreignId('paketsaya_id');
+            $table->foreignId('banksoal_id')->nullable();
+            $table->foreignId('togratis_id')->nullable();
+            $table->foreignId('jawaban_id')->nullable();
+            $table->foreignId('jawabangratis_id')->nullable();
+            $table->foreignId('subkategori_id');
             $table->string('jawab')->nullable();
             $table->string('lama_pengerjaan')->nullable();
             $table->timestamps();

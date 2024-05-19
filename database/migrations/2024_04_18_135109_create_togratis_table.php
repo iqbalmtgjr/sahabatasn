@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('togratis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_id')->constrained('kategori');
-            $table->foreignId('subkategori_id')->constrained('sub_kategori');
+            $table->foreignId('kategori_id');
+            $table->foreignId('subkategori_id');
             $table->longText('soal')->max(10000);
             $table->string('gambar')->nullable();
             $table->timestamps();

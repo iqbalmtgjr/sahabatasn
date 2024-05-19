@@ -47,7 +47,7 @@
                                 data-kt-image-input="true">
                                 <!--begin::Preview existing avatar-->
                                 <div class="image-input-wrapper w-125px h-125px"
-                                    style="background-image: url(assets/media/svg/files/blank-image.svg);">
+                                    style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }});">
                                 </div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
@@ -105,18 +105,6 @@
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
-                            <label class="required fw-semibold fs-6 mb-2">Waktu</label>
-                            <input type="number" name="waktu"
-                                class="form-control form-control-solid mb-3 mb-lg-0 @error('waktu') is-invalid @enderror"
-                                placeholder="Contoh: 20" value="{{ old('waktu') }}" />
-                            <p class="text-info">Dalam Menit</p>
-                            @error('waktu')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Harga</label>
                             <!--end::Label-->
@@ -130,23 +118,6 @@
                                 </span>
                             @enderror
                             <!--end::Input-->
-                        </div>
-                        <div class="fv-row mb-7">
-                            <label class="required fw-semibold fs-6 mb-2">Sub Ketegori</label>
-                            <select data-control="select2"
-                                class="form-select form-select-solid @error('subkategori_id') is-invalid @enderror"
-                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="subkategori_id">
-                                <option value=""></option>
-                                @foreach ($subkategori as $item)
-                                    <option value="{{ $item->id }}" @selected(old('subkategori_id') == $item->id)>
-                                        {{ $item->sub_kategori }}</option>
-                                @endforeach
-                            </select>
-                            @error('subkategori_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                     </div>
                     <!--end::Scroll-->

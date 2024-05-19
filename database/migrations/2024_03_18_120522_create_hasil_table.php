@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('hasil', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('paketsaya_id')->constrained('paket_saya');
+            $table->foreignId('user_id');
+            $table->foreignId('paketsaya_id');
             $table->string('kode_submit');
             $table->timestamps();
         });

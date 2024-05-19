@@ -12,9 +12,19 @@
                     <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                         <!--begin::Title-->
                         <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Daftar
-                            Paket</h1>
+                            Soal {{ isset($data[0]->subpaket->judul) ? $data[0]->subpaket->judul : '' }}
+                        </h1>
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
+                        <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
+                            <li class="breadcrumb-item text-muted">
+                                <a href="{{ url('paket/sub') }}" class="text-muted text-hover-primary">Daftar Sub Paket</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <span class="bullet bg-gray-400 w-5px h-2px"></span>
+                            </li>
+                            <li class="breadcrumb-item text-muted">Daftar Soal</li>
+                        </ul>
                         <!--end::Breadcrumb-->
                     </div>
                     <!--end::Page title-->
@@ -41,25 +51,37 @@
                                 <i class="ki-duotone ki-magnifier fs-1 position-absolute ms-6"><span
                                         class="path1"></span><span class="path2"></span></i>
                                 <input type="text" data-kt-docs-table-filter="search"
-                                    class="form-control form-control-solid w-250px ps-15" placeholder="Cari Paket" />
+                                    class="form-control form-control-solid w-250px ps-15" placeholder="Cari Soal" />
                             </div>
                             <!--end::Search-->
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
-                        <div class="card-toolbar">
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
                             <!--begin::Toolbar-->
+                            <div class="w-100 mw-250px">
+                                <!--begin::Select2-->
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="-- Pilih Sub Kategori --" data-kt-subkategori-filter="subkategori">
+                                    <option></option>
+                                    <option value="all">Semua</option>
+                                    @foreach ($sub_kategori as $item)
+                                        <option value="{{ $item->sub_kategori }}">{{ $item->sub_kategori }}</option>
+                                    @endforeach
+                                </select>
+                                <!--end::Select2-->
+                            </div>
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                 <!--begin::Add user-->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_add_paket">
-                                    <i class="ki-outline ki-plus fs-2"></i>Tambah Paket</button>
+                                <button onclick="getdata({{ $id }})" type="button" class="btn btn-primary"
+                                    data-bs-toggle="modal" data-bs-target="#soal">
+                                    <i class="ki-outline ki-plus fs-2"></i>Tambah Soal</button>
                                 <!--end::Add user-->
                             </div>
                         </div>
                         <!--end::Card toolbar-->
                         <!--begin::Modal - Add task-->
-                        @include('paket.modal.create')
+                        @include('subpaket.modal.soal')
                         <!--end::Modal - Add task-->
                     </div>
                     <!--end::Card header-->
@@ -72,9 +94,9 @@
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                     <th></th>
                                     <th class="w-10px pe-2">No</th>
-                                    <th>Gambar</th>
-                                    <th>Judul</th>
-                                    <th>Harga</th>
+                                    <th>Soal</th>
+                                    <th>Kategori</th>
+                                    <th>Sub Kategori</th>
                                     <th class="text-end min-w-100px">Aksi</th>
                                 </tr>
                             </thead>
@@ -92,19 +114,59 @@
         </div>
         <!--end::Content-->
     </div>
-    @include('paket.modal.edit')
 @endsection
+{{-- @push('footer')
+    <script>
+        // const button = document.getElementByClassName('hapus');
 
+        $('#kt_datatable_example_1').on('click', '.hapus', function() {
+            let data = $(this).data()
+            let Id = data.id
+            let Soal = data.soal
+
+            Swal.fire({
+                    title: 'Yakin?',
+                    text: "Mau Hapus Soal " + Soal + "?",
+                    icon: "warning",
+                    buttonsStyling: false,
+                    showCancelButton: true,
+                    confirmButtonText: "Yakin, hapus!",
+                    cancelButtonText: 'Tidak, batal',
+                    customClass: {
+                        confirmButton: "btn btn-primary",
+                        cancelButton: 'btn btn-danger'
+                    }
+                })
+                .then((result) => {
+                    console.log(result);
+                    if (result.value) {
+                        window.location = `{{ url('/subpaket/soal/hapus/') }}/${Id}`;
+                    }
+                });
+        });
+    </script>
+@endpush --}}
 @push('header')
     <link href="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet"
         type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 @endpush
 
 @push('footer')
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script>
+        $('.pembahasan').summernote({
+            placeholder: 'Masukkan pembahasan',
+            tabsize: 2,
+            height: 200
+        });
+    </script>
     <script src="{{ asset('') }}assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
-
+    {{-- <script src="{{ asset('') }}assets/js/custom/apps/ecommerce/catalog/products.js"></script> --}}
     <script>
         "use strict";
 
@@ -113,7 +175,8 @@
             // Shared variables
             var table;
             var dt;
-            var filterPayment;
+            const Id = {{ $id }}
+            // console.log(Id);
 
             // Private functions
             var initDatatable = function() {
@@ -122,7 +185,7 @@
                     processing: true,
                     serverSide: true,
                     order: [
-                        [1, 'desc']
+                        [0, 'desc'] // Mengubah indeks kolom untuk pengurutan dari 0 menjadi 1
                     ],
                     stateSave: true,
                     select: {
@@ -131,7 +194,7 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/paket/utama') }}",
+                        url: `{{ url('/subpaket/soal/') }}/${Id} }}`,
                     },
                     columns: [{
                             data: 'id',
@@ -144,13 +207,13 @@
                             }
                         },
                         {
-                            data: 'gambar'
+                            data: 'soal'
                         },
                         {
-                            data: 'judul'
+                            data: 'kategori'
                         },
                         {
-                            data: 'harga'
+                            data: 'subkategori'
                         },
                         {
                             data: null
@@ -176,43 +239,26 @@
                             </a>
                             <!--begin::Menu-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"
-                                data-bs-target="#edit">
-                                        Edit
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a  href="{{ url('') }}/paket/utama/sub/${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                        Tambah Sub
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
+                                
                                 <div class="menu-item px-3">
                                     <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Hapus
                                     </a>
                                 </div>
-                                <!--end::Menu item-->
                             </div>
                             <!--end::Menu-->
                         `;
                         },
                     }, ],
-                    // Add data-filter attribute
                 });
 
                 table = dt.$;
 
-                // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
                 dt.on('draw', function() {
-                    // initToggleToolbar();
-                    //toggleToolbars();
+                    toggleToolbars();
                     handleDeleteRows();
+                    // handleKategoriFilter();
+                    handleSubKategoriFilter();
                     KTMenu.createInstances();
                 });
             }
@@ -224,6 +270,28 @@
                     dt.search(e.target.value).draw();
                 });
             }
+
+            // var handleKategoriFilter = () => {
+            //     const kategoriFilterElement = document.querySelector(
+            //         '[data-kt-kategori-filter="kategori"]');
+
+            //     $(kategoriFilterElement).on("change", (event) => {
+            //         let kategori = event.target.value;
+            //         kategori === "all" && (kategori = "");
+            //         dt.column(3).search(kategori).draw();
+            //     });
+            // };
+
+            var handleSubKategoriFilter = () => {
+                const subKategoriFilterElement = document.querySelector(
+                    '[data-kt-subkategori-filter="subkategori"]');
+
+                $(subKategoriFilterElement).on("change", (event) => {
+                    let subKategori = event.target.value;
+                    subKategori === "all" && (subKategori = "");
+                    dt.column(4).search(subKategori).draw();
+                });
+            };
 
             // Delete customer
             var handleDeleteRows = () => {
@@ -239,13 +307,13 @@
                         const parent = e.target.closest('tr');
 
                         // Get customer name
-                        const customerName = parent.querySelectorAll('td')[1].innerText;
+                        const soal = parent.querySelectorAll('td')[1].innerText;
                         let data = $(this).data()
                         let Id = data.id;
 
                         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                         Swal.fire({
-                            text: "Yakin ingin menghapus paket " + customerName + "?",
+                            text: "Yakin ingin menghapus soal " + soal + "?",
                             icon: "warning",
                             showCancelButton: true,
                             buttonsStyling: false,
@@ -259,15 +327,15 @@
                             if (result.value) {
                                 // Simulate delete request -- for demo purpose only
                                 Swal.fire({
-                                    text: "Menghapus " + customerName,
+                                    text: "Menghapus " + soal,
                                     icon: "info",
                                     buttonsStyling: false,
                                     showConfirmButton: false,
                                     timer: 2000
                                 }).then(function() {
                                     Swal.fire({
-                                        text: "Data paket " +
-                                            customerName + " terhapus !.",
+                                        text: "Data soal " +
+                                            soal + " terhapus !.",
                                         icon: "success",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, mengerti!",
@@ -276,13 +344,13 @@
                                         }
                                     }).then(function() {
                                         window.location =
-                                            `{{ url('/paket/hapus/') }}/${Id}`;
+                                            `{{ url('/subpaket/soal/hapus') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });
                             } else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "Paket " + customerName +
+                                    text: "Soal " + soal +
                                         " tidak jadi dihapus.",
                                     icon: "error",
                                     buttonsStyling: false,
@@ -297,23 +365,127 @@
                 });
             }
 
-            // Init toggle toolbar
-            var initToggleToolbar = function() {
-                // Toggle selected action toolbar
-                // Select all checkboxes
-                const container = document.querySelector('#kt_datatable_example_1');
-                const checkboxes = container.querySelectorAll('[type="checkbox"]');
+            // var handleFilterDatatable = () => {
+            //     // Select filter options
+            //     filterPayment = document.querySelectorAll(
+            //         '[data-kt-docs-table-filter="payment_type"] [name="payment_type"]');
+            //     const filterButton = document.querySelector('[data-kt-docs-table-filter="filter"]');
 
-                // Toggle delete selected toolbar
-                checkboxes.forEach(c => {
-                    // Checkbox on click event
-                    c.addEventListener('click', function() {
-                        setTimeout(function() {
-                            toggleToolbars();
-                        }, 50);
-                    });
-                });
-            }
+            //     // Filter datatable on submit
+            //     filterButton.addEventListener('click', function() {
+            //         // Get filter values
+            //         let paymentValue = '';
+
+            //         // Get payment value
+            //         filterPayment.forEach(r => {
+            //             if (r.checked) {
+            //                 paymentValue = r.value;
+            //             }
+
+            //             // Reset payment value if "All" is selected
+            //             if (paymentValue === 'all') {
+            //                 paymentValue = '';
+            //             }
+            //         });
+
+            //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+            //         dt.search(paymentValue).draw();
+            //     });
+            // }
+
+
+            // Reset Filter
+            // var handleResetForm = () => {
+            //     // Select reset button
+            //     const resetButton = document.querySelector('[data-kt-docs-table-filter="reset"]');
+
+            //     // Reset datatable
+            //     resetButton.addEventListener('click', function() {
+            //         // Reset payment type
+            //         filterPayment[0].checked = true;
+
+            //         // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+            //         dt.search('').draw();
+            //     });
+            // }
+
+            // Init toggle toolbar
+            // var initToggleToolbar = function() {
+            //     // Toggle selected action toolbar
+            //     // Select all checkboxes
+            //     const container = document.querySelector('#kt_datatable_example_1');
+            //     const checkboxes = container.querySelectorAll('[type="checkbox"]');
+
+            //     // Select elements
+            //     const deleteSelected = document.querySelector('[data-kt-docs-table-select="delete_selected"]');
+
+            //     // Toggle delete selected toolbar
+            //     checkboxes.forEach(c => {
+            //         // Checkbox on click event
+            //         c.addEventListener('click', function() {
+            //             setTimeout(function() {
+            //                 toggleToolbars();
+            //             }, 50);
+            //         });
+            //     });
+
+            //     // Deleted selected rows
+            //     deleteSelected.addEventListener('click', function() {
+            //         // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            //         Swal.fire({
+            //             text: "Are you sure you want to delete selected customers?",
+            //             icon: "warning",
+            //             showCancelButton: true,
+            //             buttonsStyling: false,
+            //             showLoaderOnConfirm: true,
+            //             confirmButtonText: "Yes, delete!",
+            //             cancelButtonText: "No, cancel",
+            //             customClass: {
+            //                 confirmButton: "btn fw-bold btn-danger",
+            //                 cancelButton: "btn fw-bold btn-active-light-primary"
+            //             },
+            //         }).then(function(result) {
+            //             if (result.value) {
+            //                 // Simulate delete request -- for demo purpose only
+            //                 Swal.fire({
+            //                     text: "Deleting selected customers",
+            //                     icon: "info",
+            //                     buttonsStyling: false,
+            //                     showConfirmButton: false,
+            //                     timer: 2000
+            //                 }).then(function() {
+            //                     Swal.fire({
+            //                         text: "You have deleted all selected customers!.",
+            //                         icon: "success",
+            //                         buttonsStyling: false,
+            //                         confirmButtonText: "Ok, got it!",
+            //                         customClass: {
+            //                             confirmButton: "btn fw-bold btn-primary",
+            //                         }
+            //                     }).then(function() {
+            //                         // delete row data from server and re-draw datatable
+            //                         dt.draw();
+            //                     });
+
+            //                     // Remove header checked box
+            //                     const headerCheckbox = container.querySelectorAll(
+            //                         '[type="checkbox"]')[0];
+            //                     headerCheckbox.checked = false;
+            //                 });
+            //             } else if (result.dismiss === 'cancel') {
+            //                 Swal.fire({
+            //                     text: "Selected customers was not deleted.",
+            //                     icon: "error",
+            //                     buttonsStyling: false,
+            //                     confirmButtonText: "Ok, got it!",
+            //                     customClass: {
+            //                         confirmButton: "btn fw-bold btn-primary",
+            //                     }
+            //                 });
+            //             }
+            //         });
+            //     });
+            // }
 
             // Toggle toolbars
             var toggleToolbars = function() {
@@ -321,7 +493,8 @@
                 const container = document.querySelector('#kt_datatable_example_1');
                 const toolbarBase = document.querySelector('[data-kt-docs-table-toolbar="base"]');
                 const toolbarSelected = document.querySelector('[data-kt-docs-table-toolbar="selected"]');
-                const selectedCount = document.querySelector('[data-kt-docs-table-select="selected_count"]');
+                const selectedCount = document.querySelector(
+                    '[data-kt-docs-table-select="selected_count"]');
 
                 // Select refreshed checkbox DOM elements
                 const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
@@ -339,14 +512,14 @@
                 });
 
                 // Toggle toolbars
-                if (checkedState) {
-                    selectedCount.innerHTML = count;
-                    toolbarBase.classList.add('d-none');
-                    toolbarSelected.classList.remove('d-none');
-                } else {
-                    toolbarBase.classList.remove('d-none');
-                    toolbarSelected.classList.add('d-none');
-                }
+                // if (checkedState) {
+                //     selectedCount.innerHTML = count;
+                //     toolbarBase.classList.add('d-none');
+                //     toolbarSelected.classList.remove('d-none');
+                // } else {
+                //     toolbarBase.classList.remove('d-none');
+                //     toolbarSelected.classList.add('d-none');
+                // }
             }
 
             // Public methods
@@ -354,8 +527,11 @@
                 init: function() {
                     initDatatable();
                     handleSearchDatatable();
-                    initToggleToolbar();
+                    // handleKategoriFilter();
+                    handleSubKategoriFilter();
+                    // initToggleToolbar();
                     handleDeleteRows();
+                    // handleResetForm();
                 }
             }
         }();
@@ -365,4 +541,12 @@
             KTDatatablesServerSide.init();
         });
     </script>
+
+    {{-- Cadangan EDIT MODAL --}}
+    {{-- <div class="menu-item px-3">
+        <a href="#" onclick="getdata(${row['id']})" class="menu-link px-3" data-kt-docs-table-filter="edit_row"
+            data-bs-toggle="modal" data-bs-target="#edit">
+            Edit
+        </a>
+    </div> --}}
 @endpush

@@ -196,7 +196,7 @@
                                     return ``;
                                 } else {
                                     return `
-                                    <a target="_blank" href="http://localhost:8000/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
+                                    <a target="_blank" href="{{ url('') }}/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
                                         Lihat Bukti Bayar
                                     </a>
                                     <a href="#" onclick="getdata(${row['id']})" class="btn btn-sm btn-primary" data-kt-docs-table-filter="edit_row" data-bs-toggle="modal"

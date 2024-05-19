@@ -20,6 +20,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\HasiltryoutController;
 use App\Http\Controllers\PusatlanggananController;
+use App\Http\Controllers\SubpaketController;
 use App\Livewire\Pembahasan;
 
 Route::get('/', function () {
@@ -107,11 +108,24 @@ Route::group(['middleware' => ['isLogin']], function () {
         Route::get('/tryout-gratis/hapus/{id}', [TogratisController::class, 'destroy']);
 
         //kelola_paket
-        Route::get('/kelola-paket', [PaketController::class, 'index'])->name('kelola-paket');
+        Route::get('/paket/utama', [PaketController::class, 'index'])->name('paket.utama');
+        Route::get('/paket/utama/sub/{id}', [PaketController::class, 'sub'])->name('paket.sub.utama');
+        Route::get('/paket/utama/sub/hapus/{id}', [PaketController::class, 'subhapus'])->name('paket.sub.hapus');
+        Route::post('/paket/utama/sub', [PaketController::class, 'subpost'])->name('paket.sub.post');
         Route::post('/paket/input', [PaketController::class, 'store'])->name('paket-input');
         Route::get('/paket/getdata/{id}', [PaketController::class, 'getdata'])->name('getdatapaket');
         Route::post('/paket/update', [PaketController::class, 'update'])->name('paket-update');
         Route::get('/paket/hapus/{id}', [PaketController::class, 'destroy'])->name('paket-delete');
+
+        //kelola_subpaket
+        Route::get('/paket/sub', [SubpaketController::class, 'index'])->name('paket.sub');
+        Route::post('/subpaket/input', [SubpaketController::class, 'store'])->name('subpaket.input');
+        Route::get('/subpaket/getdata/{id}', [SubpaketController::class, 'getdata'])->name('getdatasubpaket');
+        Route::post('/subpaket/update', [SubpaketController::class, 'update'])->name('subpaket.update');
+        Route::get('/subpaket/hapus/{id}', [SubpaketController::class, 'destroy'])->name('subpaket.delete');
+        Route::get('/subpaket/soal/{id}', [SubpaketController::class, 'soal'])->name('subpaket.soal');
+        Route::get('/subpaket/soal/hapus/{id}', [SubpaketController::class, 'hapus'])->name('subpaket.hapus');
+        Route::post('/subpaket/soal', [SubpaketController::class, 'createsoal'])->name('subpaket.soal.input');
 
         //pembayaran
         Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');

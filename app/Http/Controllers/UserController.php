@@ -28,9 +28,9 @@ class UserController extends Controller
                         return '<p class="text-danger">Belum Ada Avatar</p>';
                     } else {
                         if (file_exists('gambar/' . $row->avatar)) {
-                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->avatar . '" alt="avatar">';
+                            return '<img class="card-img-top lozad" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->avatar . '" alt="avatar">';
                         } else {
-                            return '<img class="card-img-top" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->avatar . '" alt="avatar">';
+                            return '<img class="card-img-top lozad" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->avatar . '" alt="avatar">';
                         }
                     }
                 })

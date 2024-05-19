@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Paket extends Model
+class Subpaket extends Model
 {
     use HasFactory;
-    protected $table = 'paket';
+    protected $table = 'sub_paket';
     protected $guarded = ['id'];
-    protected $fillable = ['judul', 'gambar', 'harga', 'waktu'];
+    protected $fillable = ['kategori_id', 'subkategori_id', 'judul', 'gambar', 'waktu'];
 
     public function kategori()
     {
@@ -20,5 +20,10 @@ class Paket extends Model
     public function subkategori()
     {
         return $this->belongsTo(Subkategori::class);
+    }
+
+    public function tampungsoal()
+    {
+        return $this->hasMany(Tampungsoal::class);
     }
 }

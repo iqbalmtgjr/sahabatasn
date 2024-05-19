@@ -55,8 +55,8 @@ class HasiltryoutController extends Controller
                 ->addColumn('tkp', function ($row) {
                     return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3, $row->kode_submit);
                 })
-                ->addColumn('skb', function ($row) {
-                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 4, $row->kode_submit);
+                ->addColumn('min_grade', function () {
+                    return 311;
                 })
                 ->addColumn('skor', function ($row) {
                     return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3, $row->kode_submit);

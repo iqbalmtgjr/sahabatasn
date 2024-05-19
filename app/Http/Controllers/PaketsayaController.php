@@ -18,23 +18,9 @@ class PaketsayaController extends Controller
             ->where('status', '!=', 3)
             ->get();
 
-        if ($data->first() != null) {
-            $jmlh_soal = $this->banksoal($data->first()->paket->kategori_id, $data->first()->paket->subkategori_id)->count();
-            return view('paket_saya.index', compact('data', 'jmlh_soal'));
-        }
-        return view('paket_saya.index', compact('data'));
-    }
+        // dd($data);
 
-    private function banksoal($kategori_id, $subkategori_id)
-    {
-        if ($kategori_id > 1) {
-            return Banksoal::where('kategori_id', $kategori_id)
-                ->where('subkategori_id', $subkategori_id)
-                ->get();
-        } else {
-            return Banksoal::where('kategori_id', $kategori_id)
-                ->get();
-        }
+        return view('paket_saya.index', compact('data'));
     }
 
     public function kerjakan($id, $no)

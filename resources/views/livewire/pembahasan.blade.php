@@ -162,20 +162,46 @@
                                             @endif
                                         </p>
                                         <p style="font-size: 18px">Kunci Jawaban:
-                                            @if ($status == 3)
-                                                @foreach (range('a', 'e') as $alpha)
-                                                    @if (isset($item->jawabangratis["jawaban_$alpha"]) && $item->jawabangratis["jawaban_$alpha"] != 0)
-                                                        <span style="color: green"><strong>{{ strtoupper($alpha) }}
-                                                            </strong></span>
-                                                    @endif
-                                                @endforeach
+                                            @if ($item->subkategori_id == 3)
+                                                @if ($status == 3)
+                                                    <br>
+                                                    @foreach (range('a', 'e') as $alpha)
+                                                        @if (isset($item->jawabangratis["jawaban_$alpha"]) && $item->jawabangratis["jawaban_$alpha"] != 0)
+                                                            <span
+                                                                style="color: @if ($item->jawabangratis["pilihan_$alpha"] == $item->jawab && $item->jawabangratis["jawaban_$alpha"] == 5) green; @else red; @endif"><strong>{{ strtoupper($alpha) }}.
+                                                                    Bobot Nilai =
+                                                                    {{ $item->jawabangratis["jawaban_$alpha"] }}
+                                                                </strong></span> <br>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    <br>
+                                                    @foreach (range('a', 'e') as $alpha)
+                                                        @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
+                                                            <span
+                                                                style="color: @if ($item->jawaban["pilihan_$alpha"] == $item->jawab && $item->jawaban["jawaban_$alpha"] == 5) green; @else red; @endif"><strong>{{ strtoupper($alpha) }}.
+                                                                    Bobot Nilai =
+                                                                    {{ $item->jawaban["jawaban_$alpha"] }}
+                                                                </strong></span> <br>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             @else
-                                                @foreach (range('a', 'e') as $alpha)
-                                                    @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
-                                                        <span style="color: green"><strong>{{ strtoupper($alpha) }}
-                                                            </strong></span>
-                                                    @endif
-                                                @endforeach
+                                                @if ($status == 3)
+                                                    @foreach (range('a', 'e') as $alpha)
+                                                        @if (isset($item->jawabangratis["jawaban_$alpha"]) && $item->jawabangratis["jawaban_$alpha"] != 0)
+                                                            <span style="color: green"><strong>{{ strtoupper($alpha) }}
+                                                                </strong></span>
+                                                        @endif
+                                                    @endforeach
+                                                @else
+                                                    @foreach (range('a', 'e') as $alpha)
+                                                        @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
+                                                            <span style="color: green"><strong>{{ strtoupper($alpha) }}
+                                                                </strong></span>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             @endif
                                         </p>
                                     </div>

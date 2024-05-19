@@ -59,7 +59,7 @@
                                             id="flexRadioDefault{{ $i + 1 }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_a ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">{{ $item->jawaban->pilihan_a }}</strong>
+                                            <strong style="font-size: 15px">A. {{ $item->jawaban->pilihan_a }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
@@ -70,7 +70,7 @@
                                             value="{{ $item->jawaban->pilihan_b != null ? $item->jawaban->pilihan_b : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_b ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault2{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">{{ $item->jawaban->pilihan_b }}</strong>
+                                            <strong style="font-size: 15px">B. {{ $item->jawaban->pilihan_b }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
@@ -81,7 +81,7 @@
                                             value="{{ $item->jawaban->pilihan_c != null ? $item->jawaban->pilihan_c : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_c ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault3{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">{{ $item->jawaban->pilihan_c }}</strong>
+                                            <strong style="font-size: 15px">C. {{ $item->jawaban->pilihan_c }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
@@ -92,7 +92,7 @@
                                             value="{{ $item->jawaban->pilihan_d != null ? $item->jawaban->pilihan_d : old('jawaban_' . $i + 1) }}"
                                             {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_d ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault4{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">{{ $item->jawaban->pilihan_d }}</strong>
+                                            <strong style="font-size: 15px">D. {{ $item->jawaban->pilihan_d }}</strong>
                                         </label>
                                     </div>
                                     @if ($item->jawaban->pilihan_e != null)
@@ -106,8 +106,8 @@
                                                 value="{{ $item->jawaban->pilihan_e != null ? $item->jawaban->pilihan_e : old('jawaban_' . $i + 1) }}"
                                                 {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_e ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexRadioDefault5{{ $i + 1 }}">
-                                                <strong
-                                                    style="font-size: 15px">{{ $item->jawaban->pilihan_e }}</strong>
+                                                <strong style="font-size: 15px">E.
+                                                    {{ $item->jawaban->pilihan_e }}</strong>
                                             </label>
                                         </div>
                                     @endif

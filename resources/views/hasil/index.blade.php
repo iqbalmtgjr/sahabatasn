@@ -97,7 +97,7 @@
                                 <th>Skor TWK</th>
                                 <th>Skor TIU</th>
                                 <th>Skor TKP</th>
-                                <th>Skor SKB</th>
+                                <th>Min Pass Grade</th>
                                 <th>Skor Akhir</th>
                                 <th>Pembahasan</th>
                                 <th>Lulus</th>
@@ -177,7 +177,7 @@
                             data: 'tkp'
                         },
                         {
-                            data: 'skb'
+                            data: 'min_grade'
                         },
                         {
                             data: 'skor'

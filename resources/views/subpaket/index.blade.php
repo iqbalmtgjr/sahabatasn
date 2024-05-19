@@ -12,7 +12,7 @@
                     <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                         <!--begin::Title-->
                         <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Daftar
-                            Paket</h1>
+                            Sub Paket</h1>
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
                         <!--end::Breadcrumb-->
@@ -53,13 +53,13 @@
                                 <!--begin::Add user-->
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#kt_modal_add_paket">
-                                    <i class="ki-outline ki-plus fs-2"></i>Tambah Paket</button>
+                                    <i class="ki-outline ki-plus fs-2"></i>Tambah Sub Paket</button>
                                 <!--end::Add user-->
                             </div>
                         </div>
                         <!--end::Card toolbar-->
                         <!--begin::Modal - Add task-->
-                        @include('paket.modal.create')
+                        @include('subpaket.modal.create')
                         <!--end::Modal - Add task-->
                     </div>
                     <!--end::Card header-->
@@ -72,9 +72,11 @@
                                 <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
                                     <th></th>
                                     <th class="w-10px pe-2">No</th>
-                                    <th>Gambar</th>
                                     <th>Judul</th>
-                                    <th>Harga</th>
+                                    <th>Kategori</th>
+                                    <th>Sub Kategori</th>
+                                    <th>Banyak Soal</th>
+                                    <th>Waktu</th>
                                     <th class="text-end min-w-100px">Aksi</th>
                                 </tr>
                             </thead>
@@ -92,7 +94,8 @@
         </div>
         <!--end::Content-->
     </div>
-    @include('paket.modal.edit')
+    @include('subpaket.modal.edit')
+    @include('subpaket.modal.soal')
 @endsection
 
 @push('header')
@@ -131,7 +134,7 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/paket/utama') }}",
+                        url: "{{ url('/paket/sub') }}",
                     },
                     columns: [{
                             data: 'id',
@@ -144,13 +147,22 @@
                             }
                         },
                         {
-                            data: 'gambar'
-                        },
-                        {
                             data: 'judul'
                         },
                         {
-                            data: 'harga'
+                            data: 'kategori_id'
+                        },
+                        {
+                            data: 'subkategori_id'
+                        },
+                        {
+                            data: 'banyak_soal'
+                        },
+                        {
+                            data: 'waktu',
+                            render: function(data) {
+                                return `${data} menit`;
+                            }
                         },
                         {
                             data: null
@@ -184,13 +196,15 @@
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
+                                
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a  href="{{ url('') }}/paket/utama/sub/${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
-                                        Tambah Sub
+                                    <a href="{{ url('') }}/subpaket/soal/${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+                                        Tambah Soal
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
+
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
                                     <a href="#" data-id="${row['id']}" class="menu-link px-3" data-kt-docs-table-filter="delete_row">

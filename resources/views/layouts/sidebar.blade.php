@@ -139,14 +139,47 @@
                                             <span class="menu-title">Kelola Kategori Paket</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('kelola-paket') ? 'active' : '' }}"
-                                            href="{{ url('kelola-paket') }}">
+                                    <div data-kt-menu-trigger="click"
+                                        class="menu-item menu-accordion {{ request()->is('paket*') ? 'show' : (request()->is('subpaket/soal/*') ? 'show' : '') }}">
+                                        <!--begin:Menu link-->
+                                        <span class="menu-link">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-package fs-2"></i>
                                             </span>
-                                            <span class="menu-title">Kelola Paket Soal</span>
-                                        </a>
+                                            <span class="menu-title">Kelola Paket</span>
+                                            <span class="menu-arrow"></span>
+                                        </span>
+                                        <!--end:Menu link-->
+                                        <!--begin:Menu sub-->
+                                        <div class="menu-sub menu-sub-accordion">
+                                            <!--begin:Menu item-->
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a class="menu-link {{ request()->is('paket/sub') ? 'active' : (request()->is('subpaket/soal/*') ? 'active' : '') }}"
+                                                    href="{{ url('paket/sub') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Sub Paket</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                            <!--begin:Menu item-->
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a class="menu-link {{ request()->is('paket/utama*') ? 'active' : '' }}"
+                                                    href="{{ url('paket/utama') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">Paket Utama</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                        </div>
+                                        <!--end:Menu sub-->
                                     </div>
                                     <div class="menu-item">
                                         <a class="menu-link {{ request()->is('bank-soal*') ? 'active' : '' }}"

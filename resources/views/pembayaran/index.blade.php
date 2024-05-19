@@ -152,7 +152,7 @@
                                 return `
                             <!--begin::Menu-->
                                 <!--begin::Menu item-->
-                                    <a target="_blank" href="http://localhost:8000/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
+                                    <a target="_blank" href={{ url('') }}/bukti/${row['gambar']}"  class="btn btn-sm btn-warning">
                                         Lihat Bukti Bayar
                                     </a>
                                 <!--end::Menu item-->
@@ -281,7 +281,7 @@
             // Init toggle toolbar
 
             // Toggle toolbars
-          
+
 
             // Public methods
             return {
