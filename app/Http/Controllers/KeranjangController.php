@@ -12,8 +12,9 @@ class KeranjangController extends Controller
     public function index(Request $request, $id)
     {
         $paket = Paket::find($id);
+        // dd($paket);
         if ($paket) {
-            Keranjang::updateOrCreate([
+            Keranjang::create([
                 'user_id' => auth()->user()->id,
                 'paket_id' => $paket->id,
             ]);

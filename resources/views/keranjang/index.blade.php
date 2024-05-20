@@ -135,7 +135,7 @@
                             <div class="card-body text-center pb-5">
                                 <!--begin::Overlay-->
                                 <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
-                                    href="{{ asset('gambar/' . $item->paket->gambar . '') }}">
+                                    href="{{ asset('') . 'gambar/' . $item->paket->gambar }}">
                                     <!--begin::Image-->
                                     <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded mb-7"
                                         style="height: 266px;background-image:url('{{ asset('gambar/' . $item->paket->gambar . '') }}')">

@@ -19,10 +19,10 @@ class PusatlanggananController extends Controller
 
     public function detailskd()
     {
-        $data = Paket::join('kategori', 'paket.kategori_id', '=', 'kategori.id')
-            ->where('kategori_id', 1)
+        $data = Paket::where('kategori_id', 1)
             ->where('harga', '>', 0)
             ->get();
+        // dd($data);
         return view('pusatlangganan.detailskd', compact('data'));
     }
 

@@ -29,68 +29,6 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label class="d-block fw-semibold fs-6 mb-5">Gambar</label>
-                            <!--end::Label-->
-                            <!--begin::Image placeholder-->
-                            <style>
-                                .image-input-placeholder {
-                                    background-image: url('assets/media/svg/files/blank-image.svg');
-                                }
-
-                                [data-bs-theme="dark"] .image-input-placeholder {
-                                    background-image: url('assets/media/svg/files/blank-image-dark.svg');
-                                }
-                            </style>
-                            <!--end::Image placeholder-->
-                            <!--begin::Image input-->
-                            <div class="image-input image-input-outline image-input-placeholder @error('gambar') is-invalid @enderror"
-                                data-kt-image-input="true">
-                                <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px"
-                                    style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }});">
-                                </div>
-                                <!--end::Preview existing avatar-->
-                                <!--begin::Label-->
-                                <label
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Tambah gambar">
-                                    <i class="ki-outline ki-pencil fs-7"></i>
-                                    <!--begin::Inputs-->
-                                    <input type="file" name="gambar" accept=".png, .jpg, .jpeg" />
-                                    {{-- <input type="hidden" name="avatar_remove" /> --}}
-                                    <!--end::Inputs-->
-                                </label>
-                                <!--end::Label-->
-                                <!--begin::Cancel-->
-                                <span
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel gambar">
-                                    <i class="ki-outline ki-cross fs-2"></i>
-                                </span>
-                                <!--end::Cancel-->
-                                <!--begin::Remove-->
-                                <span
-                                    class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
-                                    data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Hapus gambar">
-                                    <i class="ki-outline ki-cross fs-2"></i>
-                                </span>
-                                <!--end::Remove-->
-                            </div>
-                            <!--end::Image input-->
-                            <!--begin::Hint-->
-                            <div class="form-text">Tipe file yang diperbolehkan : png, jpg, jpeg.
-                            </div>
-                            <!--end::Hint-->
-                            @error('gambar')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Judul</label>
                             <!--end::Label-->
                             <!--begin::Input-->
@@ -154,3 +92,14 @@
     </div>
     <!--end::Modal dialog-->
 </div>
+@push('footer')
+    <script>
+        new tempusDominus.TempusDominus(document.getElementById("kt_td_picker_localization"), {
+            localization: {
+                locale: "id",
+                startOfTheWeek: 1,
+                format: "dd/MM/yyyy"
+            }
+        });
+    </script>
+@endpush

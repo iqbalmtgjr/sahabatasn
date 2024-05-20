@@ -29,7 +29,9 @@ class HasiltryoutController extends Controller
         $grade_tiu = 80;
         $grade_tkp = 166;
 
-        // $this->total_nilai(6, 3, 1);
+        // test twk
+        // $this->total_nilai(2, 6, 3, 1, 'Y93ZZeOcPM13');
+        // dd($this->total_nilai(2, 6, 3, 1, 'Y93ZZeOcPM13'));
 
         if ($request->ajax()) {
             return DataTables::of($data)
@@ -84,42 +86,50 @@ class HasiltryoutController extends Controller
 
     public function total_nilai($paketsaya_id, $subpaket_id, $status, $subkategori_id, $kode_submit)
     {
-        if ($status == 3) {
-            // $soal = Togratis::where('subkategori_id', $subkategori_id)->get();
-            $soal = Tampungsoal::where('subpaket_id', $subpaket_id)->get();
+        // if ($status == 3) {
+        //     // $soal = Togratis::where('subkategori_id', $subkategori_id)->get();
+        //     $soal = Tampungsoal::where('subpaket_id', $subpaket_id)
+        //         ->orderBy('togratis_id', 'asc')
+        //         ->get();
 
-            $tangkap = array();
-            foreach ($soal as $item) {
-                $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                    ->where('togratis_id', $item->togratis_id)
-                    ->where('paketsaya_id', $paketsaya_id)
-                    ->where('subpaket_id', $subpaket_id)
-                    ->where('subkategori_id', $subkategori_id)
-                    ->where('kode_submit', $kode_submit)
-                    ->get();
+        //     $tangkap = array();
+        //     foreach ($soal as $item) {
+        //         $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+        //             ->where('togratis_id', $item->togratis_id)
+        //             ->where('paketsaya_id', $paketsaya_id)
+        //             ->where('subpaket_id', $subpaket_id)
+        //             ->where('subkategori_id', $subkategori_id)
+        //             ->where('kode_submit', $kode_submit)
+        //             ->get();
 
-                if (!$simpan_jawaban->isEmpty()) {
-                    $tangkap[] = $simpan_jawaban;
-                }
-            }
-        } else {
-            // $soal = Banksoal::where('subkategori_id', $subkategori_id)->get();
-            $soal = Tampungsoal::where('subpaket_id', $subpaket_id)->get();
-            $tangkap = array();
-            foreach ($soal as $item) {
-                $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                    ->where('banksoal_id', $item->banksoal_id)
-                    ->where('paketsaya_id', $paketsaya_id)
-                    ->where('subpaket_id', $subpaket_id)
-                    ->where('subkategori_id', $subkategori_id)
-                    ->where('kode_submit', $kode_submit)
-                    ->get();
+        //         if (!$simpan_jawaban->isEmpty()) {
+        //             $tangkap[] = $simpan_jawaban;
+        //         }
+        //     }
+        // } else {
 
-                if (!$simpan_jawaban->isEmpty()) {
-                    $tangkap[] = $simpan_jawaban;
-                }
+        // $soal = Banksoal::where('subkategori_id', $subkategori_id)->get();
+        $soal = Tampungsoal::where('subpaket_id', $subpaket_id)
+            ->orderBy('banksoal_id', 'asc')
+            ->get();
+        // dd($soal);
+
+        $tangkap = array();
+        foreach ($soal as $item) {
+            $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+                ->where('banksoal_id', $item->banksoal_id)
+                ->where('paketsaya_id', $paketsaya_id)
+                ->where('subpaket_id', $subpaket_id)
+                ->where('subkategori_id', $subkategori_id)
+                ->where('kode_submit', $kode_submit)
+                ->get();
+
+            if (!$simpan_jawaban->isEmpty()) {
+                $tangkap[] = $simpan_jawaban;
             }
         }
+        // }
+
 
         $jawabnya = array();
         for ($i = 0; $i < count($tangkap); $i++) {
@@ -137,35 +147,35 @@ class HasiltryoutController extends Controller
         $jawaban_d = array();
         $jawaban_e = array();
 
-        if ($status == 3) {
-            for ($i = 0; $i < count($tangkap); $i++) {
-                $pilihan_a[] = $tangkap[$i][0]->jawabangratis->pilihan_a;
-                $pilihan_b[] = $tangkap[$i][0]->jawabangratis->pilihan_b;
-                $pilihan_c[] = $tangkap[$i][0]->jawabangratis->pilihan_c;
-                $pilihan_d[] = $tangkap[$i][0]->jawabangratis->pilihan_d;
-                $pilihan_e[] = $tangkap[$i][0]->jawabangratis->pilihan_e;
+        // if ($status == 3) {
+        //     for ($i = 0; $i < count($tangkap); $i++) {
+        //         $pilihan_a[] = $tangkap[$i][0]->jawabangratis->pilihan_a;
+        //         $pilihan_b[] = $tangkap[$i][0]->jawabangratis->pilihan_b;
+        //         $pilihan_c[] = $tangkap[$i][0]->jawabangratis->pilihan_c;
+        //         $pilihan_d[] = $tangkap[$i][0]->jawabangratis->pilihan_d;
+        //         $pilihan_e[] = $tangkap[$i][0]->jawabangratis->pilihan_e;
 
-                $jawaban_a[] = $tangkap[$i][0]->jawabangratis->jawaban_a;
-                $jawaban_b[] = $tangkap[$i][0]->jawabangratis->jawaban_b;
-                $jawaban_c[] = $tangkap[$i][0]->jawabangratis->jawaban_c;
-                $jawaban_d[] = $tangkap[$i][0]->jawabangratis->jawaban_d;
-                $jawaban_e[] = $tangkap[$i][0]->jawabangratis->jawaban_e;
-            }
-        } else {
-            for ($i = 0; $i < count($tangkap); $i++) {
-                $pilihan_a[] = $tangkap[$i][0]->jawaban->pilihan_a;
-                $pilihan_b[] = $tangkap[$i][0]->jawaban->pilihan_b;
-                $pilihan_c[] = $tangkap[$i][0]->jawaban->pilihan_c;
-                $pilihan_d[] = $tangkap[$i][0]->jawaban->pilihan_d;
-                $pilihan_e[] = $tangkap[$i][0]->jawaban->pilihan_e;
+        //         $jawaban_a[] = $tangkap[$i][0]->jawabangratis->jawaban_a;
+        //         $jawaban_b[] = $tangkap[$i][0]->jawabangratis->jawaban_b;
+        //         $jawaban_c[] = $tangkap[$i][0]->jawabangratis->jawaban_c;
+        //         $jawaban_d[] = $tangkap[$i][0]->jawabangratis->jawaban_d;
+        //         $jawaban_e[] = $tangkap[$i][0]->jawabangratis->jawaban_e;
+        //     }
+        // } else {
+        for ($i = 0; $i < count($tangkap); $i++) {
+            $pilihan_a[] = $tangkap[$i][0]->jawaban->pilihan_a;
+            $pilihan_b[] = $tangkap[$i][0]->jawaban->pilihan_b;
+            $pilihan_c[] = $tangkap[$i][0]->jawaban->pilihan_c;
+            $pilihan_d[] = $tangkap[$i][0]->jawaban->pilihan_d;
+            $pilihan_e[] = $tangkap[$i][0]->jawaban->pilihan_e;
 
-                $jawaban_a[] = $tangkap[$i][0]->jawaban->jawaban_a;
-                $jawaban_b[] = $tangkap[$i][0]->jawaban->jawaban_b;
-                $jawaban_c[] = $tangkap[$i][0]->jawaban->jawaban_c;
-                $jawaban_d[] = $tangkap[$i][0]->jawaban->jawaban_d;
-                $jawaban_e[] = $tangkap[$i][0]->jawaban->jawaban_e;
-            }
+            $jawaban_a[] = $tangkap[$i][0]->jawaban->jawaban_a;
+            $jawaban_b[] = $tangkap[$i][0]->jawaban->jawaban_b;
+            $jawaban_c[] = $tangkap[$i][0]->jawaban->jawaban_c;
+            $jawaban_d[] = $tangkap[$i][0]->jawaban->jawaban_d;
+            $jawaban_e[] = $tangkap[$i][0]->jawaban->jawaban_e;
         }
+        // }
 
         $hasils = [];
 

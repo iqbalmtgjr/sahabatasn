@@ -8,6 +8,7 @@ use App\Models\Subpaket;
 use App\Models\Paketsaya;
 use App\Models\Subkategori;
 use App\Models\Tampungsoal;
+use App\Models\Togratis;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +19,6 @@ class SubpaketController extends Controller
     {
         $subkategori = Subkategori::all();
         $paket = Subpaket::all();
-        $twk = Banksoal::where('subkategori_id', 1)->get();
-        $tiu = Banksoal::where('subkategori_id', 2)->get();
-        $tkp = Banksoal::where('subkategori_id', 3)->get();
         if ($request->ajax()) {
             return DataTables::of($paket)
                 ->addColumn('kategori_id', function ($row) {
@@ -48,16 +46,16 @@ class SubpaketController extends Controller
                 ->make(true);
         }
 
-        return view('subpaket.index', compact('paket', 'twk', 'tiu', 'tkp', 'subkategori'));
+        return view('subpaket.index', compact('paket', 'subkategori'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'judul' => 'required',
             'subkategori_id' => 'required',
             'waktu' => 'required',
-            'gambar' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -70,27 +68,12 @@ class SubpaketController extends Controller
 
         $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
 
-        if ($request->file('gambar')) {
-            $extension = $request->gambar->extension();
-            $nama_file = round(microtime(true) * 1000) . '.' . $extension;
-
-            $request->file('gambar')->move(public_path('gambar/'), $nama_file);
-
-            $paket = Subpaket::updateOrCreate([
-                'gambar' => $nama_file,
-                'judul' => $request->judul,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
-            ]);
-        } else {
-            $paket = Subpaket::updateOrCreate([
-                'judul' => $request->judul,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
-            ]);
-        }
+        Subpaket::updateOrCreate([
+            'judul' => $request->judul,
+            'waktu' => $request->waktu,
+            'kategori_id' => $kategori_id,
+            'subkategori_id' => $request->subkategori_id,
+        ]);
 
         // status == 3 -> "Tipe Gratis"
         // if ($request->harga == 0) {
@@ -107,36 +90,29 @@ class SubpaketController extends Controller
 
     public function update(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'judul' => 'required',
+            'subkategori_id' => 'required',
+            'waktu' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            toastr()->error('Ada Kesalahan Saat Penginputan.', 'Gagal');
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        // dd($request->all());
         $data = Subpaket::find($request->id);
 
         $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
-        if ($request->file('gambar')) {
-            // Hapus Foto Lama
-            $path = public_path('gambar/' . $data->gambar);
-            if (file_exists($path)) {
-                @unlink($path);
-            }
-
-            $extension = $request->gambar->extension();
-            $nama_file = round(microtime(true) * 1000) . '.' . $extension;
-
-            $request->file('gambar')->move(public_path('gambar/'), $nama_file);
-
-            $data->update([
-                'gambar' => $nama_file,
-                'judul' => $request->judul,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
-            ]);
-        } else {
-            $data->update([
-                'judul' => $request->judul,
-                'waktu' => $request->waktu,
-                'kategori_id' => $kategori_id,
-                'subkategori_id' => $request->subkategori_id,
-            ]);
-        }
+        $data->update([
+            'judul' => $request->judul,
+            'waktu' => $request->waktu,
+            'kategori_id' => $kategori_id,
+            'subkategori_id' => $request->subkategori_id,
+        ]);
 
         toastr()->success('Berhasil edit data paket.', 'Sukses');
         return redirect()->back();
@@ -144,15 +120,15 @@ class SubpaketController extends Controller
 
     public function destroy(string $id)
     {
-        $paket = Subpaket::findOrFail($id);
+        $data = Subpaket::findOrFail($id);
+        $data->delete();
 
-        $path = public_path('gambar/' . $paket->gambar);
-        if (file_exists($path)) {
-            @unlink($path);
+        $soal = Tampungsoal::where('subpaket_id', $id)->get();
+        foreach ($soal as $value) {
+            $value->delete();
         }
 
-        $paket->delete();
-
+        toastr()->success('Berhasil menghapus data paket.', 'Sukses');
         return redirect()->back();
     }
 
@@ -186,6 +162,7 @@ class SubpaketController extends Controller
     {
         $data = Tampungsoal::where('subpaket_id', $id)->get();
         $sub_kategori = Subkategori::all();
+
         $twk = Banksoal::where('subkategori_id', 1)->get();
         $tiu = Banksoal::where('subkategori_id', 2)->get();
         $tkp = Banksoal::where('subkategori_id', 3)->get();

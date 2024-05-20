@@ -21,9 +21,15 @@
                         {{-- @csrf --}}
 
                         <div class="d-flex justify-content-between">
+                            {{-- @if ($status == 3)
+                                <h3 class="text-primary">Soal
+                                    {{ $datas[$currentStep - 1]->togratis->kategori->kategori }}
+                                    {{ $datas[$currentStep - 1]->togratis->subkategori->sub_kategori }}</h3>
+                            @else --}}
                             <h3 class="text-primary">Soal
-                                {{ $datas[$currentStep - 1]->subpaket->kategori->kategori }}
-                                {{ $datas[$currentStep - 1]->subpaket->subkategori->sub_kategori }}</h3>
+                                {{ $datas[$currentStep - 1]->banksoal->kategori->kategori }}
+                                {{ $datas[$currentStep - 1]->banksoal->subkategori->sub_kategori }}</h3>
+                            {{-- @endif --}}
                             <div class="row text-end ">
                                 <div class="col-3 text-end">
                                     <i class="text-primary ki-outline ki-time fs-2"></i>
@@ -168,27 +174,26 @@
                                     data-kt-stepper-element="nav">
                                     <div class="stepper-wrapper">
                                         <a href="javascript:void(0)" wire:click="setStep({{ $index + 1 }})">
-                                            @if ($status == 3)
+                                            {{-- @if ($status == 3)
                                                 <div class="stepper-icon w-40px h-40px"
-                                                    style="background-color: @if (isset($data->banksoal->jawaban->simpanjawaban) &&
-                                                            $data->banksoal->jawaban->simpanjawaban->togratis_id == $data->banksoal->id) green;
+                                                    style="background-color: @if (isset($data->togratis->jawaban->simpanjawaban) && $data->togratis->jawaban->simpanjawaban->togratis_id == $data->banksoal->id) green;
                                                 @else @endif">
                                                     <span style="font-size: 20px; font-weight: bold; color: #ffffff"
                                                         class="ki-outline ki-check fs-2 stepper-check">{{ $index + 1 }}</span>
                                                     <span
-                                                        class="stepper-number {{ isset($data->banksoal->jawaban->simpanjawaban) && $data->banksoal->jawaban->simpanjawaban->togratis_id == $data->banksoal->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
+                                                        class="stepper-number {{ isset($data->togratis->jawaban->simpanjawaban) && $data->togratis->jawaban->simpanjawaban->togratis_id == $data->togratis->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
                                                 </div>
-                                            @else
-                                                <div class="stepper-icon w-40px h-40px"
-                                                    style="background-color: @if (isset($data->banksoal->jawaban->simpanjawaban) &&
-                                                            $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id) green;
+                                            @else --}}
+                                            <div class="stepper-icon w-40px h-40px"
+                                                style="background-color: @if (isset($data->banksoal->jawaban->simpanjawaban) &&
+                                                        $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id) green;
                                                 @else @endif">
-                                                    <span style="font-size: 20px; font-weight: bold; color: #ffffff"
-                                                        class="ki-outline ki-check fs-2 stepper-check">{{ $index + 1 }}</span>
-                                                    <span
-                                                        class="stepper-number {{ isset($data->banksoal->jawaban->simpanjawaban) && $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
-                                                </div>
-                                            @endif
+                                                <span style="font-size: 20px; font-weight: bold; color: #ffffff"
+                                                    class="ki-outline ki-check fs-2 stepper-check">{{ $index + 1 }}</span>
+                                                <span
+                                                    class="stepper-number {{ isset($data->banksoal->jawaban->simpanjawaban) && $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
+                                            </div>
+                                            {{-- @endif --}}
                                         </a>
                                     </div>
                                 </div>

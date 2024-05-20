@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('subkategori_id');
             $table->string('judul');
             $table->integer('waktu');
+            // $table->dateTime('masa_berlaku');
             $table->timestamps();
         });
     }

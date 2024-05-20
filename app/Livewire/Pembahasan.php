@@ -36,29 +36,29 @@ class Pembahasan extends Component
 
         $this->status = $this->paketSaya->status;
 
-        if ($this->status == 3) {
-            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
-                ->orderBy('banksoal_id', 'asc')
-                ->get();
-        } else {
-            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
-                ->orderBy('banksoal_id', 'asc')
-                ->get();
-        }
+        // if ($this->status == 3) {
+        //     $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+        //         ->orderBy('banksoal_id', 'asc')
+        //         ->get();
+        // } else {
+        $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+            ->orderBy('banksoal_id', 'asc')
+            ->get();
+        // }
 
         $this->paketId = $paket_id;
 
-        if ($this->status == 3) {
-            $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                ->where('kode_submit', $kode_submit)
-                ->orderBy('togratis_id')
-                ->get();
-        } else {
-            $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                ->where('kode_submit', $kode_submit)
-                ->orderBy('banksoal_id')
-                ->get();
-        }
+        // if ($this->status == 3) {
+        //     $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+        //         ->where('kode_submit', $kode_submit)
+        //         ->orderBy('togratis_id')
+        //         ->get();
+        // } else {
+        $this->jawabann = Simpanjawabansubmit::where('user_id', auth()->user()->id)
+            ->where('kode_submit', $kode_submit)
+            ->orderBy('banksoal_id')
+            ->get();
+        // }
 
         // dd($this->jawabann);
 

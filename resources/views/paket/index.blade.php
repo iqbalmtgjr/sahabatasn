@@ -76,6 +76,7 @@
                                     <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Harga</th>
+                                    <th>Jumlah Sub Paket</th>
                                     <th class="text-end min-w-100px">Aksi</th>
                                 </tr>
                             </thead>
@@ -155,6 +156,9 @@
                         },
                         {
                             data: 'harga'
+                        },
+                        {
+                            data: 'subpaket'
                         },
                         {
                             data: null

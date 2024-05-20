@@ -127,7 +127,7 @@
     <script src="{{ asset('') }}assets/js/widgets.bundle.js"></script>
     <script src="{{ asset('') }}assets/js/custom/widgets.js"></script>
 
-    <script>
+    {{-- <script>
         "use strict";
 
         // Class definition
@@ -336,5 +336,5 @@
         KTUtil.onDOMContentLoaded(function() {
             KTDatatablesServerSide.init();
         });
-    </script>
+    </script> --}}
 @endpush

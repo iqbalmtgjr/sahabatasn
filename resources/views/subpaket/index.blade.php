@@ -95,7 +95,6 @@
         <!--end::Content-->
     </div>
     @include('subpaket.modal.edit')
-    @include('subpaket.modal.soal')
 @endsection
 
 @push('header')
@@ -290,7 +289,7 @@
                                         }
                                     }).then(function() {
                                         window.location =
-                                            `{{ url('/paket/hapus/') }}/${Id}`;
+                                            `{{ url('/subpaket/hapus/') }}/${Id}`;
                                         dt.draw();
                                     });
                                 });

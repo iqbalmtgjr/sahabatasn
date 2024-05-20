@@ -28,19 +28,8 @@ class PaketsayaController extends Controller
     {
         $data = Tampungpaket::where('paket_id', $paket_id)->get();
 
-        return view('paket_saya.subpaket.index', compact('data'));
+        return view('paket_saya.subpaket', compact('data'));
     }
-
-    // public function kerjakan($subpaket_id)
-    // {
-    //     $dataa = Banksoal::where('subkategori_id', $id)->get();
-
-    //     $datas = Banksoal::where('subkategori_id', $id)->get();
-    //     $nomor = (int)$no;
-    //     $jmlh = $nomor - 1;
-    //     $datas = $datas[$jmlh];
-    //     return view('paket_saya.kerjakan', compact('datas', 'dataa', 'nomor'));
-    // }
 
     public function togratis()
     {

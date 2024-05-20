@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hasil;
 use App\Models\Paket;
 use App\Models\Kategori;
 use App\Models\Subpaket;
 use App\Models\Paketsaya;
+use App\Models\Pembayaran;
 use App\Models\Subkategori;
 use Illuminate\Support\Str;
 use App\Models\Tampungpaket;
+use App\Models\Tampungsoal;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +34,10 @@ class PaketController extends Controller
                 })
                 ->addColumn('kategori', function ($row) {
                     return $row->kategori->kategori;
+                })
+                ->addColumn('subpaket', function ($row) {
+                    $data = Tampungpaket::where('paket_id', $row->id)->get();
+                    return count($data);
                 })
                 ->addColumn('gambar', function ($row) {
                     $url = asset('gambar/' . $row->gambar);
@@ -80,23 +87,39 @@ class PaketController extends Controller
                 'gambar' => $nama_file,
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori' => $request->kategori,
+                'kategori_id' => $request->kategori,
             ]);
         } else {
             $paket = Paket::updateOrCreate([
                 'judul' => $request->judul,
                 'harga' => $request->harga,
-                'kategori' => $request->kategori,
+                'kategori_id' => $request->kategori,
             ]);
         }
 
-        // status == 3 -> "Tipe Gratis"
+        // status == 3 || harga == 0 -> "Tipe Gratis"
         if ($request->harga == 0) {
-            Paketsaya::updateOrCreate([
+            $paketsaya_gratis = Paketsaya::updateOrCreate([
                 'user_id' => auth()->user()->id,
                 'paket_id' => $paket->id,
                 'status' => 3,
             ]);
+
+            // if ($request->kategori == 1) {
+            //     $subpaket_gratis = Subpaket::updateOrCreate([
+            //         'kategori_id' => $request->kategori,
+            //         'subkategori_id' => 1,
+            //         'judul' => $request->judul,
+            //         'waktu' => 110,
+            //     ]);
+            // } elseif ($request->kategori == 2) {
+            //     $subpaket_gratis = Subpaket::updateOrCreate([
+            //         'kategori_id' => $request->kategori,
+            //         'subkategori_id' => 2,
+            //         'judul' => $request->judul,
+            //         'waktu' => 110,
+            //     ]);
+            // }
         }
 
         toastr()->success('Berhasil menambah data paket.', 'Sukses');
@@ -154,15 +177,28 @@ class PaketController extends Controller
 
     public function destroy(string $id)
     {
+        //hapus_paket
         $paket = Paket::findOrFail($id);
-
         $path = public_path('gambar/' . $paket->gambar);
         if (file_exists($path)) {
             @unlink($path);
         }
-
         $paket->delete();
 
+        // hapus_tampungpaket
+        Tampungpaket::where('paket_id', $id)->delete();
+
+        // hapus_invoice_pelanggan
+        Pembayaran::where('paket_id', $id)->delete();
+
+        // hapus_paket_dipelanggan (paket saya)
+        $Paketsaya = Paketsaya::where('paket_id', $id)->first();
+
+        // hapus yg difitur hasil pelanggan karena paket saya dihapus juga
+        Hasil::where('paketsaya_id', $Paketsaya->id)->delete();
+        $Paketsaya->delete();
+
+        toastr()->success('Berhasil hapus data paket.', 'Sukses');
         return redirect()->back();
     }
 
@@ -197,7 +233,8 @@ class PaketController extends Controller
         $subpaket = Subpaket::whereIn('id', $request->subpaket)->get();
         $sub = array();
         foreach ($subpaket as $value) {
-            $cek = Tampungpaket::where('subpaket_id', $value->id)->first();
+            $cek = Tampungpaket::where('paket_id', $request->id)
+                ->where('subpaket_id', $value->id)->first();
             if (!$cek) {
                 $sub[] = array(
                     'paket_id' => $request->id,

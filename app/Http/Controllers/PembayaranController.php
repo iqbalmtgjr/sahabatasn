@@ -45,27 +45,27 @@ class PembayaranController extends Controller
     public function invoice(Request $request)
     {
         $data = Pembayaran::where('user_id', auth()->user()->id)->get();
-        if ($request->ajax()) {
-            return DataTables::of($data)
-                ->addColumn('nama_paket', function ($row) {
-                    return $row->paket->judul;
-                })
-                ->addColumn('harga', function ($row) {
-                    return 'Rp. ' . number_format($row->paket->harga, 0, ',', '.');
-                })
-                ->addColumn('harga_bayar', function ($row) {
-                    return 'Rp. ' . number_format($row->nominal, 0, ',', '.');
-                })
-                ->addColumn('status', function ($row) {
-                    if ($row->status === 0) {
-                        return '<div class="badge badge-light-danger">Belum divalidasi</div>';
-                    } else {
-                        return '<div class="badge badge-light-primary">Sudah divalidasi</div>';
-                    }
-                })
-                ->rawColumns(['status'])
-                ->make(true);
-        }
+        // if ($request->ajax()) {
+        //     return DataTables::of($data)
+        //         ->addColumn('nama_paket', function ($row) {
+        //             return $row->paket->judul;
+        //         })
+        //         ->addColumn('harga', function ($row) {
+        //             return 'Rp. ' . number_format($row->paket->harga, 0, ',', '.');
+        //         })
+        //         ->addColumn('harga_bayar', function ($row) {
+        //             return 'Rp. ' . number_format($row->nominal, 0, ',', '.');
+        //         })
+        //         ->addColumn('status', function ($row) {
+        //             if ($row->status === 0) {
+        //                 return '<div class="badge badge-light-danger">Belum divalidasi</div>';
+        //             } else {
+        //                 return '<div class="badge badge-light-primary">Sudah divalidasi</div>';
+        //             }
+        //         })
+        //         ->rawColumns(['status'])
+        //         ->make(true);
+        // }
 
         return view('pembayaran.invoice', compact('data'));
     }
@@ -109,7 +109,7 @@ class PembayaranController extends Controller
             toastr()->success('Berhasil kirim bukti bayar.', 'Sukses');
             return redirect('invoice');
         } else {
-            toastr()->warning('Bukti bayar ini sudah pernah terkirim.', 'Peringatan');
+            toastr()->warning('Bukti bayar ini sudah ada.', 'Peringatan');
             return redirect('invoice');
         }
     }
