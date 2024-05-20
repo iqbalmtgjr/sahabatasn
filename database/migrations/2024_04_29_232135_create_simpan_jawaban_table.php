@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('paketsaya_id');
+            $table->foreignId('subpaket_id');
             $table->foreignId('banksoal_id')->nullable();
             $table->foreignId('togratis_id')->nullable();
             $table->foreignId('jawaban_id')->nullable();

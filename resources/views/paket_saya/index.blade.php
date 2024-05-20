@@ -29,36 +29,48 @@
             <div class="row g-5 g-xl-8">
                 <!--begin::Col-->
                 @if ($data->count() > 0)
-                    @foreach ($data as $data)
-                        <div class="col-xl-4">
-                            <!--begin::Mixed Widget 4-->
-                            <div class="card card-xl-stretch mb-5 mb-xl-8">
-                                <!--begin::Beader-->
-                                <div class="card-header border-0 py-3">
-                                    <h3 class="card-title align-items-start flex-column">
-                                        <span class="card-label fw-bold fs-3 mb-4">{{ $data->paket->judul }}</span>
-                                        <p class="fw-semibold fs-7 mb-1 text-muted">Jumlah Soal :
-                                            <span
-                                                class="text-danger">{{ App\Models\Banksoal::where('kategori_id', $data->paket->kategori_id)->count() }}</span>
-                                        </p>
-                                        <p class="fw-semibold fs-7 mb-1 text-muted">Waktu Pengerjaan :
-                                            <span class="text-danger">{{ $data->paket->waktu }} Menit</span>
-                                        </p>
-                                        <p class="text-muted fw-semibold fs-7">Berlaku hingga :
-                                            <span class="text-danger">
-                                                {{ \Carbon\Carbon::parse($data->created_at)->addYear()->format('d F Y') }}</span>
-                                        </p>
-                                    </h3>
-                                </div>
-                                <!--end::Header-->
+                    @foreach ($data as $item)
+                        <div class="col-md-4">
+                            <div class="card-xl-stretch mx-md-3">
+                                <!--begin::Overlay-->
+
+                                {{-- On progress By Iqbal --}}
+                                <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
+                                    href="{{ asset('gambar') . '/' . $item->paket->gambar }}">
+                                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-300px"
+                                        style="background-image:url('{{ asset('gambar') . '/' . $item->paket->gambar }}')">
+                                    </div>
+                                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                        <i class="ki-outline ki-eye fs-2x text-white"></i>
+                                    </div>
+                                </a>
+                                <!--end::Overlay-->
                                 <!--begin::Body-->
-                                <div class="card-body d-flex flex-column">
-                                    <a href="{{ url('kerjakan/' . $data->paket->kategori_id . '/' . $data->paket_id) }}"
-                                        class="btn btn-primary w-100 py-3">Kerjakan</a>
+                                <div class="mt-5">
+                                    <!--begin::Title-->
+                                    {{-- <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">25 Products Mega Bundle with 50% off discount amazing</a> --}}
+                                    <!--end::Title-->
+                                    <!--begin::Text-->
+                                    <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">{{ $item->paket->judul }}
+                                    </div>
+                                    {{-- <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Waktu Pengerjaan : {{ $item->paket->judul }}
+                                    </div> --}}
+                                    <!--end::Text-->
+                                    <!--begin::Text-->
+                                    <div class="fs-6 fw-bold mt-5 d-flex flex-stack">
+                                        <!--begin::Label-->
+                                        {{-- <span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
+                                            <span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
+                                        <!--end::Label-->
+                                        <!--begin::Action-->
+                                        <a href="{{ url('paketsaya/' . $item->paket_id) }}"
+                                            class="btn btn-sm btn-primary col-12">Pilih</a>
+                                        <!--end::Action-->
+                                    </div>
+                                    <!--end::Text-->
                                 </div>
                                 <!--end::Body-->
                             </div>
-                            <!--end::Mixed Widget 4-->
                         </div>
                     @endforeach
                 @else

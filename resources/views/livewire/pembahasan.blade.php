@@ -27,14 +27,26 @@
                 <div class="card d-flex flex-row-fluid flex-center">
                     <form class="card-body w-100 px-9" id="kt_create_account_form">
                         <div class="d-flex justify-content-between">
-                            <h3>Soal
-                                {{ $datas[$currentStep - 1]->kategori->kategori }}
-                                {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
-                            <div class="row text-end ">
-                                <h3>Lama Mengerjakan:
-                                    {{ $datas[$currentStep - 1]->jawaban->simpanjawabansubmit->lama_pengerjaan }}
-                                </h3>
-                            </div>
+                            @if ($status == 3)
+                                <h3>Soal
+                                    {{ $datas[$currentStep - 1]->togratis->kategori->kategori }}
+                                    {{ $datas[$currentStep - 1]->togratis->subkategori->sub_kategori }}</h3>
+                                <div class="row text-end ">
+                                    <h3>Lama Mengerjakan:
+                                        {{ $datas[$currentStep - 1]->togratis->jawaban->simpanjawabansubmit->lama_pengerjaan }}
+                                    </h3>
+                                </div>
+                            @else
+                                <h3>Soal
+                                    {{ $datas[$currentStep - 1]->banksoal->kategori->kategori }}
+                                    {{ $datas[$currentStep - 1]->banksoal->subkategori->sub_kategori }}</h3>
+                                <div class="row text-end ">
+                                    <h3>Lama Mengerjakan:
+                                        {{ $datas[$currentStep - 1]->banksoal->jawaban->simpanjawabansubmit->lama_pengerjaan }}
+                                    </h3>
+                                </div>
+                            @endif
+
                         </div>
                         <hr>
                         @foreach ($jawabann as $i => $item)

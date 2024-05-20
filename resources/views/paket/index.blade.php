@@ -74,6 +74,7 @@
                                     <th class="w-10px pe-2">No</th>
                                     <th>Gambar</th>
                                     <th>Judul</th>
+                                    <th>Kategori</th>
                                     <th>Harga</th>
                                     <th class="text-end min-w-100px">Aksi</th>
                                 </tr>
@@ -148,6 +149,9 @@
                         },
                         {
                             data: 'judul'
+                        },
+                        {
+                            data: 'kategori'
                         },
                         {
                             data: 'harga'

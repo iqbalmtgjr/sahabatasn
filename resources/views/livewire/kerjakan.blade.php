@@ -5,7 +5,7 @@
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">
                         Soal-soal
-                        {{ $datas[0]->kategori_id == 1 || $datas[0]->kategori_id == 2 || $datas[0]->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
+                        {{ $datas[0]->subpaket->kategori_id == 1 || $datas[0]->subpaket->kategori_id == 2 || $datas[0]->subpaket->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
                     </h1>
                 </div>
             </div>
@@ -22,8 +22,8 @@
 
                         <div class="d-flex justify-content-between">
                             <h3 class="text-primary">Soal
-                                {{ $datas[$currentStep - 1]->kategori->kategori }}
-                                {{ $datas[$currentStep - 1]->subkategori->sub_kategori }}</h3>
+                                {{ $datas[$currentStep - 1]->subpaket->kategori->kategori }}
+                                {{ $datas[$currentStep - 1]->subpaket->subkategori->sub_kategori }}</h3>
                             <div class="row text-end ">
                                 <div class="col-3 text-end">
                                     <i class="text-primary ki-outline ki-time fs-2"></i>
@@ -35,79 +35,83 @@
                         </div>
                         <hr>
                         @foreach ($datas as $i => $item)
-                            <div wire:key='{{ $item->id }}'
+                            <div wire:key='{{ $item->banksoal->id }}'
                                 class="{{ $currentStep == $i + 1 ? 'current' : ($currentStep > $i + 1 ? 'pending' : '') }}"
                                 data-kt-stepper-element="content">
                                 <div class="w-100">
                                     <div class="mb-5">
                                         @if ($item->gambar != null)
                                             <img style="width: 250px"
-                                                src="{{ asset('gambar_soal') . '/' . $item->gambar }}"
+                                                src="{{ asset('gambar_soal') . '/' . $item->banksoal->gambar }}"
                                                 alt="gambar_soal">
                                         @endif
                                     </div>
                                     <div class="pb-5 pb-lg-5">
 
                                         <h2 class="fw-bold d-flex align-items-center text-dark">
-                                            {{ $i + 1 }}. {{ $item->soal }}
+                                            {{ $i + 1 }}. {{ $item->banksoal->soal }}
                                         </h2>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
                                         <input
-                                            wire:click="simpan('{{ $item->jawaban->pilihan_a }}',{{ $item->jawaban->id }})"
+                                            wire:click="simpan('{{ $item->banksoal->jawaban->pilihan_a }}',{{ $item->banksoal->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
                                             id="flexRadioDefault{{ $i + 1 }}"
-                                            {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_a ? 'checked' : '' }}>
+                                            {{ isset($item->banksoal->jawaban->simpanjawaban) && $item->banksoal->jawaban->simpanjawaban->jawab === $item->banksoal->jawaban->pilihan_a ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">A. {{ $item->jawaban->pilihan_a }}</strong>
+                                            <strong style="font-size: 15px">A.
+                                                {{ $item->banksoal->jawaban->pilihan_a }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
                                         <input
-                                            wire:click="simpan('{{ $item->jawaban->pilihan_b }}',{{ $item->jawaban->id }})"
+                                            wire:click="simpan('{{ $item->banksoal->jawaban->pilihan_b }}',{{ $item->banksoal->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
                                             id="flexRadioDefault2{{ $i + 1 }}"
-                                            value="{{ $item->jawaban->pilihan_b != null ? $item->jawaban->pilihan_b : old('jawaban_' . $i + 1) }}"
-                                            {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_b ? 'checked' : '' }}>
+                                            value="{{ $item->banksoal->jawaban->pilihan_b != null ? $item->banksoal->jawaban->pilihan_b : old('jawaban_' . $i + 1) }}"
+                                            {{ isset($item->banksoal->jawaban->simpanjawaban) && $item->banksoal->jawaban->simpanjawaban->jawab === $item->banksoal->jawaban->pilihan_b ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault2{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">B. {{ $item->jawaban->pilihan_b }}</strong>
+                                            <strong style="font-size: 15px">B.
+                                                {{ $item->banksoal->jawaban->pilihan_b }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
                                         <input
-                                            wire:click="simpan('{{ $item->jawaban->pilihan_c }}',{{ $item->jawaban->id }})"
+                                            wire:click="simpan('{{ $item->banksoal->jawaban->pilihan_c }}',{{ $item->banksoal->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
                                             id="flexRadioDefault3{{ $i + 1 }}"
-                                            value="{{ $item->jawaban->pilihan_c != null ? $item->jawaban->pilihan_c : old('jawaban_' . $i + 1) }}"
-                                            {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_c ? 'checked' : '' }}>
+                                            value="{{ $item->banksoal->jawaban->pilihan_c != null ? $item->banksoal->jawaban->pilihan_c : old('jawaban_' . $i + 1) }}"
+                                            {{ isset($item->banksoal->jawaban->simpanjawaban) && $item->banksoal->jawaban->simpanjawaban->jawab === $item->banksoal->jawaban->pilihan_c ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault3{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">C. {{ $item->jawaban->pilihan_c }}</strong>
+                                            <strong style="font-size: 15px">C.
+                                                {{ $item->banksoal->jawaban->pilihan_c }}</strong>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-custom form-check-solid" style="margin-top: 10px">
                                         <input
-                                            wire:click="simpan('{{ $item->jawaban->pilihan_d }}',{{ $item->jawaban->id }})"
+                                            wire:click="simpan('{{ $item->banksoal->jawaban->pilihan_d }}',{{ $item->banksoal->jawaban->id }})"
                                             class="form-check-input" type="radio" name="jawaban_{{ $i + 1 }}"
                                             id="flexRadioDefault4{{ $i + 1 }}"
-                                            value="{{ $item->jawaban->pilihan_d != null ? $item->jawaban->pilihan_d : old('jawaban_' . $i + 1) }}"
-                                            {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_d ? 'checked' : '' }}>
+                                            value="{{ $item->banksoal->jawaban->pilihan_d != null ? $item->banksoal->jawaban->pilihan_d : old('jawaban_' . $i + 1) }}"
+                                            {{ isset($item->banksoal->jawaban->simpanjawaban) && $item->banksoal->jawaban->simpanjawaban->jawab === $item->banksoal->jawaban->pilihan_d ? 'checked' : '' }}>
                                         <label class="form-check-label" for="flexRadioDefault4{{ $i + 1 }}">
-                                            <strong style="font-size: 15px">D. {{ $item->jawaban->pilihan_d }}</strong>
+                                            <strong style="font-size: 15px">D.
+                                                {{ $item->banksoal->jawaban->pilihan_d }}</strong>
                                         </label>
                                     </div>
-                                    @if ($item->jawaban->pilihan_e != null)
+                                    @if ($item->banksoal->jawaban->pilihan_e != null)
                                         <div class="form-check form-check-custom form-check-solid"
                                             style="margin-top: 10px">
                                             <input
-                                                wire:click="simpan('{{ $item->jawaban->pilihan_e }}',{{ $item->jawaban->id }})"
+                                                wire:click="simpan('{{ $item->banksoal->jawaban->pilihan_e }}',{{ $item->banksoal->jawaban->id }})"
                                                 class="form-check-input" type="radio"
                                                 name="jawaban_{{ $i + 1 }}"
                                                 id="flexRadioDefault5{{ $i + 1 }}"
-                                                value="{{ $item->jawaban->pilihan_e != null ? $item->jawaban->pilihan_e : old('jawaban_' . $i + 1) }}"
-                                                {{ isset($item->jawaban->simpanjawaban) && $item->jawaban->simpanjawaban->jawab === $item->jawaban->pilihan_e ? 'checked' : '' }}>
+                                                value="{{ $item->banksoal->jawaban->pilihan_e != null ? $item->banksoal->jawaban->pilihan_e : old('jawaban_' . $i + 1) }}"
+                                                {{ isset($item->banksoal->jawaban->simpanjawaban) && $item->banksoal->jawaban->simpanjawaban->jawab === $item->banksoal->jawaban->pilihan_e ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexRadioDefault5{{ $i + 1 }}">
                                                 <strong style="font-size: 15px">E.
-                                                    {{ $item->jawaban->pilihan_e }}</strong>
+                                                    {{ $item->banksoal->jawaban->pilihan_e }}</strong>
                                             </label>
                                         </div>
                                     @endif
@@ -166,21 +170,23 @@
                                         <a href="javascript:void(0)" wire:click="setStep({{ $index + 1 }})">
                                             @if ($status == 3)
                                                 <div class="stepper-icon w-40px h-40px"
-                                                    style="background-color: @if (isset($data->jawaban->simpanjawaban) && $data->jawaban->simpanjawaban->togratis_id == $data->id) green;
+                                                    style="background-color: @if (isset($data->banksoal->jawaban->simpanjawaban) &&
+                                                            $data->banksoal->jawaban->simpanjawaban->togratis_id == $data->banksoal->id) green;
                                                 @else @endif">
                                                     <span style="font-size: 20px; font-weight: bold; color: #ffffff"
                                                         class="ki-outline ki-check fs-2 stepper-check">{{ $index + 1 }}</span>
                                                     <span
-                                                        class="stepper-number {{ isset($data->jawaban->simpanjawaban) && $data->jawaban->simpanjawaban->togratis_id == $data->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
+                                                        class="stepper-number {{ isset($data->banksoal->jawaban->simpanjawaban) && $data->banksoal->jawaban->simpanjawaban->togratis_id == $data->banksoal->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
                                                 </div>
                                             @else
                                                 <div class="stepper-icon w-40px h-40px"
-                                                    style="background-color: @if (isset($data->jawaban->simpanjawaban) && $data->jawaban->simpanjawaban->banksoal_id == $data->id) green;
+                                                    style="background-color: @if (isset($data->banksoal->jawaban->simpanjawaban) &&
+                                                            $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id) green;
                                                 @else @endif">
                                                     <span style="font-size: 20px; font-weight: bold; color: #ffffff"
                                                         class="ki-outline ki-check fs-2 stepper-check">{{ $index + 1 }}</span>
                                                     <span
-                                                        class="stepper-number {{ isset($data->jawaban->simpanjawaban) && $data->jawaban->simpanjawaban->banksoal_id == $data->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
+                                                        class="stepper-number {{ isset($data->banksoal->jawaban->simpanjawaban) && $data->banksoal->jawaban->simpanjawaban->banksoal_id == $data->banksoal->id ? 'text-white' : '' }}">{{ $loop->iteration }}</span>
                                                 </div>
                                             @endif
                                         </a>
@@ -214,7 +220,7 @@
             // Fungsi untuk memulai countdown
             function startCountdown() {
                 let paketId = {{ $paketId }}
-                let menit = {{ $paketSaya->paket->waktu }};
+                let menit = {{ $datas[0]->subpaket->waktu }};
                 // console.log(menit);
                 let countdown = menit * 60;
                 const countdownElement = document.getElementById('countdown');

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('tampung_soal', function (Blueprint $table) {
             $table->id();
             $table->foreignId('subpaket_id');
-            $table->foreignId('banksoal_id');
+            $table->foreignId('banksoal_id')->nullable();
+            $table->foreignId('togratis_id')->nullable();
             $table->timestamps();
         });
     }

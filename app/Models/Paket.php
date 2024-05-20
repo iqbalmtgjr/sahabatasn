@@ -10,7 +10,7 @@ class Paket extends Model
     use HasFactory;
     protected $table = 'paket';
     protected $guarded = ['id'];
-    protected $fillable = ['judul', 'gambar', 'harga', 'waktu'];
+    protected $fillable = ['judul', 'gambar', 'harga', 'kategori_id'];
 
     public function kategori()
     {
@@ -20,5 +20,10 @@ class Paket extends Model
     public function subkategori()
     {
         return $this->belongsTo(Subkategori::class);
+    }
+
+    public function tampungpaket()
+    {
+        return $this->hasOne(Tampungpaket::class);
     }
 }

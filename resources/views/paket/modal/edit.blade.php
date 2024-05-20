@@ -99,6 +99,23 @@
                             <!--end::Input-->
                         </div>
                         <div class="fv-row mb-7">
+                            <label class="required fw-semibold fs-6 mb-2">Ketegori</label>
+                            <select id="kategori" data-control="select2"
+                                class="form-select form-select-solid @error('kategori') is-invalid @enderror"
+                                data-hide-search="true" data-placeholder="-- Pilih Kategori --" name="kategori">
+                                <option value=""></option>
+                                @foreach ($kategori as $item)
+                                    <option value="{{ $item->id }}" @selected(old('kategori') == $item->id)>
+                                        {{ $item->kategori }}</option>
+                                @endforeach
+                            </select>
+                            @error('kategori')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="required fw-semibold fs-6 mb-2">Harga Paket</label>
                             <!--end::Label-->
@@ -143,10 +160,11 @@
             url: url,
             cache: false,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 $('#id').val(response.id);
                 $('#judul').val(response.judul);
                 $('#harga').val(response.harga);
+                $('#kategori').val(response.kategori_id);
 
                 $.ajax({
                     url: '{{ asset('') }}/gambar/' + response.gambar + '',

@@ -6,6 +6,7 @@ use App\Models\Banksoal;
 use App\Models\Paketsaya;
 use Illuminate\Http\Request;
 use App\Models\Simpanjawaban;
+use App\Models\Tampungpaket;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,17 +24,23 @@ class PaketsayaController extends Controller
         return view('paket_saya.index', compact('data'));
     }
 
-    public function kerjakan($id, $no)
+    public function subpaket($paket_id)
     {
-        $dataa = Banksoal::where('subkategori_id', $id)->get();
+        $data = Tampungpaket::where('paket_id', $paket_id)->get();
 
-        $datas = Banksoal::where('subkategori_id', $id)->get();
-        $nomor = (int)$no;
-        $jmlh = $nomor - 1;
-        $datas = $datas[$jmlh];
-        // dd($datas->subkategori_id);
-        return view('paket_saya.kerjakan', compact('datas', 'dataa', 'nomor'));
+        return view('paket_saya.subpaket.index', compact('data'));
     }
+
+    // public function kerjakan($subpaket_id)
+    // {
+    //     $dataa = Banksoal::where('subkategori_id', $id)->get();
+
+    //     $datas = Banksoal::where('subkategori_id', $id)->get();
+    //     $nomor = (int)$no;
+    //     $jmlh = $nomor - 1;
+    //     $datas = $datas[$jmlh];
+    //     return view('paket_saya.kerjakan', compact('datas', 'dataa', 'nomor'));
+    // }
 
     public function togratis()
     {

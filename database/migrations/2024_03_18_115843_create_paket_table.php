@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('paket', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('subpaket_id');
+            $table->foreignId('kategori_id');
             $table->string('judul');
             $table->string('harga');
             $table->string('gambar');

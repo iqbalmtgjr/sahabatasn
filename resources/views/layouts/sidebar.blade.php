@@ -228,7 +228,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('paketsaya') ? 'active' : '' }}"
+                                        <a class="menu-link {{ request()->is('paketsaya*') ? 'active' : '' }}"
                                             href="{{ url('paketsaya') }}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-bookmark fs-2"></i>

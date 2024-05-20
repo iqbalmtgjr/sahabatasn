@@ -9,6 +9,7 @@ use App\Models\Paketsaya;
 use Illuminate\Http\Request;
 use App\Models\Simpanjawaban;
 use App\Models\Simpanjawabansubmit;
+use App\Models\Tampungsoal;
 use App\Models\Togratis;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -33,8 +34,8 @@ class HasiltryoutController extends Controller
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('paket_id', function ($row) {
-                    if ($row->paketsaya->paket->judul) {
-                        return $row->paketsaya->paket->judul;
+                    if ($row->paketsaya->paket->tampungpaket->subpaket->judul) {
+                        return $row->paketsaya->paket->tampungpaket->subpaket->judul;
                     } else {
                         return '';
                     }
@@ -47,28 +48,28 @@ class HasiltryoutController extends Controller
                     }
                 })
                 ->addColumn('twk', function ($row) {
-                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1, $row->kode_submit);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 1, $row->kode_submit);
                 })
                 ->addColumn('tiu', function ($row) {
-                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2, $row->kode_submit);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 2, $row->kode_submit);
                 })
                 ->addColumn('tkp', function ($row) {
-                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3, $row->kode_submit);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 3, $row->kode_submit);
                 })
                 ->addColumn('min_grade', function () {
                     return 311;
                 })
                 ->addColumn('skor', function ($row) {
-                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3, $row->kode_submit);
+                    return $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 1, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 2, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 3, $row->kode_submit);
                 })
                 ->addColumn('pembahasan', function ($row) {
-                    $url = url("hasil/pembahasan/" . $row->paketsaya->paket->kategori_id) . "/" . $row->paketsaya->paket_id . "/" . $row->kode_submit;
+                    $url = url("hasil/pembahasan/" . $row->paketsaya->paket->tampungpaket->subpaket_id) . "/" . $row->paketsaya->paket_id . "/" . $row->kode_submit;
                     return "<a href=\"$url\" class=\"btn btn-sm btn-primary\">Detail</a>";
                 })
                 ->addColumn('lulus', function ($row) use ($grade_twk, $grade_tiu, $grade_tkp) {
-                    $lulus_twk = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 1, $row->kode_submit) >= $grade_twk ? 1 : 0;
-                    $lulus_tiu = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 2, $row->kode_submit) >= $grade_tiu ? 1 : 0;
-                    $lulus_tkp = $this->total_nilai($row->paketsaya->id, $row->paketsaya->status, 3, $row->kode_submit) >= $grade_tkp ? 1 : 0;
+                    $lulus_twk = $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 1, $row->kode_submit) >= $grade_twk ? 1 : 0;
+                    $lulus_tiu = $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 2, $row->kode_submit) >= $grade_tiu ? 1 : 0;
+                    $lulus_tkp = $this->total_nilai($row->paketsaya->id, $row->paketsaya->paket->tampungpaket->subpaket_id, $row->paketsaya->status, 3, $row->kode_submit) >= $grade_tkp ? 1 : 0;
                     if ($lulus_twk == 1 && $lulus_tiu == 1 && $lulus_tkp == 1) {
                         return '<div class="badge badge-light-success">Lulus</div>';
                     } else {
@@ -81,15 +82,18 @@ class HasiltryoutController extends Controller
         return view('hasil.index');
     }
 
-    public function total_nilai($paketsaya_id, $status, $subkategori_id, $kode_submit)
+    public function total_nilai($paketsaya_id, $subpaket_id, $status, $subkategori_id, $kode_submit)
     {
         if ($status == 3) {
-            $soal = Togratis::where('subkategori_id', $subkategori_id)->get();
+            // $soal = Togratis::where('subkategori_id', $subkategori_id)->get();
+            $soal = Tampungsoal::where('subpaket_id', $subpaket_id)->get();
+
             $tangkap = array();
             foreach ($soal as $item) {
                 $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                    ->where('togratis_id', $item->id)
+                    ->where('togratis_id', $item->togratis_id)
                     ->where('paketsaya_id', $paketsaya_id)
+                    ->where('subpaket_id', $subpaket_id)
                     ->where('subkategori_id', $subkategori_id)
                     ->where('kode_submit', $kode_submit)
                     ->get();
@@ -99,12 +103,14 @@ class HasiltryoutController extends Controller
                 }
             }
         } else {
-            $soal = Banksoal::where('subkategori_id', $subkategori_id)->get();
+            // $soal = Banksoal::where('subkategori_id', $subkategori_id)->get();
+            $soal = Tampungsoal::where('subpaket_id', $subpaket_id)->get();
             $tangkap = array();
             foreach ($soal as $item) {
                 $simpan_jawaban = Simpanjawabansubmit::where('user_id', auth()->user()->id)
-                    ->where('banksoal_id', $item->id)
+                    ->where('banksoal_id', $item->banksoal_id)
                     ->where('paketsaya_id', $paketsaya_id)
+                    ->where('subpaket_id', $subpaket_id)
                     ->where('subkategori_id', $subkategori_id)
                     ->where('kode_submit', $kode_submit)
                     ->get();

@@ -44,9 +44,9 @@
                 <div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
                     <!--begin::Links-->
                     <div class="d-flex fw-semibold text-primary fs-base gap-5">
-                        <a href="../../demo38/dist/pages/team.html" target="_blank">Terms</a>
-                        <a href="../../demo38/dist/pages/pricing/column.html" target="_blank">Plans</a>
-                        <a href="../../demo38/dist/pages/contact.html" target="_blank">Contact Us</a>
+                        {{-- <a href="../../demo38/dist/pages/team.html" target="_blank">Terms</a>
+                        <a href="../../demo38/dist/pages/pricing/column.html" target="_blank">Plans</a> --}}
+                        <a href="https://technocloud.id" target="_blank">Created by Technocloud.id</a>
                     </div>
                     <!--end::Links-->
                 </div>
@@ -69,17 +69,13 @@
                         src="{{ asset('') }}assets/media/gambar/vector-dpn.png" alt="" />
                     <!--end::Image-->
                     <!--begin::Title-->
-                    <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">Sahabat Anda Meraih
-                        Kesuksesan</h1>
+                    <h1 class="d-none d-lg-block text-white fs-2qx fw-bolder text-center mb-7">Selamat datang di Sahabat
+                        ASN!</h1>
                     <!--end::Title-->
                     <!--begin::Text-->
-                    <div class="d-none d-lg-block text-white fs-base text-center">In this kind of post,
-                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the blogger</a>introduces
-                        a person they’ve interviewed
-                        <br />and provides some background information about
-                        <a href="#" class="opacity-75-hover text-warning fw-bold me-1">the interviewee</a>and
-                        their
-                        <br />work following this is a transcript of the interview.
+                    <div class="d-none d-lg-block text-white fs-base text-center">Platform yang didedikasikan untuk
+                        membantu kamu meraih kesuksesan menjadi Aparatur Sipil Negara (ASN) atau PPPK. Kami menyediakan
+                        beragam fitur dan sumber daya untuk mendukung dalam mencapai tujuan dan impian Anda.
                     </div>
                     <!--end::Text-->
                 </div>

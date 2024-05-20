@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Banksoal;
 use App\Models\Togratis;
 use App\Models\Paketsaya;
+use App\Models\Tampungsoal;
 use Livewire\Attributes\On;
 use App\Models\Simpanjawaban;
 use App\Models\Simpanjawabansubmit;
@@ -18,7 +19,7 @@ class Pembahasan extends Component
     public $currentStep = 1;
 
     #[On('pageChanged')]
-    public function mount($id, $paket_id, $kode_submit = null)
+    public function mount($subpaket_id, $paket_id, $kode_submit = null)
     {
         $admin = User::where('role', 'admin')->get();
         $tangkap_id = array();
@@ -36,9 +37,13 @@ class Pembahasan extends Component
         $this->status = $this->paketSaya->status;
 
         if ($this->status == 3) {
-            $this->datas = Togratis::where('kategori_id', $id)->get();
+            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+                ->orderBy('banksoal_id', 'asc')
+                ->get();
         } else {
-            $this->datas = Banksoal::where('kategori_id', $id)->get();
+            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+                ->orderBy('banksoal_id', 'asc')
+                ->get();
         }
 
         $this->paketId = $paket_id;
@@ -69,26 +74,24 @@ class Pembahasan extends Component
     public function nextSteps()
     {
         $this->currentStep++;
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->getPaket()->paket->tampungpaket->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function previousSteps()
     {
         $this->currentStep--;
         // dd($this->currentStep);
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->getPaket()->paket->tampungpaket->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function setStep($step)
     {
         $this->currentStep = $step;
-        $this->dispatch('pageChanged', $this->getSoal()->kategori_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->getPaket()->paket->tampungpaket->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
     }
 
     public function getSoal()
     {
-        // dd($this->datas[1]);
-        // dd($this->currentStep);
         return $this->datas[$this->currentStep - 1];
     }
 

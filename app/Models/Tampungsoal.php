@@ -21,4 +21,9 @@ class Tampungsoal extends Model
     {
         return $this->belongsTo(Banksoal::class);
     }
+
+    public function togratis()
+    {
+        return $this->belongsTo(Togratis::class);
+    }
 }
