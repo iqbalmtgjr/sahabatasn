@@ -12,17 +12,20 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use App\Models\Simpanjawaban;
 use App\Models\Simpanjawabansubmit;
+use App\Models\Subpaket;
+use App\Models\Tampungpaket;
 use App\Models\Tampungsoal;
 use Illuminate\Support\Facades\Request;
 
 class Kerjakan extends Component
 {
-    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId, $status, $startTime;
+    public $datas, $jawaban, $jawabann, $jawabanTersimpan, $step, $paketSaya, $totalSteps, $paketId, $status, $startTime, $subPaketSaya;
     public $currentStep = 1;
 
     #[On('pageChanged')]
     public function mount($paket_id, $subpaket_id)
     {
+        // dd($this->paketSaya);
         $this->startTime = now();
         $admin = User::where('role', 'admin')->get();
         $tangkap_id = array();
@@ -35,21 +38,25 @@ class Kerjakan extends Component
         $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
             ->where('paket_id', $paket_id)->first();
 
+        $this->subPaketSaya = Tampungpaket::where('paket_id', $paket_id)
+            ->where('subpaket_id', $subpaket_id)
+            ->first();
+
         $this->status = $this->paketSaya->status;
 
-        if ($this->status == 3) {
-            // $this->datas = Togratis::where('kategori_id', $id)->get();
-            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
-                ->orderBy('togratis_id', 'asc')
-                ->get();
-        } else {
-            // $this->datas = Banksoal::where('kategori_id', $id)->get();
-            $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
-                ->orderBy('banksoal_id', 'asc')
-                ->get();
-        }
+        // if ($this->status == 3) {
+        // $this->datas = Togratis::where('kategori_id', $id)->get();
+        //     $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+        //         ->orderBy('togratis_id', 'asc')
+        //         ->get();
+        // } else {
+        // $this->datas = Banksoal::where('kategori_id', $id)->get();
+        $this->datas = Tampungsoal::where('subpaket_id', $subpaket_id)
+            ->orderBy('banksoal_id', 'asc')
+            ->get();
+        // }
 
-        // dd($this->datas);
+        // dd($this->getPaket()->paket_id);
 
         $this->paketId = $paket_id;
         $this->jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
@@ -72,21 +79,21 @@ class Kerjakan extends Component
     {
         $this->currentStep++;
         $this->startTime = now();
-        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaket()->paket->tampungpaket->subpaket_id);
+        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaketku()->subpaket_id);
     }
 
     public function previousStep()
     {
         $this->currentStep--;
         $this->startTime = now();
-        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaket()->paket->tampungpaket->subpaket_id);
+        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaketku()->subpaket_id);
     }
 
     public function setStep($step)
     {
         $this->startTime = now();
         $this->currentStep = $step;
-        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaket()->paket->tampungpaket->subpaket_id);
+        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaketku()->subpaket_id);
     }
 
     public function getSoal()
@@ -100,6 +107,11 @@ class Kerjakan extends Component
     public function getPaket()
     {
         return $this->paketSaya;
+    }
+
+    public function getPaketku()
+    {
+        return $this->subPaketSaya;
     }
 
     public function simpan($value, $jawaban_id)
@@ -128,7 +140,7 @@ class Kerjakan extends Component
         //         Simpanjawaban::create([
         //             'user_id' => auth()->user()->id,
         //             'paketsaya_id' => $this->getPaket()->id,
-        //             'subpaket_id' => $this->getPaket()->paket->tampungpaket->subpaket_id,
+        //             'subpaket_id' => $this->getPaketku()->subpaket_id,
         //             'togratis_id' => $this->getSoal()->id,
         //             'subkategori_id' => $this->getSoal()->subkategori_id,
         //             'jawabangratis_id' => $jawaban_id,
@@ -157,7 +169,7 @@ class Kerjakan extends Component
             Simpanjawaban::create([
                 'user_id' => auth()->user()->id,
                 'paketsaya_id' => $this->getPaket()->id,
-                'subpaket_id' => $this->getPaket()->paket->tampungpaket->subpaket_id,
+                'subpaket_id' => $this->getPaketku()->subpaket_id,
                 'banksoal_id' => $this->getSoal()->id,
                 'subkategori_id' => $this->getSoal()->subkategori_id,
                 'jawaban_id' => $jawaban_id,
@@ -170,7 +182,7 @@ class Kerjakan extends Component
         $this->startTime = now();
         // toastr()->success('Jawaban berhasil disimpan', 'Berhasil');
 
-        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaket()->paket->tampungpaket->subpaket_id);
+        $this->dispatch('pageChanged', $this->getPaket()->paket_id, $this->getPaketku()->subpaket_id);
     }
 
     public function submit()
@@ -179,7 +191,7 @@ class Kerjakan extends Component
 
         $jawab_submit = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('paketsaya_id', $this->getPaket()->id)
-            ->where('subpaket_id', $this->getPaket()->paket->tampungpaket->subpaket_id)
+            ->where('subpaket_id', $this->getPaketku()->subpaket_id)
             ->get();
 
         // dd($jawab_submit->pluck('banksoal_id'));

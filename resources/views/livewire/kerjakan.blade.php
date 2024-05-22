@@ -7,6 +7,9 @@
                         Soal-soal
                         {{ $datas[0]->subpaket->kategori_id == 1 || $datas[0]->subpaket->kategori_id == 2 || $datas[0]->subpaket->kategori_id == 3 ? 'CPNS' : 'PPPK' }}
                     </h1>
+                    <h2>
+                        {{ $datas[0]->subpaket->judul }}
+                    </h2>
                 </div>
             </div>
         </div>
@@ -317,21 +320,21 @@
                 event.detail.params.allowEscapeKey = false;
                 event.detail.params.allowEnterKey = false;
             });
-            Livewire.on('swal:modal:show', (params) => {
-                params.allowOutsideClick = false;
-                params.allowEscapeKey = false;
-                params.allowEnterKey = false;
-            });
-            Livewire.on('swal:modal:shown', (params) => {
-                params.allowOutsideClick = false;
-                params.allowEscapeKey = false;
-                params.allowEnterKey = false;
-            });
-            Livewire.on('swal:modal:hidden', (params) => {
-                params.allowOutsideClick = true;
-                params.allowEscapeKey = true;
-                params.allowEnterKey = true;
-            });
+            // Livewire.on('swal:modal:show', (params) => {
+            //     params.allowOutsideClick = false;
+            //     params.allowEscapeKey = false;
+            //     params.allowEnterKey = false;
+            // });
+            // Livewire.on('swal:modal:shown', (params) => {
+            //     params.allowOutsideClick = false;
+            //     params.allowEscapeKey = false;
+            //     params.allowEnterKey = false;
+            // });
+            // Livewire.on('swal:modal:hidden', (params) => {
+            //     params.allowOutsideClick = true;
+            //     params.allowEscapeKey = true;
+            //     params.allowEnterKey = true;
+            // });
 
             ////////////* Batas *//////////////
 

@@ -41,4 +41,9 @@ class Simpanjawabansubmit extends Model
     {
         return $this->belongsTo(Paketsaya::class);
     }
+
+    public function subpaket()
+    {
+        return $this->belongsTo(Subpaket::class);
+    }
 }

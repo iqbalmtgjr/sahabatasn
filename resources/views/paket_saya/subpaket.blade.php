@@ -10,7 +10,8 @@
                 <!--begin::Page title-->
                 <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                     <!--begin::Title-->
-                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Paket Saya
+                    <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">
+                        Paket Saya "{{ $data[0]->paket->judul }}"
                     </h1>
                     <!--end::Title-->
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">

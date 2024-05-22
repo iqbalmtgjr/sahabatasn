@@ -12,7 +12,7 @@
                     <div class="page-title d-flex flex-column justify-content-center gap-1 me-3">
                         <!--begin::Title-->
                         <h1 class="page-heading d-flex flex-column justify-content-center text-dark fw-bold fs-3 m-0">Daftar
-                            Paket {{ isset($data[0]->subpaket->judul) ? $data[0]->subpaket->judul : '' }}
+                            Paket "{{ isset($data[0]->judul) ? $data[0]->paket->judul : '' }}"
                         </h1>
                         <!--end::Title-->
                         <!--begin::Breadcrumb-->
