@@ -35,9 +35,7 @@ class Pembahasan extends Component
         $this->paketSaya = Paketsaya::whereIn('user_id', $tangkap_id)
             ->where('paket_id', $paket_id)->first();
 
-        $this->subPaketSaya = Tampungpaket::where('paket_id', $paket_id)
-            ->where('subpaket_id', $subpaket_id)
-            ->first();
+        $this->subPaketSaya = $subpaket_id;
 
         $this->status = $this->paketSaya->status;
 
@@ -65,8 +63,6 @@ class Pembahasan extends Component
             ->get();
         // }
 
-        // dd($this->jawabann);
-
         $this->totalSteps = $this->datas->count();
         $this->currentStep;
     }
@@ -79,39 +75,24 @@ class Pembahasan extends Component
     public function nextSteps()
     {
         $this->currentStep++;
-        $this->dispatch('pageChanged', $this->getPaketku()->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->subPaketSaya, $this->paketSaya->paket_id, $this->kodeSubmit);
     }
 
     public function previousSteps()
     {
         $this->currentStep--;
         // dd($this->currentStep);
-        $this->dispatch('pageChanged', $this->getPaketku()->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->subPaketSaya, $this->paketSaya->paket_id, $this->kodeSubmit);
     }
 
     public function setStep($step)
     {
         $this->currentStep = $step;
-        $this->dispatch('pageChanged', $this->getPaketku()->subpaket_id, $this->getPaket()->paket_id, $this->kodeSubmitt());
+        $this->dispatch('pageChanged', $this->subPaketSaya, $this->paketSaya->paket_id, $this->kodeSubmit);
     }
 
     public function getSoal()
     {
         return $this->datas[$this->currentStep - 1];
-    }
-
-    public function getPaket()
-    {
-        return $this->paketSaya;
-    }
-
-    public function getPaketku()
-    {
-        return $this->subPaketSaya;
-    }
-
-    public function kodeSubmitt()
-    {
-        return $this->kodeSubmit;
     }
 }

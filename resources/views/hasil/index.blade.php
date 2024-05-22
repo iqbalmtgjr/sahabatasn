@@ -149,7 +149,7 @@
                         className: 'row-selected'
                     },
                     ajax: {
-                        url: "{{ url('/hasil') }}",
+                        url: "{{ url('/hasil/skd') }}",
                     },
                     columns: [{
                             data: 'id',

@@ -155,7 +155,9 @@ Route::group(['middleware' => ['isLogin']], function () {
         Route::post('/pembayaran/update', [PembayaranController::class, 'update'])->name('pembayaran-edit');
 
         //hasil
-        Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
+        // Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
+        Route::get('/hasil/skd', [HasiltryoutController::class, 'index'])->name('hasil.skd');
+        Route::get('/hasil/skb', [HasiltryoutController::class, 'skb'])->name('hasil.skb');
         Route::get('/hasil/pembahasan/{subpaket_id}/{paket_id}/{kode_submit}', Pembahasan::class)->name('pembahasan');
     });
 });

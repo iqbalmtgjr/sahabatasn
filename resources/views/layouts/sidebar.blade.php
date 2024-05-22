@@ -236,7 +236,7 @@
                                             <span class="menu-title">Paket Saya</span>
                                         </a>
                                     </div>
-                                    <div class="menu-item">
+                                    {{-- <div class="menu-item">
                                         <a class="menu-link {{ request()->is('hasil*') ? 'active' : '' }}"
                                             href="{{ url('hasil') }}">
                                             <span class="menu-icon">
@@ -244,6 +244,48 @@
                                             </span>
                                             <span class="menu-title">Hasil Tryout</span>
                                         </a>
+                                    </div> --}}
+                                    <div data-kt-menu-trigger="click"
+                                        class="menu-item menu-accordion {{ request()->is('hasil*') ? 'show' : (request()->is('hasil/*') ? 'show' : '') }}">
+                                        <!--begin:Menu link-->
+                                        <span class="menu-link">
+                                            <span class="menu-icon">
+                                                <i class="ki-outline ki-chart-simple fs-2"></i>
+                                            </span>
+                                            <span class="menu-title">Hasil Tryout</span>
+                                            <span class="menu-arrow"></span>
+                                        </span>
+                                        <!--end:Menu link-->
+                                        <!--begin:Menu sub-->
+                                        <div class="menu-sub menu-sub-accordion">
+                                            <!--begin:Menu item-->
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a class="menu-link {{ request()->is('hasil/skd') ? 'active' : '' }}"
+                                                    href="{{ url('hasil/skd') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">SKD</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                            <!--begin:Menu item-->
+                                            <div class="menu-item">
+                                                <!--begin:Menu link-->
+                                                <a class="menu-link {{ request()->is('hasil/skb*') ? 'active' : '' }}"
+                                                    href="{{ url('hasil/skb') }}">
+                                                    <span class="menu-bullet">
+                                                        <span class="bullet bullet-dot"></span>
+                                                    </span>
+                                                    <span class="menu-title">SKB</span>
+                                                </a>
+                                                <!--end:Menu link-->
+                                            </div>
+                                            <!--end:Menu item-->
+                                        </div>
+                                        <!--end:Menu sub-->
                                     </div>
                                 @endif
                                 <!--end:Menu item-->

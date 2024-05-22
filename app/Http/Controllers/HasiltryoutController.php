@@ -15,9 +15,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class HasiltryoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $data = Hasil::where('user_id', auth()->user()->id)
@@ -83,6 +80,11 @@ class HasiltryoutController extends Controller
                 ->make(true);
         }
         return view('hasil.index');
+    }
+
+    public function skb(Request $request)
+    {
+        return view('hasil.skb');
     }
 
     public function total_nilai($paketsaya_id, $subpaket_id, $subkategori_id, $kode_submit)
