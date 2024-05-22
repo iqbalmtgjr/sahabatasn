@@ -56,7 +56,7 @@ class Kerjakan extends Component
 
         // dd($this->paketSaya->paket_id);
         if (!isset($this->datas[0]->banksoal)) {
-            toastr('Paket Soal Belum Tersedia', 'warning');
+            toastr('Paket Soal Belum Tersedia', 'warning', 'Peringatan');
             if ($this->status == 3) {
                 return redirect('/togratis/' . $paket_id);
             } else {

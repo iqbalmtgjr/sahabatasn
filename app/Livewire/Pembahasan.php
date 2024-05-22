@@ -49,6 +49,11 @@ class Pembahasan extends Component
             ->get();
         // }
 
+        if (!isset($this->datas[0]->banksoal)) {
+            toastr('Paket Soal Belum Tersedia, Silahkan Hubungi Admin', 'error',  'Peringatan');
+            return redirect('/hasil/skd/');
+        }
+
         $this->paketId = $paket_id;
 
         // if ($this->status == 3) {
