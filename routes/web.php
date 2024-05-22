@@ -146,8 +146,7 @@ Route::group(['middleware' => ['isLogin']], function () {
         Route::post('/kerjakan/post', [PaketsayaController::class, 'store'])->name('kerjakan-post');
 
         Route::get('/togratis', [PaketsayaController::class, 'togratis'])->name('togratis');
-
-
+        Route::get('/togratis/{paket_id}', [PaketsayaController::class, 'subpaket']);
 
         //pembayaran
         Route::get('/invoice', [PembayaranController::class, 'invoice'])->name('invoice');
@@ -158,6 +157,6 @@ Route::group(['middleware' => ['isLogin']], function () {
         // Route::get('/hasil', [HasiltryoutController::class, 'index'])->name('hasil');
         Route::get('/hasil/skd', [HasiltryoutController::class, 'index'])->name('hasil.skd');
         Route::get('/hasil/skb', [HasiltryoutController::class, 'skb'])->name('hasil.skb');
-        Route::get('/hasil/pembahasan/{subpaket_id}/{paket_id}/{kode_submit}', Pembahasan::class)->name('pembahasan');
+        Route::get('/hasil/pembahasan/skd/{subpaket_id}/{paket_id}/{kode_submit}', Pembahasan::class)->name('pembahasan');
     });
 });

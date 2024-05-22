@@ -14,12 +14,9 @@ class PaketsayaController extends Controller
 {
     public function index(Request $request)
     {
-        // status == 3 -> "Tipe Gratis"
         $data = Paketsaya::where('user_id', auth()->user()->id)
             ->where('status', '!=', 3)
             ->get();
-
-        // dd($data);
 
         return view('paket_saya.index', compact('data'));
     }
@@ -27,8 +24,12 @@ class PaketsayaController extends Controller
     public function subpaket($paket_id)
     {
         $data = Tampungpaket::where('paket_id', $paket_id)->get();
-
-        return view('paket_saya.subpaket', compact('data'));
+        if (isset($data[0]->paket)) {
+            return view('paket_saya.subpaket', compact('data'));
+        } else {
+            toastr()->error('Paket Belum Tersedia, Silahkan hubungi admin', 'Gagal');
+            return redirect()->back();
+        }
     }
 
     public function togratis()

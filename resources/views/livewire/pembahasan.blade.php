@@ -8,7 +8,8 @@
                     </h1>
                     <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0">
                         <li class="breadcrumb-item text-muted">
-                            <a href="{{ url('hasil') }}" class="text-muted text-hover-primary">Hasil TryOut</a>
+                            <a href="{{ $datas[0]->banksoal->kategori_id == 1 ? url('hasil/skd') : url('hasil/skb') }}"
+                                class="text-muted text-hover-primary">Hasil TryOut</a>
                         </li>
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-400 w-5px h-2px"></span>
@@ -191,7 +192,7 @@
                                                 @foreach (range('a', 'e') as $alpha)
                                                     @if (isset($item->jawaban["jawaban_$alpha"]) && $item->jawaban["jawaban_$alpha"] != 0)
                                                         <span
-                                                            style="color: @if ($item->jawaban["pilihan_$alpha"] == $item->jawab && $item->jawaban["jawaban_$alpha"] == 5) green; @else red; @endif"><strong>{{ strtoupper($alpha) }}.
+                                                            style="color: @if ($item->jawaban["jawaban_$alpha"] == 5) green; @elseif($item->jawaban["pilihan_$alpha"] == $item->jawab) #2081b0; @else red; @endif"><strong>{{ strtoupper($alpha) }}.
                                                                 Bobot Nilai =
                                                                 {{ $item->jawaban["jawaban_$alpha"] }}
                                                             </strong></span> <br>
@@ -342,11 +343,19 @@
                 </div>
             </div>
             <div class="sesai mt-2 d-flex justify-content-end">
-                <a href="{{ url('/hasil') }}" class="btn btn-lg btn-success me-3">
-                    <span class="indicator-label">Selesai
-                        <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
-                </a>
+                @if ($datas[0]->banksoal->kategori_id == 1)
+                    <a href="{{ url('/hasil/skd') }}" class="btn btn-lg btn-success me-3">
+                        <span class="indicator-label">Selesai
+                            <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
+                    </a>
+                @else
+                    <a href="{{ url('/hasil/skb') }}" class="btn btn-lg btn-success me-3">
+                        <span class="indicator-label">Selesai
+                            <i class="ki-outline ki-arrow-right fs-3 ms-2 me-0"></i></span>
+                    </a>
+                @endif
             </div>
+            <h1></h1>
         </div>
     </div>
 </div>

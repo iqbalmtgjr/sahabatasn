@@ -55,6 +55,14 @@ class Kerjakan extends Component
         // }
 
         // dd($this->paketSaya->paket_id);
+        if (!isset($this->datas[0]->banksoal)) {
+            toastr('Paket Soal Belum Tersedia', 'warning');
+            if ($this->status == 3) {
+                return redirect('/togratis/' . $paket_id);
+            } else {
+                return redirect('/paketsaya/' . $paket_id);
+            }
+        }
 
         $this->paketId = $paket_id;
         $this->jawaban = Simpanjawaban::where('user_id', auth()->user()->id)
@@ -173,8 +181,6 @@ class Kerjakan extends Component
 
     public function submit()
     {
-        $paket_gue = $this->getPaket();
-
         $jawab_submit = Simpanjawaban::where('user_id', auth()->user()->id)
             ->where('paketsaya_id', $this->paketSaya->id)
             ->where('subpaket_id', $this->subPaketSaya)
@@ -261,7 +267,11 @@ class Kerjakan extends Component
             ->where('paketsaya_id', $simpan_submit->paketsaya_id)
             ->delete();
 
-        return redirect('hasil');
+        if ($this->paketSaya->paket->kategori_id == 1) {
+            return redirect('hasil/skd');
+        } else {
+            return redirect('hasil/skb');
+        }
     }
 
     public function delete($id)

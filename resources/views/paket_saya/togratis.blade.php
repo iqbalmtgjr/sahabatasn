@@ -34,7 +34,6 @@
                         <div class="col-md-4">
                             <div class="card-xl-stretch mx-md-3">
                                 <!--begin::Overlay-->
-
                                 {{-- On progress By Iqbal --}}
                                 <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
                                     href="{{ asset('gambar') . '/' . $item->paket->gambar }}">
@@ -64,7 +63,7 @@
                                             <span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
                                         <!--end::Label-->
                                         <!--begin::Action-->
-                                        <a href="{{ url('paketsaya/' . $item->paket_id) }}"
+                                        <a href="{{ url('togratis/' . $item->paket_id) }}"
                                             class="btn btn-sm btn-primary col-12">Pilih</a>
                                         <!--end::Action-->
                                     </div>

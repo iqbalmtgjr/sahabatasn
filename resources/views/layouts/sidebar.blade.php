@@ -219,7 +219,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a class="menu-link {{ request()->is('togratis') ? 'active' : '' }}"
+                                        <a class="menu-link {{ request()->is('togratis*') ? 'active' : '' }}"
                                             href="{{ url('togratis') }}">
                                             <span class="menu-icon">
                                                 <i class="ki-outline ki-medal-star fs-2"></i>
@@ -261,7 +261,7 @@
                                             <!--begin:Menu item-->
                                             <div class="menu-item">
                                                 <!--begin:Menu link-->
-                                                <a class="menu-link {{ request()->is('hasil/skd') ? 'active' : '' }}"
+                                                <a class="menu-link {{ request()->is('hasil/skd') ? 'active' : (request()->is('hasil/pembahasan/skd*') ? 'active' : '') }}"
                                                     href="{{ url('hasil/skd') }}">
                                                     <span class="menu-bullet">
                                                         <span class="bullet bullet-dot"></span>

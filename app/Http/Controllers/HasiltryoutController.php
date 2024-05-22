@@ -21,17 +21,10 @@ class HasiltryoutController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-
-        // dd(Simpanjawabansubmit::where('kode_submit', $data[0]->kode_submit)->first()->subpaket->judul);
-
         // Passing Grade
         $grade_twk = 65;
         $grade_tiu = 80;
         $grade_tkp = 166;
-
-        // test twk
-        // $this->total_nilai(2, 6, 3, 1, 'Y93ZZeOcPM13');
-        // dd($this->total_nilai(2, 6, 3, 1, 'Y93ZZeOcPM13'));
 
         if ($request->ajax()) {
             return DataTables::of($data)
@@ -47,7 +40,6 @@ class HasiltryoutController extends Controller
                     }
                 })
                 ->addColumn('twk', function ($row) {
-                    // $subpaket_twk =  Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id;
                     return $this->total_nilai($row->paketsaya->id, Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id,  1, $row->kode_submit);
                 })
                 ->addColumn('tiu', function ($row) {
@@ -63,7 +55,7 @@ class HasiltryoutController extends Controller
                     return $this->total_nilai($row->paketsaya->id, Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id,  1, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id,  2, $row->kode_submit) + $this->total_nilai($row->paketsaya->id, Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id,  3, $row->kode_submit);
                 })
                 ->addColumn('pembahasan', function ($row) {
-                    $url = url("hasil/pembahasan/" . Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id) . "/" . $row->paketsaya->paket_id . "/" . $row->kode_submit;
+                    $url = url("hasil/pembahasan/skd/" . Simpanjawabansubmit::where('kode_submit', $row->kode_submit)->first()->subpaket_id) . "/" . $row->paketsaya->paket_id . "/" . $row->kode_submit;
                     return "<a href=\"$url\" class=\"btn btn-sm btn-primary\">Detail</a>";
                 })
                 ->addColumn('lulus', function ($row) use ($grade_twk, $grade_tiu, $grade_tkp) {
