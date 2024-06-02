@@ -22,21 +22,21 @@
                                 multiple="multiple">
                                 <optgroup label="TWK">
                                     @foreach ($twk as $item1)
-                                        <option value="{{ $item1->id }}">{{ $item1->soal }}
+                                        <option value="{{ $item1->id }}">{!! $item1->soal !!}
                                             ({{ $item1->subkategori->sub_kategori }})
                                         </option>
                                     @endforeach
                                 </optgroup>
                                 <optgroup label="TIU">
                                     @foreach ($tiu as $item2)
-                                        <option value="{{ $item2->id }}">{{ $item2->soal }}
+                                        <option value="{{ $item2->id }}">{!! $item2->soal !!}
                                             ({{ $item2->subkategori->sub_kategori }})
                                         </option>
                                     @endforeach
                                 </optgroup>
                                 <optgroup label="TKP">
                                     @foreach ($tkp as $item3)
-                                        <option checked value="{{ $item3->id }}">{{ $item3->soal }}
+                                        <option value="{{ $item3->id }}">{!! $item3->soal !!}
                                             ({{ $item3->subkategori->sub_kategori }})
                                         </option>
                                     @endforeach

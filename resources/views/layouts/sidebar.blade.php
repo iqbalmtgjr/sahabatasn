@@ -109,6 +109,18 @@
                                 </div>
                                 @if (auth()->user()->role == 'admin')
                                     <div class="menu-item">
+                                        <a class="menu-link {{ request()->is('promo') ? 'active' : '' }}"
+                                            href="{{ url('promo') }}">
+                                            <span class="menu-icon">
+                                                <i class="ki-duotone ki-percentage fs-2">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                </i>
+                                            </span>
+                                            <span class="menu-title">Promosi</span>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
                                         <a class="menu-link {{ request()->is('pengumuman') ? 'active' : '' }}"
                                             href="{{ url('pengumuman') }}">
                                             <span class="menu-icon">

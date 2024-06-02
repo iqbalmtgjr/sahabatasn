@@ -43,9 +43,11 @@
                                     <!--begin::Input group-->
                                     <div class="fv-row mb-7">
                                         <label class="required fw-semibold fs-6 mb-2">Soal</label>
-                                        <input type="text" name="soal" id="soal"
-                                            class="form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
-                                            placeholder="Masukkan soal" value="{{ $data->soal }}" />
+                                        {{-- <input type="text" name="soal" id="soal"
+                                            class="soal form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
+                                            placeholder="Masukkan soal" value="{{ $data->soal }}" /> --}}
+                                        <textarea name="soal" class="soal form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
+                                            id="" cols="30" rows="10">{{ $data->soal }}</textarea>
                                         @error('soal')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -351,10 +353,25 @@
 @push('footer')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
+        $('.soal').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                // ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                // ['color', ['color']],
+                ['para', ['ul', 'ol']],
+                // ['height', ['height']]
+            ],
+            placeholder: 'Masukkan soal',
+            tabsize: 2,
+            height: 200
+        });
+
         $('#pembahasan').summernote({
             placeholder: 'Masukkan pembahasan',
             tabsize: 2,
-            height: 400
+            height: 300
         });
     </script>
 @endpush

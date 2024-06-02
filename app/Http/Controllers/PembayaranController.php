@@ -96,7 +96,7 @@ class PembayaranController extends Controller
             $extension = $request->bukti_bayar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('bukti_bayar')->move(public_path('bukti/'), $nama_file);
+            $request->file('bukti_bayar')->move(public_path('../../public_html/bukti/'), $nama_file);
 
             Pembayaran::updateOrCreate([
                 'user_id' => auth()->user()->id,
@@ -132,7 +132,7 @@ class PembayaranController extends Controller
         $pembayaran = Pembayaran::find($request->id);
 
         if ($request->file('bukti_bayar')) {
-            $path = public_path('bukti/' . $pembayaran->gambar);
+            $path = public_path('../../public_html/bukti/' . $pembayaran->gambar);
             if (file_exists($path)) {
                 @unlink($path);
             }
@@ -140,7 +140,7 @@ class PembayaranController extends Controller
             $extension = $request->bukti_bayar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('bukti_bayar')->move(public_path('bukti/'), $nama_file);
+            $request->file('bukti_bayar')->move(public_path('../../public_html/bukti/'), $nama_file);
 
             $pembayaran->update([
                 'nominal' => $request->nominal,

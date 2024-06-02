@@ -39,6 +39,20 @@
                 </div>
                 <!--end::Body-->
             </div>
+            <!--begin::Promosi-->
+            @isset($promo[0]->gambar)
+                <div class="card mb-5 mb-xl-8 mt-4">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        @foreach ($promo as $item)
+                            <img src="{{ asset('promosi/' . $item->gambar) }}" class="w-100" alt="">
+                        @endforeach
+                    </div>
+                    <!--end::Body-->
+                </div>
+            @endisset
+            <!--end::Promosi-->
+            <!--begin::Informasi Terbaru-->
             <div class="card py-4 px-4 mt-4">
                 <div class="card-body py-4">
                     <h2>Informasi Terbaru</h2>

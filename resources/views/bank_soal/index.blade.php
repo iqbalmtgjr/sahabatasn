@@ -113,6 +113,21 @@
 @push('footer')
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <script>
+        $('.soal').summernote({
+            toolbar: [
+                // [groupName, [list of button]]
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                // ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                // ['color', ['color']],
+                ['para', ['ul', 'ol']],
+                // ['height', ['height']]
+            ],
+            placeholder: 'Masukkan soal',
+            tabsize: 2,
+            height: 100
+        });
+
         $('.pembahasan').summernote({
             placeholder: 'Masukkan pembahasan',
             tabsize: 2,

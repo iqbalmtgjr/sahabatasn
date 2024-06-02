@@ -29,7 +29,7 @@ class NotifDaftar extends Mailable
     {
         return new Envelope(
             from: new Address('info@sahabatasn.com', 'Sahabat ASN'),
-            subject: 'Notif Pendaftaran Akun',
+            subject: 'Pendaftaran Akun Sahabat ASN',
         );
     }
 

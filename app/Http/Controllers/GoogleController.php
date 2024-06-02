@@ -22,7 +22,8 @@ class GoogleController extends Controller
     public function handleGoogleCallback()
     {
         try {
-            $userGoogle = Socialite::driver('google')->user();
+            $userGoogle = Socialite::driver('google')->stateless()->user();
+            // dd($userGoogle);
             $finduser = User::where('google_id', $userGoogle->id)->first();
 
             if ($finduser) {
@@ -41,7 +42,7 @@ class GoogleController extends Controller
                 ]);
 
 
-                // Mail::to($user->email)->send(new NotifDaftar($user, $make_password));
+                Mail::to($user->email)->send(new NotifDaftar($user, $make_password));
                 Auth::login($user);
 
                 toastr()->success('Selamat Datang di Sahabat ASN.', 'Sukses');

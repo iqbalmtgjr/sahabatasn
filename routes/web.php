@@ -2,17 +2,21 @@
 
 use App\Models\Paket;
 use App\Livewire\Kerjakan;
+use App\Livewire\Pembahasan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PaketController;
+use App\Http\Controllers\PromoController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BanksoalController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\SubpaketController;
 use App\Http\Controllers\TogratisController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\PaketsayaController;
@@ -20,8 +24,6 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\HasiltryoutController;
 use App\Http\Controllers\PusatlanggananController;
-use App\Http\Controllers\SubpaketController;
-use App\Livewire\Pembahasan;
 
 Route::get('/', function () {
     return redirect('login');
@@ -36,7 +38,7 @@ Route::controller(GoogleController::class)->group(function () {
 });
 
 //dashboard
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 // profile
 Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
@@ -69,6 +71,12 @@ Route::get('/tentang-kami', [AboutController::class, 'index'])->name('tentang');
 Route::group(['middleware' => ['isLogin']], function () {
     //hanya admin
     Route::middleware(['checkRole:admin'])->group(function () {
+        //kelola_promo
+        Route::get('/promo', [PromoController::class, 'index'])->name('promo');
+        Route::get('/promo/getdata/{id}', [PromoController::class, 'getdata'])->name('getdatapromo');
+        Route::post('/promo/input', [PromoController::class, 'store'])->name('promo-input');
+        Route::post('/promo/update', [PromoController::class, 'update'])->name('promo-update');
+        Route::get('/promo/hapus/{id}', [PromoController::class, 'destroy'])->name('promo-delete');
         //Kelola_user
         Route::get('/kelola-user', [UserController::class, 'index'])->name('kelola-user');
         Route::get('/user/getdata/{id}', [UserController::class, 'getdata'])->name('getdatauser');

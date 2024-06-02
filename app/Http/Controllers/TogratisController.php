@@ -72,7 +72,7 @@ class TogratisController extends Controller
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('gambar')->move(public_path('gambar_soal/'), $nama_file);
+            $request->file('gambar')->move(public_path('../../public_html/gambar_soal/'), $nama_file);
 
             $soal = Togratis::create([
                 'kategori_id' => $sub_find,
@@ -137,7 +137,7 @@ class TogratisController extends Controller
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('gambar')->move(public_path('gambar_soal/'), $nama_file);
+            $request->file('gambar')->move(public_path('../../public_html/gambar_soal/'), $nama_file);
 
             $soal = Togratis::find($request->id);
             $soal->update([

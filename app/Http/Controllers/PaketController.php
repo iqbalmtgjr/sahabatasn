@@ -41,7 +41,6 @@ class PaketController extends Controller
                 })
                 ->addColumn('gambar', function ($row) {
                     $url = asset('gambar/' . $row->gambar);
-                    $url2 = asset($row->gambar);
                     if ($row->gambar == null) {
                         return '<p class="text-danger">Belum Ada Gambar</p>';
                     } else {
@@ -81,7 +80,7 @@ class PaketController extends Controller
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('gambar')->move(public_path('gambar/'), $nama_file);
+            $request->file('gambar')->move(public_path('../../public_html/gambar/'), $nama_file);
 
             $paket = Paket::updateOrCreate([
                 'gambar' => $nama_file,
@@ -147,7 +146,7 @@ class PaketController extends Controller
         // $kategori_id = Subkategori::find($request->subkategori_id)->kategori_id;
         if ($request->file('gambar')) {
             // Hapus Foto Lama
-            $path = public_path('gambar/' . $data->gambar);
+            $path = public_path('../../public_html/gambar/' . $data->gambar);
             if (file_exists($path)) {
                 @unlink($path);
             }
@@ -155,7 +154,7 @@ class PaketController extends Controller
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('gambar')->move(public_path('gambar/'), $nama_file);
+            $request->file('gambar')->move(public_path('../../public_html/gambar/'), $nama_file);
 
             $data->update([
                 'gambar' => $nama_file,
@@ -179,7 +178,7 @@ class PaketController extends Controller
     {
         //hapus_paket
         $paket = Paket::findOrFail($id);
-        $path = public_path('gambar/' . $paket->gambar);
+        $path = public_path('../../public_html/gambar/' . $paket->gambar);
         if (file_exists($path)) {
             @unlink($path);
         }
@@ -194,9 +193,16 @@ class PaketController extends Controller
         // hapus_paket_dipelanggan (paket saya)
         $Paketsaya = Paketsaya::where('paket_id', $id)->first();
 
-        // hapus yg difitur hasil pelanggan karena paket saya dihapus juga
-        Hasil::where('paketsaya_id', $Paketsaya->id)->delete();
-        $Paketsaya->delete();
+        if ($Paketsaya) {
+            // hapus yg difitur hasil pelanggan karena paket saya dihapus juga
+            $hasil = Hasil::where('paketsaya_id', $Paketsaya->id)->first();
+            if ($hasil) {
+                $hasil->delete();
+            }
+            $Paketsaya->delete();
+        }
+
+
 
         toastr()->success('Berhasil hapus data paket.', 'Sukses');
         return redirect()->back();

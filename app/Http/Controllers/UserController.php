@@ -20,15 +20,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::all();
+        $data = User::where('id', '!=', 1)->get();
         if ($request->ajax()) {
             return DataTables::of($data)
                 ->addColumn('avatar', function ($row) {
+                    $url = asset('gambar/' . $row->avatar);
                     if ($row->avatar == null) {
                         return '<p class="text-danger">Belum Ada Avatar</p>';
                     } else {
                         if (file_exists('gambar/' . $row->avatar)) {
-                            return '<img class="card-img-top lozad" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="gambar/' . $row->avatar . '" alt="avatar">';
+                            return '<img class="card-img-top lozad" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $url . '" alt="avatar">';
                         } else {
                             return '<img class="card-img-top lozad" style="height: 120px; width: 120px; object-fit: cover; object-position: center;" src="' . $row->avatar . '" alt="avatar">';
                         }
@@ -41,9 +42,6 @@ class UserController extends Controller
         return view('user.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // dd($request->all());
@@ -65,7 +63,7 @@ class UserController extends Controller
             $extension = $request->avatar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('avatar')->move(public_path('gambar/'), $nama_file);
+            $request->file('avatar')->move(public_path('../../public_html/gambar/'), $nama_file);
 
             $make_password = Str::random(8);
             $user = User::updateOrCreate([
@@ -116,7 +114,7 @@ class UserController extends Controller
 
         if ($request->file('avatar')) {
             // Hapus Foto Lama
-            $path = public_path('gambar/' . $data->avatar);
+            $path = public_path('../../public_html/gambar/' . $data->avatar);
             if (file_exists($path)) {
                 @unlink($path);
             }
@@ -124,7 +122,7 @@ class UserController extends Controller
             $extension = $request->avatar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-            $request->file('avatar')->move(public_path('gambar/'), $nama_file);
+            $request->file('avatar')->move(public_path('../../public_html/gambar/'), $nama_file);
 
             $data->update([
                 'role' => $request->role,
@@ -151,6 +149,8 @@ class UserController extends Controller
     {
         DB::table('keranjang')->where('user_id', $id)->delete();
         User::findOrFail($id)->delete();
+
+        toastr()->success('Berhasil hapus data user.', 'Sukses');
         return redirect()->back();
     }
 

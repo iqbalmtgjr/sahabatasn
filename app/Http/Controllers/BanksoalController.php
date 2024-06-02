@@ -22,12 +22,16 @@ class BanksoalController extends Controller
         // dd($data);
         if ($request->ajax()) {
             return DataTables::of($data)
+                ->addColumn('soal', function ($row) {
+                    return $row->soal;
+                })
                 ->addColumn('kategori', function ($row) {
                     return optional($row->subkategori->kategori)->kategori;
                 })
                 ->addColumn('sub_kategori', function ($row) {
                     return optional($row->subkategori)->sub_kategori;
                 })
+                ->rawColumns(['soal'])
                 ->make(true);
         }
 
@@ -63,6 +67,10 @@ class BanksoalController extends Controller
                 ->withInput();
         }
         $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
+
+        $dom_soal = new DOMDocument();
+        $dom_soal->loadHTML($request->soal, 255);
+        $soall = $dom_soal->saveHTML();
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -72,7 +80,7 @@ class BanksoalController extends Controller
             $soal = Banksoal::create([
                 'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
-                'soal' => $request->soal,
+                'soal' => $soall,
                 // 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
             ]);
@@ -80,13 +88,15 @@ class BanksoalController extends Controller
             $soal = Banksoal::create([
                 'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
-                'soal' => $request->soal,
+                'soal' => $soall,
                 // 'tipe' => $request->tipe,
             ]);
         }
 
+
         $dom = new DOMDocument();
-        $dom->loadHTML($request->pembahasan, 225);
+
+        $dom->loadHTML($request->pembahasan, 255);
 
         $image = $dom->getElementsByTagName('img');
 
@@ -99,6 +109,7 @@ class BanksoalController extends Controller
             $img->removeAttribute('src');
             $img->setAttribute('src', $image_name);
         }
+
         $pembahas = $dom->saveHTML();
 
         Jawaban::create([
@@ -149,6 +160,10 @@ class BanksoalController extends Controller
         }
 
         $sub_find = Subkategori::find($request->sub_kategori)->kategori_id;
+
+        $dom_soal = new DOMDocument();
+        $dom_soal->loadHTML($request->soal, 255);
+        $soall = $dom_soal->saveHTML();
         if ($request->file('gambar')) {
             $extension = $request->gambar->extension();
             $nama_file = round(microtime(true) * 1000) . '.' . $extension;
@@ -159,7 +174,7 @@ class BanksoalController extends Controller
             $soal->update([
                 'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
-                'soal' => $request->soal,
+                'soal' => $soall,
                 // 'tipe' => $request->tipe,
                 'gambar' => $nama_file,
             ]);
@@ -168,7 +183,7 @@ class BanksoalController extends Controller
             $soal->update([
                 'kategori_id' => $sub_find,
                 'subkategori_id' => $request->sub_kategori,
-                'soal' => $request->soal,
+                'soal' => $soall,
                 // 'tipe' => $request->tipe,
             ]);
         }
@@ -211,9 +226,6 @@ class BanksoalController extends Controller
         return redirect('bank-soal');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $jawaban = Jawaban::where('bank_soal_id', $id)->first();

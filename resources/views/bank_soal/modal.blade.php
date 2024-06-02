@@ -32,9 +32,11 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <label class="required fw-semibold fs-6 mb-2">Soal</label>
-                                    <input type="text" name="soal"
-                                        class="form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
-                                        placeholder="Masukkan soal" value="{{ old('soal') }}" />
+                                    {{-- <input type="text" name="soal"
+                                        class="soal form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
+                                        placeholder="Masukkan soal" value="{{ old('soal') }}" /> --}}
+                                    <textarea name="soal" class="soal form-control form-control-solid mb-3 mb-lg-0 @error('soal') is-invalid @enderror"
+                                        id="" cols="30" rows="10" value="{{ old('soal') }}"></textarea>
                                     @error('soal')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

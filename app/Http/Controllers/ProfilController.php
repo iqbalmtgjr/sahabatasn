@@ -50,7 +50,7 @@ class ProfilController extends Controller
         $extension = $request->avatar->extension();
         $nama_file = round(microtime(true) * 1000) . '.' . $extension;
 
-        $request->file('avatar')->move(public_path('gambar/'), $nama_file);
+        $request->file('avatar')->move(public_path('../../public_html/gambar/'), $nama_file);
 
         // dd($nama_file);
 

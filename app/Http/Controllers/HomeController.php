@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengumuman;
+use App\Models\Promo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,8 @@ class HomeController extends Controller
     public function index()
     {
         $data = Pengumuman::all();
-        return view('home', compact('data'));
+        $promo = Promo::all();
+        // dd($promo);
+        return view('home', compact('data', 'promo'));
     }
 }

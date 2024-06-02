@@ -38,14 +38,14 @@
                 <!--begin::Row-->
                 <div class="row g-12">
                     <!--begin::Col-->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <!--begin::Hot sales post-->
                         <div class="card-xl-stretch me-md-6">
                             <!--begin::Overlay-->
                             <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ url('detailcpns') }}">
                                 <!--begin::Image-->
                                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px"
-                                    style="background-image:url('assets/media/stock/600x600/1.png')"></div>
+                                    style="background-image:url('assets/media/stock/600x400/img-7.jpg')"></div>
                                 <!--end::Image-->
                                 <!--begin::Action-->
                                 {{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
@@ -57,11 +57,11 @@
                             <!--begin::Body-->
                             <div class="mt-5">
                                 <!--begin::Title-->
-                                <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">PAKET
+                                <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark">PAKET
                                     CPNS</a>
                                 <!--end::Title-->
                                 <!--begin::Text-->
-                                <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">SKD dan SKB</div>
+                                {{-- <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">SKD dan SKB</div> --}}
                                 <!--end::Text-->
                                 <!--begin::Text-->
                                 <div class="fs- fw-bold mt-5 d-flex flex-stack">
@@ -82,7 +82,7 @@
                     </div>
                     <!--end::Col-->
                     <!--begin::Col-->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <!--begin::Hot sales post-->
                         <div class="card-xl-stretch mx-md-3">
                             <!--begin::Overlay-->
@@ -90,7 +90,7 @@
                                 href="{{ url('pusatlangganan/detailpppk') }}">
                                 <!--begin::Image-->
                                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px"
-                                    style="background-image:url('assets/media/stock/600x600/2.png')"></div>
+                                    style="background-image:url('assets/media/stock/600x400/img-5.jpg')"></div>
                                 <!--end::Image-->
                                 <!--begin::Action-->
                                 {{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
@@ -106,8 +106,52 @@
                                     PPPK</a>
                                 <!--end::Title-->
                                 <!--begin::Text-->
-                                <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Kompetensi Teknis | Manajerial,
-                                    Sosiokultural, & Wawancara</div>
+                                {{-- <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Kompetensi Teknis | Manajerial,
+                                    Sosiokultural, & Wawancara</div> --}}
+                                <!--end::Text-->
+                                <!--begin::Text-->
+                                <div class="fs-6 fw-bold mt-5 d-flex flex-stack">
+                                    <!--begin::Label-->
+                                    {{-- <span class="badge border border-dashed fs-2 fw-bold text-dark p-2">
+								<span class="fs-6 fw-semibold text-gray-400">$</span>27</span> --}}
+                                    <!--end::Label-->
+                                    <!--begin::Action-->
+                                    <a href="{{ url('pusatlangganan/detailpppk') }}"
+                                        class="btn btn-sm btn-primary col-12">Lihat</a>
+                                    <!--end::Action-->
+                                </div>
+                                <!--end::Text-->
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Hot sales post-->
+                    </div>
+                    <div class="col-md-4">
+                        <!--begin::Hot sales post-->
+                        <div class="card-xl-stretch mx-md-3">
+                            <!--begin::Overlay-->
+                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales"
+                                href="{{ url('pusatlangganan/detailpppk') }}">
+                                <!--begin::Image-->
+                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px"
+                                    style="background-image:url('assets/media/stock/600x400/img-3.jpg')"></div>
+                                <!--end::Image-->
+                                <!--begin::Action-->
+                                {{-- <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+								<i class="ki-outline ki-eye fs-2x text-white"></i>
+							</div> --}}
+                                <!--end::Action-->
+                            </a>
+                            <!--end::Overlay-->
+                            <!--begin::Body-->
+                            <div class="mt-5">
+                                <!--begin::Title-->
+                                <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">PAKET
+                                    BIMBEL</a>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                {{-- <div class="fw-semibold fs-5 text-gray-600 text-dark mt-3">Kompetensi Teknis | Manajerial,
+                                    Sosiokultural, & Wawancara</div> --}}
                                 <!--end::Text-->
                                 <!--begin::Text-->
                                 <div class="fs-6 fw-bold mt-5 d-flex flex-stack">
